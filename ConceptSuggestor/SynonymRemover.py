@@ -1,11 +1,15 @@
 import spacy
 nlp = spacy.load("en_core_web_md")
 
+from SemanticSimilarity import SemanticSimilarity
+
 class SynonymRemover(object):
-    """Removes synonyms"""
+    """Removes synonyms using semantic similarity"""
     THRESHOLD = 0.9
 
     def __init__(self, concepts):
+        self.ss = SemanticSimilarity(nlp)
+
         # Convert the strings to objects that can be used by spaCy
         self.concepts = []
         for concept in concepts:
@@ -20,7 +24,7 @@ class SynonymRemover(object):
         return False
 
     def IsSynonym(self, wordA, wordB):
-        similarity = wordA.similarity(wordB)
+        similarity = self.ss.GetSimilarity(wordA, wordB)
         print("%s - %s: %s" % (wordA.norm_, wordB.norm_, similarity))
         if(similarity >= self.THRESHOLD):
             return True
