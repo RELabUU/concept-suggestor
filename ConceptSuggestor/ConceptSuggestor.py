@@ -2,7 +2,7 @@ from SynonymRemover import SynonymRemover
 from DictionarySynonyms import DictionarySynonyms
 
 # The concepts that are already in the model.
-concepts = ["Aircraft", "Flight", "Gate", "Ticket", "Airspace", "Pilot", "Security"]
+concepts = ["Aircraft", "Flight", "Gate", "Ticket", "Airspace", "Pilot", "Security", "Route"]
 
 print("Concepts already in the model: %s" % concepts)
 new = input("Enter a concept to be checked for similarity: ")
