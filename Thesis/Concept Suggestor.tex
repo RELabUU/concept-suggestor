@@ -5,7 +5,7 @@
 % -- Title stuff --
 \title{Concept Suggestor}
 \date{17th of May, 2017}
-\author{Raphael Claasen}
+\author{Rapha\"el Claasen}
 
 % -- Bibliography --
 \addbibresource{bibliography.bib}
@@ -15,25 +15,34 @@
 
 \maketitle
 
-\section*{Abstract}
-
+\begin{abstract}
 This is the abstract.
+\end{abstract}
+
+{\bf Keywords:} one, two, three
 
 \section{Introduction}
 
-This is the introduction.
+ATM is a cross-disciplinary field that requires analysts from multiple domains such as security, safety, and business. When discussing problems about the ATM field, analysts often create domain-specific models that employ both shared and domain-specific concepts. To facilitate these discussions it is important that domain-specific models from one domain can be used in communication with other domains. This can be done by ensuring that domains use similar concepts in their models where possible.
+
+It is difficult for analysts from different domains to communicate about their proposed solutions to a given ATM problem. This difficulty is partially caused by a difference in concepts used in their modeling which reduces the usefulness of these models in communication with other domains.
 
 \section{Related Work}
 
-SpaCy is one of the best publicly available name entity recognition (NER) systems. \cite{jiang2016evaluating} SpaCy uses GloVe. GloVe is an unsupervised learning algorithm for obtaining vector representations for words.\cite{pennington2014glove}
+SpaCy is one of the fastest and most accurate publicly available Natural Language Processing (NLP) toolkits available.\cite{choi2015depends}
+SpaCy uses GloVe. GloVe is an unsupervised learning algorithm for obtaining vector representations for words.\cite{pennington2014glove}
 
-\section{Algorithm}
+\section{Algorithms}
 
 These are the algorithms.
 
 \section{Evaluation Methodology}
 
-This is the evaluation methodology.
+\begin{itemize}
+\item How to measure similarity in concepts used in the various domain-specific models?
+\item How to determine which are relevant concepts from other models that should be suggested to a modeler in order to improve the alignment between the models?
+\item How to determine which are relevant concepts from elsewhere that might improve alignment between the models?
+\end{itemize}
 
 \section{Experiments}
 
@@ -45,7 +54,7 @@ These are the conclusions.
 
 \section{Acknowledgements}
 
-These are the acknowledgements.
+I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise, valuable guidance, and encouragement with me.
 
 \printbibliography
 
