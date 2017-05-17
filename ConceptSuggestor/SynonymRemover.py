@@ -1,5 +1,7 @@
 import spacy
+print("Loading spaCy word database (can take a while)...")
 nlp = spacy.load("en_core_web_md")
+print("Loading complete!")
 
 from SemanticSimilarity import SemanticSimilarity
 
@@ -25,7 +27,7 @@ class SynonymRemover(object):
 
     def IsSynonym(self, wordA, wordB):
         similarity = self.ss.GetSimilarity(wordA, wordB)
-        print("%s - %s: %s" % (wordA.norm_, wordB.norm_, similarity))
+        print("%s - %s: %s" % (wordA.norm_, wordB.norm_, similarity)) # DEBUG
         if(similarity >= self.THRESHOLD):
             return True
         else:

@@ -23,6 +23,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ConceptSuggestor.py" />
+    <Compile Include="DictionarySynonyms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SemanticSimilarity.py">
       <SubType>Code</SubType>
     </Compile>
