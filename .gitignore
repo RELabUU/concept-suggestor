@@ -1,4 +1,6 @@
+######################
 ### --- Python --- ###
+######################
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -105,7 +107,9 @@ ENV/
 # Visual Studio 2015
 .suo
 
+#####################
 ### --- LaTeX --- ###
+#####################
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
@@ -327,3 +331,6 @@ TSWLatexianTemp*
 
 # expex forward references with \gathertags
 *-tags.tex
+
+# PDF results from compilation
+*.pdf
