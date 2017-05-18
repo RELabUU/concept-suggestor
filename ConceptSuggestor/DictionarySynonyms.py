@@ -1,7 +1,7 @@
 from PyDictionary import PyDictionary
 
 class DictionarySynonyms(object):
-    """description of class"""
+    """Checks whether words are synonyms using thesaurus.com as a dictionary."""
 
     TWOWAYCHECK = True # Whether to only check for B == synonym(A) or also for A == synonym(B)
 

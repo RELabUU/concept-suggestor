@@ -1,7 +1,5 @@
 import spacy
-print("Loading spaCy word database (can take a while)...")
 nlp = spacy.load("en_core_web_md")
-print("Loading complete!")
 
 from SemanticSimilarity import SemanticSimilarity
 

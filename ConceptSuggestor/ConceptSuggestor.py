@@ -1,18 +1,19 @@
 # The concepts that are already in the model.
-concepts = ["Aircraft", "Flight", "Gate", "Ticket", "Airspace", "Pilot", "Security", "Route"]
+concepts = ["Airplane", "Flight", "Gate", "Ticket", "Airspace", "Pilot", "Security", "Route"]
 print("Concepts already in the model: %s" % concepts)
 
 
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b"):
+    if(choice=="a" or choice=="b" or choice=="c"):
         return True
     else:
         return False
 
 def GetProgramMode():
     print("These are your options:")
-    print("a - check similarity using word vectors")
-    print("b - check whether a synonym exists using thesaurus.com")
+    print("a - Check similarity using word vectors")
+    print("b - Check whether a synonym exists using thesaurus.com")
+    print("c - Check whether a synonym exists using WordNet")
 
     # Get the program mode from the user and ensure it's valid.
     choice = input("Please tell me what to do (type a letter): ").lower()
@@ -25,7 +26,7 @@ def GetProgramMode():
     return choice
 
 choice = GetProgramMode()
-new = input("Enter a concept to be checked for similarity: ")
+new = input("Enter a concept you want to check whether we have a synonym for (i.e. Aeroplane): ")
 
 if(choice == "a"):
     from SynonymRemover import SynonymRemover
@@ -38,6 +39,12 @@ elif(choice=="b"):
     print("Result of Thesaurus.com synonyms: ")
     ds = DictionarySynonyms()
     print(ds.HasSynonym(concepts, new))
+
+elif(choice=="c"):
+    from WordNetSynonyms import WordNetSynonyms
+    print("Result of WordNet synonyms: ")
+    wns = WordNetSynonyms()
+    print(wns.HasSynonym(concepts, new))
 
 else:
     print("Invalid mode. Aborting.")
