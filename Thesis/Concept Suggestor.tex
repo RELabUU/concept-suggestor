@@ -19,7 +19,7 @@
 This is the abstract.
 \end{abstract}
 
-{\bf Keywords:} one, two, three
+{\bf Keywords:} NLP, semantic relatedness, three
 
 \section{Introduction}
 
@@ -29,9 +29,11 @@ It is difficult for analysts from different domains to communicate about their p
 
 \section{Related Work}
 
-SpaCy is one of the fastest and most accurate publicly available Natural Language Processing (NLP) toolkits available.\cite{choi2015depends}
-SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words.\cite{pennington2014glove} These word vectors can be used to model semantic similarity of words.
 WordNet is an electronic lexical database.\cite{kilgarriff2000wordnet}
+SpaCy is one of the fastest and most accurate publicly available Natural Language Processing (NLP) toolkits available.\cite{choi2015depends}
+SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words.\cite{pennington2014glove} These word vectors can be used to model semantic similarity of words. Spacy's default word vector library is trained on Wikipedia. Wikipedia has proven to be a valuable source for computing semantic relatedness measures.\cite{strube2006wikirelate}
+
+Most methods of computing semantic relatedness measures such as word vectors rely on training an algorithm on a dataset. Public datasets, such as Google, Wikipedia, or WordNet are often used, although private datasets can also be used to improve context-sensitivity. Wikipedia and WordNet have proven to perform well in a variety of situations.\cite{strube2006wikirelate}
 
 \section{Algorithms}
 
@@ -39,6 +41,16 @@ These are the algorithms.
 
 \section{Evaluation Methodology}
 
+Although there is no standard for computational evaluation of semantic similarity, there are generally three accepted methods.\cite{meng2013review}
+
+Firstly, a theoretical examination of a computational measure can be made for those mathematical properties thought desirable, such as whether it is a metric, whether its parameter-projections are smooth functions, and so on. % TODO: Find out exactly what this means & rephrase it so I understand. It's quite complex language. Taken from meng2013review
+
+Secondly, the coefficients of correlation with human judgement can be calculated, measured, and compared.\cite{zhou2008new,seco2004intrinsic}
+
+Thirdly, if an application requires a measure of semantic similarity, we can compare the performance of different measures, while all other aspects of the application remain constant, to find the most effective measure.\cite{blanchard2006tree,budanitsky2006evaluating}
+
+
+% Below is subject matter that I want to have handled in this section.
 \begin{itemize}
 \item How to measure similarity in concepts used in the various domain-specific models?
 \item How to determine which are relevant concepts from other models that should be suggested to a modeler in order to improve the alignment between the models?
