@@ -1,3 +1,6 @@
+INFILE = "commit_example.json" # Example file to load
+OUTFILE = "suggestions_example.json" # Example file to send after request
+
 # The concepts that are already in the model.
 concepts = ["Airplane", "Flight", "Gate", "Ticket", "Airspace", "Pilot", "Security", "Route"]
 print("Concepts already in the model: %s" % concepts)
@@ -52,5 +55,8 @@ elif(choice=="d"):
     from JsonParser import JsonParser
     print("Result of JsonParser: ")
     jp = JsonParser()
+    data = jp.LoadFile(INFILE)
+    print(data)
+    jp.MakeFile(data, OUTFILE)
 else:
     print("Invalid mode. Aborting.")
