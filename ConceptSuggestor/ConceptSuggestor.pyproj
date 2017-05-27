@@ -22,6 +22,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="JsonParser.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ConceptSuggestor.py" />
     <Compile Include="DictionarySynonyms.py">
       <SubType>Code</SubType>

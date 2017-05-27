@@ -1,0 +1,322 @@
+[
+  {
+    "label": "Failure of short-term network traffic balancing",
+    "id": "5509275a-4e3d-4993-8e9e-4b7273c0d4f6",
+    "op": "add_element"
+  },
+  {
+    "label": "Simultaneous instructions",
+    "id": "16ea7a72-8d79-433a-9d68-17a7762e83c5",
+    "op": "add_element"
+  },
+  {
+    "label": "Failure to identify conflict",
+    "id": "991acd3d-d6d3-4a29-b456-63462bb0d230",
+    "op": "add_element"
+  },
+  {
+    "label": "Ineffective network level demand\/capacity balancing",
+    "id": "182c5592-07cc-4549-85af-d4727717d29c",
+    "op": "add_element"
+  },
+  {
+    "label": "Bad transfer of frequency",
+    "id": "2571f77b-e37b-4d6c-9ec8-cb0ba91e8755",
+    "op": "add_element"
+  },
+  {
+    "label": "Incorrect planning data",
+    "id": "35c1bb73-d963-4c58-b568-f883761c0767",
+    "op": "add_element"
+  },
+  {
+    "label": "Unclear instructions",
+    "id": "79e4bd3f-91a2-4ec4-9850-c9f93bfb66e3",
+    "op": "add_element"
+  },
+  {
+    "label": "PLOC equipment\/system failures",
+    "id": "73e17621-9cd7-4cef-ab66-d9a45bf8c2a9",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate coordination",
+    "id": "f95c4102-8319-4fbd-9ca6-f190c2d28b19",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate communication",
+    "id": "8ceff968-ed12-4704-8c8b-ae822ce226bf",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate ATC transmission of instructions",
+    "id": "0e249fdc-f502-4360-adba-6509dd585393",
+    "op": "add_element"
+  },
+  {
+    "label": "Failure to balance operational airspace demand",
+    "id": "e73e8dd0-cbb7-4d6b-a2bc-b5a1f6e44b89",
+    "op": "add_element"
+  },
+  {
+    "label": "Ineffective departure rates",
+    "id": "ac3b7c8e-12cd-41dd-82c6-0de2dea718b9",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate planner-executor coordination",
+    "id": "5f5089ac-842b-4339-832c-15ace4ef5711",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate ATC-ATC coordination",
+    "id": "e857595e-ae7e-46a4-bd37-fe9eb58018f4",
+    "op": "add_element"
+  },
+  {
+    "label": "Conflict",
+    "id": "1b31cfda-b933-490b-8953-7ee4b76c059c",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate trajectory info",
+    "id": "e626c166-07db-464d-af18-5d26b06d6c52",
+    "op": "add_element"
+  },
+  {
+    "label": "Ineffective resource management (supervision)",
+    "id": "b4534fc1-9003-4710-8c88-53375bf17028",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate planning",
+    "id": "162e88b6-0a6d-4057-94e3-581a5cc20c57",
+    "op": "add_element"
+  },
+  {
+    "label": "TRACT failure to identify conflict",
+    "id": "2b127a98-166f-414b-8a01-26763e793258",
+    "op": "add_element"
+  },
+  {
+    "label": "No planning info",
+    "id": "dd42c277-b2a9-40b5-ba65-8559adee3668",
+    "op": "add_element"
+  },
+  {
+    "label": "",
+    "id": "1a675a81-f3ce-41f1-8ff7-5ce4c74e0ba7",
+    "op": "add_element"
+  },
+  {
+    "label": "Loss of communications",
+    "id": "d7795154-5a8a-46c8-aec1-3722ea7b91d7",
+    "op": "add_element"
+  },
+  {
+    "label": "",
+    "id": "b7c4cbad-940d-48d8-b4c4-1ca5ccdcd1f0",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate Pilot-ATC coordination",
+    "id": "3164ca0f-7ffc-4963-917c-1603bdfba264",
+    "op": "add_element"
+  },
+  {
+    "label": "Other event",
+    "id": "df93127f-9c6a-42a1-a05c-cfe54ecf6290",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate communication of instructions to pilot",
+    "id": "b8d987ec-f68c-47c6-b55f-253f48399cad",
+    "op": "add_element"
+  },
+  {
+    "label": "",
+    "id": "60787f21-9862-4370-9f7c-cdcb0b374df7",
+    "op": "add_element"
+  },
+  {
+    "label": "Ineffective handover",
+    "id": "3e0cf57b-7096-415e-aa07-7203ba2b79fd",
+    "op": "add_element"
+  },
+  {
+    "label": "",
+    "id": "c5df746f-eeed-4c9f-aedd-af60d102ed79",
+    "op": "add_element"
+  },
+  {
+    "label": "Bad frequency management",
+    "id": "872e8963-6738-40c4-ab72-619406d0a222",
+    "op": "add_element"
+  },
+  {
+    "label": "",
+    "id": "b1b019ba-9b94-4676-96d1-ee4fe73c56cd",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate planning task",
+    "id": "e93c98b2-9603-44e7-a967-573aa854f5d1",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate surveillance picture",
+    "id": "f09f9d47-c603-4420-b2cc-79eb8b192c44",
+    "op": "add_element"
+  },
+  {
+    "label": "Failure to balance arrival or departure rates",
+    "id": "3e96eb53-3979-439e-adbc-4503af1055d3",
+    "op": "add_element"
+  },
+  {
+    "label": "Insufficient time to act",
+    "id": "521fa954-3e8a-4533-99ff-daa50ae600cc",
+    "op": "add_element"
+  },
+  {
+    "label": "Network management failure to balance operational airspace capacity\/demand",
+    "id": "d08f85dc-fa44-4b45-b437-1b1bbcda416c",
+    "op": "add_element"
+  },
+  {
+    "label": "Failure to resectorise",
+    "id": "7314bed7-3419-4803-a2df-e244ad19d1a0",
+    "op": "add_element"
+  },
+  {
+    "label": "",
+    "id": "d288aa69-4d22-439b-8e1c-3879251e0c84",
+    "op": "add_element"
+  },
+  {
+    "label": "Unexpected events invalidate balancing",
+    "id": "fc5d5182-5d88-4cca-8217-1bead655c72b",
+    "op": "add_element"
+  },
+  {
+    "label": "Pilot induced deviation",
+    "id": "56175d27-3ab9-4d02-a435-37a6bc57d6b9",
+    "op": "add_element"
+  },
+  {
+    "label": "",
+    "id": "32cbc95f-94e6-426a-bfc8-b6ef57c7c4cc",
+    "op": "add_element"
+  },
+  {
+    "label": "Inexpected capacity shortfall or demand invalidates DCB",
+    "id": "0f69075b-36d5-47e8-8db2-82ef2c766c72",
+    "op": "add_element"
+  },
+  {
+    "label": "Planning fails to remove conflict",
+    "id": "1b612a62-ec0d-43ca-8f93-44a0249af5d5",
+    "op": "add_element"
+  },
+  {
+    "label": "Emergency situation",
+    "id": "ef43e5db-acfa-4838-9b33-6115b05d42f5",
+    "op": "add_element"
+  },
+  {
+    "label": "TRACT failure to solve conflict",
+    "id": "fa5a6aac-2c0b-4aae-9898-2673fcb0c393",
+    "op": "add_element"
+  },
+  {
+    "label": "",
+    "id": "c1260e5e-06fb-462c-b937-09b7629a290a",
+    "op": "add_element"
+  },
+  {
+    "label": "Pilot failure to follow ATC instructions or ATM procedures",
+    "id": "c958e26b-e569-418a-9212-079ece760ee1",
+    "op": "add_element"
+  },
+  {
+    "label": "Misjudged conflict resolution",
+    "id": "23b9243d-90c8-4a49-b6c9-932316d5d331",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate readback\/hearback",
+    "id": "7d29e104-6be1-4287-9524-c971caa94629",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate pilot response to ATC",
+    "id": "6cb39ade-b4c8-4714-a50f-4f13dde8986e",
+    "op": "add_element"
+  },
+  {
+    "label": "",
+    "id": "c9095856-d868-4f54-ba75-2d9d29a7e91b",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate ATCo response",
+    "id": "e5178511-de52-4e70-b329-4f76594b6fe0",
+    "op": "add_element"
+  },
+  {
+    "label": "Inadequate planning info",
+    "id": "cee7d0ec-693e-4b47-be5e-3c13a3b7d5be",
+    "op": "add_element"
+  },
+  {
+    "label": "Aircraft not transfered not on frequency",
+    "id": "81586802-b11f-4882-8933-2bec3ad375e6",
+    "op": "add_element"
+  },
+  {
+    "label": "Pilot misunderstood ATC instructions",
+    "id": "6c149432-0570-4721-b833-7e32ea8ff200",
+    "op": "add_element"
+  },
+  {
+    "label": "",
+    "id": "9750791c-e235-445d-85e2-247af9629337",
+    "op": "add_element"
+  },
+  {
+    "label": "Misjudged acceptance rate or traffic peak",
+    "id": "58c3dda2-b322-430a-9288-17cbabe8eb86",
+    "op": "add_element"
+  },
+  {
+    "label": "Failure in staffing",
+    "id": "42e163ee-2938-4a61-831b-f08ea50b43fe",
+    "op": "add_element"
+  },
+  {
+    "label": "Multi-sector planning fails to balance sector demand",
+    "id": "88f31f5a-3029-4b44-82b2-7f1c781a2d0e",
+    "op": "add_element"
+  },
+  {
+    "label": "Ineffective arrival rates",
+    "id": "5ef55c2a-1c93-40e7-8631-8c2587fe67d6",
+    "op": "add_element"
+  },
+  {
+    "label": "TRACT Automatic speed resolution fails to remove conflict",
+    "id": "2cd8dbf9-fda1-45d0-bcbc-1dbe73308db1",
+    "op": "add_element"
+  },
+  {
+    "label": "Incomplete instructions",
+    "id": "822475fc-f08b-42a9-9dba-b16395870970",
+    "op": "add_element"
+  },
+  {
+    "label": "Ineffective short-term demand\/capacity balancing to prevent pre-tactical conflicts",
+    "id": "0b9382c9-80be-4a20-95a1-2fdb6ec98157",
+    "op": "add_element"
+  }
+]

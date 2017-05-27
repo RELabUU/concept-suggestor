@@ -4,7 +4,7 @@ print("Concepts already in the model: %s" % concepts)
 
 
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c"):
+    if(choice=="a" or choice=="b" or choice=="c" or choice=="d"):
         return True
     else:
         return False
@@ -14,6 +14,7 @@ def GetProgramMode():
     print("a - Check similarity using word vectors")
     print("b - Check whether a synonym exists using thesaurus.com")
     print("c - Check whether a synonym exists using WordNet")
+    print("d - Open a JSON file")
 
     # Get the program mode from the user and ensure it's valid.
     choice = input("Please tell me what to do (type a letter): ").lower()
@@ -26,7 +27,8 @@ def GetProgramMode():
     return choice
 
 choice = GetProgramMode()
-new = input("Enter a concept you want to check whether we have a synonym for (i.e. Aeroplane): ")
+if(choice != "d"):
+    new = input("Enter a concept you want to check whether we have a synonym for (i.e. Aeroplane): ")
 
 if(choice == "a"):
     from SynonymRemover import SynonymRemover
@@ -46,5 +48,9 @@ elif(choice=="c"):
     wns = WordNetSynonyms()
     print(wns.HasSynonym(concepts, new))
 
+elif(choice=="d"):
+    from JsonParser import JsonParser
+    print("Result of JsonParser: ")
+    jp = JsonParser()
 else:
     print("Invalid mode. Aborting.")
