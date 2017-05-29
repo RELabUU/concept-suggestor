@@ -1,6 +1,6 @@
 from PyDictionary import PyDictionary
 
-class DictionarySynonyms(object):
+class ThesaurusSynonyms(object):
     """Checks whether words are synonyms using thesaurus.com as a dictionary."""
 
     TWOWAYCHECK = True # Whether to only check for B == synonym(A) or also for A == synonym(B)
@@ -11,12 +11,10 @@ class DictionarySynonyms(object):
     # Checks if the collection has a synonym of the word
     def HasSynonym(self, collection, word):
         # Get the synonyms of "word" once and store them
-        self.synonymsOfWord = []
-        if(self.TWOWAYCHECK is True):
-            self.synonymsOfWord = self.dict.synonym(word)
-            print("Synonyms of %s: %s" % (word, self.synonymsOfWord)) # DEBUG
+        self.synonymsOfWord = self.dict.synonym(word)
+        print("Synonyms of %s: %s" % (word, self.synonymsOfWord)) # DEBUG
 
-        for cword in collection:
+        for cword in collection: 
             if self.IsSynonym(cword, word, self.synonymsOfWord):
                 return True
         return False
@@ -25,6 +23,11 @@ class DictionarySynonyms(object):
     def IsSynonym(self, wordA, wordB, synonymsOfWordB):
         synonyms = self.dict.synonym(wordA)
         print("Synonyms of %s: %s" % (wordA, synonyms)) # DEBUG
+
+        # If the collections are identical, the words are expected to be identical.
+        if synonyms == synonymsOfWordB:
+            return True
+
         result = wordB.lower() in synonyms
         if result is True:
             return result
