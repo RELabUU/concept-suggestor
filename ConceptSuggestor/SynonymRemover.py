@@ -1,32 +1,64 @@
-import spacy
-nlp = spacy.load("en_core_web_md")
-
-from SemanticSimilarity import SemanticSimilarity
-
 class SynonymRemover(object):
-    """Removes synonyms using semantic similarity"""
-    THRESHOLD = 0.9
+    """Removes synonyms using a variety of methods"""
 
-    def __init__(self, concepts):
-        self.ss = SemanticSimilarity(nlp)
+    def __init__(self, concepts, threshold, useWordVectors = False, wordVectorWeight = 0, useThesaurus = False, thesaurusWeight = 0, useWordNet = False, wordNetWeight = 0, totalWeight = 0, totalThreshold = 0):
+        self.useWordVectors = useWordVectors
+        if(self.useWordVectors == True):
+            from SemanticSimilarity import SemanticSimilarity
+            self.ss = SemanticSimilarity(concepts)
+            self.wordVectorWeight = wordVectorWeight
 
-        # Convert the strings to objects that can be used by spaCy
-        self.concepts = []
-        for concept in concepts:
-            self.concepts.append(nlp.vocab[concept])
+        self.useThesaurus = useThesaurus
+        if(self.useThesaurus == True):
+            from ThesaurusSynonyms import ThesaurusSynonyms
+            self.ts = ThesaurusSynonyms()
+            self.thesaurusWeight = thesaurusWeight
 
-    def HasSynonym(self, word):
-        word = nlp.vocab[word]
-        for groupword in self.concepts:
-            if(self.IsSynonym(groupword, word)):
-                return True
-        # We get here if no synonyms are found
-        return False
+        self.useWordNet = useWordNet
+        if(self.useWordNet == True):
+            from WordNetSynonyms import WordNetSynonyms
+            self.wns = WordNetSynonyms()
+            self.wordNetWeight = wordNetWeight
 
-    def IsSynonym(self, wordA, wordB):
-        similarity = self.ss.GetSimilarity(wordA, wordB)
-        print("%s - %s: %s" % (wordA.norm_, wordB.norm_, similarity)) # DEBUG
-        if(similarity >= self.THRESHOLD):
+        self.totalWeight = totalWeight
+        self.totalThreshold = totalThreshold
+
+    # Returns oldCollection + newCollection without the items in newCollection that are already in oldCollection or which have a synonym of themselves in oldCollection
+    def AddWithoutSynonyms(self, oldCollection, newCollection):
+        toBeAdded = []
+        for newItem in newCollection:
+            if(not self.IsSynonym(newItem, oldCollection)):
+                toBeAdded.append(newItem)
+
+        return oldCollection + toBeAdded
+
+    # Returns whether a synonym of item is in collection.
+    def IsSynonym(self, item, collection):
+        total = 0
+
+        # Semantic similarity using SpaCy
+        if(self.useWordVectors == True):
+            print("item: %s" % item)
+            semanticSimilarity = self.ss.GetMaxSimilarity(item)
+            semanticSimilarity *= self.wordVectorWeight
+            total += semanticSimilarity
+
+        # Checking the synonym using thesaurus
+        if(self.useThesaurus == True):
+            thesaurus = int(self.ts.HasSynonym(item, collection))
+            thesaurus *= self.thesaurusWeight
+            total += thesaurus
+
+        # Checking the synonym using WordNet
+        if(self.useWordNet == True):
+            wordNet = int(self.wns.HasSynonym(item, collection))
+            wordNet *= self.wordNetWeight
+            total += wordNet
+
+        print("Total: %s + %s + %s = %s out of %s" % (semanticSimilarity, thesaurus, wordNet, total, self.totalWeight)) # DEBUG
+
+        total /= self.totalWeight
+        if(total >= self.totalThreshold):
             return True
         else:
             return False

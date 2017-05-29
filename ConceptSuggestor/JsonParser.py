@@ -12,7 +12,7 @@ class JsonParser(object):
 
     # Loads a commit JSON file and returns a list of new concepts.
     def LoadCommit(self, file):
-        data = LoadFile(self, file)
+        data = self.LoadFile(file)
 
         newitems = []
 
@@ -25,7 +25,7 @@ class JsonParser(object):
         return newitems
     
     def LoadConcepts(self, file):
-        data = LoadFile(self, file)
+        data = self.LoadFile(file)
 
         items = []
 

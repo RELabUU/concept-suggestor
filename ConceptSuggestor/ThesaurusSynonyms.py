@@ -9,7 +9,7 @@ class ThesaurusSynonyms(object):
         self.dict = PyDictionary()
 
     # Checks if the collection has a synonym of the word
-    def HasSynonym(self, collection, word):
+    def HasSynonym(self, word, collection):
         # Get the synonyms of "word" once and store them
         self.synonymsOfWord = self.dict.synonym(word)
         print("Synonyms of %s: %s" % (word, self.synonymsOfWord)) # DEBUG
@@ -28,6 +28,7 @@ class ThesaurusSynonyms(object):
         if synonyms == synonymsOfWordB:
             return True
 
+        # Check if wordB exists in synonyms of wordA.
         result = wordB.lower() in synonyms
         if result is True:
             return result

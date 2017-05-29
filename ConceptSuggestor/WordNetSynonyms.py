@@ -4,7 +4,7 @@ class WordNetSynonyms(object):
     """Uses WordNet to determine whether words are synonyms"""
 
     # Checks if the collection has a synonym of the word
-    def HasSynonym(self, collection, word):
+    def HasSynonym(self, word, collection):
         for cword in collection:
             print("Comparing %s and %s" % (cword, word))
             if(self.IsSynonym(cword, word)):
