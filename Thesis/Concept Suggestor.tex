@@ -33,7 +33,7 @@ Recommender systems are software tools and techniques providing suggestions for 
 
 WordNet is an electronic lexical database.\cite{kilgarriff2000wordnet}
 SpaCy is one of the fastest and most accurate publicly available Natural Language Processing (NLP) toolkits available.\cite{choi2015depends}
-SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words.\cite{pennington2014glove} These word vectors can be used to model semantic similarity of words. Spacy's default word vector library is trained on Wikipedia. Wikipedia has proven to be a valuable source for computing semantic relatedness measures.\cite{strube2006wikirelate}
+SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words. Training is performed on aggregated global word-word co-occurrence statistics from a corpus.\cite{pennington2014glove} Although GloVe measures co-occurrence, and not semantic similarity or relatedness, its results can be used as a rough estimate of semantic similarity or relatedness.\cite{levy2015improving} Spacy's default word vector library is trained on Wikipedia. Wikipedia has proven to be a valuable source for computing semantic relatedness measures.\cite{strube2006wikirelate}
 
 Most methods of computing semantic relatedness measures such as word vectors rely on training an algorithm on a dataset. Public datasets, such as Google, Wikipedia, or WordNet are often used, although private datasets can also be used to improve context-sensitivity. Wikipedia and WordNet have proven to perform well in a variety of situations.\cite{strube2006wikirelate}
 
