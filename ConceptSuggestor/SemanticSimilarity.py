@@ -13,7 +13,7 @@ class SemanticSimilarity(object):
     def HasSynonym(self, word, threshold):
         word = self.nlp.vocab[word]
         for groupword in self.concepts:
-            if(self.IsSynonym(groupword, word, threshold)):
+            if self.IsSynonym(groupword, word, threshold):
                 return True
         # We get here if no synonyms are found
         return False
@@ -21,14 +21,14 @@ class SemanticSimilarity(object):
     def IsSynonym(self, wordA, wordB, threshold):
         similarity = self.GetSimilarity(wordA, wordB)
         print("%s - %s: %s" % (wordA.norm_, wordB.norm_, similarity)) # DEBUG
-        if(similarity >= threshold):
+        if similarity >= threshold:
             return True
         else:
             return False
 
     # Gets the vector of a string, or returns the object if it's already a vector.
     def StringToVector(self, object):
-        if(type(object) == str):
+        if type(object) == str:
             return self.nlp.vocab[object]
         else:
             return object
@@ -47,7 +47,7 @@ class SemanticSimilarity(object):
         maxSimilarity = 0
         for groupword in self.concepts:
             similarity = self.GetSimilarity(word, groupword)
-            if(similarity > maxSimilarity):
+            if similarity > maxSimilarity:
                 maxSimilarity = similarity
 
         return maxSimilarity

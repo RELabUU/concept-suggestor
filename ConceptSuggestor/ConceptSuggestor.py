@@ -1,6 +1,7 @@
 COMMITFILE = "commit_example2.json" # Example commit to load
 CONCEPTSFILE = "concepts_example.json" # Example concepts already in the model
 OUTFILE = "suggestions_example.json" # Example file to send after request
+AIRMFILE = "AIRM/EA4A02.informationmodel.xml" # AIRM information model
 
 WORDVECTOR_THRESHOLD = 0.9
 TOTAL_THRESHOLD = 0.8
@@ -11,22 +12,23 @@ WORDNET_WEIGHT = 0.5
 TOTAL_WEIGHT = WORDVECTOR_WEIGHT + THESAURUS_WEIGHT + WORDNET_WEIGHT
 
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e"):
+    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f"):
         return True
     else:
         return False
 
 def GetProgramMode():
     print("These are your options:")
-    print("a - The complete parameterized package. Loads new concepts from external JSON file, adds non-synonyms to the existing concepts, and writes that to an external JSON file.")
+    print("a - The complete parameterized package. Loads new concepts from external JSON file, removes synonyms, and writes that to an external JSON file.")
     print("b - Check similarity using word vectors.")
     print("c - Check whether a synonym exists using thesaurus.com.")
     print("d - Check whether a synonym exists using WordNet.")
     print("e - Open a JSON file.")
+    print("f - Open the AIRM file.")
 
     # Get the program mode from the user and ensure it's valid.
     choice = input("Please tell me what to do (type a letter): ").lower()
-    if(IsValidChoice(choice)):
+    if IsValidChoice(choice):
         return choice
     else:
         print("I could not understand that option. Please try again.")
@@ -43,10 +45,10 @@ def Main():
     print("Concepts already in the model: %s" % concepts)
 
     choice = GetProgramMode()
-    if(choice != "a" and choice != "e"):
+    if choice != "a" and choice != "e" and choice != "f":
         new = input("Enter a concept you want to check whether we have a synonym for (i.e. Aeroplane): ")
 
-    if(choice == "a"):
+    if choice == "a":
         from SynonymRemover import SynonymRemover
         sr = SynonymRemover(concepts, TOTAL_THRESHOLD, 
                             useWordVectors = True, wordVectorWeight = WORDVECTOR_WEIGHT,
@@ -58,37 +60,44 @@ def Main():
         jp = JsonParser()
         newConcepts = jp.LoadCommit(COMMITFILE)
 
-        finalConcepts = sr.AddWithoutSynonyms(concepts, newConcepts)
+        newConcepts = sr.RemoveSynonyms(concepts, newConcepts)
 
-        print("Final concepts: %s" % finalConcepts)
-        jp.MakeFile(finalConcepts, OUTFILE)
+        print("New concepts: %s" % newConcepts)
+        jp.MakeFile(newConcepts, OUTFILE)
 
-    elif(choice == "b"):
+    elif choice == "b":
         from SemanticSimilarity import SemanticSimilarity
         print("Result of semantic similarity: ")
         ss = SemanticSimilarity(concepts)
         print(ss.HasSynonym(new, WORDVECTOR_THRESHOLD))
 
-    elif(choice=="c"):
+    elif choice=="c":
         from ThesaurusSynonyms import ThesaurusSynonyms
         print("Result of Thesaurus.com synonyms: ")
         ds = ThesaurusSynonyms()
         print(ds.HasSynonym(new, concepts))
 
-    elif(choice=="d"):
+    elif choice=="d":
         from WordNetSynonyms import WordNetSynonyms
         print("Result of WordNet synonyms: ")
         wns = WordNetSynonyms()
 
         print(wns.HasSynonym(new, concepts))
 
-    elif(choice=="e"):
+    elif choice=="e":
         from JsonParser import JsonParser
         print("Result of JsonParser: ")
         jp = JsonParser()
         data = jp.LoadCommit(COMMITFILE)
         print(data)
         jp.MakeFile(data, OUTFILE)
+
+    elif choice=="f":
+         from XmlParser import XmlParser
+         print("Result of XmlParser: ")
+         xp = XmlParser()
+         data = xp.LoadFile(AIRMFILE)
+         print(data)
     else:
         print("Invalid mode. Aborting.")
 

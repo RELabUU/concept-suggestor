@@ -17,7 +17,7 @@ class JsonParser(object):
         newitems = []
 
         for item in data:
-            if(item["op"] == "add_element"):
+            if item["op"] == "add_element":
                 newitems.append(item["label"])
             else:
                 print("Do not understand commit message: %s" % item["op"])

@@ -1,10 +1,14 @@
+import xml.etree.ElementTree as ET
+
 class XmlParser(object):
     """Parses XML files."""
 
-    import xmltodict
-
-    def LoadFile(file):
-        with open(file) as data_file:
-            data = xmltodict.parse(data_file.read())
-
-        print("Currently not supported.")
+    def LoadFile(self, file):
+        tree = ET.parse(file)
+        root = tree.getroot()
+        namespaces = {"UML": "omg.org/UML1.3"}
+        classes = []
+        for node in tree.findall(".//UML:Class", namespaces):
+            name = node.attrib.get("name")
+            classes.append(name)
+        return classes

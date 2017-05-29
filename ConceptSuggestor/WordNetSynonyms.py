@@ -7,7 +7,7 @@ class WordNetSynonyms(object):
     def HasSynonym(self, word, collection):
         for cword in collection:
             print("Comparing %s and %s" % (cword, word))
-            if(self.IsSynonym(cword, word)):
+            if self.IsSynonym(cword, word):
                return True
         return False
 

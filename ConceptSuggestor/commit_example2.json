@@ -8,5 +8,10 @@
     "label": "Aircraft",
     "id": "16ea7a72-8d79-433a-9d68-17a7762e83c5",
     "op": "add_element"
+  },
+  {
+    "label": "Aerospace",
+    "id": "991acd3d-d6d3-4a29-b456-63462bb0d230",
+    "op": "add_element"
   }
 ]

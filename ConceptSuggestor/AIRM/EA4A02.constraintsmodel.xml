@@ -1,0 +1,1474 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<XMI xmi.version="1.1" xmlns:UML="omg.org/UML1.3" timestamp="2017-05-09 11:56:58">
+	<XMI.header>
+		<XMI.documentation>
+			<XMI.exporter>Enterprise Architect</XMI.exporter>
+			<XMI.exporterVersion>2.5</XMI.exporterVersion>
+		</XMI.documentation>
+	</XMI.header>
+	<XMI.content>
+		<UML:Model name="EA Model" xmi.id="MX_EAID_EAF7C21A_1B4F_41bb_8896_590F6E4F3141">
+			<UML:Namespace.ownedElement>
+				<UML:Class name="EARootClass" xmi.id="EAID_11111111_5487_4080_A7F4_41526CB0AA00" isRoot="true" isLeaf="false" isAbstract="false"/>
+				<UML:Package name="ConstraintsModel" xmi.id="EAPK_EAF7C21A_1B4F_41bb_8896_590F6E4F3141" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
+					<UML:ModelElement.taggedValue>
+						<UML:TaggedValue tag="documentation" value="The AIRM Constraints Model provides the AIRM Constraints which have an impact on the AIRM Information Model and/or the AIRM Consolidated Logical Data Model."/>
+						<UML:TaggedValue tag="parent" value="EAPK_526C38EE_D7D4_468d_BCD2_DC4B2F2367E8"/>
+						<UML:TaggedValue tag="created" value="2014-02-04 16:21:20"/>
+						<UML:TaggedValue tag="modified" value="2014-05-06 15:31:15"/>
+						<UML:TaggedValue tag="iscontrolled" value="FALSE"/>
+						<UML:TaggedValue tag="lastloaddate" value="2014-05-02 15:31:09"/>
+						<UML:TaggedValue tag="lastsavedate" value="2014-05-02 15:31:09"/>
+						<UML:TaggedValue tag="isprotected" value="FALSE"/>
+						<UML:TaggedValue tag="usedtd" value="FALSE"/>
+						<UML:TaggedValue tag="logxml" value="FALSE"/>
+						<UML:TaggedValue tag="tpos" value="0"/>
+						<UML:TaggedValue tag="packageFlags" value="CRC=0;"/>
+						<UML:TaggedValue tag="batchsave" value="0"/>
+						<UML:TaggedValue tag="batchload" value="0"/>
+						<UML:TaggedValue tag="status" value="Validated"/>
+						<UML:TaggedValue tag="author" value="08.01.03"/>
+						<UML:TaggedValue tag="complexity" value="1"/>
+						<UML:TaggedValue tag="ea_stype" value="Public"/>
+						<UML:TaggedValue tag="tpos" value="0"/>
+					</UML:ModelElement.taggedValue>
+					<UML:Namespace.ownedElement>
+						<UML:Collaboration xmi.id="EAID_EAF7C21A_1B4F_41bb_8896_590F6E4F3141_Collaboration" name="Collaborations">
+							<UML:Namespace.ownedElement>
+								<UML:ClassifierRole name="ConsolidatedLogicalDataModel" xmi.id="EAID_2CD2A35F_BA59_4aab_ABAE_81E8C8851311" visibility="public" base="EAID_11111111_5487_4080_A7F4_41526CB0AA00">
+									<UML:ModelElement.taggedValue>
+										<UML:TaggedValue tag="isAbstract" value="false"/>
+										<UML:TaggedValue tag="isSpecification" value="false"/>
+										<UML:TaggedValue tag="ea_stype" value="Package"/>
+										<UML:TaggedValue tag="ea_ntype" value="0"/>
+										<UML:TaggedValue tag="isActive" value="false"/>
+										<UML:TaggedValue tag="package" value="EAPK_EAF7C21A_1B4F_41bb_8896_590F6E4F3141"/>
+										<UML:TaggedValue tag="date_created" value="2014-05-16 13:13:57"/>
+										<UML:TaggedValue tag="date_modified" value="2016-03-22 14:08:30"/>
+										<UML:TaggedValue tag="tagged" value="0"/>
+										<UML:TaggedValue tag="package2" value="EAID_2CD2A35F_BA59_4aab_ABAE_81E8C8851311"/>
+										<UML:TaggedValue tag="package_name" value="ConstraintsModel"/>
+										<UML:TaggedValue tag="author" value="08.01.03"/>
+										<UML:TaggedValue tag="complexity" value="1"/>
+										<UML:TaggedValue tag="status" value="Validated"/>
+										<UML:TaggedValue tag="tpos" value="0"/>
+										<UML:TaggedValue tag="ea_localid" value="99"/>
+										<UML:TaggedValue tag="ea_eleType" value="package"/>
+										<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+									</UML:ModelElement.taggedValue>
+								</UML:ClassifierRole>
+								<UML:ClassifierRole name="AIRM Constraints Applicable to the CLDM" xmi.id="EAID_6287DE8E_C73D_42f6_887D_63B2712FE75D" visibility="public" base="EAID_11111111_5487_4080_A7F4_41526CB0AA00">
+									<UML:ModelElement.taggedValue>
+										<UML:TaggedValue tag="documentation" value="ipping"/>
+										<UML:TaggedValue tag="isAbstract" value="false"/>
+										<UML:TaggedValue tag="isSpecification" value="false"/>
+										<UML:TaggedValue tag="ea_stype" value="Boundary"/>
+										<UML:TaggedValue tag="ea_ntype" value="0"/>
+										<UML:TaggedValue tag="version" value="1.0"/>
+										<UML:TaggedValue tag="isActive" value="false"/>
+										<UML:TaggedValue tag="package" value="EAPK_EAF7C21A_1B4F_41bb_8896_590F6E4F3141"/>
+										<UML:TaggedValue tag="date_created" value="2014-05-16 13:15:01"/>
+										<UML:TaggedValue tag="date_modified" value="2017-05-04 15:46:04"/>
+										<UML:TaggedValue tag="gentype" value="&lt;none&gt;"/>
+										<UML:TaggedValue tag="tagged" value="0"/>
+										<UML:TaggedValue tag="package_name" value="ConstraintsModel"/>
+										<UML:TaggedValue tag="phase" value="1.0"/>
+										<UML:TaggedValue tag="author" value="The Administrator"/>
+										<UML:TaggedValue tag="complexity" value="1"/>
+										<UML:TaggedValue tag="status" value="Proposed"/>
+										<UML:TaggedValue tag="tpos" value="0"/>
+										<UML:TaggedValue tag="ea_localid" value="1266"/>
+										<UML:TaggedValue tag="ea_eleType" value="element"/>
+										<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=3;"/>
+									</UML:ModelElement.taggedValue>
+								</UML:ClassifierRole>
+							</UML:Namespace.ownedElement>
+							<UML:Collaboration.interaction/>
+						</UML:Collaboration>
+						<UML:Dependency client="EAPK_EAF7C21A_1B4F_41bb_8896_590F6E4F3141" supplier="EAPK_00E1F6CB_2C8B_4dbe_9C34_889C799D3AA2" xmi.id="EAID_FBE07F55_8F04_4832_9738_131791A500D6" visibility="public">
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="style" value="3"/>
+								<UML:TaggedValue tag="ea_type" value="Dependency"/>
+								<UML:TaggedValue tag="direction" value="Source -&gt; Destination"/>
+								<UML:TaggedValue tag="linemode" value="3"/>
+								<UML:TaggedValue tag="linecolor" value="-1"/>
+								<UML:TaggedValue tag="linewidth" value="0"/>
+								<UML:TaggedValue tag="seqno" value="0"/>
+								<UML:TaggedValue tag="headStyle" value="0"/>
+								<UML:TaggedValue tag="lineStyle" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="3694"/>
+								<UML:TaggedValue tag="ea_sourceName" value="ConstraintsModel"/>
+								<UML:TaggedValue tag="ea_targetName" value="FoundationLibrary"/>
+								<UML:TaggedValue tag="ea_sourceType" value="Package"/>
+								<UML:TaggedValue tag="ea_targetType" value="Package"/>
+								<UML:TaggedValue tag="ea_sourceID" value="1265"/>
+								<UML:TaggedValue tag="ea_targetID" value="1300"/>
+								<UML:TaggedValue tag="src_visibility" value="Public"/>
+								<UML:TaggedValue tag="src_aggregation" value="0"/>
+								<UML:TaggedValue tag="src_isOrdered" value="false"/>
+								<UML:TaggedValue tag="src_targetScope" value="instance"/>
+								<UML:TaggedValue tag="src_changeable" value="none"/>
+								<UML:TaggedValue tag="src_isNavigable" value="false"/>
+								<UML:TaggedValue tag="src_containment" value="Unspecified"/>
+								<UML:TaggedValue tag="src_style" value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"/>
+								<UML:TaggedValue tag="dst_visibility" value="Public"/>
+								<UML:TaggedValue tag="dst_aggregation" value="0"/>
+								<UML:TaggedValue tag="dst_isOrdered" value="false"/>
+								<UML:TaggedValue tag="dst_targetScope" value="instance"/>
+								<UML:TaggedValue tag="dst_changeable" value="none"/>
+								<UML:TaggedValue tag="dst_isNavigable" value="true"/>
+								<UML:TaggedValue tag="dst_containment" value="Unspecified"/>
+								<UML:TaggedValue tag="dst_style" value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"/>
+								<UML:TaggedValue tag="privatedata5" value="SX=32;SY=-173;EX=32;EY=-176;EDGE=2;"/>
+								<UML:TaggedValue tag="virtualInheritance" value="0"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Dependency>
+						<UML:Dependency client="EAPK_6CE3141E_F2D8_4f47_AEB6_49FED873DBDB" supplier="EAPK_EAF7C21A_1B4F_41bb_8896_590F6E4F3141" xmi.id="EAID_17407FFF_8FB9_438f_A46F_22A4324277A7" visibility="public">
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="style" value="2"/>
+								<UML:TaggedValue tag="ea_type" value="Dependency"/>
+								<UML:TaggedValue tag="direction" value="Source -&gt; Destination"/>
+								<UML:TaggedValue tag="linemode" value="2"/>
+								<UML:TaggedValue tag="linecolor" value="-1"/>
+								<UML:TaggedValue tag="linewidth" value="0"/>
+								<UML:TaggedValue tag="seqno" value="0"/>
+								<UML:TaggedValue tag="headStyle" value="0"/>
+								<UML:TaggedValue tag="lineStyle" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="5546"/>
+								<UML:TaggedValue tag="ea_sourceName" value="ConsolidatedLogicalDataModel"/>
+								<UML:TaggedValue tag="ea_targetName" value="ConstraintsModel"/>
+								<UML:TaggedValue tag="ea_sourceType" value="Package"/>
+								<UML:TaggedValue tag="ea_targetType" value="Package"/>
+								<UML:TaggedValue tag="ea_sourceID" value="258"/>
+								<UML:TaggedValue tag="ea_targetID" value="1265"/>
+								<UML:TaggedValue tag="src_visibility" value="Public"/>
+								<UML:TaggedValue tag="src_aggregation" value="0"/>
+								<UML:TaggedValue tag="src_isOrdered" value="false"/>
+								<UML:TaggedValue tag="src_targetScope" value="instance"/>
+								<UML:TaggedValue tag="src_changeable" value="none"/>
+								<UML:TaggedValue tag="src_isNavigable" value="false"/>
+								<UML:TaggedValue tag="src_containment" value="Unspecified"/>
+								<UML:TaggedValue tag="src_style" value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"/>
+								<UML:TaggedValue tag="dst_visibility" value="Public"/>
+								<UML:TaggedValue tag="dst_aggregation" value="0"/>
+								<UML:TaggedValue tag="dst_isOrdered" value="false"/>
+								<UML:TaggedValue tag="dst_targetScope" value="instance"/>
+								<UML:TaggedValue tag="dst_changeable" value="none"/>
+								<UML:TaggedValue tag="dst_isNavigable" value="true"/>
+								<UML:TaggedValue tag="dst_containment" value="Unspecified"/>
+								<UML:TaggedValue tag="dst_style" value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"/>
+								<UML:TaggedValue tag="privatedata5" value="SX=0;SY=0;EX=0;EY=0;EDGE=4;"/>
+								<UML:TaggedValue tag="virtualInheritance" value="0"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Dependency>
+						<UML:Dependency client="EAPK_A04B0988_6959_400f_AD70_35D16B90E91B" supplier="EAPK_EAF7C21A_1B4F_41bb_8896_590F6E4F3141" xmi.id="EAID_5B80680E_271C_4442_BBD5_AB594FFDD1E3" visibility="public">
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="style" value="2"/>
+								<UML:TaggedValue tag="ea_type" value="Dependency"/>
+								<UML:TaggedValue tag="direction" value="Source -&gt; Destination"/>
+								<UML:TaggedValue tag="linemode" value="2"/>
+								<UML:TaggedValue tag="linecolor" value="-1"/>
+								<UML:TaggedValue tag="linewidth" value="0"/>
+								<UML:TaggedValue tag="seqno" value="0"/>
+								<UML:TaggedValue tag="headStyle" value="0"/>
+								<UML:TaggedValue tag="lineStyle" value="0"/>
+								<UML:TaggedValue tag="ea_localid" value="2944"/>
+								<UML:TaggedValue tag="ea_sourceName" value="InformationModel"/>
+								<UML:TaggedValue tag="ea_targetName" value="ConstraintsModel"/>
+								<UML:TaggedValue tag="ea_sourceType" value="Package"/>
+								<UML:TaggedValue tag="ea_targetType" value="Package"/>
+								<UML:TaggedValue tag="ea_sourceID" value="4385"/>
+								<UML:TaggedValue tag="ea_targetID" value="1265"/>
+								<UML:TaggedValue tag="src_visibility" value="Public"/>
+								<UML:TaggedValue tag="src_aggregation" value="0"/>
+								<UML:TaggedValue tag="src_isOrdered" value="false"/>
+								<UML:TaggedValue tag="src_targetScope" value="instance"/>
+								<UML:TaggedValue tag="src_changeable" value="none"/>
+								<UML:TaggedValue tag="src_isNavigable" value="false"/>
+								<UML:TaggedValue tag="src_containment" value="Unspecified"/>
+								<UML:TaggedValue tag="src_style" value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"/>
+								<UML:TaggedValue tag="dst_visibility" value="Public"/>
+								<UML:TaggedValue tag="dst_aggregation" value="0"/>
+								<UML:TaggedValue tag="dst_isOrdered" value="false"/>
+								<UML:TaggedValue tag="dst_targetScope" value="instance"/>
+								<UML:TaggedValue tag="dst_changeable" value="none"/>
+								<UML:TaggedValue tag="dst_isNavigable" value="true"/>
+								<UML:TaggedValue tag="dst_containment" value="Unspecified"/>
+								<UML:TaggedValue tag="dst_style" value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"/>
+								<UML:TaggedValue tag="privatedata5" value="SX=-13;SY=-4;EX=-13;EY=-4;EDGE=4;"/>
+								<UML:TaggedValue tag="virtualInheritance" value="0"/>
+							</UML:ModelElement.taggedValue>
+						</UML:Dependency>
+						<UML:Package name="ConsolidatedLogicalDataModel" xmi.id="EAPK_2CD2A35F_BA59_4aab_ABAE_81E8C8851311" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
+							<UML:ModelElement.taggedValue>
+								<UML:TaggedValue tag="parent" value="EAPK_EAF7C21A_1B4F_41bb_8896_590F6E4F3141"/>
+								<UML:TaggedValue tag="created" value="2014-05-16 13:13:57"/>
+								<UML:TaggedValue tag="modified" value="2014-05-16 13:13:57"/>
+								<UML:TaggedValue tag="iscontrolled" value="FALSE"/>
+								<UML:TaggedValue tag="lastloaddate" value="2016-03-24 15:27:40"/>
+								<UML:TaggedValue tag="lastsavedate" value="2016-03-24 15:27:40"/>
+								<UML:TaggedValue tag="isprotected" value="FALSE"/>
+								<UML:TaggedValue tag="usedtd" value="FALSE"/>
+								<UML:TaggedValue tag="logxml" value="FALSE"/>
+								<UML:TaggedValue tag="tpos" value="0"/>
+								<UML:TaggedValue tag="batchsave" value="0"/>
+								<UML:TaggedValue tag="batchload" value="0"/>
+								<UML:TaggedValue tag="status" value="Validated"/>
+								<UML:TaggedValue tag="author" value="08.01.03"/>
+								<UML:TaggedValue tag="complexity" value="1"/>
+								<UML:TaggedValue tag="ea_stype" value="Public"/>
+							</UML:ModelElement.taggedValue>
+							<UML:Namespace.ownedElement>
+								<UML:Collaboration xmi.id="EAID_2CD2A35F_BA59_4aab_ABAE_81E8C8851311_Collaboration" name="Collaborations">
+									<UML:Namespace.ownedElement>
+										<UML:ClassifierRole name="SubjectFields" xmi.id="EAID_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6" visibility="public" base="EAID_11111111_5487_4080_A7F4_41526CB0AA00">
+											<UML:ModelElement.taggedValue>
+												<UML:TaggedValue tag="isAbstract" value="false"/>
+												<UML:TaggedValue tag="isSpecification" value="false"/>
+												<UML:TaggedValue tag="ea_stype" value="Package"/>
+												<UML:TaggedValue tag="ea_ntype" value="0"/>
+												<UML:TaggedValue tag="isActive" value="false"/>
+												<UML:TaggedValue tag="package" value="EAPK_2CD2A35F_BA59_4aab_ABAE_81E8C8851311"/>
+												<UML:TaggedValue tag="date_created" value="2014-05-16 13:14:07"/>
+												<UML:TaggedValue tag="date_modified" value="2016-03-22 14:08:30"/>
+												<UML:TaggedValue tag="tagged" value="0"/>
+												<UML:TaggedValue tag="package2" value="EAID_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6"/>
+												<UML:TaggedValue tag="package_name" value="ConsolidatedLogicalDataModel"/>
+												<UML:TaggedValue tag="author" value="08.01.03"/>
+												<UML:TaggedValue tag="complexity" value="1"/>
+												<UML:TaggedValue tag="status" value="Validated"/>
+												<UML:TaggedValue tag="tpos" value="0"/>
+												<UML:TaggedValue tag="ea_localid" value="100"/>
+												<UML:TaggedValue tag="ea_eleType" value="package"/>
+												<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+											</UML:ModelElement.taggedValue>
+										</UML:ClassifierRole>
+									</UML:Namespace.ownedElement>
+									<UML:Collaboration.interaction/>
+								</UML:Collaboration>
+								<UML:Package name="SubjectFields" xmi.id="EAPK_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
+									<UML:ModelElement.taggedValue>
+										<UML:TaggedValue tag="parent" value="EAPK_2CD2A35F_BA59_4aab_ABAE_81E8C8851311"/>
+										<UML:TaggedValue tag="created" value="2014-05-16 13:14:07"/>
+										<UML:TaggedValue tag="modified" value="2014-05-16 13:14:07"/>
+										<UML:TaggedValue tag="iscontrolled" value="FALSE"/>
+										<UML:TaggedValue tag="lastloaddate" value="2016-03-24 15:27:40"/>
+										<UML:TaggedValue tag="lastsavedate" value="2016-03-24 15:27:40"/>
+										<UML:TaggedValue tag="isprotected" value="FALSE"/>
+										<UML:TaggedValue tag="usedtd" value="FALSE"/>
+										<UML:TaggedValue tag="logxml" value="FALSE"/>
+										<UML:TaggedValue tag="tpos" value="0"/>
+										<UML:TaggedValue tag="batchsave" value="0"/>
+										<UML:TaggedValue tag="batchload" value="0"/>
+										<UML:TaggedValue tag="status" value="Validated"/>
+										<UML:TaggedValue tag="author" value="08.01.03"/>
+										<UML:TaggedValue tag="complexity" value="1"/>
+										<UML:TaggedValue tag="ea_stype" value="Public"/>
+									</UML:ModelElement.taggedValue>
+									<UML:Namespace.ownedElement>
+										<UML:Collaboration xmi.id="EAID_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6_Collaboration" name="Collaborations">
+											<UML:Namespace.ownedElement>
+												<UML:ClassifierRole name="Flight" xmi.id="EAID_094E9306_459A_4147_95EB_0A27DEFA3F26" visibility="public" base="EAID_11111111_5487_4080_A7F4_41526CB0AA00">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="isAbstract" value="false"/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Package"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="isActive" value="false"/>
+														<UML:TaggedValue tag="package" value="EAPK_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6"/>
+														<UML:TaggedValue tag="date_created" value="2014-05-08 11:46:16"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-22 14:08:36"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package2" value="EAID_094E9306_459A_4147_95EB_0A27DEFA3F26"/>
+														<UML:TaggedValue tag="package_name" value="SubjectFields"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="104"/>
+														<UML:TaggedValue tag="ea_eleType" value="package"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:ClassifierRole>
+												<UML:ClassifierRole name="BaseInfrastructure" xmi.id="EAID_61381CF0_384C_45b0_A103_A2AA9BD6C644" visibility="public" base="EAID_11111111_5487_4080_A7F4_41526CB0AA00">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="isAbstract" value="false"/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Package"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="isActive" value="false"/>
+														<UML:TaggedValue tag="package" value="EAPK_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-04 16:22:42"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-22 14:08:33"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package2" value="EAID_61381CF0_384C_45b0_A103_A2AA9BD6C644"/>
+														<UML:TaggedValue tag="package_name" value="SubjectFields"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="103"/>
+														<UML:TaggedValue tag="ea_eleType" value="package"/>
+														<UML:TaggedValue tag="style" value="BackColor=6008319;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:ClassifierRole>
+												<UML:ClassifierRole name="AirspaceInfrastructure" xmi.id="EAID_7A3476E2_07CC_4c06_80E1_C80D5F781193" visibility="public" base="EAID_11111111_5487_4080_A7F4_41526CB0AA00">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="isAbstract" value="false"/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Package"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="isActive" value="false"/>
+														<UML:TaggedValue tag="package" value="EAPK_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-04 16:22:30"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-22 14:08:31"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package2" value="EAID_7A3476E2_07CC_4c06_80E1_C80D5F781193"/>
+														<UML:TaggedValue tag="package_name" value="SubjectFields"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="101"/>
+														<UML:TaggedValue tag="ea_eleType" value="package"/>
+														<UML:TaggedValue tag="style" value="BackColor=6008319;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:ClassifierRole>
+												<UML:ClassifierRole name="AirTrafficOperations" xmi.id="EAID_B27ED112_C504_4e4a_AF33_B38E4FA0179B" visibility="public" base="EAID_11111111_5487_4080_A7F4_41526CB0AA00">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="isAbstract" value="false"/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Package"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="isActive" value="false"/>
+														<UML:TaggedValue tag="package" value="EAPK_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-04 16:21:54"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-22 14:08:32"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package2" value="EAID_B27ED112_C504_4e4a_AF33_B38E4FA0179B"/>
+														<UML:TaggedValue tag="package_name" value="SubjectFields"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="102"/>
+														<UML:TaggedValue tag="ea_eleType" value="package"/>
+														<UML:TaggedValue tag="style" value="BackColor=16763904;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:ClassifierRole>
+												<UML:ClassifierRole name="Meteorology" xmi.id="EAID_B8D658D6_B2B1_43e0_83B3_5E12626DB797" visibility="public" base="EAID_11111111_5487_4080_A7F4_41526CB0AA00">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="isAbstract" value="false"/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Package"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="isActive" value="false"/>
+														<UML:TaggedValue tag="package" value="EAPK_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6"/>
+														<UML:TaggedValue tag="date_created" value="2016-03-21 16:50:21"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-25 10:25:16"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package2" value="EAID_B8D658D6_B2B1_43e0_83B3_5E12626DB797"/>
+														<UML:TaggedValue tag="package_name" value="SubjectFields"/>
+														<UML:TaggedValue tag="author" value="The Administrator"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Proposed"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="105"/>
+														<UML:TaggedValue tag="ea_eleType" value="package"/>
+														<UML:TaggedValue tag="style" value="BackColor=16763904;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:ClassifierRole>
+											</UML:Namespace.ownedElement>
+											<UML:Collaboration.interaction/>
+										</UML:Collaboration>
+										<UML:Package name="AirspaceInfrastructure" xmi.id="EAPK_7A3476E2_07CC_4c06_80E1_C80D5F781193" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
+											<UML:ModelElement.taggedValue>
+												<UML:TaggedValue tag="parent" value="EAPK_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6"/>
+												<UML:TaggedValue tag="created" value="2014-02-04 16:22:30"/>
+												<UML:TaggedValue tag="modified" value="2014-05-06 15:31:44"/>
+												<UML:TaggedValue tag="iscontrolled" value="FALSE"/>
+												<UML:TaggedValue tag="lastloaddate" value="2014-05-02 15:31:09"/>
+												<UML:TaggedValue tag="lastsavedate" value="2014-05-02 15:31:09"/>
+												<UML:TaggedValue tag="isprotected" value="FALSE"/>
+												<UML:TaggedValue tag="usedtd" value="FALSE"/>
+												<UML:TaggedValue tag="logxml" value="FALSE"/>
+												<UML:TaggedValue tag="tpos" value="0"/>
+												<UML:TaggedValue tag="batchsave" value="0"/>
+												<UML:TaggedValue tag="batchload" value="0"/>
+												<UML:TaggedValue tag="status" value="Published"/>
+												<UML:TaggedValue tag="author" value="08.01.03"/>
+												<UML:TaggedValue tag="complexity" value="1"/>
+												<UML:TaggedValue tag="ea_stype" value="Public"/>
+											</UML:ModelElement.taggedValue>
+											<UML:Namespace.ownedElement>
+												<UML:Class name="SignificantPoint_navaidSystem.name" xmi.id="EAID_80C59A5A_0F98_4125_9CA6_360D8E5A5D1A" visibility="public" namespace="EAPK_7A3476E2_07CC_4c06_80E1_C80D5F781193" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each SignificantPoint with navaidSystem.name assigned shall-have navaidSystem.name exactly six characters long."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_7A3476E2_07CC_4c06_80E1_C80D5F781193"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-06 12:43:12"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:56"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="AirspaceInfrastructure"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;italic=0;ul=0;charset=1;pitch=0;bold=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1270"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={E1F50AC9-2F05-43d6-9E5D-48FA1ECA4762}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={1BD2F1FE-5E12-4bc1-916E-12DA31075F2E};@ENDSTEREO;$DES;$CLT={80C59A5A-0F98-4125-9CA6-360D8E5A5D1A}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+											</UML:Namespace.ownedElement>
+										</UML:Package>
+										<UML:Package name="AirTrafficOperations" xmi.id="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
+											<UML:ModelElement.taggedValue>
+												<UML:TaggedValue tag="parent" value="EAPK_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6"/>
+												<UML:TaggedValue tag="created" value="2014-02-04 16:21:54"/>
+												<UML:TaggedValue tag="modified" value="2014-05-06 15:31:48"/>
+												<UML:TaggedValue tag="iscontrolled" value="FALSE"/>
+												<UML:TaggedValue tag="lastloaddate" value="2014-05-02 15:31:10"/>
+												<UML:TaggedValue tag="lastsavedate" value="2014-05-02 15:31:10"/>
+												<UML:TaggedValue tag="isprotected" value="FALSE"/>
+												<UML:TaggedValue tag="usedtd" value="FALSE"/>
+												<UML:TaggedValue tag="logxml" value="FALSE"/>
+												<UML:TaggedValue tag="tpos" value="0"/>
+												<UML:TaggedValue tag="batchsave" value="0"/>
+												<UML:TaggedValue tag="batchload" value="0"/>
+												<UML:TaggedValue tag="status" value="Published"/>
+												<UML:TaggedValue tag="author" value="08.01.03"/>
+												<UML:TaggedValue tag="complexity" value="1"/>
+												<UML:TaggedValue tag="ea_stype" value="Public"/>
+											</UML:ModelElement.taggedValue>
+											<UML:Namespace.ownedElement>
+												<UML:Class name="ReferenceLocation_significantPoint" xmi.id="EAID_0EC5C9A9_FD82_4f2e_894B_8D250897667F" visibility="public" namespace="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each ReferenceLocation with significant point assigned shall-have type equal to SIGNIFICANT_POINT"/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B"/>
+														<UML:TaggedValue tag="date_created" value="2016-02-25 11:47:08"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:55"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="AirTrafficOperations"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;bold=1;italic=0;ul=0;charset=1;pitch=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1276"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=14938876;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={9BC8D985-1663-46f4-8DF6-226BC3443F13}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={0A1AC12C-376E-4e5f-9FFF-7A84B5D6A371};@ENDSTEREO;$DES;$CLT={0EC5C9A9-FD82-4f2e-894B-8D250897667F}$CLT;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="ReferenceLocation_trafficDestination" xmi.id="EAID_45C2FEE3_CDE2_40c9_8C94_210F530FB46C" visibility="public" namespace="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each ReferenceLocation with trafficDestination assigned shall-have type equal to AERODROME or SET_OF_AERODROMES"/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B"/>
+														<UML:TaggedValue tag="date_created" value="2016-02-25 11:53:56"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:55"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="AirTrafficOperations"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;bold=1;italic=0;ul=0;charset=1;pitch=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1277"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=14938876;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={84947207-A8F8-4992-A807-45F55CD6EE8E}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={0A1AC12C-376E-4e5f-9FFF-7A84B5D6A371};@ENDSTEREO;$DES;$CLT={45C2FEE3-CDE2-40c9-8C94-210F530FB46C}$CLT;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="ReferenceLocation_aerodrome" xmi.id="EAID_657C5D69_D575_4187_BB4E_F4C183771B12" visibility="public" namespace="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each ReferenceLocation with aerodrome assigned shall-have type equal to AERODROME"/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B"/>
+														<UML:TaggedValue tag="date_created" value="2016-02-25 11:46:00"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:55"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="AirTrafficOperations"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;bold=1;italic=0;ul=0;charset=1;pitch=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1272"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=14938876;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={928BE822-267C-4c26-BFD2-FAC78C8B5F32}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={0A1AC12C-376E-4e5f-9FFF-7A84B5D6A371};@ENDSTEREO;$DES;$CLT={657C5D69-D575-4187-BB4E-F4C183771B12}$CLT;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="ReferenceLocation_levelRange" xmi.id="EAID_8AB3C1A3_069F_452f_8354_CF15711EE1D5" visibility="public" namespace="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each ReferenceLocation with levelRange assigned shall-have type equal to AIRSPACE or SIGNIFICANT_POINT"/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B"/>
+														<UML:TaggedValue tag="date_created" value="2016-02-25 11:52:04"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:55"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="AirTrafficOperations"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;bold=1;italic=0;ul=0;charset=1;pitch=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1275"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=14938876;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={6ACC2CDF-50AB-488a-A8DC-4AF5ED2A7DBF}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={0A1AC12C-376E-4e5f-9FFF-7A84B5D6A371};@ENDSTEREO;$DES;$CLT={8AB3C1A3-069F-452f-8354-CF15711EE1D5}$CLT;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="ReferenceLocation_airspace" xmi.id="EAID_9804C256_7E18_4610_B5F4_202E8305F140" visibility="public" namespace="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each ReferenceLocation with airspace assigned shall-have type equal to AIRSPACE"/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B"/>
+														<UML:TaggedValue tag="date_created" value="2016-02-25 11:43:35"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:55"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="AirTrafficOperations"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;bold=1;italic=0;ul=0;charset=1;pitch=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1274"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=14938876;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={EE23BD0C-93AF-411d-B025-3AA3F547A276}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={0A1AC12C-376E-4e5f-9FFF-7A84B5D6A371};@ENDSTEREO;$DES;$CLT={9804C256-7E18-4610-B5F4-202E8305F140}$CLT;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="ReferenceLocation_aerodromeSet" xmi.id="EAID_B8D58797_08CE_482a_8715_D61A1935F282" visibility="public" namespace="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each ReferenceLocation with aerodromeSet assigned shall-have type equal to SET_OF_AERODROMES"/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B"/>
+														<UML:TaggedValue tag="date_created" value="2016-02-25 11:46:41"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:55"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="AirTrafficOperations"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;bold=1;italic=0;ul=0;charset=1;pitch=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1273"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=14938876;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={CF1FBF07-2530-49e7-9831-7450506794FC}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={0A1AC12C-376E-4e5f-9FFF-7A84B5D6A371};@ENDSTEREO;$DES;$CLT={B8D58797-08CE-482a-8715-D61A1935F282}$CLT;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="RunwayContamination_clearedWidth" xmi.id="EAID_D9006E62_0D37_41ea_A727_9DEE9D2C34A8" visibility="public" namespace="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each RunwayContamination with clearedWidth assigned shall-have Runway.clearedWidth lower than or equal to RunwayContamination.nominalWidth."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-06 12:57:16"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:55"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="AirTrafficOperations"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;bold=1;italic=0;ul=0;charset=1;pitch=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1279"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=14938876;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={DB094337-6551-405b-9D63-4A3ED7131FD9}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={1BD2F1FE-5E12-4bc1-916E-12DA31075F2E};@ENDSTEREO;$DES;$CLT={D9006E62-0D37-41ea-A727-9DEE9D2C34A8}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="RunwayContamination_clearedLength " xmi.id="EAID_F1DEABF1_3D6C_494b_8FC5_B8EEC66071FA" visibility="public" namespace="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each RunwayContamination with clearedLength assigned shall-have Runway.clearedLength lower than or equal-to RunwayContamination.nominalLength."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-06 12:52:10"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:55"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="AirTrafficOperations"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;black=0;bold=1;italic=0;ul=0;charset=1;pitch=0;fontsz=110;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1278"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=14938876;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={CAC1252C-401F-43cd-BD16-6FBF994868F8}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={1BD2F1FE-5E12-4bc1-916E-12DA31075F2E};@ENDSTEREO;$DES;$CLT={F1DEABF1-3D6C-494b-8FC5-B8EEC66071FA}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+											</UML:Namespace.ownedElement>
+										</UML:Package>
+										<UML:Package name="BaseInfrastructure" xmi.id="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
+											<UML:ModelElement.taggedValue>
+												<UML:TaggedValue tag="parent" value="EAPK_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6"/>
+												<UML:TaggedValue tag="created" value="2014-02-04 16:22:42"/>
+												<UML:TaggedValue tag="modified" value="2014-05-06 15:31:40"/>
+												<UML:TaggedValue tag="iscontrolled" value="FALSE"/>
+												<UML:TaggedValue tag="lastloaddate" value="2014-05-02 15:31:10"/>
+												<UML:TaggedValue tag="lastsavedate" value="2014-05-02 15:31:10"/>
+												<UML:TaggedValue tag="isprotected" value="FALSE"/>
+												<UML:TaggedValue tag="usedtd" value="FALSE"/>
+												<UML:TaggedValue tag="logxml" value="FALSE"/>
+												<UML:TaggedValue tag="tpos" value="0"/>
+												<UML:TaggedValue tag="batchsave" value="0"/>
+												<UML:TaggedValue tag="batchload" value="0"/>
+												<UML:TaggedValue tag="status" value="Published"/>
+												<UML:TaggedValue tag="author" value="08.01.03"/>
+												<UML:TaggedValue tag="complexity" value="1"/>
+												<UML:TaggedValue tag="ea_stype" value="Public"/>
+											</UML:ModelElement.taggedValue>
+											<UML:Namespace.ownedElement>
+												<UML:Class name="ILSGlidepath_frequency" xmi.id="EAID_074DB60A_A488_41cb_A686_C699A324BF23" visibility="public" namespace="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each ILSGlidepath with frequency assigned shall-have frequency expressed in closed interval between 328.6 {MHZ} and 335.4 {MHZ}."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-05 15:08:47"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:54"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="BaseInfrastructure"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;bold=0;italic=0;ul=0;charset=1;pitch=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1283"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=14938876;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={244CD5FF-15F5-40dc-BA60-2D205926BAFE}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={1BD2F1FE-5E12-4bc1-916E-12DA31075F2E};@ENDSTEREO;$DES;$CLT={074DB60A-A488-41cb-A686-C699A324BF23}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="Aerodrome_locationIndicatorICAO" xmi.id="EAID_1485C91A_394C_4bc2_B633_023408E3B83F" visibility="public" namespace="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each Aerodrome with locationIndicatorICAO assigned shall-have locationIndicatorICAO exactly four characters long of-type {CodeUpperAlphaType}."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644"/>
+														<UML:TaggedValue tag="date_created" value="2013-07-25 11:25:19"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:53"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="BaseInfrastructure"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1282"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={AB0654D3-A775-442f-9284-DA0D6AA7E20C}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={1BD2F1FE-5E12-4bc1-916E-12DA31075F2E};@ENDSTEREO;$DES;$CLT={1485C91A-394C-4bc2-B633-023408E3B83F}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="VOR_frequency_1" xmi.id="EAID_2CF7908C_7B4E_4eda_B85F_F193D2D63050" visibility="public" namespace="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each VOR with frequency assigned shall-be expressed in multiple of 50 {KHZ}. "/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-05 13:54:30"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:54"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="BaseInfrastructure"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;bold=0;italic=0;ul=0;charset=1;pitch=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1288"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=14938876;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={388D4BBF-0B9D-4fbd-8F1B-A87FA79C7120}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={1BD2F1FE-5E12-4bc1-916E-12DA31075F2E};@ENDSTEREO;$DES;$CLT={2CF7908C-7B4E-4eda-B85F-F193D2D63050}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="NDB_frequency" xmi.id="EAID_47536F99_585C_4449_BC32_3EDFE985D3E2" visibility="public" namespace="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each NDB with frequency assigned shall- have frequency in closed interval between 190 {KHZ} and 1750 {KHZ}."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-05 15:52:45"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:54"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="BaseInfrastructure"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;bold=0;italic=0;ul=0;charset=1;pitch=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1287"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=14938876;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={BAEBB670-286F-4763-9B2D-F69EE1971075}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={1BD2F1FE-5E12-4bc1-916E-12DA31075F2E};@ENDSTEREO;$DES;$CLT={47536F99-585C-4449-BC32-3EDFE985D3E2}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="Aerodrome_designatorIATA" xmi.id="EAID_529F6430_A12D_49e8_8474_D3E2197F6117" visibility="public" namespace="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each Aerodrome with designatorIATA assigned shall-have designatorIATA exactly three characters long of-type {CodeUpperAlphaType}."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644"/>
+														<UML:TaggedValue tag="date_created" value="2013-07-25 10:35:15"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:53"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="BaseInfrastructure"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1281"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={B3051B83-0C33-483b-BBEA-D7A70B85D873}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={1BD2F1FE-5E12-4bc1-916E-12DA31075F2E};@ENDSTEREO;$DES;$CLT={529F6430-A12D-49e8-8474-D3E2197F6117}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="Localizer_frequency_2" xmi.id="EAID_5BB298FF_B817_485a_B823_F7FB14EA389F" visibility="public" namespace="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each Localizer with frequency assigned shall- have frequency expressed in closed interval between 108.000 {MHZ} and 111.975 {MHZ}."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-05 14:50:03"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:54"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="BaseInfrastructure"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;bold=0;italic=0;ul=0;charset=1;pitch=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1285"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={7416E201-D467-417b-847B-CC3982984A27}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={1BD2F1FE-5E12-4bc1-916E-12DA31075F2E};@ENDSTEREO;$DES;$CLT={5BB298FF-B817-485a-B823-F7FB14EA389F}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Generalization subtype="EAID_5BB298FF_B817_485a_B823_F7FB14EA389F" supertype="EAID_A3F407C2_51DF_406c_A952_61DFDAC1C301" xmi.id="EAID_42BDFDA4_AF86_45b8_B94B_67910B5DCEA9" visibility="public">
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="style" value="2"/>
+														<UML:TaggedValue tag="ea_type" value="Generalization"/>
+														<UML:TaggedValue tag="direction" value="Source -&gt; Destination"/>
+														<UML:TaggedValue tag="linemode" value="2"/>
+														<UML:TaggedValue tag="linecolor" value="-1"/>
+														<UML:TaggedValue tag="linewidth" value="0"/>
+														<UML:TaggedValue tag="seqno" value="0"/>
+														<UML:TaggedValue tag="headStyle" value="0"/>
+														<UML:TaggedValue tag="lineStyle" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="3693"/>
+														<UML:TaggedValue tag="ea_sourceName" value="Localizer_frequency_2"/>
+														<UML:TaggedValue tag="ea_targetName" value="Localizer_frequency_1"/>
+														<UML:TaggedValue tag="ea_sourceType" value="Class"/>
+														<UML:TaggedValue tag="ea_targetType" value="Class"/>
+														<UML:TaggedValue tag="ea_sourceID" value="1285"/>
+														<UML:TaggedValue tag="ea_targetID" value="1284"/>
+														<UML:TaggedValue tag="src_visibility" value="Public"/>
+														<UML:TaggedValue tag="src_aggregation" value="0"/>
+														<UML:TaggedValue tag="src_isOrdered" value="false"/>
+														<UML:TaggedValue tag="src_targetScope" value="instance"/>
+														<UML:TaggedValue tag="src_changeable" value="none"/>
+														<UML:TaggedValue tag="src_isNavigable" value="false"/>
+														<UML:TaggedValue tag="src_containment" value="Unspecified"/>
+														<UML:TaggedValue tag="src_style" value="Union=0;Derived=0;AllowDuplicates=0;"/>
+														<UML:TaggedValue tag="dst_visibility" value="Public"/>
+														<UML:TaggedValue tag="dst_aggregation" value="0"/>
+														<UML:TaggedValue tag="dst_isOrdered" value="false"/>
+														<UML:TaggedValue tag="dst_targetScope" value="instance"/>
+														<UML:TaggedValue tag="dst_changeable" value="none"/>
+														<UML:TaggedValue tag="dst_isNavigable" value="true"/>
+														<UML:TaggedValue tag="dst_containment" value="Unspecified"/>
+														<UML:TaggedValue tag="dst_style" value="Union=0;Derived=0;AllowDuplicates=0;"/>
+														<UML:TaggedValue tag="privatedata5" value="SX=0;SY=0;EX=0;EY=0;EDGE=1;"/>
+														<UML:TaggedValue tag="virtualInheritance" value="0"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Generalization>
+												<UML:Class name="MarkerBeacon_frequency" xmi.id="EAID_91742EEF_4765_457d_919F_7D0F26B2A9A5" visibility="public" namespace="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each MarkerBeacon with frequency shall- have frequency equal to 75 {MHZ}."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-05 15:14:00"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:54"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="BaseInfrastructure"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1286"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={EC0C524C-2D58-41dd-88F1-17539DC7E919}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={1BD2F1FE-5E12-4bc1-916E-12DA31075F2E};@ENDSTEREO;$DES;$CLT={91742EEF-4765-457d-919F-7D0F26B2A9A5}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="Localizer_frequency_1" xmi.id="EAID_A3F407C2_51DF_406c_A952_61DFDAC1C301" visibility="public" namespace="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each Localizer with frequency.uom assigned shall- have uom of-type {MHZ}."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-05 13:38:39"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:54"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="BaseInfrastructure"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;italic=0;ul=0;charset=1;pitch=0;bold=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1284"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={73D49BC1-D5C8-489e-9265-10216F44FE6C}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={1BD2F1FE-5E12-4bc1-916E-12DA31075F2E};@ENDSTEREO;$DES;$CLT={A3F407C2-51DF-406c-A952-61DFDAC1C301}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="VOR_frequency_2" xmi.id="EAID_EE779288_9C62_465c_A9C0_E161AA774E84" visibility="public" namespace="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each VOR with frequency assigned shall-have frequency in closed interval between 108.000 {MHZ} and 117.975 {MHZ}."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644"/>
+														<UML:TaggedValue tag="date_created" value="2014-02-05 15:19:53"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:54"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="BaseInfrastructure"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="styleex" value="font=Arial;fontsz=110;black=0;bold=0;italic=0;ul=0;charset=1;pitch=0;"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1289"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=14938876;BorderColor=0;BorderWidth=1;FontColor=0;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={38F40C98-0D41-4b7e-B796-594A24A72053}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={1BD2F1FE-5E12-4bc1-916E-12DA31075F2E};@ENDSTEREO;$DES;$CLT={EE779288-9C62-465c-A9C0-E161AA774E84}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+											</UML:Namespace.ownedElement>
+										</UML:Package>
+										<UML:Package name="Flight" xmi.id="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
+											<UML:ModelElement.taggedValue>
+												<UML:TaggedValue tag="parent" value="EAPK_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6"/>
+												<UML:TaggedValue tag="created" value="2014-05-08 11:46:16"/>
+												<UML:TaggedValue tag="modified" value="2014-05-08 11:46:16"/>
+												<UML:TaggedValue tag="iscontrolled" value="FALSE"/>
+												<UML:TaggedValue tag="lastloaddate" value="2016-03-24 15:27:41"/>
+												<UML:TaggedValue tag="lastsavedate" value="2016-03-24 15:27:41"/>
+												<UML:TaggedValue tag="isprotected" value="FALSE"/>
+												<UML:TaggedValue tag="usedtd" value="FALSE"/>
+												<UML:TaggedValue tag="logxml" value="FALSE"/>
+												<UML:TaggedValue tag="tpos" value="0"/>
+												<UML:TaggedValue tag="batchsave" value="0"/>
+												<UML:TaggedValue tag="batchload" value="0"/>
+												<UML:TaggedValue tag="status" value="Published"/>
+												<UML:TaggedValue tag="author" value="08.01.03"/>
+												<UML:TaggedValue tag="complexity" value="1"/>
+												<UML:TaggedValue tag="ea_stype" value="Public"/>
+											</UML:ModelElement.taggedValue>
+											<UML:Namespace.ownedElement>
+												<UML:Class name="AircraftIdentification_aircraftRegistration" xmi.id="EAID_3417BC8C_F862_44af_A9F9_9EEFF84B5568" visibility="public" namespace="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="If the aircraft registration marking is used as AircraftIdentification, the ICAO designator of the aircraft operator and the flight number shall not be provided."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26"/>
+														<UML:TaggedValue tag="date_created" value="2014-05-08 14:05:44"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-23 10:07:31"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="Flight"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1292"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={EED73FB6-72E3-45ad-B805-C5F8B80BD9A0}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={270742B4-9222-4e53-BF0C-1A958BC294DB};@ENDSTEREO;$DES;$CLT={3417BC8C-F862-44af-A9F9-9EEFF84B5568}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="FlightPhase_cruisingSpeed" xmi.id="EAID_6213B50B_7B1A_4900_8814_79A7A39A521C" visibility="public" namespace="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="FlightPhase.crusingSpeed is plausible only when FlightPhase.type = CRUISE."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26"/>
+														<UML:TaggedValue tag="date_created" value="2015-01-26 14:48:48"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-23 10:07:31"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="Flight"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1296"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={BFA85729-D4AE-403f-A15D-F0EF037EDF25}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={270742B4-9222-4e53-BF0C-1A958BC294DB};@ENDSTEREO;$DES;$CLT={6213B50B-7B1A-4900-8814-79A7A39A521C}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="FlightPhase_cruisingLevel" xmi.id="EAID_68B2BACE_3FA1_4147_B5E2_F96897899944" visibility="public" namespace="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="FlightPhase.crusingLevel is plausible only when FlightPhase.type = CRUISE."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26"/>
+														<UML:TaggedValue tag="date_created" value="2015-01-26 14:52:45"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-23 10:07:31"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="Flight"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1295"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={51C64F6A-2A99-4f89-9F94-75FC8BDF0AF8}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={270742B4-9222-4e53-BF0C-1A958BC294DB};@ENDSTEREO;$DES;$CLT={68B2BACE-3FA1-4147-B5E2-F96897899944}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="SSRCode_code" xmi.id="EAID_9AF264EB_590D_44ce_A07C_0944164BF267" visibility="public" namespace="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="The SSRCode.code shall be exactly a series of 4 octal number."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26"/>
+														<UML:TaggedValue tag="date_created" value="2014-05-08 13:53:46"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-23 10:07:31"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="Flight"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1297"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={040DAA08-6082-4d15-85DD-960BACAC2758}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={270742B4-9222-4e53-BF0C-1A958BC294DB};@ENDSTEREO;$DES;$CLT={9AF264EB-590D-44ce-A07C-0944164BF267}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="FlightPhase_cruisingAltitude" xmi.id="EAID_B871C4C5_405D_47fa_B10A_DEC185D3EE76" visibility="public" namespace="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="FlightPhase.crusingAltitude is plausible only when FlightPhase.type = CRUISE."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26"/>
+														<UML:TaggedValue tag="date_created" value="2015-01-26 14:51:03"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-23 10:07:31"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="Flight"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1294"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={546FBE75-CD40-4b5d-A2CB-BAA527108F21}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={270742B4-9222-4e53-BF0C-1A958BC294DB};@ENDSTEREO;$DES;$CLT={B871C4C5-405D-47fa-B10A-DEC185D3EE76}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+												<UML:Class name="FlightPhase_cruiseClimbSpeed" xmi.id="EAID_CF1E0B46_7BFC_447e_9D80_46B9455C6E52" visibility="public" namespace="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="FlightPhase.cruiseClimbSpeed is plausible only when FlightPhase.type = CHANGE_OF_CRUISE_LEVEL."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26"/>
+														<UML:TaggedValue tag="date_created" value="2015-01-26 14:54:33"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-23 10:07:31"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="Flight"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1293"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={D1D626E0-C23F-43c2-9171-3DEBE602C757}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={270742B4-9222-4e53-BF0C-1A958BC294DB};@ENDSTEREO;$DES;$CLT={CF1E0B46-7BFC-447e-9D80-46B9455C6E52}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+											</UML:Namespace.ownedElement>
+										</UML:Package>
+										<UML:Package name="Meteorology" xmi.id="EAPK_B8D658D6_B2B1_43e0_83B3_5E12626DB797" isRoot="false" isLeaf="false" isAbstract="false" visibility="public">
+											<UML:ModelElement.taggedValue>
+												<UML:TaggedValue tag="parent" value="EAPK_CD92EDB0_9697_48be_8D2A_0C907AE5FFE6"/>
+												<UML:TaggedValue tag="created" value="2016-03-21 16:50:21"/>
+												<UML:TaggedValue tag="modified" value="2016-03-21 16:50:21"/>
+												<UML:TaggedValue tag="iscontrolled" value="FALSE"/>
+												<UML:TaggedValue tag="lastloaddate" value="2016-03-24 15:27:41"/>
+												<UML:TaggedValue tag="lastsavedate" value="2016-03-24 15:27:41"/>
+												<UML:TaggedValue tag="isprotected" value="FALSE"/>
+												<UML:TaggedValue tag="usedtd" value="FALSE"/>
+												<UML:TaggedValue tag="logxml" value="FALSE"/>
+												<UML:TaggedValue tag="tpos" value="0"/>
+												<UML:TaggedValue tag="batchsave" value="0"/>
+												<UML:TaggedValue tag="batchload" value="0"/>
+												<UML:TaggedValue tag="status" value="Proposed"/>
+												<UML:TaggedValue tag="author" value="The Administrator"/>
+												<UML:TaggedValue tag="complexity" value="1"/>
+												<UML:TaggedValue tag="ea_stype" value="Public"/>
+											</UML:ModelElement.taggedValue>
+											<UML:Namespace.ownedElement>
+												<UML:Class name="RunwayVisualRange_rvrValueInterpretation" xmi.id="EAID_4F2CE553_DF61_49bf_BBDD_5CD4BC4B5189" visibility="public" namespace="EAPK_B8D658D6_B2B1_43e0_83B3_5E12626DB797" isRoot="false" isLeaf="false" isAbstract="false" isActive="false">
+													<UML:ModelElement.stereotype>
+														<UML:Stereotype name="AIRMConstraint"/>
+													</UML:ModelElement.stereotype>
+													<UML:ModelElement.taggedValue>
+														<UML:TaggedValue tag="documentation" value="Each RunwayVisualRange with rvrValueInterpretation provided shall have rvrValueInterpretation equal to 'ABOVE' or 'BELOW'."/>
+														<UML:TaggedValue tag="isSpecification" value="false"/>
+														<UML:TaggedValue tag="ea_stype" value="Class"/>
+														<UML:TaggedValue tag="ea_ntype" value="0"/>
+														<UML:TaggedValue tag="package" value="EAPK_B8D658D6_B2B1_43e0_83B3_5E12626DB797"/>
+														<UML:TaggedValue tag="date_created" value="2016-03-21 16:52:34"/>
+														<UML:TaggedValue tag="date_modified" value="2016-03-24 15:58:30"/>
+														<UML:TaggedValue tag="tagged" value="0"/>
+														<UML:TaggedValue tag="package_name" value="Meteorology"/>
+														<UML:TaggedValue tag="author" value="08.01.03"/>
+														<UML:TaggedValue tag="complexity" value="1"/>
+														<UML:TaggedValue tag="status" value="Published"/>
+														<UML:TaggedValue tag="stereotype" value="AIRMConstraint"/>
+														<UML:TaggedValue tag="tpos" value="0"/>
+														<UML:TaggedValue tag="ea_localid" value="1299"/>
+														<UML:TaggedValue tag="ea_eleType" value="element"/>
+														<UML:TaggedValue tag="style" value="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+														<UML:TaggedValue tag="$ea_xref_property" value="$XREFPROP=$XID={482C1AFD-EB9A-4ad6-A0A6-5C9A6D34A326}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=AIRMConstraint;GUID={270742B4-9222-4e53-BF0C-1A958BC294DB};@ENDSTEREO;$DES;$CLT={4F2CE553-DF61-49bf-BBDD-5CD4BC4B5189}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+													</UML:ModelElement.taggedValue>
+												</UML:Class>
+											</UML:Namespace.ownedElement>
+										</UML:Package>
+									</UML:Namespace.ownedElement>
+								</UML:Package>
+							</UML:Namespace.ownedElement>
+						</UML:Package>
+					</UML:Namespace.ownedElement>
+				</UML:Package>
+			</UML:Namespace.ownedElement>
+		</UML:Model>
+		<UML:Diagram name="AIRMConstraintsModel" xmi.id="EAID_2C027C1D_9CE5_4613_A4EF_3F0E537E2FAD" diagramType="PackageDiagram" owner="EAPK_EAF7C21A_1B4F_41bb_8896_590F6E4F3141" toolName="Enterprise Architect 2.5">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="version" value="1.0"/>
+				<UML:TaggedValue tag="author" value="08.01.03"/>
+				<UML:TaggedValue tag="created_date" value="2014-05-15 10:14:52"/>
+				<UML:TaggedValue tag="modified_date" value="2016-03-25 10:25:32"/>
+				<UML:TaggedValue tag="package" value="EAPK_EAF7C21A_1B4F_41bb_8896_590F6E4F3141"/>
+				<UML:TaggedValue tag="type" value="Package"/>
+				<UML:TaggedValue tag="swimlanes" value="locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=1;ufh=0;cls=0;"/>
+				<UML:TaggedValue tag="matrixitems" value="locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"/>
+				<UML:TaggedValue tag="ea_localid" value="381"/>
+				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=2;PPgs.cy=1;DocSize.cx=795;DocSize.cy=1134;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+				<UML:TaggedValue tag="styleex" value="SaveTag=BABADF28;ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;"/>
+			</UML:ModelElement.taggedValue>
+			<UML:Diagram.element>
+				<UML:DiagramElement geometry="Left=320;Top=231;Right=564;Bottom=311;" subject="EAID_B8D658D6_B2B1_43e0_83B3_5E12626DB797" seqno="1" style="DUID=2B61B7FE;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"/>
+				<UML:DiagramElement geometry="Left=43;Top=32;Right=308;Bottom=157;" subject="EAID_094E9306_459A_4147_95EB_0A27DEFA3F26" seqno="2" style="DUID=1EE5847B;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"/>
+				<UML:DiagramElement geometry="Left=44;Top=402;Right=265;Bottom=575;" subject="EAID_61381CF0_384C_45b0_A103_A2AA9BD6C644" seqno="3" style="DUID=FF0155D8;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"/>
+				<UML:DiagramElement geometry="Left=334;Top=417;Right=574;Bottom=497;" subject="EAID_7A3476E2_07CC_4c06_80E1_C80D5F781193" seqno="4" style="DUID=89E9D707;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"/>
+				<UML:DiagramElement geometry="Left=43;Top=192;Right=268;Bottom=349;" subject="EAID_B27ED112_C504_4e4a_AF33_B38E4FA0179B" seqno="5" style="DUID=0553D620;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;"/>
+				<UML:DiagramElement geometry="Left=7;Top=8;Right=935;Bottom=784;" subject="EAID_6287DE8E_C73D_42f6_887D_63B2712FE75D" seqno="6" style="DUID=74444273;"/>
+			</UML:Diagram.element>
+		</UML:Diagram>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_4B168F04_422D_4b2d_91D2_C8873CFD3CF6" value="{4D658F0A-1D73-4721-B9C0-0C96AD9E5BAE},{20D8623B-A298-468b-9AB6-878261743F13},{92DDF1CE-81D4-4f7f-BDFC-0F1640D8BE7B}" modelElement="EAID_80C59A5A_0F98_4125_9CA6_360D8E5A5D1A"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_19F5F3BF_1413_455e_8C64_AB76DFE16715" value="SBVR" modelElement="EAID_80C59A5A_0F98_4125_9CA6_360D8E5A5D1A"/>
+		<UML:TaggedValue tag="Definition:Adapted" xmi.id="EAID_DAAE822A_C2C4_4a5f_95DB_2768D11AB086" value="Rewritten" modelElement="EAID_80C59A5A_0F98_4125_9CA6_360D8E5A5D1A"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_8869CA4F_3CB8_41b8_86AE_82E9B3B97A50" value="{B5AFBC0A-6A88-4001-B5FB-25987AFEE08C}" modelElement="EAID_80C59A5A_0F98_4125_9CA6_360D8E5A5D1A"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_70CBE4A8_936E_4222_98CB_CFB820EDBF15" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:AirspaceInfrastructure:SignificantPoint_navaidSystem.name" modelElement="EAID_80C59A5A_0F98_4125_9CA6_360D8E5A5D1A"/>
+		<UML:Diagram name="AirspaceInfrastructure  - Constraints" xmi.id="EAID_B0EAE69E_6116_4f36_A000_7CDE6B96522B" diagramType="ClassDiagram" owner="EAPK_7A3476E2_07CC_4c06_80E1_C80D5F781193" toolName="Enterprise Architect 2.5">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="version" value="1.0"/>
+				<UML:TaggedValue tag="author" value="08.01.03"/>
+				<UML:TaggedValue tag="created_date" value="2014-02-04 16:32:01"/>
+				<UML:TaggedValue tag="modified_date" value="2016-03-24 15:58:56"/>
+				<UML:TaggedValue tag="package" value="EAPK_7A3476E2_07CC_4c06_80E1_C80D5F781193"/>
+				<UML:TaggedValue tag="type" value="Logical"/>
+				<UML:TaggedValue tag="swimlanes" value="locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=1;ufh=0;cls=0;"/>
+				<UML:TaggedValue tag="matrixitems" value="locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"/>
+				<UML:TaggedValue tag="ea_localid" value="382"/>
+				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=795;DocSize.cy=1138;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+				<UML:TaggedValue tag="styleex" value="SaveTag=B2BC6B26;ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;"/>
+			</UML:ModelElement.taggedValue>
+			<UML:Diagram.element>
+				<UML:DiagramElement geometry="Left=28;Top=30;Right=440;Bottom=235;" subject="EAID_80C59A5A_0F98_4125_9CA6_360D8E5A5D1A" seqno="1" style="DUID=CE4120CA;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;RzO=3;"/>
+			</UML:Diagram.element>
+		</UML:Diagram>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_B1EE25D5_5586_4336_A171_CC8936DDDE84" value="{DF2EC37B-3227-49ff-94B7-CEE71EB1B8A3},{F16573AD-9299-42ef-AC80-44B3D94CC25C}" modelElement="EAID_0EC5C9A9_FD82_4f2e_894B_8D250897667F"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_ACC26D46_F4DE_415e_B2DF_2BBC9C0B604D" value="SBVR" modelElement="EAID_0EC5C9A9_FD82_4f2e_894B_8D250897667F"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_11B0D561_9F40_4dec_AE0E_B79BF64E8605" value="{FBEA2B1F-E74D-4985-ACC4-A45B5519686A}" modelElement="EAID_0EC5C9A9_FD82_4f2e_894B_8D250897667F"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_51D29F33_861E_4d4b_AFDA_E492092E9627" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:AirTrafficOperations:ReferenceLocation_significantPoint" modelElement="EAID_0EC5C9A9_FD82_4f2e_894B_8D250897667F"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_CC582EAF_C3B1_495e_9A9C_5A3CFD2D251F" value="{DF2EC37B-3227-49ff-94B7-CEE71EB1B8A3}" modelElement="EAID_45C2FEE3_CDE2_40c9_8C94_210F530FB46C"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_E31B44C5_3A06_4220_8443_7386C3B6D825" value="SBVR" modelElement="EAID_45C2FEE3_CDE2_40c9_8C94_210F530FB46C"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_4721653E_FE8F_4a69_96BE_7C9C4EE73480" value="{FBEA2B1F-E74D-4985-ACC4-A45B5519686A}" modelElement="EAID_45C2FEE3_CDE2_40c9_8C94_210F530FB46C"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_44472C8C_5EF3_4238_AB22_0F937A04CE88" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:AirTrafficOperations:ReferenceLocation_trafficDestination" modelElement="EAID_45C2FEE3_CDE2_40c9_8C94_210F530FB46C"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_8F9D0151_C111_43ef_B80E_426EA1E78961" value="{DF2EC37B-3227-49ff-94B7-CEE71EB1B8A3},{F16573AD-9299-42ef-AC80-44B3D94CC25C}" modelElement="EAID_657C5D69_D575_4187_BB4E_F4C183771B12"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_47D10907_6EDC_4d17_B31D_FF6042B8ABD9" value="SBVR" modelElement="EAID_657C5D69_D575_4187_BB4E_F4C183771B12"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_3A8F8F4F_7D37_4328_AFB7_B955CA9F3E55" value="{FBEA2B1F-E74D-4985-ACC4-A45B5519686A}" modelElement="EAID_657C5D69_D575_4187_BB4E_F4C183771B12"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_2AC3E74F_FF21_46f3_B21D_46D90949D762" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:AirTrafficOperations:ReferenceLocation_aerodrome" modelElement="EAID_657C5D69_D575_4187_BB4E_F4C183771B12"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_AE0EA0A0_6EB4_4554_95B3_E1B6AAABBCA4" value="{DF2EC37B-3227-49ff-94B7-CEE71EB1B8A3},{F16573AD-9299-42ef-AC80-44B3D94CC25C}" modelElement="EAID_8AB3C1A3_069F_452f_8354_CF15711EE1D5"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_9CA7D02E_F323_462a_9D46_A62C81B7301F" value="SBVR" modelElement="EAID_8AB3C1A3_069F_452f_8354_CF15711EE1D5"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_99C68352_35BC_4579_BA22_8C7948083B5F" value="{FBEA2B1F-E74D-4985-ACC4-A45B5519686A}" modelElement="EAID_8AB3C1A3_069F_452f_8354_CF15711EE1D5"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_C7C9BF62_0912_49fd_92AA_0BBE33C237D9" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:AirTrafficOperations:ReferenceLocation_levelRange" modelElement="EAID_8AB3C1A3_069F_452f_8354_CF15711EE1D5"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_EBA494F0_64DF_4c2b_8C5D_9BD67532EABA" value="{DF2EC37B-3227-49ff-94B7-CEE71EB1B8A3},{F16573AD-9299-42ef-AC80-44B3D94CC25C}" modelElement="EAID_9804C256_7E18_4610_B5F4_202E8305F140"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_9373320A_A51F_4499_A2D3_7602506DD92E" value="SBVR" modelElement="EAID_9804C256_7E18_4610_B5F4_202E8305F140"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_F564ED7A_81C2_4e80_8611_7AAC8A5DCA98" value="{FBEA2B1F-E74D-4985-ACC4-A45B5519686A}" modelElement="EAID_9804C256_7E18_4610_B5F4_202E8305F140"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_CD84CBB6_F937_4fc2_8D9C_CEACEB7FB147" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:AirTrafficOperations:ReferenceLocation_airspace" modelElement="EAID_9804C256_7E18_4610_B5F4_202E8305F140"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_CF43D63C_4FAC_4768_9BE2_74959CF71D92" value="{DF2EC37B-3227-49ff-94B7-CEE71EB1B8A3},{F16573AD-9299-42ef-AC80-44B3D94CC25C}" modelElement="EAID_B8D58797_08CE_482a_8715_D61A1935F282"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_79369FFC_735C_45d0_9C73_6F7AD4189658" value="SBVR" modelElement="EAID_B8D58797_08CE_482a_8715_D61A1935F282"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_FE4C31BF_BD87_4a3a_816B_1B17DB4C63A4" value="{FBEA2B1F-E74D-4985-ACC4-A45B5519686A}" modelElement="EAID_B8D58797_08CE_482a_8715_D61A1935F282"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_A1CB7E5B_CDE6_42e0_BCFE_666AF6C316AC" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:AirTrafficOperations:ReferenceLocation_aerodromeSet" modelElement="EAID_B8D58797_08CE_482a_8715_D61A1935F282"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_C551B659_CEF9_4652_91EE_831EF186DAB6" value="{B243D838-D739-44b0-96EC-EF51A26D59D9},{46A543C1-E38B-4c44-9C32-FAF31359CD95}" modelElement="EAID_D9006E62_0D37_41ea_A727_9DEE9D2C34A8"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_8F6F3875_C9D8_4897_9F27_1831368165FD" value="SBVR" modelElement="EAID_D9006E62_0D37_41ea_A727_9DEE9D2C34A8"/>
+		<UML:TaggedValue tag="Definition:Adapted" xmi.id="EAID_0B4B23AF_E9CC_4987_BC81_1EFF143308E4" value="Specialised" modelElement="EAID_D9006E62_0D37_41ea_A727_9DEE9D2C34A8"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_45A5310E_3540_4549_BD9D_8154BA52A98B" value="{9B8AD702-E27B-497c-9950-BC079CF06560}" modelElement="EAID_D9006E62_0D37_41ea_A727_9DEE9D2C34A8"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_27BEE950_69CD_430e_BEC1_FB631E906C52" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:AirTrafficOperations:RunwayContamination_clearedWidth" modelElement="EAID_D9006E62_0D37_41ea_A727_9DEE9D2C34A8"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_63657EC8_EDCE_4cf2_B2F8_3C74F434F012" value="{B243D838-D739-44b0-96EC-EF51A26D59D9},{295EBB74-CE64-49ef-9EB6-E2D764793411}" modelElement="EAID_F1DEABF1_3D6C_494b_8FC5_B8EEC66071FA"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_F6F82A5E_99AC_4dc2_8BBE_1F5F2014C4C6" value="SBVR" modelElement="EAID_F1DEABF1_3D6C_494b_8FC5_B8EEC66071FA"/>
+		<UML:TaggedValue tag="Definition:Adapted" xmi.id="EAID_10CEBDC3_5E98_4854_8D9E_6740AA983696" value="Specialised" modelElement="EAID_F1DEABF1_3D6C_494b_8FC5_B8EEC66071FA"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_0F7EEE06_B141_47ce_A3CA_F52F6B29D12A" value="{9B8AD702-E27B-497c-9950-BC079CF06560}" modelElement="EAID_F1DEABF1_3D6C_494b_8FC5_B8EEC66071FA"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_5496E5FD_68DE_4a87_833C_8B207A99146A" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:AirTrafficOperations:RunwayContamination_clearedLength " modelElement="EAID_F1DEABF1_3D6C_494b_8FC5_B8EEC66071FA"/>
+		<UML:Diagram name="AirTrafficOperations - Constraints" xmi.id="EAID_04B59464_698D_421a_B86C_8DD33D55A0E7" diagramType="ClassDiagram" owner="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B" toolName="Enterprise Architect 2.5">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="version" value="1.0"/>
+				<UML:TaggedValue tag="author" value="08.01.03"/>
+				<UML:TaggedValue tag="created_date" value="2014-02-04 16:31:52"/>
+				<UML:TaggedValue tag="modified_date" value="2016-03-24 15:58:55"/>
+				<UML:TaggedValue tag="package" value="EAPK_B27ED112_C504_4e4a_AF33_B38E4FA0179B"/>
+				<UML:TaggedValue tag="type" value="Logical"/>
+				<UML:TaggedValue tag="swimlanes" value="locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=1;ufh=0;cls=0;"/>
+				<UML:TaggedValue tag="matrixitems" value="locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"/>
+				<UML:TaggedValue tag="ea_localid" value="383"/>
+				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=2;DocSize.cx=795;DocSize.cy=1138;ShowDetails=0;Orientation=P;Zoom=84;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+				<UML:TaggedValue tag="styleex" value="SaveTag=03814725;ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;"/>
+			</UML:ModelElement.taggedValue>
+			<UML:Diagram.element>
+				<UML:DiagramElement geometry="Left=22;Top=981;Right=494;Bottom=1201;" subject="EAID_0EC5C9A9_FD82_4f2e_894B_8D250897667F" seqno="1" style="DUID=683259B3;NSL=0;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;LCol=0;BCol=14938876;BFol=0;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=23;Top=739;Right=501;Bottom=960;" subject="EAID_8AB3C1A3_069F_452f_8354_CF15711EE1D5" seqno="2" style="DUID=D7114110;NSL=0;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;LCol=0;BCol=14938876;BFol=0;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=24;Top=499;Right=504;Bottom=720;" subject="EAID_9804C256_7E18_4610_B5F4_202E8305F140" seqno="3" style="DUID=28E934C0;NSL=0;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;LCol=0;BCol=14938876;BFol=0;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=23;Top=257;Right=511;Bottom=478;" subject="EAID_B8D58797_08CE_482a_8715_D61A1935F282" seqno="4" style="DUID=C792D1A4;NSL=0;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;LCol=0;BCol=14938876;BFol=0;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=12;Top=14;Right=517;Bottom=235;" subject="EAID_657C5D69_D575_4187_BB4E_F4C183771B12" seqno="5" style="DUID=BA18F918;NSL=0;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;LCol=0;BCol=14938876;BFol=0;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=22;Top=1222;Right=493;Bottom=1444;" subject="EAID_45C2FEE3_CDE2_40c9_8C94_210F530FB46C" seqno="6" style="DUID=E3E7CF5F;NSL=0;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;LCol=0;BCol=14938876;BFol=0;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=22;Top=1703;Right=483;Bottom=1924;" subject="EAID_D9006E62_0D37_41ea_A727_9DEE9D2C34A8" seqno="7" style="DUID=6FE71258;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=22;Top=1463;Right=489;Bottom=1684;" subject="EAID_F1DEABF1_3D6C_494b_8FC5_B8EEC66071FA" seqno="8" style="DUID=16AAA794;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;RzO=3;"/>
+			</UML:Diagram.element>
+		</UML:Diagram>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_96D579E9_1DB5_4e0c_803E_F1C4E0793A1F" value="{3C532D6C-8FFB-4166-9A62-8D47AAA29B30},{0F59E1AC-4D8A-4900-AD0D-F42CCBFFA333}" modelElement="EAID_074DB60A_A488_41cb_A686_C699A324BF23"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_E0735B90_9661_41fd_AE26_CB0A09223309" value="SBVR" modelElement="EAID_074DB60A_A488_41cb_A686_C699A324BF23"/>
+		<UML:TaggedValue tag="Definition:Adapted" xmi.id="EAID_92E87BCC_7A4A_4f16_9B40_7643E7A78F05" value="Rewritten" modelElement="EAID_074DB60A_A488_41cb_A686_C699A324BF23"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_077DB461_72BE_4753_878D_962B650F709A" value="{58DA82DE-66F7-4062-8038-9AFB8F1E051C}" modelElement="EAID_074DB60A_A488_41cb_A686_C699A324BF23"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_CCEF67B5_D159_44ce_91CA_706A5029842A" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:BaseInfrastructure:ILSGlidepath_frequency" modelElement="EAID_074DB60A_A488_41cb_A686_C699A324BF23"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_9C36FAA0_785F_459e_BA0F_326A6F235785" value="{932943DC-B962-43c7-AF3A-609042913E40},{675C1B4B-96A9-4640-AB98-43CD0D0383CE}" modelElement="EAID_1485C91A_394C_4bc2_B633_023408E3B83F"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_7CE15F2A_ED2D_4d9b_A225_75FF37556C3A" value="SBVR" modelElement="EAID_1485C91A_394C_4bc2_B633_023408E3B83F"/>
+		<UML:TaggedValue tag="Definition:Adapted" xmi.id="EAID_E9D9F9D5_2169_468f_AAC1_07CE770D0B85" value="Rewritten" modelElement="EAID_1485C91A_394C_4bc2_B633_023408E3B83F"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_2F0324CC_B1F8_44b5_BDEF_4944FB7CF643" value="{A844D404-96BF-40e0-8DE8-8E44A12F55A8}" modelElement="EAID_1485C91A_394C_4bc2_B633_023408E3B83F"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_94B8725B_C4D1_4b39_B33E_3AF327DD65B0" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:BaseInfrastructure:Aerodrome_locationIndicatorICAO" modelElement="EAID_1485C91A_394C_4bc2_B633_023408E3B83F"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_A14D6786_CD46_4084_93E9_EDEBDB77F22A" value="{638AC79E-586C-4f00-97E3-DFD461F1A830},{EB769E56-E1E3-49d6-AE72-6362C056E3D4}" modelElement="EAID_2CF7908C_7B4E_4eda_B85F_F193D2D63050"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_B7922EDD_11AF_4327_B165_BD20EB166890" value="SBVR" modelElement="EAID_2CF7908C_7B4E_4eda_B85F_F193D2D63050"/>
+		<UML:TaggedValue tag="Definition:Adapted" xmi.id="EAID_11E2EC07_DD94_4188_BC11_7A899CEBD565" value="Rewritten" modelElement="EAID_2CF7908C_7B4E_4eda_B85F_F193D2D63050"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_C5C4A2DD_3612_47a7_A55B_2F07144008BD" value="{58DA82DE-66F7-4062-8038-9AFB8F1E051C}" modelElement="EAID_2CF7908C_7B4E_4eda_B85F_F193D2D63050"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_EA301960_27AB_444f_9ADC_F00A29466537" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:BaseInfrastructure:VOR_frequency_1" modelElement="EAID_2CF7908C_7B4E_4eda_B85F_F193D2D63050"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_ADC18DF6_D3DF_4915_AB43_236E7FA20BBE" value="{B7C9D403-EAC9-46c5-BD40-F6800EE6B595},{E4E6CCBF-D587-49d2-9568-734639E808A0}" modelElement="EAID_47536F99_585C_4449_BC32_3EDFE985D3E2"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_47938CC4_719F_424d_A9AB_8AC8EC4B4F5D" value="SBVR" modelElement="EAID_47536F99_585C_4449_BC32_3EDFE985D3E2"/>
+		<UML:TaggedValue tag="Definition:Adapted" xmi.id="EAID_B08E7F7E_3672_43d5_B072_42DCF330934E" value="Rewritten" modelElement="EAID_47536F99_585C_4449_BC32_3EDFE985D3E2"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_A7BC18E0_343A_40a0_A32F_8DCBE759D037" value="{58DA82DE-66F7-4062-8038-9AFB8F1E051C}" modelElement="EAID_47536F99_585C_4449_BC32_3EDFE985D3E2"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_2BADD457_D0F3_4ce6_A18C_B6EA63D69678" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:BaseInfrastructure:NDB_frequency" modelElement="EAID_47536F99_585C_4449_BC32_3EDFE985D3E2"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_589FB198_9A3B_4e1b_B295_CC3E9F139CCC" value="{932943DC-B962-43c7-AF3A-609042913E40},{CC93E344-D093-4df8-8451-0A9B041DC9DC}" modelElement="EAID_529F6430_A12D_49e8_8474_D3E2197F6117"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_E23D65BA_032C_46a7_B435_54F8B7878653" value="SBVR" modelElement="EAID_529F6430_A12D_49e8_8474_D3E2197F6117"/>
+		<UML:TaggedValue tag="Definition:Adapted" xmi.id="EAID_6EE15408_C333_41f5_9E12_141159E76A2A" value="Rewritten" modelElement="EAID_529F6430_A12D_49e8_8474_D3E2197F6117"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_F8F8DC0D_DAA7_48aa_9741_5E787CEF0AFE" value="{5F1FAD07-97A1-4088-AAED-47252B527319}" modelElement="EAID_529F6430_A12D_49e8_8474_D3E2197F6117"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_6C8D52F2_15A2_46f3_B642_8F6B16208BF7" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:BaseInfrastructure:Aerodrome_designatorIATA" modelElement="EAID_529F6430_A12D_49e8_8474_D3E2197F6117"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_6FF1F1F5_6382_4e5e_AFCE_3BD1BB5EF739" value="{51CEA83C-CB94-43c7-BFB5-CD59D3ED238D},{B1E77AC0-BEA7-48d2-A3B9-99AFF9FAB0F9}" modelElement="EAID_5BB298FF_B817_485a_B823_F7FB14EA389F"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_23AFBB99_3C7C_4dae_A47F_4087EC0C9A61" value="SBVR" modelElement="EAID_5BB298FF_B817_485a_B823_F7FB14EA389F"/>
+		<UML:TaggedValue tag="Definition:Adapted" xmi.id="EAID_686ABEA2_E0DB_459d_8146_297199353DDF" value="Rewritten" modelElement="EAID_5BB298FF_B817_485a_B823_F7FB14EA389F"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_85467408_50E0_49da_83F0_E3D1D3B6F9CA" value="{58DA82DE-66F7-4062-8038-9AFB8F1E051C}" modelElement="EAID_5BB298FF_B817_485a_B823_F7FB14EA389F"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_4A6DCB59_8334_45f3_BDD1_5FEEE44985F6" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:BaseInfrastructure:Localizer_frequency_2" modelElement="EAID_5BB298FF_B817_485a_B823_F7FB14EA389F"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_E1192AD3_F436_453d_8074_8B9426959E30" value="{343F5E2F-D469-4f9f-92C4-532F29DDB547},{5B5C315C-073E-4cff-A4E9-E866194F5907}" modelElement="EAID_91742EEF_4765_457d_919F_7D0F26B2A9A5"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_E17C8641_B091_41ee_BAB6_195ACA9EC367" value="SBVR" modelElement="EAID_91742EEF_4765_457d_919F_7D0F26B2A9A5"/>
+		<UML:TaggedValue tag="Definition:Adapted" xmi.id="EAID_15DD8D4D_035B_4128_BEB7_7B93FFB2477B" value="Rewritten" modelElement="EAID_91742EEF_4765_457d_919F_7D0F26B2A9A5"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_9F782F37_98A8_4fac_A862_07CD0F13F284" value="{58DA82DE-66F7-4062-8038-9AFB8F1E051C}" modelElement="EAID_91742EEF_4765_457d_919F_7D0F26B2A9A5"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_32D20403_350D_4c96_BB77_769964B9A186" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:BaseInfrastructure:MarkerBeacon_frequency" modelElement="EAID_91742EEF_4765_457d_919F_7D0F26B2A9A5"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_94AD7EC1_CE51_48bf_A491_728DA1CE2822" value="{51CEA83C-CB94-43c7-BFB5-CD59D3ED238D},{B1E77AC0-BEA7-48d2-A3B9-99AFF9FAB0F9}" modelElement="EAID_A3F407C2_51DF_406c_A952_61DFDAC1C301"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_C87D37E1_87B2_46f7_9E6E_38627550B3D8" value="SBVR" modelElement="EAID_A3F407C2_51DF_406c_A952_61DFDAC1C301"/>
+		<UML:TaggedValue tag="Definition:Adapted" xmi.id="EAID_83D05158_0B94_46c4_BE2B_B8BD249BEDEF" value="Rewritten" modelElement="EAID_A3F407C2_51DF_406c_A952_61DFDAC1C301"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_36D7070F_21B3_4ffe_87D0_72C58831F547" value="{58DA82DE-66F7-4062-8038-9AFB8F1E051C}" modelElement="EAID_A3F407C2_51DF_406c_A952_61DFDAC1C301"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_40F44458_B087_402b_B726_9F1DE87A8055" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:BaseInfrastructure:Localizer_frequency_1" modelElement="EAID_A3F407C2_51DF_406c_A952_61DFDAC1C301"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_DD764000_7B72_4959_827D_D36E29C8FBCA" value="{638AC79E-586C-4f00-97E3-DFD461F1A830},{EB769E56-E1E3-49d6-AE72-6362C056E3D4}" modelElement="EAID_EE779288_9C62_465c_A9C0_E161AA774E84"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_D99B1DFB_D859_4d5a_B384_F6DD58C12B26" value="SBVR" modelElement="EAID_EE779288_9C62_465c_A9C0_E161AA774E84"/>
+		<UML:TaggedValue tag="Definition:Adapted" xmi.id="EAID_DB37BF87_95E6_48c5_BC7F_880AAA0C4ED5" value="Rewritten" modelElement="EAID_EE779288_9C62_465c_A9C0_E161AA774E84"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_35E5F714_CC0B_4335_8BB7_D9AA12768518" value="{58DA82DE-66F7-4062-8038-9AFB8F1E051C}" modelElement="EAID_EE779288_9C62_465c_A9C0_E161AA774E84"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_646AAAC3_CE90_441b_9302_D01DC6CE516C" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:BaseInfrastructure:VOR_frequency_2" modelElement="EAID_EE779288_9C62_465c_A9C0_E161AA774E84"/>
+		<UML:Diagram name="BaseInfrastructure  - Constraints-1" xmi.id="EAID_A7241F06_0E6B_46d0_84B9_E0B7B5CFB415" diagramType="ClassDiagram" owner="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644" toolName="Enterprise Architect 2.5">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="version" value="1.0"/>
+				<UML:TaggedValue tag="author" value="08.01.03"/>
+				<UML:TaggedValue tag="created_date" value="2014-02-04 16:32:05"/>
+				<UML:TaggedValue tag="modified_date" value="2016-03-24 16:01:01"/>
+				<UML:TaggedValue tag="package" value="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644"/>
+				<UML:TaggedValue tag="type" value="Logical"/>
+				<UML:TaggedValue tag="swimlanes" value="locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=1;ufh=0;cls=0;"/>
+				<UML:TaggedValue tag="matrixitems" value="locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"/>
+				<UML:TaggedValue tag="ea_localid" value="384"/>
+				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=2;PPgs.cy=1;DocSize.cx=795;DocSize.cy=1138;ShowDetails=0;Orientation=P;Zoom=47;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+				<UML:TaggedValue tag="styleex" value="SaveTag=D78F5B85;ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;"/>
+			</UML:ModelElement.taggedValue>
+			<UML:Diagram.element>
+				<UML:DiagramElement geometry="Left=486;Top=392;Right=931;Bottom=603;" subject="EAID_47536F99_585C_4449_BC32_3EDFE985D3E2" seqno="1" style="DUID=34CFBCDB;Tag=1;AttCustom=0;OpCustom=0;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Notes=1000;RzO=3;Constraint=1;"/>
+				<UML:DiagramElement geometry="Left=462;Top=657;Right=897;Bottom=868;" subject="EAID_EE779288_9C62_465c_A9C0_E161AA774E84" seqno="2" style="DUID=5D6EBDB0;Tag=1;AttCustom=0;OpCustom=0;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Notes=1000;RzO=3;Constraint=1;"/>
+				<UML:DiagramElement geometry="Left=43;Top=912;Right=418;Bottom=1123;" subject="EAID_91742EEF_4765_457d_919F_7D0F26B2A9A5" seqno="3" style="DUID=D690237E;Tag=1;AttCustom=0;OpCustom=0;bold=0;black=0;italic=0;ul=0;charset=0;Notes=1000;font=Arial;fontsz=110;pitch=34;RzO=3;Constraint=1;"/>
+				<UML:DiagramElement geometry="Left=494;Top=84;Right=945;Bottom=314;" subject="EAID_074DB60A_A488_41cb_A686_C699A324BF23" seqno="4" style="DUID=9C979D3A;Tag=1;AttCustom=0;OpCustom=0;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Notes=1000;RzO=3;Constraint=1;"/>
+				<UML:DiagramElement geometry="Left=42;Top=389;Right=434;Bottom=619;" subject="EAID_5BB298FF_B817_485a_B823_F7FB14EA389F" seqno="5" style="DUID=90D905C5;Tag=1;AttCustom=0;OpCustom=0;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Notes=1000;RzO=3;Constraint=1;"/>
+				<UML:DiagramElement geometry="Left=51;Top=658;Right=418;Bottom=869;" subject="EAID_2CF7908C_7B4E_4eda_B85F_F193D2D63050" seqno="6" style="DUID=F60979C1;Tag=1;AttCustom=0;OpCustom=0;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Notes=1000;RzO=3;Constraint=1;"/>
+				<UML:DiagramElement geometry="Left=42;Top=83;Right=430;Bottom=294;" subject="EAID_A3F407C2_51DF_406c_A952_61DFDAC1C301" seqno="7" style="DUID=14D4B726;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;RzO=3;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;Constraint=1;"/>
+				<UML:DiagramElement geometry="SX=0;SY=0;EX=0;EY=0;EDGE=1;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;Path=;" subject="EAID_42BDFDA4_AF86_45b8_B94B_67910B5DCEA9" style="Mode=2;EOID=14D4B726;SOID=90D905C5;Color=-1;LWidth=0;Hidden=0;"/>
+			</UML:Diagram.element>
+		</UML:Diagram>
+		<UML:Diagram name="BaseInfrastructure  - Constraints-2" xmi.id="EAID_BD9E03D2_DA68_472b_8723_42905D1B7837" diagramType="ClassDiagram" owner="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644" toolName="Enterprise Architect 2.5">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="version" value="1.0"/>
+				<UML:TaggedValue tag="author" value="08.01.03"/>
+				<UML:TaggedValue tag="created_date" value="2014-02-06 12:12:09"/>
+				<UML:TaggedValue tag="modified_date" value="2016-03-24 15:58:53"/>
+				<UML:TaggedValue tag="package" value="EAPK_61381CF0_384C_45b0_A103_A2AA9BD6C644"/>
+				<UML:TaggedValue tag="type" value="Logical"/>
+				<UML:TaggedValue tag="swimlanes" value="locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=1;ufh=0;cls=0;"/>
+				<UML:TaggedValue tag="matrixitems" value="locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"/>
+				<UML:TaggedValue tag="ea_localid" value="385"/>
+				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=795;DocSize.cy=1138;ShowDetails=0;Orientation=P;Zoom=75;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+				<UML:TaggedValue tag="styleex" value="SaveTag=3A9AF80F;ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;"/>
+			</UML:ModelElement.taggedValue>
+			<UML:Diagram.element>
+				<UML:DiagramElement geometry="Left=406;Top=127;Right=732;Bottom=367;" subject="EAID_1485C91A_394C_4bc2_B633_023408E3B83F" seqno="1" style="DUID=C79FF363;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;bold=0;black=0;italic=0;ul=0;charset=0;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;font=Arial;fontsz=110;pitch=34;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=22;Top=127;Right=389;Bottom=351;" subject="EAID_529F6430_A12D_49e8_8474_D3E2197F6117" seqno="2" style="DUID=8E6637AB;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;bold=0;black=0;italic=0;ul=0;charset=0;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;font=Arial;fontsz=110;pitch=34;RzO=3;"/>
+			</UML:Diagram.element>
+		</UML:Diagram>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_219D398F_CAFA_48fc_9931_5334618922B0" value="{53AAFE6E-3812-40d2-B6F6-634377398342}" modelElement="EAID_3417BC8C_F862_44af_A9F9_9EEFF84B5568"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_FE5F9F8E_9912_4fff_98DA_D9C81553C6F1" value="Free text" modelElement="EAID_3417BC8C_F862_44af_A9F9_9EEFF84B5568"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_37223886_D0AE_4665_BAC4_50C8FEC5DF82" value="{AC173662-8AB4-4c96-A120-A78A5B254677}" modelElement="EAID_3417BC8C_F862_44af_A9F9_9EEFF84B5568"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_F803B37F_19E8_4aee_A310_E16487730283" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:Flight:AircraftIdentification_aircraftRegistration" modelElement="EAID_3417BC8C_F862_44af_A9F9_9EEFF84B5568"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_B39C2984_B6CB_42f4_81F9_1FD5AD4AECDC" value="{025457FC-59DD-4c94-A04B-8C90551A8213},{32284C4D-1C8C-446a-A79E-501D0A910AE9}" modelElement="EAID_6213B50B_7B1A_4900_8814_79A7A39A521C"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_42EDD80C_51C4_4064_AD41_C11B0E0DC85D" value="Other" modelElement="EAID_6213B50B_7B1A_4900_8814_79A7A39A521C"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_F9B5A9AB_8E0C_4a22_9028_1FC0212BC034" value="{AC173662-8AB4-4c96-A120-A78A5B254677}" modelElement="EAID_6213B50B_7B1A_4900_8814_79A7A39A521C"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_186A003D_CDCA_46cd_958C_0CDF8CFA29F5" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:Flight:FlightPhase_cruisingSpeed" modelElement="EAID_6213B50B_7B1A_4900_8814_79A7A39A521C"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_1D8A4374_2627_4938_A8F4_8F18370853C1" value="{025457FC-59DD-4c94-A04B-8C90551A8213},{63CD418E-583C-42f3-ABE0-F293E5F101EB}" modelElement="EAID_68B2BACE_3FA1_4147_B5E2_F96897899944"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_A8451E04_0435_4b7f_9F5E_B06F69E3351A" value="Other" modelElement="EAID_68B2BACE_3FA1_4147_B5E2_F96897899944"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_E70BDE39_2234_447b_847D_E4B04DFAE4E5" value="{AC173662-8AB4-4c96-A120-A78A5B254677}" modelElement="EAID_68B2BACE_3FA1_4147_B5E2_F96897899944"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_F1559666_6DC9_4900_873F_E875A55D4794" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:Flight:FlightPhase_cruisingLevel" modelElement="EAID_68B2BACE_3FA1_4147_B5E2_F96897899944"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_4C020BFF_9E2E_4cb1_A695_E3F772F752FF" value="{C451D19F-02AB-4b28-8E39-461B495397CB},{BF01FADA-F6F9-4f98-B451-ABE37A4B4B5A}" modelElement="EAID_9AF264EB_590D_44ce_A07C_0944164BF267"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_C10BF62F_38FE_4ef1_8BD1_C37779EF1E46" value="SBVR" modelElement="EAID_9AF264EB_590D_44ce_A07C_0944164BF267"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_7B88B6EE_A652_4eb3_B575_7F49737B6BC2" value="{AC173662-8AB4-4c96-A120-A78A5B254677}" modelElement="EAID_9AF264EB_590D_44ce_A07C_0944164BF267"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_11F0C701_6CE5_4e4a_A80B_D82309976FCB" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:Flight:SSRCode_code" modelElement="EAID_9AF264EB_590D_44ce_A07C_0944164BF267"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_9B8147A0_9E7E_4aa0_9D01_ABF353A060A0" value="{025457FC-59DD-4c94-A04B-8C90551A8213},{E0326DA2-C1F3-465b-983F-42C6C9B88CD9}" modelElement="EAID_B871C4C5_405D_47fa_B10A_DEC185D3EE76"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_F0482687_4B2C_41e6_99DC_51A084F961ED" value="Other" modelElement="EAID_B871C4C5_405D_47fa_B10A_DEC185D3EE76"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_13F0586E_4A6C_4590_BBF8_2932E9485455" value="{AC173662-8AB4-4c96-A120-A78A5B254677}" modelElement="EAID_B871C4C5_405D_47fa_B10A_DEC185D3EE76"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_6AF1509E_9569_4bf3_A188_6127E17C476D" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:Flight:FlightPhase_cruisingAltitude" modelElement="EAID_B871C4C5_405D_47fa_B10A_DEC185D3EE76"/>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_E12DFCF8_4F8E_4b18_B960_F5CB9B628C2B" value="{025457FC-59DD-4c94-A04B-8C90551A8213},{7DE912B1-194E-4aa5-817F-1F920F9CD359}" modelElement="EAID_CF1E0B46_7BFC_447e_9D80_46B9455C6E52"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_7DE2EFB1_6234_4144_B124_B965CB75257B" value="Other" modelElement="EAID_CF1E0B46_7BFC_447e_9D80_46B9455C6E52"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_51C36F7B_4B02_4fbd_AECF_98D007289438" value="{AC173662-8AB4-4c96-A120-A78A5B254677}" modelElement="EAID_CF1E0B46_7BFC_447e_9D80_46B9455C6E52"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_80117EDF_1378_4e0a_917E_058295C2479E" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:Flight:FlightPhase_cruiseClimbSpeed" modelElement="EAID_CF1E0B46_7BFC_447e_9D80_46B9455C6E52"/>
+		<UML:Diagram name="Flight - CLDM Constraints" xmi.id="EAID_0DE38C2F_CFA3_40d5_B032_B82D6D4D0C33" diagramType="ClassDiagram" owner="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26" toolName="Enterprise Architect 2.5">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="version" value="1.0"/>
+				<UML:TaggedValue tag="author" value="08.01.03"/>
+				<UML:TaggedValue tag="created_date" value="2014-05-08 11:46:18"/>
+				<UML:TaggedValue tag="modified_date" value="2016-03-23 10:07:31"/>
+				<UML:TaggedValue tag="package" value="EAPK_094E9306_459A_4147_95EB_0A27DEFA3F26"/>
+				<UML:TaggedValue tag="type" value="Logical"/>
+				<UML:TaggedValue tag="swimlanes" value="locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=1;ufh=0;cls=0;"/>
+				<UML:TaggedValue tag="matrixitems" value="locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"/>
+				<UML:TaggedValue tag="ea_localid" value="386"/>
+				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=827;DocSize.cy=1169;ShowDetails=0;Orientation=P;Zoom=84;ShowTags=1;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+				<UML:TaggedValue tag="styleex" value="SaveTag=236AD4E4;ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=1;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;"/>
+			</UML:ModelElement.taggedValue>
+			<UML:Diagram.element>
+				<UML:DiagramElement geometry="Left=16;Top=412;Right=281;Bottom=584;" subject="EAID_CF1E0B46_7BFC_447e_9D80_46B9455C6E52" seqno="1" style="DUID=EEE7F7BD;AttCustom=0;OpCustom=0;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=304;Top=422;Right=545;Bottom=581;" subject="EAID_68B2BACE_3FA1_4147_B5E2_F96897899944" seqno="2" style="DUID=7CB3A8BC;AttCustom=0;OpCustom=0;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=291;Top=235;Right=543;Bottom=394;" subject="EAID_B871C4C5_405D_47fa_B10A_DEC185D3EE76" seqno="3" style="DUID=650EA105;AttCustom=0;OpCustom=0;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=15;Top=232;Right=261;Bottom=391;" subject="EAID_6213B50B_7B1A_4900_8814_79A7A39A521C" seqno="4" style="DUID=F24450DC;AttCustom=0;OpCustom=0;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=18;Top=17;Right=265;Bottom=202;" subject="EAID_3417BC8C_F862_44af_A9F9_9EEFF84B5568" seqno="5" style="DUID=05E6610F;AttCustom=0;OpCustom=0;RzO=3;"/>
+				<UML:DiagramElement geometry="Left=285;Top=13;Right=549;Bottom=172;" subject="EAID_9AF264EB_590D_44ce_A07C_0944164BF267" seqno="6" style="DUID=0568F76A;AttCustom=0;OpCustom=0;RzO=3;"/>
+			</UML:Diagram.element>
+		</UML:Diagram>
+		<UML:TaggedValue tag="Constraint:AppliesTo" xmi.id="EAID_A7000231_D2DD_4f4a_AD67_359F35C46F77" value="{8333DC48-BCF1-4f5b-A71A-3061236B2E83},{4D712C41-3664-4f86-956E-B578D584D028}" modelElement="EAID_4F2CE553_DF61_49bf_BBDD_5CD4BC4B5189"/>
+		<UML:TaggedValue tag="Constraint:FormatType" xmi.id="EAID_B26D4CD3_48DD_45d0_88B3_3DA1546B9AED" value="SBVR" modelElement="EAID_4F2CE553_DF61_49bf_BBDD_5CD4BC4B5189"/>
+		<UML:TaggedValue tag="Definition:Source" xmi.id="EAID_CE2D78D7_01E1_4e43_AB73_71EB90E43F79" value="{FBEA2B1F-E74D-4985-ACC4-A45B5519686A}" modelElement="EAID_4F2CE553_DF61_49bf_BBDD_5CD4BC4B5189"/>
+		<UML:TaggedValue tag="URN" xmi.id="EAID_C7A72D86_43A6_489f_891B_EFD0E8151F3C" value="urn:x-ses:sesarju:airm:v410:ConstraintsModel:ConsolidatedLogicalDataModel:SubjectFields:Meteorology:RunwayVisualRange_rvrValueInterpretation" modelElement="EAID_4F2CE553_DF61_49bf_BBDD_5CD4BC4B5189"/>
+		<UML:Diagram name="Meteorology" xmi.id="EAID_E8D0FC3B_EE70_45ba_A591_C9F10AD2ACAC" diagramType="ClassDiagram" owner="EAPK_B8D658D6_B2B1_43e0_83B3_5E12626DB797" toolName="Enterprise Architect 2.5">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="version" value="1.0"/>
+				<UML:TaggedValue tag="author" value="08.01.03"/>
+				<UML:TaggedValue tag="created_date" value="2016-03-21 16:50:27"/>
+				<UML:TaggedValue tag="modified_date" value="2016-03-24 15:58:30"/>
+				<UML:TaggedValue tag="package" value="EAPK_B8D658D6_B2B1_43e0_83B3_5E12626DB797"/>
+				<UML:TaggedValue tag="type" value="Logical"/>
+				<UML:TaggedValue tag="swimlanes" value="locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;tcol=-1;ofCol=-1;ufCol=-1;hl=1;ufh=0;cls=0;"/>
+				<UML:TaggedValue tag="matrixitems" value="locked=false;matrixactive=false;swimlanesactive=true;kanbanactive=false;width=1;clrLine=0;"/>
+				<UML:TaggedValue tag="ea_localid" value="387"/>
+				<UML:TaggedValue tag="EAStyle" value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=850;DocSize.cy=1098;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=1;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;ShowShape=1;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+				<UML:TaggedValue tag="styleex" value="SaveTag=8F734CED;ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;KanbanActive=0;MatrixLineWidth=1;MatrixLineClr=0;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;m_bElementClassifier=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;SuppressedCompartments=;Theme=:119;"/>
+			</UML:ModelElement.taggedValue>
+			<UML:Diagram.element>
+				<UML:DiagramElement geometry="Left=33;Top=33;Right=323;Bottom=199;" subject="EAID_4F2CE553_DF61_49bf_BBDD_5CD4BC4B5189" seqno="1" style="DUID=2FFD9DBD;Tag=1;AttCustom=0;OpCustom=0;Notes=1000;RzO=3;"/>
+			</UML:Diagram.element>
+		</UML:Diagram>
+		<UML:DiagramElement geometry="Left=28;Top=168;Right=153;Bottom=545;" subject="EAID_EAF7C21A_1B4F_41bb_8896_590F6E4F3141" seqno="1" style="DUID=BAA9FD9B;NSL=0;BCol=-1;BFol=-1;LCol=-1;LWth=-1;fontsz=0;bold=0;black=0;italic=0;ul=0;charset=0;pitch=0;AttPro=0;AttPri=0;AttPub=0;AttPkg=0;AttCustom=0;OpCustom=0;Notes=1000;RzO=3;">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="diagram_guid" value="EAID_33AF9985_213B_4e03_92D4_786491BCFD41"/>
+			</UML:ModelElement.taggedValue>
+		</UML:DiagramElement>
+		<UML:DiagramElement geometry="SX=32;SY=-173;EX=32;EY=-176;EDGE=2;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;" subject="EAID_FBE07F55_8F04_4832_9738_131791A500D6" style="Mode=3;EOID=074A16AE;SOID=BAA9FD9B;Color=-1;LWidth=0;">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="diagram_guid" value="EAID_33AF9985_213B_4e03_92D4_786491BCFD41"/>
+				<UML:TaggedValue tag="hidden" value="0"/>
+			</UML:ModelElement.taggedValue>
+		</UML:DiagramElement>
+		<UML:DiagramElement geometry="SX=0;SY=0;EX=0;EY=0;EDGE=4;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;" subject="EAID_17407FFF_8FB9_438f_A46F_22A4324277A7" style="Mode=2;EOID=BAA9FD9B;SOID=1547904D;Color=-1;LWidth=0;">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="diagram_guid" value="EAID_33AF9985_213B_4e03_92D4_786491BCFD41"/>
+				<UML:TaggedValue tag="hidden" value="0"/>
+			</UML:ModelElement.taggedValue>
+		</UML:DiagramElement>
+		<UML:DiagramElement geometry="SX=-13;SY=-4;EX=-13;EY=-4;EDGE=4;$LLB=;LLT=;LMT=;LMB=;LRT=;LRB=;IRHS=;ILHS=;" subject="EAID_5B80680E_271C_4442_BBD5_AB594FFDD1E3" style="Mode=2;EOID=BAA9FD9B;SOID=B76CEE14;Color=-1;LWidth=0;">
+			<UML:ModelElement.taggedValue>
+				<UML:TaggedValue tag="diagram_guid" value="EAID_33AF9985_213B_4e03_92D4_786491BCFD41"/>
+				<UML:TaggedValue tag="hidden" value="0"/>
+			</UML:ModelElement.taggedValue>
+		</UML:DiagramElement>
+	</XMI.content>
+	<XMI.difference/>
+	<XMI.extensions xmi.extender="Enterprise Architect 2.5">
+		<EAStub xmi.id="EAPK_00E1F6CB_2C8B_4dbe_9C34_889C799D3AA2" name="FoundationLibrary" UMLType="Package"/>
+		<EAStub xmi.id="EAPK_6CE3141E_F2D8_4f47_AEB6_49FED873DBDB" name="ConsolidatedLogicalDataModel" UMLType="Package"/>
+		<EAStub xmi.id="EAPK_A04B0988_6959_400f_AD70_35D16B90E91B" name="InformationModel" UMLType="Package"/>
+		<EAModel.paramSub/>
+	</XMI.extensions>
+</XMI>
