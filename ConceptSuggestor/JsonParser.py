@@ -1,14 +1,18 @@
 import json
 
 class JsonParser(object):
-    """Parses JSON text to objects and vice-versa"""
+    """Reads and writes JSON files."""
 
+    # Loads a JSON file and returns the data
     def LoadFile(self, file):
         with open(file) as data_file:
             data = json.load(data_file)
+        
+        return data
 
-        from pprint import pprint
-        #pprint(data)
+    # Loads a commit JSON file and returns a list of new concepts.
+    def LoadCommit(self, file):
+        data = LoadFile(self, file)
 
         newitems = []
 
@@ -20,6 +24,17 @@ class JsonParser(object):
 
         return newitems
     
+    def LoadConcepts(self, file):
+        data = LoadFile(self, file)
+
+        items = []
+
+        for item in data:
+            items.append(item)
+
+        return items
+
+    # Writes a list to a JSON file.
     def MakeFile(self, data, file):
         with open(file, "w") as data_file:
             json.dump(data, data_file)
