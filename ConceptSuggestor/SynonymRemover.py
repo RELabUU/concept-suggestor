@@ -4,8 +4,8 @@ class SynonymRemover(object):
     def __init__(self, concepts, threshold, useWordVectors = False, wordVectorWeight = 0, useThesaurus = False, thesaurusWeight = 0, useWordNet = False, wordNetWeight = 0, totalWeight = 0, totalThreshold = 0):
         self.useWordVectors = useWordVectors
         if self.useWordVectors == True:
-            from SemanticSimilarity import SemanticSimilarity
-            self.ss = SemanticSimilarity(concepts)
+            from SpacySimilarity import SpacySimilarity
+            self.ss = SpacySimilarity(concepts)
             self.wordVectorWeight = wordVectorWeight
 
         self.useThesaurus = useThesaurus
@@ -16,8 +16,8 @@ class SynonymRemover(object):
 
         self.useWordNet = useWordNet
         if self.useWordNet == True:
-            from WordNetSynonyms import WordNetSynonyms
-            self.wns = WordNetSynonyms()
+            from WordNetSimilarity import WordNetSimilarity
+            self.wns = WordNetSimilarity()
             self.wordNetWeight = wordNetWeight
 
         self.totalWeight = totalWeight
@@ -51,7 +51,7 @@ class SynonymRemover(object):
 
         # Checking the synonym using WordNet
         if self.useWordNet == True:
-            wordNet = int(self.wns.HasSynonym(item, collection))
+            wordNet = self.wns.GetMaxSimilarity(item, collection)
             wordNet *= self.wordNetWeight
             total += wordNet
 

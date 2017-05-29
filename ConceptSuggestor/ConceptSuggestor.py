@@ -22,7 +22,7 @@ def GetProgramMode():
     print("a - The complete parameterized package. Loads new concepts from external JSON file, removes synonyms, and writes that to an external JSON file.")
     print("b - Check similarity using word vectors.")
     print("c - Check whether a synonym exists using thesaurus.com.")
-    print("d - Check whether a synonym exists using WordNet.")
+    print("d - Check similarity using WordNet.")
     print("e - Open a JSON file.")
     print("f - Open the AIRM file.")
 
@@ -66,9 +66,9 @@ def Main():
         jp.MakeFile(newConcepts, OUTFILE)
 
     elif choice == "b":
-        from SemanticSimilarity import SemanticSimilarity
+        from SpacySimilarity import SpacySimilarity
         print("Result of semantic similarity: ")
-        ss = SemanticSimilarity(concepts)
+        ss = SpacySimilarity(concepts)
         print(ss.HasSynonym(new, WORDVECTOR_THRESHOLD))
 
     elif choice=="c":
@@ -78,11 +78,11 @@ def Main():
         print(ds.HasSynonym(new, concepts))
 
     elif choice=="d":
-        from WordNetSynonyms import WordNetSynonyms
-        print("Result of WordNet synonyms: ")
-        wns = WordNetSynonyms()
+        from WordNetSimilarity import WordNetSimilarity
+        print("Result of WordNet similarity: ")
+        wns = WordNetSimilarity()
 
-        print(wns.HasSynonym(new, concepts))
+        print(wns.GetMaxSimilarity(new, concepts))
 
     elif choice=="e":
         from JsonParser import JsonParser

@@ -1,4 +1,4 @@
-class SemanticSimilarity(object):
+class SpacySimilarity(object):
     """Establishes semantic similarity between words."""
 
     import spacy

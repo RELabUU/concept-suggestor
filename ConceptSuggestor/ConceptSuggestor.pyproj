@@ -29,13 +29,13 @@
     <Compile Include="ThesaurusSynonyms.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SemanticSimilarity.py">
+    <Compile Include="SpacySimilarity.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="SynonymRemover.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="WordNetSynonyms.py">
+    <Compile Include="WordNetSimilarity.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="XmlParser.py">
