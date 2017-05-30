@@ -19,7 +19,7 @@
 This is the abstract.
 \end{abstract}
 
-{\bf Keywords:} NLP, semantic relatedness, three
+{\bf Keywords:} NLP, semantic relatedness, semantic similarity
 
 \section{Introduction}
 
@@ -33,13 +33,24 @@ Recommender systems are software tools and techniques providing suggestions for 
 
 WordNet is an electronic lexical database.\cite{kilgarriff2000wordnet}
 SpaCy is one of the fastest and most accurate publicly available Natural Language Processing (NLP) toolkits available.\cite{choi2015depends}
-SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words. Training is performed on aggregated global word-word co-occurrence statistics from a corpus.\cite{pennington2014glove} Although GloVe measures co-occurrence, and not semantic similarity or relatedness, its results can be used as a rough estimate of semantic similarity or relatedness.\cite{levy2015improving} Spacy's default word vector library is trained on Wikipedia. Wikipedia has proven to be a valuable source for computing semantic relatedness measures.\cite{strube2006wikirelate}
+SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words. Training is performed on aggregated global word-word co-occurrence statistics from a corpus.\cite{pennington2014glove} Although GloVe measures co-occurrence and not semantic similarity or relatedness, its results can be used as a rough estimate of semantic similarity or relatedness.\cite{levy2015improving} SpaCy's default word vector library is trained on Wikipedia. Wikipedia has proven to be a valuable source for computing semantic relatedness measures.\cite{strube2006wikirelate}
 
 Most methods of computing semantic relatedness measures such as word vectors rely on training an algorithm on a dataset. Public datasets, such as Google, Wikipedia, or WordNet are often used, although private datasets can also be used to improve context-sensitivity. Wikipedia and WordNet have proven to perform well in a variety of situations.\cite{strube2006wikirelate}
 
 \section{Algorithms}
 
-These are the algorithms.
+The Concept Suggestor uses several steps to decide which concepts get suggested to the user.
+
+The first step is eliminating synonyms. The Concept Suggestor has three methods which it combines to eliminate synonyms from the suggestions: SpaCy's similarity function, PyDictionary's synonym function, and WordNet's similarity function. These are combined into a weighted total, which must pass a threshold in order for the concept to be seen as a synonym.
+
+\subsection{SpaCy}
+SpaCy's word vectors are calculated by using the GloVe algorithm on Wikipedia. The similarity function of SpaCy computes the cosine of two word vectors. This results in a number between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other.
+
+\subsection{PyDictionary}
+PyDictionary requests synonyms from the thesaurus.com website. The method looks whether two words can be found in each other's list of synonyms and returns a value of one if they can, and a value of zero if they can't. Some combinations of words, such as "airplane" and "aeroplane" are not found in each other's list of synonyms, but have identical lists of synonyms. Because of this, our method has been adapted to also look whether two words have identical lists of synonyms. If this is the case, the method also returns a value of one.
+
+\subsection{WordNet}
+WordNet is a public electronic lexical database that began in the mid-1980s in the Princeton University Department of Psychology and has been regularly updated and improved since then. The similarity function of WordNet returns a score between zero and one denoting how similar two words are, based on the shortest path that connects the senses in the is-a (hypernym/hyponym) taxonomy. % TODO: make the last sentence not plagiarism. Source: http://www.nltk.org/howto/wordnet.html 
 
 \section{Evaluation Methodology}
 

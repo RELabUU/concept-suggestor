@@ -13,5 +13,10 @@
     "label": "Aerospace",
     "id": "991acd3d-d6d3-4a29-b456-63462bb0d230",
     "op": "add_element"
+  },
+  {
+    "label": "Co-pilot",
+    "id": "182c5592-07cc-4549-85af-d4727717d29c",
+    "op": "add_element"
   }
 ]
