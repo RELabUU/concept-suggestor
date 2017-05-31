@@ -11,8 +11,11 @@ THESAURUS_WEIGHT = 0.5
 WORDNET_WEIGHT = 0.5
 TOTAL_WEIGHT = WORDVECTOR_WEIGHT + THESAURUS_WEIGHT + WORDNET_WEIGHT
 
+collections = { "one": "concepts_example.json",
+                "two": "concepts_example2.json" }
+
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f"):
+    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g"):
         return True
     else:
         return False
@@ -25,6 +28,7 @@ def GetProgramMode():
     print("d - Check similarity using WordNet.")
     print("e - Open a JSON file.")
     print("f - Open the AIRM file.")
+    print("g - Opens multiple collections and finds the ratio of occurence of a word.")
 
     # Get the program mode from the user and ensure it's valid.
     choice = input("Please tell me what to do (type a letter): ").lower()
@@ -93,11 +97,19 @@ def Main():
         jp.MakeFile(data, OUTFILE)
 
     elif choice=="f":
-         from XmlParser import XmlParser
-         print("Result of XmlParser: ")
-         xp = XmlParser()
-         data = xp.LoadFile(AIRMFILE)
-         print(data)
+        from XmlParser import XmlParser
+        print("Result of XmlParser: ")
+        xp = XmlParser()
+        data = xp.LoadFile(AIRMFILE)
+        print(data)
+
+    elif choice=="g":
+        from CollectionManager import CollectionManager
+        print("Result of CollectionManager: ")
+        cm = CollectionManager()
+        cm.LoadCollections(collections)
+        print(cm.FrequencyOfWord(new))
+
     else:
         print("Invalid mode. Aborting.")
 
