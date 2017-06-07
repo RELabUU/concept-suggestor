@@ -6,6 +6,10 @@ AIRMFILE = "AIRM/EA4A02.informationmodel.xml" # AIRM information model
 WORDVECTOR_THRESHOLD = 0.9
 TOTAL_THRESHOLD = 0.8
 
+USEWORDVECTORS = True
+USETHESAURUS = True
+USEWORDNET = True
+
 WORDVECTOR_WEIGHT = 0.5
 THESAURUS_WEIGHT = 0.5
 WORDNET_WEIGHT = 0.5
@@ -55,9 +59,9 @@ def Main():
     if choice == "a":
         from SynonymRemover import SynonymRemover
         sr = SynonymRemover(concepts, TOTAL_THRESHOLD, 
-                            useWordVectors = True, wordVectorWeight = WORDVECTOR_WEIGHT,
-                            useThesaurus = True, thesaurusWeight = THESAURUS_WEIGHT, 
-                            useWordNet = True, wordNetWeight = WORDNET_WEIGHT,
+                            useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
+                            useThesaurus = USETHESAURUS, thesaurusWeight = THESAURUS_WEIGHT, 
+                            useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
                             totalWeight = TOTAL_WEIGHT, totalThreshold = TOTAL_THRESHOLD)
         
         from JsonParser import JsonParser
