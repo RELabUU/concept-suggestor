@@ -19,10 +19,15 @@ class ThesaurusSynonyms(object):
                 return True
         return False
 
-    # Checks if wordB is a synonym of wordA, and vice-versa if TWOWAYCHECK == True
-    def IsSynonym(self, wordA, wordB, synonymsOfWordB):
+    # Checks if wordB is a synonym of wordA, and vice-versa if TWOWAYCHECK == True. 
+    # synonymsOfWordB is a parameter that can be used for efficiency. I.e. if you want to call this method repeatedly with the same wordB, it's faster to get the synonyms before calling this method.
+    def IsSynonym(self, wordA, wordB, synonymsOfWordB = []):
         synonyms = self.dict.synonym(wordA)
         print("Synonyms of %s: %s" % (wordA, synonyms)) # DEBUG
+
+        # Fill the synonymsOfWordB 
+        if synonymsOfWordB == [] and self.TWOWAYCHECK is True:
+            synonymsOfWordB = self.dict.synonym(wordB)
 
         # If the collections are identical, the words are expected to be identical.
         if synonyms == synonymsOfWordB:
