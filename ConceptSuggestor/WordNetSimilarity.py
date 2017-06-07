@@ -3,6 +3,8 @@ from nltk.corpus import wordnet as wn
 class WordNetSimilarity(object):
     """Uses WordNet to determine whether words are synonyms"""
 
+    # These two methods use incorrect ways of determining synonyms. Better: calculate similarity, and use a threshold.
+    """
     # Checks if the collection has a synonym of the word
     def HasSynonym(self, word, collection):
         for cword in collection:
@@ -19,6 +21,7 @@ class WordNetSimilarity(object):
         print("Synonyms of %s: %s" % (wordA, synonyms))
         result = wordB.lower() in synonyms
         return result
+    """
 
     def GetSimilarity(self, wordA, wordB):
         wa = wn.synsets(wordA)

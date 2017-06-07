@@ -1,19 +1,17 @@
+import spacy
+
 class SpacySimilarity(object):
     """Establishes semantic similarity between words."""
 
-    import spacy
-    nlp = spacy.load("en_core_web_md")
-
-    def __init__(self, concepts):
+    def __init__(self):
         # Convert the strings to objects that can be used by spaCy
-        self.concepts = []
-        for concept in concepts:
-            self.concepts.append(self.nlp.vocab[concept])
+        self.nlp = spacy.load("en_core_web_md")
 
-    def HasSynonym(self, word, threshold):
+    def HasSynonym(self, word, collection, threshold):
         word = self.nlp.vocab[word]
-        for groupword in self.concepts:
-            if self.IsSynonym(groupword, word, threshold):
+        for groupword in collection:
+            groupword_vocab = self.nlp.vocab[groupword]
+            if self.IsSynonym(groupword_vocab, word, threshold):
                 return True
         # We get here if no synonyms are found
         return False
@@ -42,11 +40,12 @@ class SpacySimilarity(object):
         return conceptA.similarity(conceptB)
 
     # Gets the maximum similarity of word to all words in the "concepts" collection.
-    def GetMaxSimilarity(self, word):
+    def GetMaxSimilarity(self, word, collection):
         word = self.nlp.vocab[word]
         maxSimilarity = 0
-        for groupword in self.concepts:
-            similarity = self.GetSimilarity(word, groupword)
+        for groupword in collection:
+            groupword_vocab = self.nlp.vocab[groupword]
+            similarity = self.GetSimilarity(word, groupword_vocab)
             if similarity > maxSimilarity:
                 maxSimilarity = similarity
 

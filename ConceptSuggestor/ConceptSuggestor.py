@@ -19,7 +19,7 @@ collections = { "one": "concepts_example.json",
                 "two": "concepts_example2.json" }
 
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g"):
+    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g" or choice=="h"):
         return True
     else:
         return False
@@ -33,6 +33,7 @@ def GetProgramMode():
     print("e - Open a JSON file.")
     print("f - Open the AIRM file.")
     print("g - Opens multiple collections and finds the ratio of occurence of a word.")
+    print("h - Compares two possibly compound terms and returns the similarity between them.")
 
     # Get the program mode from the user and ensure it's valid.
     choice = input("Please tell me what to do (type a letter): ").lower()
@@ -53,7 +54,7 @@ def Main():
     print("Concepts already in the model: %s" % concepts)
 
     choice = GetProgramMode()
-    if choice != "a" and choice != "e" and choice != "f":
+    if choice == "b" or choice == "c" or choice == "d" or choice == "g":
         new = input("Enter a concept you want to check whether we have a synonym for (i.e. Aeroplane): ")
 
     if choice == "a":
@@ -89,7 +90,6 @@ def Main():
         from WordNetSimilarity import WordNetSimilarity
         print("Result of WordNet similarity: ")
         wns = WordNetSimilarity()
-
         print(wns.GetMaxSimilarity(new, concepts))
 
     elif choice=="e":
@@ -113,6 +113,18 @@ def Main():
         cm = CollectionManager()
         cm.LoadCollections(collections)
         print(cm.FrequencyOfWord(new))
+
+    elif choice=="h":
+        from CompoundHandler import CompoundHandler
+        print("Result of CompoundHandler: ")
+        ch = CompoundHandler(TOTAL_THRESHOLD,
+                             useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
+                             useThesaurus = USETHESAURUS, thesaurusWeight = THESAURUS_WEIGHT,
+                             useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
+                             totalWeight = TOTAL_WEIGHT, totalThreshold = TOTAL_THRESHOLD)
+        compoundA = input("Enter the first possibly compound term: ")
+        compoundB = input("Enter the second possibly compound term: ")
+        print(ch.GetSimilarity(compoundA, compoundB))
 
     else:
         print("Invalid mode. Aborting.")

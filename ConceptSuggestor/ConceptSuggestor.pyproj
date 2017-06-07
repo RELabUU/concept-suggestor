@@ -25,10 +25,16 @@
     <Compile Include="CollectionManager.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CompoundHandler.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="JsonParser.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ConceptSuggestor.py" />
+    <Compile Include="SimilarityCalculator.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="ThesaurusSynonyms.py">
       <SubType>Code</SubType>
     </Compile>
