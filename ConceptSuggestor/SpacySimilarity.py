@@ -3,9 +3,11 @@ import spacy
 class SpacySimilarity(object):
     """Establishes semantic similarity between words."""
 
+    PACKAGE = "en_core_web_md"
+
     def __init__(self, collection = []):
         # Convert the strings to objects that can be used by spaCy
-        self.nlp = spacy.load("en_core_web_md")
+        self.nlp = spacy.load(self.PACKAGE)
 
         # If a collection is specified to load, load it so that loading is not redundantly done elsewhere.
         self.collection = []
