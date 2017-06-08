@@ -7,4 +7,6 @@ Takes concepts from models and suggests relevant and interesting ones to modeler
 3. Run `pip install -r requirements1.txt`.
 4. Run `pip install -r requirements2.txt`.
 5. Run `python -m spacy download en_core_web_md`.
-6. Run the `ConceptSuggestor.py` file to launch the program.
+6. Launch or open the project.
+    - Run the `ConceptSuggestor\ConceptSuggestor.py` file to launch the program.
+    - Open `ConceptSuggestor.sln` in Visual Studio to open the solution.
