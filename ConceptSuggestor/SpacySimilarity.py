@@ -3,15 +3,28 @@ import spacy
 class SpacySimilarity(object):
     """Establishes semantic similarity between words."""
 
-    def __init__(self):
+    def __init__(self, collection = []):
         # Convert the strings to objects that can be used by spaCy
         self.nlp = spacy.load("en_core_web_md")
 
-    def HasSynonym(self, word, collection, threshold):
+        # If a collection is specified to load, load it so that loading is not redundantly done elsewhere.
+        self.collection = []
+        for word in collection:
+            self.collection.append(self.nlp.vocab[word])
+
+    def HasSynonym(self, word, threshold, collection = [],):
         word = self.nlp.vocab[word]
-        for groupword in collection:
-            groupword_vocab = self.nlp.vocab[groupword]
-            if self.IsSynonym(groupword_vocab, word, threshold):
+
+        # If a collection has been loaded previously, and none is passed to this method, use the previously loaded collection of words
+        if self.collection != [] and collection == []:
+            newcollection = self.collection
+        else:
+            newcollection = []
+            for groupword in collection:
+                newcollection.append(self.nlp.vocab[groupword])
+
+        for groupword in newcollection:
+            if self.IsSynonym(groupword, word, threshold):
                 return True
         # We get here if no synonyms are found
         return False
@@ -40,12 +53,19 @@ class SpacySimilarity(object):
         return conceptA.similarity(conceptB)
 
     # Gets the maximum similarity of word to all words in the "concepts" collection.
-    def GetMaxSimilarity(self, word, collection):
+    def GetMaxSimilarity(self, word, collection = []):
         word = self.nlp.vocab[word]
         maxSimilarity = 0
-        for groupword in collection:
-            groupword_vocab = self.nlp.vocab[groupword]
-            similarity = self.GetSimilarity(word, groupword_vocab)
+
+        if self.collection != [] and collection == []:
+            newcollection = self.collection
+        else:
+            newcollection = []
+            for groupword in collection:
+                newcollection.append(self.nlp.vocab[groupword])
+
+        for groupword in newcollection:
+            similarity = self.GetSimilarity(word, groupword)
             if similarity > maxSimilarity:
                 maxSimilarity = similarity
 
