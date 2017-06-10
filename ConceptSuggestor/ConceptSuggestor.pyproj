@@ -35,9 +35,6 @@
     <Compile Include="SimilarityCalculator.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ThesaurusSynonyms.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="SpacySimilarity.py">
       <SubType>Code</SubType>
     </Compile>
