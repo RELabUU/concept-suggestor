@@ -68,7 +68,7 @@ def Main():
     elif choice=="f":
         TestXmlParser()
     elif choice=="g":
-        TestCollectionManager(GetInputWord())
+        TestCollectionManager()
     elif choice=="h":
         TestCompoundHandler()
     else:
@@ -99,18 +99,24 @@ def TestSpacySimilarity(existingConcepts, newWord):
     print("Result of semantic similarity: ")
     ss = SpacySimilarity(existingConcepts)
     print(ss.HasSynonym(newWord, WORDVECTOR_THRESHOLD))
+    while(input("Do you want to try again? (y/n) ") == "y"):
+        print(ss.HasSynonym(GetInputWord(), WORDVECTOR_THRESHOLD))
 
 def TestThesaurusSynonyms(existingConcepts, newWord):
     from ThesaurusSynonyms import ThesaurusSynonyms
     print("Result of Thesaurus.com synonyms: ")
     ds = ThesaurusSynonyms()
     print(ds.HasSynonym(newWord, existingConcepts))
+    while(input("Do you want to try again? (y/n) ") == "y"):
+        print(ds.HasSynonym(GetInputWord(), existingConcepts))
 
 def TestWordNetSimilarity(existingConcepts, newWord):
     from WordNetSimilarity import WordNetSimilarity
     print("Result of WordNet similarity: ")
     wns = WordNetSimilarity()
     print(wns.GetMaxSimilarity(newWord, existingConcepts))
+    while(input("Do you want to try again? (y/n) ") == "y"):
+        print(wns.GetMaxSimilarity(GetInputWord(), existingConcepts))
 
 def TestJsonParser():
     from JsonParser import JsonParser
@@ -127,12 +133,14 @@ def TestXmlParser():
     data = xp.LoadFile(AIRMFILE)
     print(data)
 
-def TestCollectionManager(word):
+def TestCollectionManager():
     from CollectionManager import CollectionManager
     print("Result of CollectionManager: ")
     cm = CollectionManager()
     cm.LoadCollections(collections)
-    print(cm.FrequencyOfWord(word))
+    print(cm.FrequencyOfWord(GetInputWord()))
+    while(input("Do you want to try again? (y/n) ") == "y"):
+        print(cm.FrequencyOfWord(GetInputWord()))
 
 def TestCompoundHandler():
     from CompoundHandler import CompoundHandler
@@ -146,5 +154,9 @@ def TestCompoundHandler():
     compoundA = input("Enter the first possibly compound term: ")
     compoundB = input("Enter the second possibly compound term: ")
     print(ch.GetSimilarity(compoundA, compoundB))
+    while(input("Do you want to try again? (y/n) ") == "y"):
+        compoundA = input("Enter the first possibly compound term: ")
+        compoundB = input("Enter the second possibly compound term: ")
+        print(ch.GetSimilarity(compoundA, compoundB))
 
 Main()

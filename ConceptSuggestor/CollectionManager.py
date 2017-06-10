@@ -11,6 +11,7 @@ class CollectionManager(object):
 
         for collection in collections:
             self.collections[collection] = jp.LoadFile(collections[collection])
+            print(self.collections[collection])
 
     # Adds one or multiple words to an existing collection. Note: "collection" is the key to the dictionary, not an actual collection.
     def AddToCollection(self, collection, words):
