@@ -1,18 +1,12 @@
 class SimilarityCalculator(object):
     """Calculates the similarity of two words using a variety of methods."""
 
-    def __init__(self, threshold, useWordVectors = False, wordVectorWeight = 0, useThesaurus = False, thesaurusWeight = 0, useWordNet = False, wordNetWeight = 0, totalWeight = 0):
+    def __init__(self, threshold, useWordVectors = False, wordVectorWeight = 0, useWordNet = False, wordNetWeight = 0, totalWeight = 0):
         self.useWordVectors = useWordVectors
         if self.useWordVectors is True:
             from SpacySimilarity import SpacySimilarity
             self.ss = SpacySimilarity()
             self.wordVectorWeight = wordVectorWeight
-
-        self.useThesaurus = useThesaurus
-        if self.useThesaurus is True:
-            from ThesaurusSynonyms import ThesaurusSynonyms
-            self.ts = ThesaurusSynonyms()
-            self.thesaurusWeight = thesaurusWeight
 
         self.useWordNet = useWordNet
         if self.useWordNet is True:
@@ -31,17 +25,12 @@ class SimilarityCalculator(object):
             spacySimilarity *= self.wordVectorWeight
             total += spacySimilarity
 
-        if self.useThesaurus is True:
-            thesaurus = int(self.ts.IsSynonym(wordA, wordB))
-            thesaurus *= self.thesaurusWeight
-            total += thesaurus
-
         if self.useWordNet is True:
             wordNet = self.wns.GetSimilarity(wordA, wordB)
             wordNet *= self.wordNetWeight
             total += wordNet
 
-        print("Total: %s + %s + %s = %s out of %s" % (spacySimilarity, thesaurus, wordNet, total, self.totalWeight)) # DEBUG
+        print("Total: %s + %s = %s out of %s" % (spacySimilarity, wordNet, total, self.totalWeight)) # DEBUG
 
         total /= self.totalWeight
 
@@ -56,17 +45,12 @@ class SimilarityCalculator(object):
             spacySimilarity *= self.wordVectorWeight
             total += spacySimilarity
 
-        if self.useThesaurus is True:
-            thesaurus = int(self.ts.HasSynonym(word, collection))
-            thesaurus *= self.thesaurusWeight
-            total += thesaurus
-
         if self.useWordNet is True:
             wordNet = self.wns.GetMaxSimilarity(word, collection)
             wordNet *= self.wordNetWeight
             total += wordNet
 
-        print("Total: %s + %s + %s = %s out of %s" % (spacySimilarity, thesaurus, wordNet, total, self.totalWeight)) # DEBUG
+        print("Total: %s + %s = %s out of %s" % (spacySimilarity, wordNet, total, self.totalWeight)) # DEBUG
 
         total /= self.totalWeight
 

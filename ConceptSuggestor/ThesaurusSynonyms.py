@@ -1,3 +1,5 @@
+# This class doesn't handle words that can't be found very well. Thesaurus.com tries to find similarly spelled words and returns those, without an error message or similar. Co-pilot, which is unknown, becomes copulate.
+
 from PyDictionary import PyDictionary
 
 class ThesaurusSynonyms(object):

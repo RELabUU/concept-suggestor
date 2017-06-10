@@ -7,19 +7,17 @@ WORDVECTOR_THRESHOLD = 0.9
 TOTAL_THRESHOLD = 0.8
 
 USEWORDVECTORS = True
-USETHESAURUS = True
 USEWORDNET = True
 
 WORDVECTOR_WEIGHT = 0.5
-THESAURUS_WEIGHT = 0.5
 WORDNET_WEIGHT = 0.5
-TOTAL_WEIGHT = WORDVECTOR_WEIGHT + THESAURUS_WEIGHT + WORDNET_WEIGHT
+TOTAL_WEIGHT = WORDVECTOR_WEIGHT + WORDNET_WEIGHT
 
 collections = { "one": "concepts_example.json",
                 "two": "concepts_example2.json" }
 
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g" or choice=="h"):
+    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g"):
         return True
     else:
         return False
@@ -28,12 +26,11 @@ def GetProgramMode():
     print("These are your options:")
     print("a - The complete parameterized package. Loads new concepts from external JSON file, removes synonyms, and writes that to an external JSON file.")
     print("b - Check similarity using word vectors.")
-    print("c - Check whether a synonym exists using thesaurus.com.")
-    print("d - Check similarity using WordNet.")
-    print("e - Open a JSON file.")
-    print("f - Open the AIRM file.")
-    print("g - Opens multiple collections and finds the ratio of occurence of a word.")
-    print("h - Compares two possibly compound terms and returns the similarity between them.")
+    print("c - Check similarity using WordNet.")
+    print("d - Open a JSON file.")
+    print("e - Open the AIRM file.")
+    print("f - Opens multiple collections and finds the ratio of occurence of a word.")
+    print("g - Compares two possibly compound terms and returns the similarity between them.")
 
     # Get the program mode from the user and ensure it's valid.
     choice = input("Please tell me what to do (type a letter): ").lower()
@@ -58,18 +55,16 @@ def Main():
     if choice == "a":
         TestCompletePackage(existingConcepts)
     elif choice == "b":
-        TestSpacySimilarity(existingConcepts, GetInputWord())
-    elif choice=="c":
-        TestThesaurusSynonyms(existingConcepts, GetInputWord())
-    elif choice=="d":
-        TestWordNetSimilarity(existingConcepts, GetInputWord())
-    elif choice=="e":
+        TestSpacySimilarity(existingConcepts)
+    elif choice == "c":
+        TestWordNetSimilarity(existingConcepts)
+    elif choice == "d":
         TestJsonParser()
-    elif choice=="f":
+    elif choice == "e":
         TestXmlParser()
-    elif choice=="g":
+    elif choice == "f":
         TestCollectionManager()
-    elif choice=="h":
+    elif choice == "g":
         TestCompoundHandler()
     else:
         print("Invalid mode. Aborting.")
@@ -77,11 +72,13 @@ def Main():
 def GetInputWord():
     return input("Enter a concept to put into this test (i.e. Aeroplane): ")
 
+def TryAgain():
+    return input("Do you want to try again? (y/n) ") == "y"
+
 def TestCompletePackage(existingConcepts):
     from SynonymRemover import SynonymRemover
     sr = SynonymRemover(existingConcepts, TOTAL_THRESHOLD, 
                         useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
-                        useThesaurus = USETHESAURUS, thesaurusWeight = THESAURUS_WEIGHT, 
                         useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
                         totalWeight = TOTAL_WEIGHT, totalThreshold = TOTAL_THRESHOLD)
         
@@ -94,29 +91,32 @@ def TestCompletePackage(existingConcepts):
     print("New concepts: %s" % newConcepts)
     jp.MakeFile(newConcepts, OUTFILE)
 
-def TestSpacySimilarity(existingConcepts, newWord):
+def TestSpacySimilarity(existingConcepts):
     from SpacySimilarity import SpacySimilarity
     print("Result of semantic similarity: ")
     ss = SpacySimilarity(existingConcepts)
-    print(ss.HasSynonym(newWord, WORDVECTOR_THRESHOLD))
-    while(input("Do you want to try again? (y/n) ") == "y"):
+    while True:
         print(ss.HasSynonym(GetInputWord(), WORDVECTOR_THRESHOLD))
+        if not TryAgain():
+            break
 
-def TestThesaurusSynonyms(existingConcepts, newWord):
+def TestThesaurusSynonyms(existingConcepts):
     from ThesaurusSynonyms import ThesaurusSynonyms
     print("Result of Thesaurus.com synonyms: ")
     ds = ThesaurusSynonyms()
-    print(ds.HasSynonym(newWord, existingConcepts))
-    while(input("Do you want to try again? (y/n) ") == "y"):
+    while True:
         print(ds.HasSynonym(GetInputWord(), existingConcepts))
+        if not TryAgain():
+            break
 
-def TestWordNetSimilarity(existingConcepts, newWord):
+def TestWordNetSimilarity(existingConcepts):
     from WordNetSimilarity import WordNetSimilarity
     print("Result of WordNet similarity: ")
     wns = WordNetSimilarity()
-    print(wns.GetMaxSimilarity(newWord, existingConcepts))
-    while(input("Do you want to try again? (y/n) ") == "y"):
+    while True:
         print(wns.GetMaxSimilarity(GetInputWord(), existingConcepts))
+        if not TryAgain():
+            break
 
 def TestJsonParser():
     from JsonParser import JsonParser
@@ -138,9 +138,10 @@ def TestCollectionManager():
     print("Result of CollectionManager: ")
     cm = CollectionManager()
     cm.LoadCollections(collections)
-    print(cm.FrequencyOfWord(GetInputWord()))
-    while(input("Do you want to try again? (y/n) ") == "y"):
+    while True:
         print(cm.FrequencyOfWord(GetInputWord()))
+        if not TryAgain():
+            break
 
 def TestCompoundHandler():
     from CompoundHandler import CompoundHandler
@@ -151,12 +152,11 @@ def TestCompoundHandler():
                          useThesaurus = USETHESAURUS, thesaurusWeight = THESAURUS_WEIGHT,
                          useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
                          totalWeight = TOTAL_WEIGHT, totalThreshold = TOTAL_THRESHOLD)
-    compoundA = input("Enter the first possibly compound term: ")
-    compoundB = input("Enter the second possibly compound term: ")
-    print(ch.GetSimilarity(compoundA, compoundB))
-    while(input("Do you want to try again? (y/n) ") == "y"):
+    while True:
         compoundA = input("Enter the first possibly compound term: ")
         compoundB = input("Enter the second possibly compound term: ")
         print(ch.GetSimilarity(compoundA, compoundB))
+        if not TryAgain():
+            break
 
 Main()
