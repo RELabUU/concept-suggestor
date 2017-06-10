@@ -50,83 +50,101 @@ def Main():
     jp = JsonParser()
     
     # The concepts that are already in the model.
-    concepts = jp.LoadFile(CONCEPTSFILE)
-    print("Concepts already in the model: %s" % concepts)
+    existingConcepts = jp.LoadFile(CONCEPTSFILE)
+    print("Concepts already in the model: %s" % existingConcepts)
 
     choice = GetProgramMode()
-    if choice == "b" or choice == "c" or choice == "d" or choice == "g":
-        new = input("Enter a concept you want to check whether we have a synonym for (i.e. Aeroplane): ")
 
     if choice == "a":
-        from SynonymRemover import SynonymRemover
-        sr = SynonymRemover(concepts, TOTAL_THRESHOLD, 
-                            useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
-                            useThesaurus = USETHESAURUS, thesaurusWeight = THESAURUS_WEIGHT, 
-                            useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
-                            totalWeight = TOTAL_WEIGHT, totalThreshold = TOTAL_THRESHOLD)
-        
-        from JsonParser import JsonParser
-        jp = JsonParser()
-        newConcepts = jp.LoadCommit(COMMITFILE)
-
-        newConcepts = sr.RemoveSynonyms(concepts, newConcepts)
-
-        print("New concepts: %s" % newConcepts)
-        jp.MakeFile(newConcepts, OUTFILE)
-
+        TestCompletePackage(existingConcepts)
     elif choice == "b":
-        from SpacySimilarity import SpacySimilarity
-        print("Result of semantic similarity: ")
-        ss = SpacySimilarity(concepts)
-        print(ss.HasSynonym(new, WORDVECTOR_THRESHOLD))
-
+        TestSpacySimilarity(existingConcepts, GetInputWord())
     elif choice=="c":
-        from ThesaurusSynonyms import ThesaurusSynonyms
-        print("Result of Thesaurus.com synonyms: ")
-        ds = ThesaurusSynonyms()
-        print(ds.HasSynonym(new, concepts))
-
+        TestThesaurusSynonyms(existingConcepts, GetInputWord())
     elif choice=="d":
-        from WordNetSimilarity import WordNetSimilarity
-        print("Result of WordNet similarity: ")
-        wns = WordNetSimilarity()
-        print(wns.GetMaxSimilarity(new, concepts))
-
+        TestWordNetSimilarity(existingConcepts, GetInputWord())
     elif choice=="e":
-        from JsonParser import JsonParser
-        print("Result of JsonParser: ")
-        jp = JsonParser()
-        data = jp.LoadCommit(COMMITFILE)
-        print(data)
-        jp.MakeFile(data, OUTFILE)
-
+        TestJsonParser()
     elif choice=="f":
-        from XmlParser import XmlParser
-        print("Result of XmlParser: ")
-        xp = XmlParser()
-        data = xp.LoadFile(AIRMFILE)
-        print(data)
-
+        TestXmlParser()
     elif choice=="g":
-        from CollectionManager import CollectionManager
-        print("Result of CollectionManager: ")
-        cm = CollectionManager()
-        cm.LoadCollections(collections)
-        print(cm.FrequencyOfWord(new))
-
+        TestCollectionManager(GetInputWord())
     elif choice=="h":
-        from CompoundHandler import CompoundHandler
-        print("Result of CompoundHandler: ")
-        ch = CompoundHandler(TOTAL_THRESHOLD,
-                             useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
-                             useThesaurus = USETHESAURUS, thesaurusWeight = THESAURUS_WEIGHT,
-                             useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
-                             totalWeight = TOTAL_WEIGHT, totalThreshold = TOTAL_THRESHOLD)
-        compoundA = input("Enter the first possibly compound term: ")
-        compoundB = input("Enter the second possibly compound term: ")
-        print(ch.GetSimilarity(compoundA, compoundB))
-
+        TestCompoundHandler()
     else:
         print("Invalid mode. Aborting.")
+
+def GetInputWord():
+    return input("Enter a concept to put into this test (i.e. Aeroplane): ")
+
+def TestCompletePackage(existingConcepts):
+    from SynonymRemover import SynonymRemover
+    sr = SynonymRemover(existingConcepts, TOTAL_THRESHOLD, 
+                        useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
+                        useThesaurus = USETHESAURUS, thesaurusWeight = THESAURUS_WEIGHT, 
+                        useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
+                        totalWeight = TOTAL_WEIGHT, totalThreshold = TOTAL_THRESHOLD)
+        
+    from JsonParser import JsonParser
+    jp = JsonParser()
+    newConcepts = jp.LoadCommit(COMMITFILE)
+
+    newConcepts = sr.RemoveSynonyms(existingConcepts, newConcepts)
+
+    print("New concepts: %s" % newConcepts)
+    jp.MakeFile(newConcepts, OUTFILE)
+
+def TestSpacySimilarity(existingConcepts, newWord):
+    from SpacySimilarity import SpacySimilarity
+    print("Result of semantic similarity: ")
+    ss = SpacySimilarity(existingConcepts)
+    print(ss.HasSynonym(newWord, WORDVECTOR_THRESHOLD))
+
+def TestThesaurusSynonyms(existingConcepts, newWord):
+    from ThesaurusSynonyms import ThesaurusSynonyms
+    print("Result of Thesaurus.com synonyms: ")
+    ds = ThesaurusSynonyms()
+    print(ds.HasSynonym(newWord, existingConcepts))
+
+def TestWordNetSimilarity(existingConcepts, newWord):
+    from WordNetSimilarity import WordNetSimilarity
+    print("Result of WordNet similarity: ")
+    wns = WordNetSimilarity()
+    print(wns.GetMaxSimilarity(newWord, existingConcepts))
+
+def TestJsonParser():
+    from JsonParser import JsonParser
+    print("Result of JsonParser: ")
+    jp = JsonParser()
+    data = jp.LoadCommit(COMMITFILE)
+    print(data)
+    jp.MakeFile(data, OUTFILE)
+
+def TestXmlParser():
+    from XmlParser import XmlParser
+    print("Result of XmlParser: ")
+    xp = XmlParser()
+    data = xp.LoadFile(AIRMFILE)
+    print(data)
+
+def TestCollectionManager(word):
+    from CollectionManager import CollectionManager
+    print("Result of CollectionManager: ")
+    cm = CollectionManager()
+    cm.LoadCollections(collections)
+    print(cm.FrequencyOfWord(word))
+
+def TestCompoundHandler():
+    from CompoundHandler import CompoundHandler
+    print("Result of CompoundHandler: ")
+
+    ch = CompoundHandler(TOTAL_THRESHOLD,
+                         useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
+                         useThesaurus = USETHESAURUS, thesaurusWeight = THESAURUS_WEIGHT,
+                         useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
+                         totalWeight = TOTAL_WEIGHT, totalThreshold = TOTAL_THRESHOLD)
+    compoundA = input("Enter the first possibly compound term: ")
+    compoundB = input("Enter the second possibly compound term: ")
+    print(ch.GetSimilarity(compoundA, compoundB))
 
 Main()
