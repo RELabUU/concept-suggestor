@@ -59,6 +59,7 @@ class SpacySimilarity(object):
     def GetMaxSimilarity(self, word, collection = []):
         word = self.nlp.vocab[word]
         maxSimilarity = 0
+        maxSimWord = "NONE" # DEBUG
 
         if self.collection != [] and collection == []:
             newcollection = self.collection
@@ -71,7 +72,7 @@ class SpacySimilarity(object):
             similarity = self.GetSimilarity(word, groupword)
             if similarity > maxSimilarity:
                 maxSimilarity = similarity
-                maxSimWord = groupword # DEBUG
+                maxSimWord = groupword.lower_ # DEBUG
 
-        print("Maximum similarity %s found to word %s" % (maxSimilarity, maxSimWord.lower_)) # DEBUG
+        print("Maximum similarity %s found to word \"%s\"" % (maxSimilarity, maxSimWord)) # DEBUG
         return maxSimilarity

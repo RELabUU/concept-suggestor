@@ -81,19 +81,17 @@ def TestCompletePackage(existingConcepts):
 
 def TestSpacySimilarity(existingConcepts):
     from SpacySimilarity import SpacySimilarity
-    print("Result of semantic similarity: ")
     ss = SpacySimilarity(existingConcepts)
     while True:
-        print("Maximum similarity found to a word in the existing collection: %s" % ss.GetMaxSimilarity(GetInputWord()))
+        ss.GetMaxSimilarity(GetInputWord())
         if not TryAgain():
             break
 
 def TestWordNetSimilarity(existingConcepts):
     from WordNetSimilarity import WordNetSimilarity
-    print("Result of WordNet similarity: ")
     wns = WordNetSimilarity()
     while True:
-        print("Maximum similarity found to a word in the existing collection: %s" % wns.GetMaxSimilarity(GetInputWord(), existingConcepts))
+        wns.GetMaxSimilarity(GetInputWord(), existingConcepts)
         if not TryAgain():
             break
 

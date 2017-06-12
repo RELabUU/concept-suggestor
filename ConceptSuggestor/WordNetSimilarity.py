@@ -37,6 +37,7 @@ class WordNetSimilarity(object):
         wa = wn.synsets(word)
         
         maxSimilarity = 0
+        maxSimWord = "NONE" # DEBUG
         if wa:
             for wordB in collection:
                 wb = wn.synsets(wordB)
@@ -44,5 +45,7 @@ class WordNetSimilarity(object):
                     similarity = wa[0].wup_similarity(wb[0])
                     if similarity > maxSimilarity:
                         maxSimilarity = similarity
+                        maxSimWord = wordB # DEBUG
 
+        print("Maximum similarity %s found to word \"%s\"" % (maxSimilarity, maxSimWord)) # DEBUG
         return maxSimilarity
