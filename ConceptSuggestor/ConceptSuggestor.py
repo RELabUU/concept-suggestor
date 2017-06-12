@@ -123,7 +123,6 @@ def TestCompoundHandler():
 
     ch = CompoundHandler(TOTAL_THRESHOLD,
                          useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
-                         useThesaurus = USETHESAURUS, thesaurusWeight = THESAURUS_WEIGHT,
                          useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
                          totalWeight = TOTAL_WEIGHT, totalThreshold = TOTAL_THRESHOLD)
     while True:
