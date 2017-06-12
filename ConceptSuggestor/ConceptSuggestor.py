@@ -16,17 +16,11 @@ TOTAL_WEIGHT = WORDVECTOR_WEIGHT + WORDNET_WEIGHT
 collections = { "one": "concepts_example.json",
                 "two": "concepts_example2.json" }
 
-def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g"):
-        return True
-    else:
-        return False
-
 def GetProgramMode():
     print("These are your options:")
-    print("a - The complete parameterized package. Loads new concepts from external JSON file, removes synonyms, and writes that to an external JSON file.")
-    print("b - Check similarity using word vectors.")
-    print("c - Check similarity using WordNet.")
+    print("a - Example Functionality. Loads new concepts from external JSON file, removes synonyms, and writes that to an external JSON file.")
+    print("b - Compare similarity of a word to loaded concepts using SpaCy's word vectors.")
+    print("c - Compare similarity of a word to loaded concepts using WordNet's similarity function.")
     print("d - Open a JSON file.")
     print("e - Open the AIRM file.")
     print("f - Opens multiple collections and finds the ratio of occurence of a word.")
@@ -43,21 +37,14 @@ def GetProgramMode():
     return choice
 
 def Main():
-    from JsonParser import JsonParser
-    jp = JsonParser()
-    
-    # The concepts that are already in the model.
-    existingConcepts = jp.LoadFile(CONCEPTSFILE)
-    print("Concepts already in the model: %s" % existingConcepts)
-
     choice = GetProgramMode()
 
     if choice == "a":
-        TestCompletePackage(existingConcepts)
+        TestCompletePackage(LoadConcepts())
     elif choice == "b":
-        TestSpacySimilarity(existingConcepts)
+        TestSpacySimilarity(LoadConcepts())
     elif choice == "c":
-        TestWordNetSimilarity(existingConcepts)
+        TestWordNetSimilarity(LoadConcepts())
     elif choice == "d":
         TestJsonParser()
     elif choice == "e":
@@ -69,11 +56,12 @@ def Main():
     else:
         print("Invalid mode. Aborting.")
 
-def GetInputWord():
-    return input("Enter a concept to put into this test (i.e. Aeroplane): ")
+def LoadConcepts():
+    from JsonParser import JsonParser
 
-def TryAgain():
-    return input("Do you want to try again? (y/n) ") == "y"
+    jp = JsonParser()
+
+    return jp.LoadFile(CONCEPTSFILE)
 
 def TestCompletePackage(existingConcepts):
     from SynonymRemover import SynonymRemover
@@ -96,16 +84,7 @@ def TestSpacySimilarity(existingConcepts):
     print("Result of semantic similarity: ")
     ss = SpacySimilarity(existingConcepts)
     while True:
-        print(ss.HasSynonym(GetInputWord(), WORDVECTOR_THRESHOLD))
-        if not TryAgain():
-            break
-
-def TestThesaurusSynonyms(existingConcepts):
-    from ThesaurusSynonyms import ThesaurusSynonyms
-    print("Result of Thesaurus.com synonyms: ")
-    ds = ThesaurusSynonyms()
-    while True:
-        print(ds.HasSynonym(GetInputWord(), existingConcepts))
+        print("Maximum similarity found to a word in the existing collection: %s" % ss.GetMaxSimilarity(GetInputWord()))
         if not TryAgain():
             break
 
@@ -114,7 +93,7 @@ def TestWordNetSimilarity(existingConcepts):
     print("Result of WordNet similarity: ")
     wns = WordNetSimilarity()
     while True:
-        print(wns.GetMaxSimilarity(GetInputWord(), existingConcepts))
+        print("Maximum similarity found to a word in the existing collection: %s" % wns.GetMaxSimilarity(GetInputWord(), existingConcepts))
         if not TryAgain():
             break
 
@@ -139,7 +118,7 @@ def TestCollectionManager():
     cm = CollectionManager()
     cm.LoadCollections(collections)
     while True:
-        print(cm.FrequencyOfWord(GetInputWord()))
+        print("Relative frequency of occurrence: %s" % cm.FrequencyOfWord(GetInputWord()))
         if not TryAgain():
             break
 
@@ -158,5 +137,17 @@ def TestCompoundHandler():
         print(ch.GetSimilarity(compoundA, compoundB))
         if not TryAgain():
             break
+
+def IsValidChoice(choice):
+    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g"):
+        return True
+    else:
+        return False
+
+def GetInputWord():
+    return input("Enter a concept to put into this test (i.e. Aeroplane): ")
+
+def TryAgain():
+    return input("Do you want to try again? (y/n) ") == "y"
 
 Main()

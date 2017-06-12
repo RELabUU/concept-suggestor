@@ -7,6 +7,7 @@ class SpacySimilarity(object):
 
     def __init__(self, collection = []):
         # Convert the strings to objects that can be used by spaCy
+        print("Loading SpaCy's %s model..." % self.PACKAGE) # DEBUG
         self.nlp = spacy.load(self.PACKAGE)
 
         # If a collection is specified to load, load it so that loading is not redundantly done elsewhere.
@@ -70,5 +71,7 @@ class SpacySimilarity(object):
             similarity = self.GetSimilarity(word, groupword)
             if similarity > maxSimilarity:
                 maxSimilarity = similarity
+                maxSimWord = groupword # DEBUG
 
+        print("Maximum similarity %s found to word %s" % (maxSimilarity, maxSimWord.lower_)) # DEBUG
         return maxSimilarity

@@ -8,6 +8,7 @@ class JsonParser(object):
         with open(file) as data_file:
             data = json.load(data_file)
         
+        print("Concepts Loaded: %s" % data) # DEBUG
         return data
 
     # Loads a commit JSON file and returns a list of new concepts.
