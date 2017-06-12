@@ -9,9 +9,11 @@ class CollectionManager(object):
         from JsonParser import JsonParser
         jp = JsonParser()
 
+        i = 1 # DEBUG
         for collection in collections:
             self.collections[collection] = jp.LoadFile(collections[collection])
-            print(self.collections[collection])
+            print("Collection %s loaded: %s" % (i, self.collections[collection])) # DEBUG
+            i += 1 # DEBUG
 
     # Adds one or multiple words to an existing collection. Note: "collection" is the key to the dictionary, not an actual collection.
     def AddToCollection(self, collection, words):
@@ -31,7 +33,7 @@ class CollectionManager(object):
     def WordInCollection(self, collection, word):
         return word in self.collections[collection]
 
-    # Returns a number between 0 and 1 denoting in how many collections the word occurs.
+    # Returns a number between 0 and 1 denoting in how many collections the word occurs. Warning: Case-sensitive.
     def FrequencyOfWord(self, word):
         collectionCount = len(self.collections.keys())
         foundCount = 0
@@ -40,4 +42,6 @@ class CollectionManager(object):
             if word in self.collections[collection]:
                 foundCount += 1
 
-        return foundCount / collectionCount
+        result = foundCount / collectionCount
+        print("Frequency of occurrence of \"%s\": %s" % (word, result)) # DEBUG
+        return result

@@ -47,5 +47,5 @@ class WordNetSimilarity(object):
                         maxSimilarity = similarity
                         maxSimWord = wordB # DEBUG
 
-        print("Maximum similarity %s found to word \"%s\"" % (maxSimilarity, maxSimWord)) # DEBUG
+        print("WordNet: Maximum similarity %s found to word \"%s\"" % (maxSimilarity, maxSimWord)) # DEBUG
         return maxSimilarity

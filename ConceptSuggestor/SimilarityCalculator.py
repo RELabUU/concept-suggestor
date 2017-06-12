@@ -20,38 +20,34 @@ class SimilarityCalculator(object):
     def GetSimilarity(self, wordA, wordB):
         total = 0
 
+        spacySimilarity = 0
         if self.useWordVectors is True:
             spacySimilarity = self.ss.GetSimilarity(wordA, wordB)
-            spacySimilarity *= self.wordVectorWeight
-            total += spacySimilarity
-
+           
+        wordNetSimilarity = 0
         if self.useWordNet is True:
-            wordNet = self.wns.GetSimilarity(wordA, wordB)
-            wordNet *= self.wordNetWeight
-            total += wordNet
-
-        print("Total: %s + %s = %s out of %s" % (spacySimilarity, wordNet, total, self.totalWeight)) # DEBUG
-
-        total /= self.totalWeight
+            wordNetSimilarity = self.wns.GetSimilarity(wordA, wordB)
+            
+        total = ((self.wordVectorWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalWeight
+        print("Total: (%s * %s) + (%s * %s) = %s out of %s" % (self.wordVectorWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalWeight)) # DEBUG
 
         return total
 
-    # Returns the maximum similarity of a word to all words in the collection. Individual methods can use different words for maximum similarity. I.e. spacy finds A and C to have maximum similarity, and returns that value, and WordNet finds A and B to have maximum similarity, and returns that value. This means that the maximum similarity is not between two words, but between a word and various words in the collection.
+    # Returns the maximum similarity of a word to all words in the collection. 
+    # Individual methods can use different words for maximum similarity. I.e. spacy finds A and C to have maximum similarity, and returns that value, and WordNet finds A and B to have maximum similarity, and returns that value. 
+    # This means that the maximum similarity is not necessarily between just two words, but can also be between a word and multiple words in the collection.
     def GetMaxSimilarity(self, word, collection):
         total = 0
 
+        spacySimilarity = 0
         if self.useWordVectors is True:
             spacySimilarity = self.ss.GetMaxSimilarity(word, collection)
-            spacySimilarity *= self.wordVectorWeight
-            total += spacySimilarity
 
+        wordNetSimilarity = 0
         if self.useWordNet is True:
-            wordNet = self.wns.GetMaxSimilarity(word, collection)
-            wordNet *= self.wordNetWeight
-            total += wordNet
-
-        print("Total: %s + %s = %s out of %s" % (spacySimilarity, wordNet, total, self.totalWeight)) # DEBUG
-
-        total /= self.totalWeight
+            wordNetSimilarity = self.wns.GetMaxSimilarity(word, collection)
+            
+        total = ((self.wordVectorWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalWeight
+        print("Total: (%s * %s) + (%s * %s) = %s out of %s" % (self.wordVectorWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalWeight)) # DEBUG
 
         return total

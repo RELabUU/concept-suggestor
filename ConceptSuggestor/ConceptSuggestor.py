@@ -61,7 +61,7 @@ def LoadConcepts():
 
     jp = JsonParser()
 
-    return jp.LoadFile(CONCEPTSFILE)
+    return jp.LoadFile(CONCEPTSFILE, debug = True) # DEBUG - Not the entire line, only the "debug = True" part.
 
 def TestCompletePackage(existingConcepts):
     from SynonymRemover import SynonymRemover
@@ -97,26 +97,23 @@ def TestWordNetSimilarity(existingConcepts):
 
 def TestJsonParser():
     from JsonParser import JsonParser
-    print("Result of JsonParser: ")
     jp = JsonParser()
     data = jp.LoadCommit(COMMITFILE)
-    print(data)
     jp.MakeFile(data, OUTFILE)
+    print("Concepts written to %s." % OUTFILE)
 
 def TestXmlParser():
     from XmlParser import XmlParser
-    print("Result of XmlParser: ")
     xp = XmlParser()
     data = xp.LoadFile(AIRMFILE)
-    print(data)
+    print("Concepts loaded: %s" % data)
 
 def TestCollectionManager():
     from CollectionManager import CollectionManager
-    print("Result of CollectionManager: ")
     cm = CollectionManager()
     cm.LoadCollections(collections)
     while True:
-        print("Relative frequency of occurrence: %s" % cm.FrequencyOfWord(GetInputWord()))
+        cm.FrequencyOfWord(GetInputWord())
         if not TryAgain():
             break
 

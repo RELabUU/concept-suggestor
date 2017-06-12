@@ -74,5 +74,5 @@ class SpacySimilarity(object):
                 maxSimilarity = similarity
                 maxSimWord = groupword.lower_ # DEBUG
 
-        print("Maximum similarity %s found to word \"%s\"" % (maxSimilarity, maxSimWord)) # DEBUG
+        print("SpaCy: Maximum similarity %s found to word \"%s\"" % (maxSimilarity, maxSimWord)) # DEBUG
         return maxSimilarity

@@ -14,6 +14,7 @@ class SynonymRemover(object):
     def RemoveSynonyms(self, oldCollection, newCollection):
         noSynonyms = []
         for newItem in newCollection:
+            print("Comparing %s to collection:" % newItem) # DEBUG
             if(not self.IsSynonym(newItem, oldCollection)):
                 noSynonyms.append(newItem)
 
