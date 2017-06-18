@@ -32,6 +32,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ConceptSuggestor.py" />
+    <Compile Include="Settings.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SimilarityCalculator.py">
       <SubType>Code</SubType>
     </Compile>

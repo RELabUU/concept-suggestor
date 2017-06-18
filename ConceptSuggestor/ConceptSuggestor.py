@@ -1,3 +1,6 @@
+from Settings import Settings
+s = Settings()
+
 COMMITFILE = "commit_example2.json" # Example commit to load
 CONCEPTSFILE = "concepts_example.json" # Example concepts already in the model
 OUTFILE = "suggestions_example.json" # Example file to send after request
@@ -128,6 +131,8 @@ def TestCompoundHandler():
     while True:
         compoundA = input("Enter the first possibly compound term: ")
         compoundB = input("Enter the second possibly compound term: ")
+        if s.Setting("reload") is True:
+            s.LoadSettings()
         print(ch.GetSimilarity(compoundA, compoundB))
         if not TryAgain():
             break
@@ -139,7 +144,10 @@ def IsValidChoice(choice):
         return False
 
 def GetInputWord():
-    return input("Enter a concept to put into this test (i.e. Aeroplane): ")
+    input = input("Enter a concept to put into this test (i.e. Aeroplane): ")
+    if s.Setting("reload") is True:
+        s.LoadSettings()
+    return input
 
 def TryAgain():
     return input("Do you want to try again? (y/n) ") == "y"

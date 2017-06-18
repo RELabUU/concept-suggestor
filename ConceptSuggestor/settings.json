@@ -1,0 +1,15 @@
+{
+	"_comment": "Reload the settings every time new input is given to the program.",
+	"reload": true,
+	
+	"_comment": "Used for comparing compound terms to single-word terms",
+	"_comment": "Alpha + beta = 1",
+	"alpha": 0.67,
+	"beta": 0.33,
+	
+	"_comment": "Used for comparing compound terms to compound terms",
+	"_comment": "Gamma + delta + 2(epsilon) = 1",
+	"gamma": 0.2,
+	"delta": 0.6,
+	"epsilon": 0.1
+}
