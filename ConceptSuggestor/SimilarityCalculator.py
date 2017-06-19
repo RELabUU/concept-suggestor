@@ -29,7 +29,7 @@ class SimilarityCalculator(object):
             wordNetSimilarity = self.wns.GetSimilarity(wordA, wordB)
             
         total = ((self.wordVectorWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalWeight
-        # print("Total: (%s * %s) + (%s * %s) = %s out of %s" % (self.wordVectorWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalWeight)) # DEBUG
+        # print("Total: (%f * %f) + (%f * %f) = %f out of %f" % (self.wordVectorWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalWeight)) # DEBUG
 
         return total
 
