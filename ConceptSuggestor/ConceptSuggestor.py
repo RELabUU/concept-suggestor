@@ -177,10 +177,10 @@ def IsValidChoice(choice):
         return False
 
 def GetInputWord():
-    input = input("Enter a concept to put into this test (i.e. Aeroplane): ")
+    concept = input("Enter a concept to put into this test (i.e. Aeroplane): ")
     if s.Setting("reload") is True:
         s.LoadSettings()
-    return input
+    return concept
 
 def TryAgain():
     return input("Do you want to try again? (y/n) ") == "y"
