@@ -9,7 +9,7 @@
 	
 	"_comment": "Used for comparing compound terms to compound terms",
 	"_comment": "Gamma + delta + 2(epsilon) = 1",
-	"gamma": 0.5,
-	"delta": 0.3,
-	"epsilon": 0.1
+	"gamma": 0.4,
+	"delta": 0.1,
+	"epsilon": 0.25
 }
