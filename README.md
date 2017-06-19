@@ -11,3 +11,11 @@ Takes concepts from models and suggests relevant and interesting ones to modeler
 6. Launch or open the project.
     - Run the `ConceptSuggestor\ConceptSuggestor.py` file to launch the program.
     - Open `ConceptSuggestor.sln` in Visual Studio to open the solution.
+
+## Usage
+Concept Suggestor has several options available for use.
+When the program is opened, it shows a list of available options.
+
+A variety of settings is contained in `settings.json`. 
+If the `reload` value is set to `true`, you can change the settings in between operations.
+The settings will be reloaded after the asks whether you want to try again.
