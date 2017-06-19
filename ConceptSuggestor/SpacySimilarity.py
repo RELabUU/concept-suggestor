@@ -54,7 +54,7 @@ class SpacySimilarity(object):
         conceptB = self.StringToVector(conceptB)
 
         result = conceptA.similarity(conceptB)
-        print("SpaCy: Similarity between \"%s\" and \"%s\": %s" % (conceptA.lower_, conceptB.lower_, result)) # DEBUG
+        #print("SpaCy: Similarity between \"%s\" and \"%s\": %s" % (conceptA.lower_, conceptB.lower_, result)) # DEBUG
         return result
 
     # Gets the maximum similarity of word to all words in the "concepts" collection.

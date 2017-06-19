@@ -31,7 +31,7 @@ class WordNetSimilarity(object):
         if wa and wb:
             similarity = wa[0].wup_similarity(wb[0])
 
-        print("WordNet: Similarity between \"%s\" and \"%s\": %s" % (wordA, wordB, similarity)) # DEBUG
+        #print("WordNet: Similarity between \"%s\" and \"%s\": %s" % (wordA, wordB, similarity)) # DEBUG
         return similarity
 
     def GetMaxSimilarity(self, word, collection):

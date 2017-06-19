@@ -160,7 +160,7 @@ def TestExternalCompounds():
         for value in data:
             result = ch.GetSimilarity(value["one"], value["two"])
             results.append(abs(value["sim"] - result))
-            print("Similarity expected: %s\nSimilarity found: %s" % (value["sim"], result))
+            print("Similarity expected: %s\nSimilarity found: %s\n\n" % (value["sim"], result))
 
         print("Average distance: %s - Standard deviation: %s" % (numpy.mean(results), numpy.std(results)))
 
