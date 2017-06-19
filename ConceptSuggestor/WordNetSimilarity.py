@@ -24,8 +24,14 @@ class WordNetSimilarity(object):
     """
 
     def GetSimilarity(self, wordA, wordB):
+        if wordA == wordB: # wup_similarity is coded in such a way that identical words don't necessarily return a similarity of 1, so we manually force that here.
+            return 1
+
         wa = wn.synsets(wordA)
         wb = wn.synsets(wordB)
+
+        if wordA == "Passenger" and wordB == "Passenger":
+            print("%s\n%s" % (wa, wb))
 
         similarity = 0
         if wa and wb:
@@ -41,6 +47,10 @@ class WordNetSimilarity(object):
         maxSimWord = "NONE" # DEBUG
         if wa:
             for wordB in collection:
+                if word == wordB: # wup_similarity is coded in such a way that identical words don't necessarily return a similarity of 1, so we manually force that here.
+                    maxSimilarity = 1
+                    maxSimWord = wordB
+                    break
                 wb = wn.synsets(wordB)
                 if wb:
                     similarity = wa[0].wup_similarity(wb[0])
