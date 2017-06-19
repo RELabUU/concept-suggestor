@@ -3,25 +3,17 @@ from nltk.corpus import wordnet as wn
 class WordNetSimilarity(object):
     """Uses WordNet to determine whether words are synonyms"""
 
-    # These two methods use incorrect ways of determining synonyms. Better: calculate similarity, and use a threshold.
-    """
-    # Checks if the collection has a synonym of the word
-    def HasSynonym(self, word, collection):
-        for cword in collection:
-            print("Comparing %s and %s" % (cword, word))
-            if self.IsSynonym(cword, word):
-               return True
-        return False
-
-    def IsSynonym(self, wordA, wordB):
-        synonyms = []
-        for syn in wn.synsets(wordA):
-            for l in syn.lemmas():
-                synonyms.append(l.name())
-        print("Synonyms of %s: %s" % (wordA, synonyms))
-        result = wordB.lower() in synonyms
-        return result
-    """
+    def __init__(self, measure = "wup", corpus = "brown"):
+        self.similarityMeasure = measure
+        
+        if self.similarityMeasure == "res" or self.similarityMeasure == "jcn" or self.similarityMeasure == "lin":
+            print("Loading \"%s\" Information Content corpus..." % corpus)
+            from nltk.corpus import wordnet_ic as wnic 
+            # Loads Information Content used for similarity measuring.
+            if corpus == "semcor":
+                self.ic = wnic.ic("ic-semcor.dat") 
+            elif corpus == "brown":
+                self.ic = wnic.ic("ic-brown.dat")
 
     def GetSimilarity(self, wordA, wordB):
         if wordA == wordB: # wup_similarity is coded in such a way that identical words don't necessarily return a similarity of 1, so we manually force that here.
@@ -30,12 +22,9 @@ class WordNetSimilarity(object):
         wa = wn.synsets(wordA)
         wb = wn.synsets(wordB)
 
-        if wordA == "Passenger" and wordB == "Passenger":
-            print("%s\n%s" % (wa, wb))
-
         similarity = 0
         if wa and wb:
-            similarity = wa[0].wup_similarity(wb[0])
+            similarity = self.PerformSimilarityMeasure(wa[0], wb[0], self.similarityMeasure)
 
         #print("WordNet: Similarity between \"%s\" and \"%s\": %s" % (wordA, wordB, similarity)) # DEBUG
         return similarity
@@ -47,16 +36,37 @@ class WordNetSimilarity(object):
         maxSimWord = "NONE" # DEBUG
         if wa:
             for wordB in collection:
-                if word == wordB: # wup_similarity is coded in such a way that identical words don't necessarily return a similarity of 1, so we manually force that here.
-                    maxSimilarity = 1
-                    maxSimWord = wordB
-                    break
+                #if word == wordB: # wup_similarity is coded in such a way that identical words don't necessarily return a similarity of 1, so we manually force that here.
+                    #maxSimilarity = 1
+                    #maxSimWord = wordB
+                    #break
                 wb = wn.synsets(wordB)
                 if wb:
-                    similarity = wa[0].wup_similarity(wb[0])
+                    similarity = self.PerformSimilarityMeasure(wa[0], wb[0], self.similarityMeasure)
                     if similarity > maxSimilarity:
                         maxSimilarity = similarity
                         maxSimWord = wordB # DEBUG
 
-        print("WordNet: Maximum similarity %s found to word \"%s\"" % (maxSimilarity, maxSimWord)) # DEBUG
+        print("WordNet: Maximum similarity %f found to word \"%s\"" % (maxSimilarity, maxSimWord)) # DEBUG
         return maxSimilarity
+
+    def PerformSimilarityMeasure(self, synsetA, synsetB, measure):
+        similarity = 0
+
+        # Path-based measures
+        if measure == "path": # shortest path is-a (hypernym/hyponym) taxonomy
+            similarity = synsetA.path_similarity(synsetB)
+        elif measure == "lch": # Leacock-Chodorow
+            similarity = synsetA.lch_similarity(synsetB)
+        elif measure == "wup": # Wu-Palmer
+            similarity = synsetA.wup_similarity(synsetB)
+
+        # IC-based measures
+        elif measure == "res": # Resnik
+            similarity = synsetA.res_similarity(synsetB, self.ic)
+        elif measure == "jcn": # Jiang-Conrath
+            similarity = synsetA.jcn_similarity(synsetB, self.ic)
+        elif measure == "lin": # Lin
+            similarity = synsetA.lin_similarity(synsetB, self.ic)
+
+        return similarity
