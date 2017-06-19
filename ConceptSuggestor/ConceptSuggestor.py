@@ -138,6 +138,8 @@ def TestCompoundHandler():
             break
 
 def TestExternalCompounds():
+    import numpy
+
     from CompoundHandler import CompoundHandler
     ch = CompoundHandler(useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
                          useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
@@ -147,12 +149,23 @@ def TestExternalCompounds():
     jp = JsonParser()
     data = jp.LoadFile(COMPOUNDSFILE, debug = True)
 
+    
+
     while True:
         if s.Setting("reload") is True:
            s.LoadSettings()
 
+        results = []
+
         for value in data:
-            print("Similarity expected: %s\nSimilarity found: %s\n\n" % (value["sim"], ch.GetSimilarity(value["one"], value["two"])))
+            result = ch.GetSimilarity(value["one"], value["two"])
+            results.append(abs(value["sim"] - result))
+            print("Similarity expected: %s\nSimilarity found: %s" % (value["sim"], result))
+
+        print("Average distance: %s - Standard deviation: %s" % (numpy.mean(results), numpy.std(results)))
+
+        print("==============================")
+        print()
 
         if not TryAgain():
             break
