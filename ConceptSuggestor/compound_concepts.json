@@ -23,5 +23,30 @@
 		"one": "Pilot Training",
 		"two": "Cockpit Pressure",
 		"sim": 0.2
+	},
+	{
+		"one": "Police Officer",
+		"two": "Security Officer",
+		"sim": 0.6
+	},
+	{
+		"one": "Computer Terminal",
+		"two": "Flight Terminal",
+		"sim": 0.2
+	},
+	{
+		"one": "Flight Attendant",
+		"two": "Cabin Attentant",
+		"sim": 0.8
+	},
+	{
+		"one": "Passenger Airline",
+		"two": "Passenger Aircraft",
+		"sim": 0.6
+	},
+	{
+		"one": "Control Tower",
+		"two": "Ground Control",
+		"sim": 0.6
 	}
 ]
