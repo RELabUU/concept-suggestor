@@ -1,10 +1,9 @@
 class SynonymRemover(object):
     """Removes synonyms using a variety of methods"""
 
-    def __init__(self, concepts, threshold, useWordVectors = False, wordVectorWeight = 0, useWordNet = False, wordNetWeight = 0, totalWeight = 0, totalThreshold = 0):
+    def __init__(self, concepts, useWordVectors = False, wordVectorWeight = 0, useWordNet = False, wordNetWeight = 0, totalWeight = 0, totalThreshold = 0):
         from SimilarityCalculator import SimilarityCalculator
-        self.sc = SimilarityCalculator(threshold,
-                                       useWordVectors = useWordVectors, wordVectorWeight = wordVectorWeight,
+        self.sc = SimilarityCalculator(useWordVectors = useWordVectors, wordVectorWeight = wordVectorWeight,
                                        useWordNet = useWordNet, wordNetWeight = wordNetWeight,
                                        totalWeight = totalWeight)
 

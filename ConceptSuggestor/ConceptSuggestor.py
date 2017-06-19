@@ -5,9 +5,7 @@ COMMITFILE = "commit_example2.json" # Example commit to load
 CONCEPTSFILE = "concepts_example.json" # Example concepts already in the model
 OUTFILE = "suggestions_example.json" # Example file to send after request
 AIRMFILE = "AIRM/EA4A02.informationmodel.xml" # AIRM information model
-
-WORDVECTOR_THRESHOLD = 0.9
-TOTAL_THRESHOLD = 0.8
+COMPOUNDSFILE = "compound_concepts.json" # File containing compound words and their human-estimated similarity.
 
 USEWORDVECTORS = True
 USEWORDNET = True
@@ -28,6 +26,7 @@ def GetProgramMode():
     print("e - Open the AIRM file.")
     print("f - Opens multiple collections and finds the ratio of occurence of a word.")
     print("g - Compares two possibly compound terms and returns the similarity between them.")
+    print("h - Tests compound terms found in compound_concepts.json for similarity.")
 
     # Get the program mode from the user and ensure it's valid.
     choice = input("Please tell me what to do (type a letter): ").lower()
@@ -56,6 +55,8 @@ def Main():
         TestCollectionManager()
     elif choice == "g":
         TestCompoundHandler()
+    elif choice == "h":
+        TestExternalCompounds()
     else:
         print("Invalid mode. Aborting.")
 
@@ -68,7 +69,7 @@ def LoadConcepts():
 
 def TestCompletePackage(existingConcepts):
     from SynonymRemover import SynonymRemover
-    sr = SynonymRemover(existingConcepts, TOTAL_THRESHOLD, 
+    sr = SynonymRemover(existingConcepts, 
                         useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
                         useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
                         totalWeight = TOTAL_WEIGHT, totalThreshold = TOTAL_THRESHOLD)
@@ -124,10 +125,9 @@ def TestCompoundHandler():
     from CompoundHandler import CompoundHandler
     print("Result of CompoundHandler: ")
 
-    ch = CompoundHandler(TOTAL_THRESHOLD,
-                         useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
+    ch = CompoundHandler(useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
                          useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
-                         totalWeight = TOTAL_WEIGHT, totalThreshold = TOTAL_THRESHOLD)
+                         totalWeight = TOTAL_WEIGHT)
     while True:
         compoundA = input("Enter the first possibly compound term: ")
         compoundB = input("Enter the second possibly compound term: ")
@@ -137,8 +137,28 @@ def TestCompoundHandler():
         if not TryAgain():
             break
 
+def TestExternalCompounds():
+    from CompoundHandler import CompoundHandler
+    ch = CompoundHandler(useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
+                         useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
+                         totalWeight = TOTAL_WEIGHT)
+
+    from JsonParser import JsonParser
+    jp = JsonParser()
+    data = jp.LoadFile(COMPOUNDSFILE, debug = True)
+
+    while True:
+        if s.Setting("reload") is True:
+           s.LoadSettings()
+
+        for value in data:
+            print("Similarity expected: %s\nSimilarity found: %s\n\n" % (value["sim"], ch.GetSimilarity(value["one"], value["two"])))
+
+        if not TryAgain():
+            break
+
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g"):
+    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g" or choice=="h"):
         return True
     else:
         return False

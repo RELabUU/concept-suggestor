@@ -1,0 +1,27 @@
+[
+	{
+		"one": "Flight Altitude",
+		"two": "Flight Level",
+		"sim": 0.8
+	},
+	{
+		"one": "Emergency Flight",
+		"two": "Emergency Plan",
+		"sim": 0.4
+	},
+	{
+		"one": "Flight Level",
+		"two": "Emergency Altitude",
+		"sim": 0.4
+	},
+	{
+		"one": "Flight Course",
+		"two": "Flight Level",
+		"sim": 0.2
+	},
+	{
+		"one": "Pilot Training",
+		"two": "Cockpit Pressure",
+		"sim": 0.0
+	}
+]
