@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage[backend=biber]{biblatex}
+\usepackage{amsmath}
 
 % -- Title stuff --
 \title{Concept Suggestor}
@@ -33,7 +34,7 @@ Recommender systems are software tools and techniques providing suggestions for 
 
 WordNet is an electronic lexical database.\cite{kilgarriff2000wordnet}
 SpaCy is one of the fastest and most accurate publicly available Natural Language Processing (NLP) toolkits available.\cite{choi2015depends}
-SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words. Training is performed on aggregated global word-word co-occurrence statistics from a corpus.\cite{pennington2014glove} Although GloVe measures co-occurrence and not semantic similarity or relatedness, its results can be used as a rough estimate of semantic similarity or relatedness.\cite{levy2015improving} SpaCy's default word vector library is trained on Wikipedia. Wikipedia has proven to be a valuable source for computing semantic relatedness measures.\cite{strube2006wikirelate}
+SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words. Training is performed on aggregated global word-word co-occurrence statistics from a corpus.\cite{pennington2014glove} Although GloVe measures co-occurrence and not semantic similarity or relatedness, its results can be used as a rough estimate of semantic similarity or relatedness.\cite{levy2015improving} SpaCy's default word vector library is trained on the Common Crawl corpus. The Common Crawl corpus contains over 2.96 billion web pages and over 250 TiB of uncompressed content as of June 2017.\cite{nagel2017commoncrawl} % Wikipedia has proven to be a valuable source for computing semantic relatedness measures.\cite{strube2006wikirelate} % TODO: Determine whether the last sentence is still relevant, and/or replace with "Common Crawl is good corpus".
 
 Most methods of computing semantic relatedness measures such as word vectors rely on training an algorithm on a dataset. Public datasets, such as Google, Wikipedia, or WordNet are often used, although private datasets can also be used to improve context-sensitivity. Wikipedia and WordNet have proven to perform well in a variety of situations.\cite{strube2006wikirelate}
 
@@ -41,28 +42,64 @@ Most methods of computing semantic relatedness measures such as word vectors rel
 
 The Concept Suggestor uses several steps to decide which concepts get suggested to the user.
 
-The first step is eliminating synonyms. A possible method of eliminating synonyms is comparing the similarity of words. The Concept Suggestor combines two algorithms for this: SpaCy's similarity function and WordNet's similarity function. The mean of these two algorithms is computed to determine overall word similarity.
+\subsection{Semantic Similarity of two Words}
 
-\subsection{SpaCy}
-SpaCy's word vectors are calculated by using the GloVe algorithm on Wikipedia. The similarity function of SpaCy computes the cosine of two word vectors. This results in a number between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other.
+The first step is to determine semantic similarity of concepts. The Concept Suggestor combines two algorithms for this: SpaCy's similarity function and WordNet's similarity function. The mean of these two algorithms is computed to determine overall word similarity. The following formula represents the similarity calculations:
+\begin{equation} \label{eq:totalsimilarity}
+	\frac{spacySim(wordA, wordB) + wordnetSim(wordA, wordB)} {2}
+\end{equation}
 
-\subsection{PyDictionary}
-PyDictionary requests synonyms from the thesaurus.com website. The method looks whether two words can be found in each other's list of synonyms and returns a value of one if they can, and a value of zero if they can't. Some combinations of words, such as "airplane" and "aeroplane" are not found in each other's list of synonyms, but have identical lists of synonyms. Because of this, our method has been adapted to also look whether two words have identical lists of synonyms. If this is the case, the method also returns a value of one.
+\subsubsection{SpaCy}
+SpaCy's word vectors are calculated by using the GloVe algorithm on the Common Crawl corpus. The similarity function of SpaCy computes the cosine of two word vectors. This results in a number between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other.
 
-\subsection{WordNet}
+\subsubsection{WordNet}
 WordNet is a public electronic lexical database that began in the mid-1980s in the Princeton University Department of Psychology and has been regularly updated and improved since then. The similarity function of WordNet returns a score between zero and one denoting how similar two words are, based on the shortest path that connects the senses in the is-a (hypernym/hyponym) taxonomy. % TODO: make the last sentence not plagiarism. Source: http://www.nltk.org/howto/wordnet.html 
 
-WordNet offers several methods to measure similarity.
+WordNet offers six methods to measure similarity.\cite{pedersen2004wordnet}
 \begin{itemize}
-	\item path\_similarity
-	\item lch\_similarity
-	\item wup\_similarity
-	\item res\_similarity
-	\item jcn\_similarity
-	\item lin\_similarity
+	\item Path Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses in the is-a (hypernym/hyponym) taxonomy. The score is in the range 0 to 1. % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
+	\item Leacock-Chodorow Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses (as above) and the maximum depth of the taxonomy in which the senses occur. The relationship is given as \(-log(p/2d)\) where p is the shortest path length and d the taxonomy depth. % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
+	\item Wu-Palmer Similarity: Returns a score denoting how similar two word senses are, based on the depth of the two senses in the taxonomy and that of their Least Common Subsumer (most specific ancestor node). % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
+	\item Resnik Similarity: Returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node). % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
+	\item Jiang-Conrath Similarity: Returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node) and that of the two input synsets. The relationship is given by the following equation:
+\begin{equation} \label{eq:jcnsimilarity}
+	\frac{1} {IC(s1) + IC(s1) - 2 * IC(lcs)}
+\end{equation}
+% TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
+	\item Lin Similarity: Returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node) and that of the two input Synsets. The relationship is given by the follwing equation:
+\begin{equation} \label{eq:linsimilarity}
+	\frac{2 * IC(lcs)} {IC(s1) + IC(s2)} 
+\end{equation} 
+% TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
 \end{itemize}
 
 From these methods, the Wu-Palmer method is a good balance between performance and accuracy.\cite{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}
+
+\subsection{Semantic Similarity of Two-Word Compounds}
+
+To compute the overall semantic similarity of two-word compounds, the semantic similarity of each possible word-pair constructed with one word from each compound is calculated as above, and the weighted average of all these semantic similarities is computed.
+
+\subsubsection{Comparing a Single Word to a Two-Word Compound}
+
+When comparing a single word to a two-word compound, there are two possible word-pairs that can be constructed using one word from each compound. In example, when comparing the word "Altitude" to "Flight Level", the two word-pairs which can be constructed are "Altitude-Flight" and "Altitude-Level".
+The formula used for computing the total similarity is 
+\begin{equation} \label{eq:1wordto2word}
+	\alpha * sim(ca, cb[1]) + \beta * sim(ca, cb[0])
+\end{equation}
+where $ \alpha $ and $ \beta $ are the weights, $ ca $ indicates the single word, and $ cb $ is an array representing the two-word compound, where $ cb[0] $ is the first word of the two-word compound and $ cb[1] $ is the second word, and $ sim(X,Y) $ computes the semantic similarity of $ X $ and $ Y $.
+
+We have found that weights of $ \alpha = 0.67 $ and $ \beta = 0.33 $ deliver acceptable accuracy. % TODO: actually test this one.
+
+\subsubsection{Comparing a Two-Word Compound to a Two-Word Compound}
+
+When comparing a two-word compound to a two-word compound, there are four possible word-pairs that can be constructed using one word from each compound. In example, when comparing the compound "Flight Level" to "Emergency Altitude", the four word-pairs which can be constructed are "Flight-Emergency", "Flight-Altitude", "Level-Emergency" and "Level-Altitude".
+The formula used for computing the total similarity is 
+\begin{equation} \label{eq:2wordto2word}
+	\alpha * sim(ca[1], cb[1]) + \beta * sim(ca[0], cb[0]) + \gamma * sim(ca[0], cb[1]) + \gamma * sim(ca[1], cb[0])
+\end{equation}
+where $ \alpha $, $ \beta $, and $ \gamma $ are the weights, $ ca $ and $ cb $ are arrays representing the two-word compounds, where $ ca[0] $ and $ cb[0] $ are the first words of the two-word compounds and $ c1[1] $ and $ cb[1] $ are the second words, and $ sim(X,Y) $ computes the semantic similarity of $ X $ and $ Y $. 
+
+We have found that weights of $ \alpha = 0.4 $, $ \beta = 0.1 $, and $ \gamma = 0.25 $ deliver acceptable accuracy.
 
 \section{Evaluation Methodology}
 

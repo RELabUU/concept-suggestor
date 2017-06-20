@@ -11,5 +11,7 @@
 	"_comment": "Gamma + delta + 2(epsilon) = 1",
 	"gamma": 0.4,
 	"delta": 0.1,
-	"epsilon": 0.25
+	"epsilon": 0.25,
+	
+	"_comment": "In the thesis, gamma = Alpha, delta = Beta and epsilon = Gamma."
 }
