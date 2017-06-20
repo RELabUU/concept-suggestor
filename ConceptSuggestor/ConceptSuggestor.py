@@ -14,6 +14,8 @@ WORDVECTOR_WEIGHT = 0.5
 WORDNET_WEIGHT = 0.5
 TOTAL_WEIGHT = WORDVECTOR_WEIGHT + WORDNET_WEIGHT
 
+TOTAL_THRESHOLD = 0.8
+
 collections = { "one": "concepts_example.json",
                 "two": "concepts_example2.json" }
 
