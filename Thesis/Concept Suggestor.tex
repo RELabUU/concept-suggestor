@@ -41,7 +41,7 @@ Most methods of computing semantic relatedness measures such as word vectors rel
 
 The Concept Suggestor uses several steps to decide which concepts get suggested to the user.
 
-The first step is eliminating synonyms. The Concept Suggestor has three methods which it combines to eliminate synonyms from the suggestions: SpaCy's similarity function, PyDictionary's synonym function, and WordNet's similarity function. These are combined into a weighted total, which must pass a threshold in order for the concept to be seen as a synonym.
+The first step is eliminating synonyms. A possible method of eliminating synonyms is comparing the similarity of words. The Concept Suggestor combines two algorithms for this: SpaCy's similarity function and WordNet's similarity function. The mean of these two algorithms is computed to determine overall word similarity.
 
 \subsection{SpaCy}
 SpaCy's word vectors are calculated by using the GloVe algorithm on Wikipedia. The similarity function of SpaCy computes the cosine of two word vectors. This results in a number between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other.
@@ -51,6 +51,18 @@ PyDictionary requests synonyms from the thesaurus.com website. The method looks 
 
 \subsection{WordNet}
 WordNet is a public electronic lexical database that began in the mid-1980s in the Princeton University Department of Psychology and has been regularly updated and improved since then. The similarity function of WordNet returns a score between zero and one denoting how similar two words are, based on the shortest path that connects the senses in the is-a (hypernym/hyponym) taxonomy. % TODO: make the last sentence not plagiarism. Source: http://www.nltk.org/howto/wordnet.html 
+
+WordNet offers several methods to measure similarity.
+\begin{itemize}
+	\item path\_similarity
+	\item lch\_similarity
+	\item wup\_similarity
+	\item res\_similarity
+	\item jcn\_similarity
+	\item lin\_similarity
+\end{itemize}
+
+From these methods, the Wu-Palmer method is a good balance between performance and accuracy.\cite{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}
 
 \section{Evaluation Methodology}
 
@@ -69,9 +81,9 @@ The techniques for measuring semantic similarity and relatedness can be roughly 
 
 % Below is subject matter that I want to have handled in this section.
 \begin{itemize}
-\item How to measure similarity in concepts used in the various domain-specific models?
-\item How to determine which are relevant concepts from other models that should be suggested to a modeler in order to improve the alignment between the models?
-\item How to determine which are relevant concepts from elsewhere that might improve alignment between the models?
+	\item How to measure similarity in concepts used in the various domain-specific models?
+	\item How to determine which are relevant concepts from other models that should be suggested to a modeler in order to improve the alignment between the models?
+	\item How to determine which are relevant concepts from elsewhere that might improve alignment between the models?
 \end{itemize}
 
 \section{Experiments}
