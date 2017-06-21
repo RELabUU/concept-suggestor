@@ -3,7 +3,7 @@ from nltk.corpus import wordnet as wn
 class WordNetSimilarity(object):
     """Uses WordNet to determine whether words are synonyms"""
 
-    def __init__(self, measure = "wup", corpus = "brown"):
+    def __init__(self, measure, corpus = "brown"):
         self.similarityMeasure = measure
         
         if self.similarityMeasure == "res" or self.similarityMeasure == "jcn" or self.similarityMeasure == "lin":

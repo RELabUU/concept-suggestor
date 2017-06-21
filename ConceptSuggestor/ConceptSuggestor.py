@@ -63,7 +63,7 @@ def LoadConcepts():
 
 def TestCompletePackage(existingConcepts):
     from SynonymRemover import SynonymRemover
-    sr = SynonymRemover(existingConcepts, 
+    sr = SynonymRemover(existingConcepts, s.WordNetSimilarityMethod,
                         useWordVectors = s.UseSpacy(), spacyWeight = s.SpaCyWeight(),
                         useWordNet = s.UseWordNet(), wordNetWeight = s.WordNetWeight(),
                         totalWeight = s.TotalSimilarityWeight(), similarityThreshold = s.SimilarityThreshold())
@@ -89,7 +89,7 @@ def TestSpacySimilarity(existingConcepts):
 
 def TestWordNetSimilarity(existingConcepts):
     from WordNetSimilarity import WordNetSimilarity
-    wns = WordNetSimilarity()
+    wns = WordNetSimilarity(s.WordNetSimilarityMethod())
     while True:
         word = GetInputWord()
         if word != "n":
@@ -125,7 +125,8 @@ def TestCompoundHandler():
     from CompoundHandler import CompoundHandler
     print("Result of CompoundHandler: ")
 
-    ch = CompoundHandler(useWordVectors = s.UseSpacy(), spacyWeight = s.SpaCyWeight(),
+    ch = CompoundHandler(s.WordNetSimilarityMethod(),
+                         useWordVectors = s.UseSpacy(), spacyWeight = s.SpaCyWeight(),
                          useWordNet = s.UseWordNet(), wordNetWeight = s.WordNetWeight(),
                          totalWeight = s.TotalSimilarityWeight())
     while True:
@@ -142,7 +143,8 @@ def TestExternalCompounds():
     import numpy
 
     from CompoundHandler import CompoundHandler
-    ch = CompoundHandler(useWordVectors = s.UseSpacy(), spacyWeight = s.SpaCyWeight(),
+    ch = CompoundHandler(s.WordNetSimilarityMethod(),
+                         useWordVectors = s.UseSpacy(), spacyWeight = s.SpaCyWeight(),
                          useWordNet = s.UseWordNet(), wordNetWeight = s.WordNetWeight(),
                          totalWeight = s.TotalSimilarityWeight())
 

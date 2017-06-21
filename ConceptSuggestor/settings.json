@@ -2,6 +2,9 @@
 	"_comment": "Reload the settings every time new input is given to the program.",
 	"reload": true,
 	
+	"_comment": "This is the method that will be uses to compute similarity using WordNet:",
+	"wordnetSimilarityMethod": "wup",
+	
 	"_comment": "These are the weights that are given to SpaCy's similarity() and WordNet's similarity().",
 	"spacyWeight": 0.5,
 	"wordnetWeight": 0.5,

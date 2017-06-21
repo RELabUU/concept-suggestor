@@ -1,9 +1,10 @@
 class CompoundHandler(object):
     """Handles compound terms."""
 
-    def __init__(self, useWordVectors = False, spacyWeight = 0, useWordNet = False, wordNetWeight = 0, totalWeight = 0):
+    def __init__(self, wordnetSimilarityMethod, useWordVectors = False, spacyWeight = 0, useWordNet = False, wordNetWeight = 0, totalWeight = 0):
         from SimilarityCalculator import SimilarityCalculator
-        self.sc = SimilarityCalculator(useWordVectors = useWordVectors, spacyWeight = spacyWeight, 
+        self.sc = SimilarityCalculator(wordnetSimilarityMethod, 
+                                       useWordVectors = useWordVectors, spacyWeight = spacyWeight, 
                                        useWordNet = useWordNet, wordNetWeight = wordNetWeight, 
                                        totalWeight = totalWeight)
         

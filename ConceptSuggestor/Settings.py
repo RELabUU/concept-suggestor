@@ -36,6 +36,8 @@ class Settings(object):
     # Methods to directly get all the various settings instead of having to manually input the names.
     def Reload(self):
         return self._Setting("reload")
+    def WordNetSimilarityMethod(self):
+        return self._Setting("wordnetSimilarityMethod")
     def SpaCyWeight(self):
         return self._Setting("spacyWeight")
     def WordNetWeight(self):
