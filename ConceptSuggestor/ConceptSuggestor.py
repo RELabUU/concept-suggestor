@@ -13,7 +13,7 @@ collections = { "one": "concepts_example.json",
 def GetProgramMode():
     print("These are your options:")
     print("a - Example Functionality. Loads new concepts from external JSON file, removes synonyms, and writes that to an external JSON file.")
-    print("b - Compare similarity of a word to loaded concepts using SpaCy's word vectors.")
+    print("b - Compare similarity of two words using SpaCy's word vectors.")
     print("c - Compare similarity of a word to loaded concepts using WordNet's similarity function.")
     print("d - Open a JSON file.")
     print("e - Open the AIRM file.")
@@ -38,7 +38,7 @@ def Main():
     if choice == "a":
         TestCompletePackage(LoadConcepts())
     elif choice == "b":
-        TestSpacySimilarity(LoadConcepts())
+        TestSpacySimilarity()
     elif choice == "c":
         TestWordNetSimilarity(LoadConcepts())
     elif choice == "d":
@@ -74,13 +74,17 @@ def TestCompletePackage(existingConcepts):
     print("New concepts: %s" % newConcepts)
     jp.MakeFile(newConcepts, OUTFILE)
 
-def TestSpacySimilarity(existingConcepts):
+def TestSpacySimilarity():
     from SpacySimilarity import SpacySimilarity
-    ss = SpacySimilarity(existingConcepts)
+    ss = SpacySimilarity()
     while True:
-        word = GetInputWord()
-        if word != "n":
-            ss.GetMaxSimilarity(word)
+        wordA = GetInputWord()
+        if wordA != "n":
+            wordB = GetInputWord()
+            if wordB != "n":
+                print("%s <> %s: %f" % (wordA, wordB, ss.GetSimilarity(wordA, wordB)))
+            else:
+                break
         else:
             break
 
@@ -172,7 +176,7 @@ def IsValidChoice(choice):
 
 def GetInputWord():
     while True:
-        concept = input("Enter a concept to put into this test (i.e. Aeroplane). Type \"n\" to quit: ")
+        concept = input("Enter a concept to put into this test (type \"n\" to quit): ")
         if concept == "":
             print("No concept was found. Please try again.")
             continue
