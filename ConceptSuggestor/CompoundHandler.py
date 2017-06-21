@@ -90,3 +90,8 @@ class CompoundHandler(object):
                                                                                       similarity)) # DEBUG
 
         return similarity
+
+    def ReloadSettings(self, settings):
+        self.s = settings
+
+        self.sc.ReloadSettings(settings)

@@ -98,6 +98,7 @@ def TestWordNetSimilarity():
                 break
         else:
             break
+        wns.ReloadSettings(settings.WordNetSimilarityMethod)
 
 def TestWordNetSynonymity():
     from WordNetSynonyms import WordNetSynonyms
@@ -125,6 +126,7 @@ def TestCompoundHandler():
             compoundB = input("Enter the second possibly compound term: ")
             if settings._Setting("reload") is True:
                 settings.LoadSettings()
+                ch.ReloadSettings(settings)
             print(ch.GetSimilarity(compoundA, compoundB))
         else:
             break
@@ -140,6 +142,7 @@ def TestExternalCompounds():
     while True:
         if settings._Setting("reload") is True:
            settings.LoadSettings()
+           ch.ReloadSettings(settings)
 
         results = []
 
@@ -182,6 +185,8 @@ def TestPipeline():
                 break
         else:
             break
+
+        sc.ReloadSettings(settings)
 
 def IsValidChoice(choice):
     if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g"):

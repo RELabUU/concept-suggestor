@@ -14,7 +14,7 @@ class SimilarityCalculator(object):
             self.wns = WordNetSimilarity(settings.WordNetSimilarityMethod)
             self.wordNetWeight = settings.WordNetWeight
 
-        self.totalWeight = settings.TotalSimilarityWeight
+        self.totalSimilarityWeight = settings.TotalSimilarityWeight
 
     # Returns the similarity of two words.
     def GetSimilarity(self, wordA, wordB):
@@ -28,7 +28,7 @@ class SimilarityCalculator(object):
         if self.useWordNet is True:
             wordNetSimilarity = self.wns.GetSimilarity(wordA, wordB)
             
-        total = ((self.spacyWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalWeight
+        total = ((self.spacyWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalSimilarityWeight
         # print("Total: (%f * %f) + (%f * %f) = %f out of %f" % (self.wordVectorWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalWeight)) # DEBUG
 
         return total
@@ -47,7 +47,19 @@ class SimilarityCalculator(object):
         if self.useWordNet is True:
             wordNetSimilarity = self.wns.GetMaxSimilarity(word, collection)
             
-        total = ((self.spacyWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalWeight
-        print("Total: (%s * %s) + (%s * %s) = %s out of %s" % (self.spacyWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalWeight)) # DEBUG
+        total = ((self.spacyWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalSimilarityWeight
+        print("Total: (%s * %s) + (%s * %s) = %s out of %s" % (self.spacyWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalSimilarityWeight)) # DEBUG
 
         return total
+
+    def ReloadSettings(self, settings):
+        self.useSpacy = settings.UseSpacy
+        if self.useSpacy is True:
+            self.spacyWeight = settings.SpaCyWeight
+        
+        self.useWordNet = settings.UseWordNet
+        if self.useWordNet is True:
+            self.wns.ReloadSettings(settings.WordNetSimilarityMethod)
+            self.wordNetWeight = settings.WordNetWeight
+
+        self.totalSimilarityWeight = settings.TotalSimilarityWeight

@@ -70,3 +70,6 @@ class WordNetSimilarity(object):
             similarity = synsetA.lin_similarity(synsetB, self.ic)
 
         return similarity
+
+    def ReloadSettings(self, measure):
+        self.similarityMeasure = measure
