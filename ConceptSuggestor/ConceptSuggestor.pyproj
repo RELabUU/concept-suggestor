@@ -47,6 +47,9 @@
     <Compile Include="WordNetSimilarity.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="WordNetSynonyms.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="XmlParser.py">
       <SubType>Code</SubType>
     </Compile>

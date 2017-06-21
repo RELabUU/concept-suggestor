@@ -1,7 +1,7 @@
 from nltk.corpus import wordnet as wn
 
 class WordNetSimilarity(object):
-    """Uses WordNet to determine whether words are synonyms"""
+    """Uses WordNet to determine similarity between words."""
 
     def __init__(self, measure, corpus = "brown"):
         self.similarityMeasure = measure

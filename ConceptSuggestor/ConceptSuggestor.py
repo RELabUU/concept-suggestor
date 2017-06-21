@@ -15,8 +15,9 @@ def GetProgramMode():
     print("a - Example Functionality. Loads new concepts from external JSON file, removes synonyms, and writes that to an external JSON file.")
     print("b - Compare similarity of two words using SpaCy's word vectors.")
     print("c - Compare similarity of two words using WordNet's similarity function.")
-    print("d - Compares two possibly compound terms and returns the similarity between them.")
-    print("e - Tests compound terms found in compound_concepts.json for similarity.")
+    print("d - Uses WordNet to determine whether two words are synonyms.")
+    print("e - Compares two possibly compound terms and returns the similarity between them.")
+    print("f - Tests compound terms found in compound_concepts.json for similarity.")
 
     # Get the program mode from the user and ensure it's valid.
     choice = input("Please tell me what to do (type a letter): ").lower()
@@ -39,8 +40,10 @@ def Main():
     elif choice == "c":
         TestWordNetSimilarity()
     elif choice == "d":
-        TestCompoundHandler()
+        TestWordNetSynonymity()
     elif choice == "e":
+        TestCompoundHandler()
+    elif choice == "f":
         TestExternalCompounds()
     else:
         print("Invalid mode. Aborting.")
@@ -68,6 +71,7 @@ def TestCompletePackage(existingConcepts):
 def TestSpacySimilarity():
     from SpacySimilarity import SpacySimilarity
     ss = SpacySimilarity()
+
     while True:
         wordA = GetInputWord()
         if wordA != "n":
@@ -82,6 +86,7 @@ def TestSpacySimilarity():
 def TestWordNetSimilarity():
     from WordNetSimilarity import WordNetSimilarity
     wns = WordNetSimilarity(settings.WordNetSimilarityMethod())
+
     while True:
         wordA = GetInputWord()
         if wordA != "n":
@@ -93,11 +98,26 @@ def TestWordNetSimilarity():
         else:
             break
 
+def TestWordNetSynonymity():
+    from WordNetSynonyms import WordNetSynonyms
+    wns = WordNetSynonyms()
+
+    while True:
+        wordA = GetInputWord()
+        if wordA != "n":
+            wordB = GetInputWord()
+            if wordB != "n":
+                print("%s <> %s: %s" % (wordA, wordB, wns.IsSynonym(wordA, wordB)))
+            else:
+                break
+        else:
+            break
+
 def TestCompoundHandler():
     from CompoundHandler import CompoundHandler
+    ch = CompoundHandler(settings)
     print("Result of CompoundHandler: ")
 
-    ch = CompoundHandler(settings)
     while True:
         compoundA = input("Enter the first possibly compound term (type \"n\" to quit): ")
         if compoundA != "n":
@@ -117,8 +137,6 @@ def TestExternalCompounds():
     from JsonParser import JsonParser
     jp = JsonParser()
     data = jp.LoadFile(COMPOUNDSFILE)
-
-    
 
     while True:
         if settings._Setting("reload") is True:
@@ -140,7 +158,7 @@ def TestExternalCompounds():
             break
 
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e"):
+    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f"):
         return True
     else:
         return False
