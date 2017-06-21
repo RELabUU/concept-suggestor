@@ -1,27 +1,27 @@
 class SimilarityCalculator(object):
     """Calculates the similarity of two words using a variety of methods."""
 
-    def __init__(self, wordnetSimilarityMethod, useWordVectors = False, spacyWeight = 0, useWordNet = False, wordNetWeight = 0, totalWeight = 0):
-        self.useWordVectors = useWordVectors
-        if self.useWordVectors is True:
+    def __init__(self, settings):
+        self.useSpacy = settings.UseSpacy()
+        if self.useSpacy is True:
             from SpacySimilarity import SpacySimilarity
             self.ss = SpacySimilarity()
-            self.spacyWeight = spacyWeight
+            self.spacyWeight = settings.SpaCyWeight()
 
-        self.useWordNet = useWordNet
+        self.useWordNet = settings.UseWordNet()
         if self.useWordNet is True:
             from WordNetSimilarity import WordNetSimilarity
-            self.wns = WordNetSimilarity(wordnetSimilarityMethod)
-            self.wordNetWeight = wordNetWeight
+            self.wns = WordNetSimilarity(settings.WordNetSimilarityMethod())
+            self.wordNetWeight = settings.WordNetWeight()
 
-        self.totalWeight = totalWeight
+        self.totalWeight = settings.TotalSimilarityWeight()
 
     # Returns the similarity of two words.
     def GetSimilarity(self, wordA, wordB):
         total = 0
 
         spacySimilarity = 0
-        if self.useWordVectors is True:
+        if self.useSpacy is True:
             spacySimilarity = self.ss.GetSimilarity(wordA, wordB)
            
         wordNetSimilarity = 0
@@ -40,7 +40,7 @@ class SimilarityCalculator(object):
         total = 0
 
         spacySimilarity = 0
-        if self.useWordVectors is True:
+        if self.useSpacy is True:
             spacySimilarity = self.ss.GetMaxSimilarity(word, collection)
 
         wordNetSimilarity = 0

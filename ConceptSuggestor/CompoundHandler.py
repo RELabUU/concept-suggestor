@@ -1,15 +1,13 @@
 class CompoundHandler(object):
     """Handles compound terms."""
 
-    def __init__(self, wordnetSimilarityMethod, useWordVectors = False, spacyWeight = 0, useWordNet = False, wordNetWeight = 0, totalWeight = 0):
+    import Settings
+
+    def __init__(self, settings):
+        self.s = settings
+
         from SimilarityCalculator import SimilarityCalculator
-        self.sc = SimilarityCalculator(wordnetSimilarityMethod, 
-                                       useWordVectors = useWordVectors, spacyWeight = spacyWeight, 
-                                       useWordNet = useWordNet, wordNetWeight = wordNetWeight, 
-                                       totalWeight = totalWeight)
-        
-        from Settings import Settings
-        self.s = Settings()
+        self.sc = SimilarityCalculator(self.s)
 
     def GetSimilarity(self, compoundA, compoundB):
         wordsA = compoundA.split()
@@ -43,8 +41,8 @@ class CompoundHandler(object):
 
             similarity = (self.s._Setting("alpha") * similarityA + 
                           self.s._Setting("beta") * similarityB)
-            print("Similarity: %f * %f + %f * %f = %f" % (self.s._Setting("alpha"), similarityA, 
-                                                          self.s._Setting("beta"), similarityB, 
+            print("Similarity: %f * %f + %f * %f = %f" % (self.s.Alpha(), similarityA, 
+                                                          self.s.Beta(), similarityB, 
                                                           similarity)) # DEBUG
 
         # Level - Flight Altitude
@@ -59,8 +57,8 @@ class CompoundHandler(object):
 
             similarity = (self.s._Setting("alpha") * similarityA + 
                           self.s._Setting("beta") * similarityB)
-            print("Similarity: %f * %f + %f * %f = %f" % (self.s._Setting("alpha"), similarityA, 
-                                                          self.s._Setting("beta"), similarityB, 
+            print("Similarity: %f * %f + %f * %f = %f" % (self.s.Alpha(), similarityA, 
+                                                          self.s.Alpha(), similarityB, 
                                                           similarity)) # DEBUG
 
         # Flight Level - Flight Altitude
@@ -85,10 +83,10 @@ class CompoundHandler(object):
                           self.s._Setting("delta") * similarityD + 
                           self.s._Setting("epsilon") * similarityEa + 
                           self.s._Setting("epsilon") * similarityEb)
-            print("Similarity: (%f * %f) + (%f * %f) + (%f * %f) + (%f * %f) = %f" % (self.s._Setting("gamma"), similarityC, 
-                                                                                      self.s._Setting("delta"), similarityD, 
-                                                                                      self.s._Setting("epsilon"), similarityEa, 
-                                                                                      self.s._Setting("epsilon"), similarityEb, 
+            print("Similarity: (%f * %f) + (%f * %f) + (%f * %f) + (%f * %f) = %f" % (self.s.Gamma(), similarityC, 
+                                                                                      self.s.Delta(), similarityD, 
+                                                                                      self.s.Epsilon(), similarityEa, 
+                                                                                      self.s.Epsilon(), similarityEb, 
                                                                                       similarity)) # DEBUG
 
         return similarity

@@ -1,5 +1,5 @@
 from Settings import Settings
-s = Settings()
+settings = Settings()
 
 COMMITFILE = "commit_example2.json" # Example commit to load
 CONCEPTSFILE = "concepts_example.json" # Example concepts already in the model
@@ -63,10 +63,7 @@ def LoadConcepts():
 
 def TestCompletePackage(existingConcepts):
     from SynonymRemover import SynonymRemover
-    sr = SynonymRemover(existingConcepts, s.WordNetSimilarityMethod,
-                        useWordVectors = s.UseSpacy(), spacyWeight = s.SpaCyWeight(),
-                        useWordNet = s.UseWordNet(), wordNetWeight = s.WordNetWeight(),
-                        totalWeight = s.TotalSimilarityWeight(), similarityThreshold = s.SimilarityThreshold())
+    sr = SynonymRemover(existingConcepts, settings)
         
     from JsonParser import JsonParser
     jp = JsonParser()
@@ -89,7 +86,7 @@ def TestSpacySimilarity(existingConcepts):
 
 def TestWordNetSimilarity(existingConcepts):
     from WordNetSimilarity import WordNetSimilarity
-    wns = WordNetSimilarity(s.WordNetSimilarityMethod())
+    wns = WordNetSimilarity(settings.WordNetSimilarityMethod())
     while True:
         word = GetInputWord()
         if word != "n":
@@ -125,16 +122,13 @@ def TestCompoundHandler():
     from CompoundHandler import CompoundHandler
     print("Result of CompoundHandler: ")
 
-    ch = CompoundHandler(s.WordNetSimilarityMethod(),
-                         useWordVectors = s.UseSpacy(), spacyWeight = s.SpaCyWeight(),
-                         useWordNet = s.UseWordNet(), wordNetWeight = s.WordNetWeight(),
-                         totalWeight = s.TotalSimilarityWeight())
+    ch = CompoundHandler(settings)
     while True:
         compoundA = input("Enter the first possibly compound term (type \"n\" to quit): ")
         if compoundA != "n":
             compoundB = input("Enter the second possibly compound term: ")
-            if s._Setting("reload") is True:
-                s.LoadSettings()
+            if settings._Setting("reload") is True:
+                settings.LoadSettings()
             print(ch.GetSimilarity(compoundA, compoundB))
         else:
             break
@@ -143,10 +137,7 @@ def TestExternalCompounds():
     import numpy
 
     from CompoundHandler import CompoundHandler
-    ch = CompoundHandler(s.WordNetSimilarityMethod(),
-                         useWordVectors = s.UseSpacy(), spacyWeight = s.SpaCyWeight(),
-                         useWordNet = s.UseWordNet(), wordNetWeight = s.WordNetWeight(),
-                         totalWeight = s.TotalSimilarityWeight())
+    ch = CompoundHandler(settings)
 
     from JsonParser import JsonParser
     jp = JsonParser()
@@ -155,8 +146,8 @@ def TestExternalCompounds():
     
 
     while True:
-        if s._Setting("reload") is True:
-           s.LoadSettings()
+        if settings._Setting("reload") is True:
+           settings.LoadSettings()
 
         results = []
 
@@ -185,8 +176,8 @@ def GetInputWord():
         if concept == "":
             print("No concept was found. Please try again.")
             continue
-        if s._Setting("reload") is True:
-            s.LoadSettings()
+        if settings.Reload() is True:
+            settings.LoadSettings()
         return concept
 
 def TryAgain():
