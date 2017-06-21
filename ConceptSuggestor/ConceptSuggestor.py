@@ -93,12 +93,13 @@ def TestWordNetSimilarity():
         if wordA != "n":
             wordB = GetInputWord(2)
             if wordB != "n":
+                if settings.Reload is True:
+                    wns.ReloadSettings(settings.WordNetSimilarityMethod)
                 print("%s <> %s: %f" % (wordA, wordB, wns.GetSimilarity(wordA, wordB)))
             else:
                 break
         else:
             break
-        wns.ReloadSettings(settings.WordNetSimilarityMethod)
 
 def TestWordNetSynonymity():
     from WordNetSynonyms import WordNetSynonyms
@@ -124,7 +125,7 @@ def TestCompoundHandler():
         compoundA = input("Enter the first possibly compound term (type \"n\" to quit): ")
         if compoundA != "n":
             compoundB = input("Enter the second possibly compound term: ")
-            if settings._Setting("reload") is True:
+            if settings.Reload is True:
                 settings.LoadSettings()
                 ch.ReloadSettings(settings)
             print(ch.GetSimilarity(compoundA, compoundB))
@@ -140,7 +141,7 @@ def TestExternalCompounds():
     data = jp.LoadFile(COMPOUNDSFILE)
 
     while True:
-        if settings._Setting("reload") is True:
+        if settings.Reload is True:
            settings.LoadSettings()
            ch.ReloadSettings(settings)
 
@@ -170,6 +171,8 @@ def TestPipeline():
         if wordA != "n":
             wordB = GetInputWord(2)
             if wordB != "n":
+                if settings.Reload is True:
+                    sc.ReloadSettings(settings)
                 similarity = sc.GetSimilarity(wordA, wordB)
                 print("Similarity: %f" % similarity)
                 if similarity > settings.SimilarityThreshold:
@@ -185,8 +188,6 @@ def TestPipeline():
                 break
         else:
             break
-
-        sc.ReloadSettings(settings)
 
 def IsValidChoice(choice):
     if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g"):
