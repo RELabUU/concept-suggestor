@@ -2,19 +2,19 @@ class SimilarityCalculator(object):
     """Calculates the similarity of two words using a variety of methods."""
 
     def __init__(self, settings):
-        self.useSpacy = settings.UseSpacy()
+        self.useSpacy = settings.UseSpacy
         if self.useSpacy is True:
             from SpacySimilarity import SpacySimilarity
             self.ss = SpacySimilarity()
-            self.spacyWeight = settings.SpaCyWeight()
+            self.spacyWeight = settings.SpaCyWeight
 
-        self.useWordNet = settings.UseWordNet()
+        self.useWordNet = settings.UseWordNet
         if self.useWordNet is True:
             from WordNetSimilarity import WordNetSimilarity
-            self.wns = WordNetSimilarity(settings.WordNetSimilarityMethod())
-            self.wordNetWeight = settings.WordNetWeight()
+            self.wns = WordNetSimilarity(settings.WordNetSimilarityMethod)
+            self.wordNetWeight = settings.WordNetWeight
 
-        self.totalWeight = settings.TotalSimilarityWeight()
+        self.totalWeight = settings.TotalSimilarityWeight
 
     # Returns the similarity of two words.
     def GetSimilarity(self, wordA, wordB):

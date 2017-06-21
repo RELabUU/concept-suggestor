@@ -13,8 +13,8 @@ class WordNetSynonyms(object):
         match = set(synsA).intersection(synsB)
 
         if match != set():
-            print("Match: %s" % match)
+            # print("Match: %s" % match) # DEBUG
             return True
         else:
-            print("No match.")
+            # print("No match.") # DEBUG
             return False

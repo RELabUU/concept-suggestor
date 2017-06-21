@@ -39,10 +39,10 @@ class CompoundHandler(object):
             similarityB = self.sc.GetSimilarity(wordsA[0], wordsB[0]) # Flight - Altitude
             print("similarityB: %s <> %s = %f" % (wordsA[0], wordsB[0], similarityB)) # DEBUG
 
-            similarity = (self.s._Setting("alpha") * similarityA + 
-                          self.s._Setting("beta") * similarityB)
-            print("Similarity: %f * %f + %f * %f = %f" % (self.s.Alpha(), similarityA, 
-                                                          self.s.Beta(), similarityB, 
+            similarity = (self.s.Alpha * similarityA + 
+                          self.s.Beta * similarityB)
+            print("Similarity: %f * %f + %f * %f = %f" % (self.s.Alpha, similarityA, 
+                                                          self.s.Beta, similarityB, 
                                                           similarity)) # DEBUG
 
         # Level - Flight Altitude
@@ -55,10 +55,10 @@ class CompoundHandler(object):
             similarityB = self.sc.GetSimilarity(wordsA[0], wordsB[0]) # Level - Flight
             print("similarityB: %s <> %s = %f" % (wordsA[0], wordsB[0], similarityB)) # DEBUG
 
-            similarity = (self.s._Setting("alpha") * similarityA + 
-                          self.s._Setting("beta") * similarityB)
-            print("Similarity: %f * %f + %f * %f = %f" % (self.s.Alpha(), similarityA, 
-                                                          self.s.Alpha(), similarityB, 
+            similarity = (self.s.Alpha * similarityA + 
+                          self.s.Beta * similarityB)
+            print("Similarity: %f * %f + %f * %f = %f" % (self.s.Alpha, similarityA, 
+                                                          self.s.Alpha, similarityB, 
                                                           similarity)) # DEBUG
 
         # Flight Level - Flight Altitude
@@ -79,14 +79,14 @@ class CompoundHandler(object):
             similarityEb = self.sc.GetSimilarity(wordsA[1], wordsB[0]) # Level - Flight
             print("similarityEb: %s <> %s = %f" % (wordsA[1], wordsB[0], similarityEb)) # DEBUG
 
-            similarity = (self.s._Setting("gamma") * similarityC + 
-                          self.s._Setting("delta") * similarityD + 
-                          self.s._Setting("epsilon") * similarityEa + 
-                          self.s._Setting("epsilon") * similarityEb)
-            print("Similarity: (%f * %f) + (%f * %f) + (%f * %f) + (%f * %f) = %f" % (self.s.Gamma(), similarityC, 
-                                                                                      self.s.Delta(), similarityD, 
-                                                                                      self.s.Epsilon(), similarityEa, 
-                                                                                      self.s.Epsilon(), similarityEb, 
+            similarity = (self.s.Gamma * similarityC + 
+                          self.s.Delta * similarityD + 
+                          self.s.Epsilon * similarityEa + 
+                          self.s.Epsilon * similarityEb)
+            print("Similarity: (%f * %f) + (%f * %f) + (%f * %f) + (%f * %f) = %f" % (self.s.Gamma, similarityC, 
+                                                                                      self.s.Delta, similarityD, 
+                                                                                      self.s.Epsilon, similarityEa, 
+                                                                                      self.s.Epsilon, similarityEb, 
                                                                                       similarity)) # DEBUG
 
         return similarity

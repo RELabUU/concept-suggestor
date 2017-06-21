@@ -34,31 +34,44 @@ class Settings(object):
         return Settings.instance._Setting(name)
 
     # Methods to directly get all the various settings instead of having to manually input the names.
+    @property
     def Reload(self):
         return self._Setting("reload")
+    @property
     def WordNetSimilarityMethod(self):
         return self._Setting("wordnetSimilarityMethod")
+    @property
     def SpaCyWeight(self):
         return self._Setting("spacyWeight")
+    @property
     def WordNetWeight(self):
         return self._Setting("wordnetWeight")
+    @property
     def SimilarityThreshold(self):
         return self._Setting("similarityThreshold")
+    @property
     def Alpha(self):
         return self._Setting("alpha")
+    @property
     def Beta(self):
         return self._Setting("beta")
+    @property
     def Gamma(self):
         return self._Setting("gamma")
+    @property
     def Delta(self):
         return self._Setting("delta")
+    @property
     def Epsilon(self):
         return self._Setting("epsilon")
 
     # Derived settings
+    @property
     def UseSpacy(self):
-        return self.SpaCyWeight() != 0
+        return self.SpaCyWeight != 0
+    @property
     def UseWordNet(self):
-        return self.WordNetWeight() != 0
+        return self.WordNetWeight != 0
+    @property
     def TotalSimilarityWeight(self):
-        return self.SpaCyWeight() + self.WordNetWeight()
+        return self.SpaCyWeight + self.WordNetWeight

@@ -5,7 +5,7 @@ class SynonymRemover(object):
         from SimilarityCalculator import SimilarityCalculator
         self.sc = SimilarityCalculator(settings)
 
-        self.totalThreshold = settings.SimilarityThreshold()
+        self.totalThreshold = settings.SimilarityThreshold
 
     # Returns all items in newCollection that don't have a synonym in oldCollection.
     def RemoveSynonyms(self, oldCollection, newCollection):

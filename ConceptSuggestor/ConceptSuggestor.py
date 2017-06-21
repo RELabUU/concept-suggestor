@@ -86,7 +86,7 @@ def TestSpacySimilarity():
 
 def TestWordNetSimilarity():
     from WordNetSimilarity import WordNetSimilarity
-    wns = WordNetSimilarity(settings.WordNetSimilarityMethod())
+    wns = WordNetSimilarity(settings.WordNetSimilarityMethod)
 
     while True:
         wordA = GetInputWord(1)
@@ -169,7 +169,7 @@ def TestPipeline():
             if wordB != "n":
                 similarity = sc.GetSimilarity(wordA, wordB)
                 print("Similarity: %f" % similarity)
-                if similarity > settings.SimilarityThreshold():
+                if similarity > settings.SimilarityThreshold:
                     synonymity = wns.IsSynonym(wordA, wordB)
                     print("Synonymity: %s" % synonymity)
                     if synonymity is True:
@@ -199,7 +199,7 @@ def GetInputWord(count = 0):
         if concept == "":
             print("No concept was found. Please try again.")
             continue
-        if settings.Reload() is True:
+        if settings.Reload is True:
             settings.LoadSettings()
         return concept
 
