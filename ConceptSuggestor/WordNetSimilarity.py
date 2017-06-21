@@ -7,13 +7,7 @@ class WordNetSimilarity(object):
         self.similarityMeasure = measure
         
         if self.similarityMeasure == "res" or self.similarityMeasure == "jcn" or self.similarityMeasure == "lin":
-            print("Loading \"%s\" Information Content corpus..." % corpus)
-            from nltk.corpus import wordnet_ic as wnic 
-            # Loads Information Content used for similarity measuring.
-            if corpus == "semcor":
-                self.ic = wnic.ic("ic-semcor.dat") 
-            elif corpus == "brown":
-                self.ic = wnic.ic("ic-brown.dat")
+            LoadCorpus(corpus)
 
     def GetSimilarity(self, wordA, wordB):
         if wordA == wordB: # wup_similarity is coded in such a way that identical words don't necessarily return a similarity of 1, so we manually force that here.
@@ -73,3 +67,17 @@ class WordNetSimilarity(object):
 
     def ReloadSettings(self, measure):
         self.similarityMeasure = measure
+        if measure == "res" or measure == "jcn" or measure == "lin":
+            if hasattr(self, 'ic'):
+                pass
+            else:
+                LoadCorpus()
+
+    def LoadCorpus(self, corpus = "brown"):
+        print("Loading \"%s\" Information Content corpus..." % corpus)
+        from nltk.corpus import wordnet_ic as wnic 
+        # Loads Information Content used for similarity measuring.
+        if corpus == "semcor":
+            self.ic = wnic.ic("ic-semcor.dat") 
+        elif corpus == "brown":
+            self.ic = wnic.ic("ic-brown.dat")
