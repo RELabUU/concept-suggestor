@@ -73,6 +73,25 @@ WordNet offers six methods to measure similarity\cite{pedersen2004wordnet}. % TO
 % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
 \end{itemize}
 
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c||c|c|}
+	\hline
+	& forest - graveyard & asylum - madhouse \\
+	\hline
+	Human Estimate & 0.25 & 0.76 \\
+	Path & 0.0714 & 0.125 \\
+	Leacock-Chodorow & 1.00 & 1.56 \\
+	Wu-Palmer & 0.133 & 0.632 \\
+	Resnik & 0.00 & 3.98 \\
+	Jiang-Conrath & 0.0493 & 0.0661 \\
+	Lin & 0.00 & 0.345 \\
+	\hline
+\end{tabular}
+\caption{Comparison of WordNet similarity measures} % Human estimates taken from budanitsky2006evaluating
+\label{table:1}
+\end{table}
+
 From these methods, the Wu-Palmer method is a good balance between performance and accuracy\cite{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}.
 
 \subsection{Semantic Similarity of Two-Word Compounds}
