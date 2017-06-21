@@ -14,12 +14,9 @@ def GetProgramMode():
     print("These are your options:")
     print("a - Example Functionality. Loads new concepts from external JSON file, removes synonyms, and writes that to an external JSON file.")
     print("b - Compare similarity of two words using SpaCy's word vectors.")
-    print("c - Compare similarity of a word to loaded concepts using WordNet's similarity function.")
-    print("d - Open a JSON file.")
-    print("e - Open the AIRM file.")
-    print("f - Opens multiple collections and finds the ratio of occurence of a word.")
-    print("g - Compares two possibly compound terms and returns the similarity between them.")
-    print("h - Tests compound terms found in compound_concepts.json for similarity.")
+    print("c - Compare similarity of two words using WordNet's similarity function.")
+    print("d - Compares two possibly compound terms and returns the similarity between them.")
+    print("e - Tests compound terms found in compound_concepts.json for similarity.")
 
     # Get the program mode from the user and ensure it's valid.
     choice = input("Please tell me what to do (type a letter): ").lower()
@@ -40,16 +37,10 @@ def Main():
     elif choice == "b":
         TestSpacySimilarity()
     elif choice == "c":
-        TestWordNetSimilarity(LoadConcepts())
+        TestWordNetSimilarity()
     elif choice == "d":
-        TestJsonParser()
-    elif choice == "e":
-        TestXmlParser()
-    elif choice == "f":
-        TestCollectionManager()
-    elif choice == "g":
         TestCompoundHandler()
-    elif choice == "h":
+    elif choice == "e":
         TestExternalCompounds()
     else:
         print("Invalid mode. Aborting.")
@@ -88,37 +79,17 @@ def TestSpacySimilarity():
         else:
             break
 
-def TestWordNetSimilarity(existingConcepts):
+def TestWordNetSimilarity():
     from WordNetSimilarity import WordNetSimilarity
     wns = WordNetSimilarity(settings.WordNetSimilarityMethod())
     while True:
-        word = GetInputWord()
-        if word != "n":
-            wns.GetMaxSimilarity(word, existingConcepts)
-        else:
-            break
-
-def TestJsonParser():
-    from JsonParser import JsonParser
-    jp = JsonParser()
-    data = jp.LoadCommit(COMMITFILE)
-    jp.MakeFile(data, OUTFILE)
-    print("Concepts written to %s." % OUTFILE)
-
-def TestXmlParser():
-    from XmlParser import XmlParser
-    xp = XmlParser()
-    data = xp.LoadFile(AIRMFILE)
-    print("Concepts loaded: %s" % data)
-
-def TestCollectionManager():
-    from CollectionManager import CollectionManager
-    cm = CollectionManager()
-    cm.LoadCollections(collections)
-    while True:
-        word = GetInputWord()
-        if word != "n":
-            cm.FrequencyOfWord(word)
+        wordA = GetInputWord()
+        if wordA != "n":
+            wordB = GetInputWord()
+            if wordB != "n":
+                print("%s <> %s: %f" % (wordA, wordB, wns.GetSimilarity(wordA, wordB)))
+            else:
+                break
         else:
             break
 
@@ -169,7 +140,7 @@ def TestExternalCompounds():
             break
 
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g" or choice=="h"):
+    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e"):
         return True
     else:
         return False
