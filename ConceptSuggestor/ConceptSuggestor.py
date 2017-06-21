@@ -89,16 +89,20 @@ def TestSpacySimilarity(existingConcepts):
     from SpacySimilarity import SpacySimilarity
     ss = SpacySimilarity(existingConcepts)
     while True:
-        ss.GetMaxSimilarity(GetInputWord())
-        if not TryAgain():
+        word = GetInputWord()
+        if word != "n":
+            ss.GetMaxSimilarity(word)
+        else:
             break
 
 def TestWordNetSimilarity(existingConcepts):
     from WordNetSimilarity import WordNetSimilarity
     wns = WordNetSimilarity()
     while True:
-        wns.GetMaxSimilarity(GetInputWord(), existingConcepts)
-        if not TryAgain():
+        word = GetInputWord()
+        if word != "n":
+            wns.GetMaxSimilarity(word, existingConcepts)
+        else:
             break
 
 def TestJsonParser():
@@ -119,8 +123,10 @@ def TestCollectionManager():
     cm = CollectionManager()
     cm.LoadCollections(collections)
     while True:
-        cm.FrequencyOfWord(GetInputWord())
-        if not TryAgain():
+        word = GetInputWord()
+        if word != "n":
+            cm.FrequencyOfWord(word)
+        else:
             break
 
 def TestCompoundHandler():
@@ -131,12 +137,13 @@ def TestCompoundHandler():
                          useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
                          totalWeight = TOTAL_WEIGHT)
     while True:
-        compoundA = input("Enter the first possibly compound term: ")
-        compoundB = input("Enter the second possibly compound term: ")
-        if s.Setting("reload") is True:
-            s.LoadSettings()
-        print(ch.GetSimilarity(compoundA, compoundB))
-        if not TryAgain():
+        compoundA = input("Enter the first possibly compound term (type \"n\" to quit): ")
+        if compoundA != "n":
+            compoundB = input("Enter the second possibly compound term: ")
+            if s.Setting("reload") is True:
+                s.LoadSettings()
+            print(ch.GetSimilarity(compoundA, compoundB))
+        else:
             break
 
 def TestExternalCompounds():
@@ -179,7 +186,7 @@ def IsValidChoice(choice):
         return False
 
 def GetInputWord():
-    concept = input("Enter a concept to put into this test (i.e. Aeroplane): ")
+    concept = input("Enter a concept to put into this test (i.e. Aeroplane). Type \"n\" to quit: ")
     if s.Setting("reload") is True:
         s.LoadSettings()
     return concept
