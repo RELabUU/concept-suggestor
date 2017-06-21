@@ -7,7 +7,7 @@ class WordNetSimilarity(object):
         self.similarityMeasure = measure
         
         if self.similarityMeasure == "res" or self.similarityMeasure == "jcn" or self.similarityMeasure == "lin":
-            LoadCorpus(corpus)
+            self.LoadCorpus(corpus)
 
     def GetSimilarity(self, wordA, wordB):
         if wordA == wordB: # wup_similarity is coded in such a way that identical words don't necessarily return a similarity of 1, so we manually force that here.
@@ -71,7 +71,7 @@ class WordNetSimilarity(object):
             if hasattr(self, 'ic'):
                 pass
             else:
-                LoadCorpus()
+                self.LoadCorpus()
 
     def LoadCorpus(self, corpus = "brown"):
         print("Loading \"%s\" Information Content corpus..." % corpus)
