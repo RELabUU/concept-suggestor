@@ -64,9 +64,9 @@ def LoadConcepts():
 def TestCompletePackage(existingConcepts):
     from SynonymRemover import SynonymRemover
     sr = SynonymRemover(existingConcepts, 
-                        useWordVectors = UseSpacy(), spacyWeight = s.Setting("spacyWeight"),
-                        useWordNet = UseWordNet(), wordNetWeight = s.Setting("wordnetWeight"),
-                        totalWeight = TotalWeight(), similarityThreshold = s.Setting("similarityThreshold"))
+                        useWordVectors = s.UseSpacy(), spacyWeight = s.SpaCyWeight(),
+                        useWordNet = s.UseWordNet(), wordNetWeight = s.WordNetWeight(),
+                        totalWeight = s.TotalSimilarityWeight(), similarityThreshold = s.SimilarityThreshold())
         
     from JsonParser import JsonParser
     jp = JsonParser()
@@ -125,14 +125,14 @@ def TestCompoundHandler():
     from CompoundHandler import CompoundHandler
     print("Result of CompoundHandler: ")
 
-    ch = CompoundHandler(useWordVectors = UseSpacy(), wordVectorWeight = s.Setting("spacyWeight"),
-                         useWordNet = UseWordNet(), wordNetWeight = s.Setting("wordnetWeight"),
-                         totalWeight = TotalWeight())
+    ch = CompoundHandler(useWordVectors = s.UseSpacy(), spacyWeight = s.SpaCyWeight(),
+                         useWordNet = s.UseWordNet(), wordNetWeight = s.WordNetWeight(),
+                         totalWeight = s.TotalSimilarityWeight())
     while True:
         compoundA = input("Enter the first possibly compound term (type \"n\" to quit): ")
         if compoundA != "n":
             compoundB = input("Enter the second possibly compound term: ")
-            if s.Setting("reload") is True:
+            if s._Setting("reload") is True:
                 s.LoadSettings()
             print(ch.GetSimilarity(compoundA, compoundB))
         else:
@@ -142,9 +142,9 @@ def TestExternalCompounds():
     import numpy
 
     from CompoundHandler import CompoundHandler
-    ch = CompoundHandler(useWordVectors = UseSpacy(), wordVectorWeight = s.Setting("spacyWeight"),
-                         useWordNet = UseWordNet(), wordNetWeight = s.Setting("wordnetWeight"),
-                         totalWeight = TotalWeight())
+    ch = CompoundHandler(useWordVectors = s.UseSpacy(), spacyWeight = s.SpaCyWeight(),
+                         useWordNet = s.UseWordNet(), wordNetWeight = s.WordNetWeight(),
+                         totalWeight = s.TotalSimilarityWeight())
 
     from JsonParser import JsonParser
     jp = JsonParser()
@@ -153,7 +153,7 @@ def TestExternalCompounds():
     
 
     while True:
-        if s.Setting("reload") is True:
+        if s._Setting("reload") is True:
            s.LoadSettings()
 
         results = []
@@ -183,7 +183,7 @@ def GetInputWord():
         if concept == "":
             print("No concept was found. Please try again.")
             continue
-        if s.Setting("reload") is True:
+        if s._Setting("reload") is True:
             s.LoadSettings()
         return concept
 
@@ -196,14 +196,5 @@ def TryAgain():
             return False
         else:
             print("Could not understand. Please try again. Type \"y\" or \"n\".")
-
-def UseSpacy():
-    return s.Setting("spacyWeight") != 0
-
-def UseWordNet():
-    return s.Setting("wordnetWeight") != 0
-
-def TotalWeight():
-    return s.Setting("spacyWeight") + s.Setting("wordnetWeight")
 
 Main()
