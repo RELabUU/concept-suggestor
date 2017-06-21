@@ -186,12 +186,23 @@ def IsValidChoice(choice):
         return False
 
 def GetInputWord():
-    concept = input("Enter a concept to put into this test (i.e. Aeroplane). Type \"n\" to quit: ")
-    if s.Setting("reload") is True:
-        s.LoadSettings()
-    return concept
+    while True:
+        concept = input("Enter a concept to put into this test (i.e. Aeroplane). Type \"n\" to quit: ")
+        if concept == "":
+            print("No concept was found. Please try again.")
+            continue
+        if s.Setting("reload") is True:
+            s.LoadSettings()
+        return concept
 
 def TryAgain():
-    return input("Do you want to try again? (y/n) ") == "y"
+    while True:
+        tryagain = input("Do you want to try again? (y/n) ")
+        if tryagain == "y":
+            return True
+        elif tryagain == "n":
+            return False
+        else:
+            print("Could not understand. Please try again. Type \"y\" or \"n\".")
 
 Main()
