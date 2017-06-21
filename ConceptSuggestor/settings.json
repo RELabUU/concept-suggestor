@@ -2,6 +2,13 @@
 	"_comment": "Reload the settings every time new input is given to the program.",
 	"reload": true,
 	
+	"_comment": "These are the weights that are given to SpaCy's similarity() and WordNet's similarity().",
+	"spacyWeight": 0.5,
+	"wordnetWeight": 0.5,
+	
+	"_comment": "This value is used as a threshold for similarity value indicating synonymity.",
+	"similarityThreshold": 0.8,
+	
 	"_comment": "Used for comparing compound terms to single-word terms",
 	"_comment": "Alpha + beta = 1",
 	"alpha": 0.67,

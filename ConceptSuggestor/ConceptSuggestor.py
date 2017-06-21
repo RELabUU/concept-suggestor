@@ -7,15 +7,6 @@ OUTFILE = "suggestions_example.json" # Example file to send after request
 AIRMFILE = "AIRM/EA4A02.informationmodel.xml" # AIRM information model
 COMPOUNDSFILE = "compound_concepts.json" # File containing compound words and their human-estimated similarity.
 
-USEWORDVECTORS = True
-USEWORDNET = True
-
-WORDVECTOR_WEIGHT = 0.5
-WORDNET_WEIGHT = 0.5
-TOTAL_WEIGHT = WORDVECTOR_WEIGHT + WORDNET_WEIGHT
-
-TOTAL_THRESHOLD = 0.8
-
 collections = { "one": "concepts_example.json",
                 "two": "concepts_example2.json" }
 
@@ -41,6 +32,7 @@ def GetProgramMode():
     return choice
 
 def Main():
+
     choice = GetProgramMode()
 
     if choice == "a":
@@ -72,9 +64,9 @@ def LoadConcepts():
 def TestCompletePackage(existingConcepts):
     from SynonymRemover import SynonymRemover
     sr = SynonymRemover(existingConcepts, 
-                        useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
-                        useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
-                        totalWeight = TOTAL_WEIGHT, totalThreshold = TOTAL_THRESHOLD)
+                        useWordVectors = UseSpacy(), spacyWeight = s.Setting("spacyWeight"),
+                        useWordNet = UseWordNet(), wordNetWeight = s.Setting("wordnetWeight"),
+                        totalWeight = TotalWeight(), similarityThreshold = s.Setting("similarityThreshold"))
         
     from JsonParser import JsonParser
     jp = JsonParser()
@@ -133,9 +125,9 @@ def TestCompoundHandler():
     from CompoundHandler import CompoundHandler
     print("Result of CompoundHandler: ")
 
-    ch = CompoundHandler(useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
-                         useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
-                         totalWeight = TOTAL_WEIGHT)
+    ch = CompoundHandler(useWordVectors = UseSpacy(), wordVectorWeight = s.Setting("spacyWeight"),
+                         useWordNet = UseWordNet(), wordNetWeight = s.Setting("wordnetWeight"),
+                         totalWeight = TotalWeight())
     while True:
         compoundA = input("Enter the first possibly compound term (type \"n\" to quit): ")
         if compoundA != "n":
@@ -150,9 +142,9 @@ def TestExternalCompounds():
     import numpy
 
     from CompoundHandler import CompoundHandler
-    ch = CompoundHandler(useWordVectors = USEWORDVECTORS, wordVectorWeight = WORDVECTOR_WEIGHT,
-                         useWordNet = USEWORDNET, wordNetWeight = WORDNET_WEIGHT,
-                         totalWeight = TOTAL_WEIGHT)
+    ch = CompoundHandler(useWordVectors = UseSpacy(), wordVectorWeight = s.Setting("spacyWeight"),
+                         useWordNet = UseWordNet(), wordNetWeight = s.Setting("wordnetWeight"),
+                         totalWeight = TotalWeight())
 
     from JsonParser import JsonParser
     jp = JsonParser()
@@ -204,5 +196,14 @@ def TryAgain():
             return False
         else:
             print("Could not understand. Please try again. Type \"y\" or \"n\".")
+
+def UseSpacy():
+    return s.Setting("spacyWeight") != 0
+
+def UseWordNet():
+    return s.Setting("wordnetWeight") != 0
+
+def TotalWeight():
+    return s.Setting("spacyWeight") + s.Setting("wordnetWeight")
 
 Main()

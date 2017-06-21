@@ -1,12 +1,12 @@
 class SimilarityCalculator(object):
     """Calculates the similarity of two words using a variety of methods."""
 
-    def __init__(self, useWordVectors = False, wordVectorWeight = 0, useWordNet = False, wordNetWeight = 0, totalWeight = 0):
+    def __init__(self, useWordVectors = False, spacyWeight = 0, useWordNet = False, wordNetWeight = 0, totalWeight = 0):
         self.useWordVectors = useWordVectors
         if self.useWordVectors is True:
             from SpacySimilarity import SpacySimilarity
             self.ss = SpacySimilarity()
-            self.wordVectorWeight = wordVectorWeight
+            self.spacyWeight = spacyWeight
 
         self.useWordNet = useWordNet
         if self.useWordNet is True:
@@ -28,7 +28,7 @@ class SimilarityCalculator(object):
         if self.useWordNet is True:
             wordNetSimilarity = self.wns.GetSimilarity(wordA, wordB)
             
-        total = ((self.wordVectorWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalWeight
+        total = ((self.spacyWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalWeight
         # print("Total: (%f * %f) + (%f * %f) = %f out of %f" % (self.wordVectorWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalWeight)) # DEBUG
 
         return total
@@ -47,7 +47,7 @@ class SimilarityCalculator(object):
         if self.useWordNet is True:
             wordNetSimilarity = self.wns.GetMaxSimilarity(word, collection)
             
-        total = ((self.wordVectorWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalWeight
-        print("Total: (%s * %s) + (%s * %s) = %s out of %s" % (self.wordVectorWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalWeight)) # DEBUG
+        total = ((self.spacyWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalWeight
+        print("Total: (%s * %s) + (%s * %s) = %s out of %s" % (self.spacyWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalWeight)) # DEBUG
 
         return total
