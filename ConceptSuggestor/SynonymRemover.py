@@ -4,6 +4,8 @@ class SynonymRemover(object):
     def __init__(self, concepts, settings):
         from SimilarityCalculator import SimilarityCalculator
         self.sc = SimilarityCalculator(settings)
+        from WordNetSynonyms import WordNetSynonyms
+        self.wns = WordNetSynonyms()
 
         self.totalThreshold = settings.SimilarityThreshold
 
@@ -22,6 +24,9 @@ class SynonymRemover(object):
         similarity = self.sc.GetMaxSimilarity(item, collection)
 
         if similarity >= self.totalThreshold:
-            return True
+            if self.wns.HasSynonym(item, collection):
+                return True
+            else:
+                return False
         else:
             return False

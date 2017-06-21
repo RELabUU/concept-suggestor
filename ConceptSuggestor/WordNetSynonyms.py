@@ -18,3 +18,10 @@ class WordNetSynonyms(object):
         else:
             # print("No match.") # DEBUG
             return False
+
+    def HasSynonym(self, word, collection):
+        for wordB in collection:
+            if self.IsSynonym(word, wordB) is True:
+                return True
+            else:
+                return False
