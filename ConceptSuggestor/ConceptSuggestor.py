@@ -18,6 +18,7 @@ def GetProgramMode():
     print("d - Uses WordNet to determine whether two words are synonyms.")
     print("e - Compares two possibly compound terms and returns the similarity between them.")
     print("f - Tests compound terms found in compound_concepts.json for similarity.")
+    print("g - Full pipeline. Determines whether two words are similar enough but not synonyms.")
 
     # Get the program mode from the user and ensure it's valid.
     choice = input("Please tell me what to do (type a letter): ").lower()
@@ -45,12 +46,13 @@ def Main():
         TestCompoundHandler()
     elif choice == "f":
         TestExternalCompounds()
+    elif choice == "g":
+        TestPipeline()
     else:
         print("Invalid mode. Aborting.")
 
 def LoadConcepts():
     from JsonParser import JsonParser
-
     jp = JsonParser()
 
     return jp.LoadFile(CONCEPTSFILE, debug = True) # DEBUG - Not the entire line, only the "debug = True" part.
@@ -58,7 +60,6 @@ def LoadConcepts():
 def TestCompletePackage(existingConcepts):
     from SynonymRemover import SynonymRemover
     sr = SynonymRemover(existingConcepts, settings)
-        
     from JsonParser import JsonParser
     jp = JsonParser()
     newConcepts = jp.LoadCommit(COMMITFILE)
@@ -73,9 +74,9 @@ def TestSpacySimilarity():
     ss = SpacySimilarity()
 
     while True:
-        wordA = GetInputWord()
+        wordA = GetInputWord(1)
         if wordA != "n":
-            wordB = GetInputWord()
+            wordB = GetInputWord(2)
             if wordB != "n":
                 print("%s <> %s: %f" % (wordA, wordB, ss.GetSimilarity(wordA, wordB)))
             else:
@@ -88,9 +89,9 @@ def TestWordNetSimilarity():
     wns = WordNetSimilarity(settings.WordNetSimilarityMethod())
 
     while True:
-        wordA = GetInputWord()
+        wordA = GetInputWord(1)
         if wordA != "n":
-            wordB = GetInputWord()
+            wordB = GetInputWord(2)
             if wordB != "n":
                 print("%s <> %s: %f" % (wordA, wordB, wns.GetSimilarity(wordA, wordB)))
             else:
@@ -103,9 +104,9 @@ def TestWordNetSynonymity():
     wns = WordNetSynonyms()
 
     while True:
-        wordA = GetInputWord()
+        wordA = GetInputWord(1)
         if wordA != "n":
-            wordB = GetInputWord()
+            wordB = GetInputWord(2)
             if wordB != "n":
                 print("%s <> %s: %s" % (wordA, wordB, wns.IsSynonym(wordA, wordB)))
             else:
@@ -130,10 +131,8 @@ def TestCompoundHandler():
 
 def TestExternalCompounds():
     import numpy
-
     from CompoundHandler import CompoundHandler
     ch = CompoundHandler(settings)
-
     from JsonParser import JsonParser
     jp = JsonParser()
     data = jp.LoadFile(COMPOUNDSFILE)
@@ -157,15 +156,46 @@ def TestExternalCompounds():
         if not TryAgain():
             break
 
+def TestPipeline():
+    from SimilarityCalculator import SimilarityCalculator
+    sc = SimilarityCalculator(settings)
+    from WordNetSynonyms import WordNetSynonyms
+    wns = WordNetSynonyms()
+
+    while True:
+        wordA = GetInputWord(1)
+        if wordA != "n":
+            wordB = GetInputWord(2)
+            if wordB != "n":
+                similarity = sc.GetSimilarity(wordA, wordB)
+                print("Similarity: %f" % similarity)
+                if similarity > settings.SimilarityThreshold():
+                    synonymity = wns.IsSynonym(wordA, wordB)
+                    print("Synonymity: %s" % synonymity)
+                    if synonymity is True:
+                        print("The words are both accepted in the model!")
+                    else:
+                        print("One of the words is not accepted. They are synonyms.")
+                else:
+                    print("The words are both accepted in the model!")
+            else:
+                break
+        else:
+            break
+
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f"):
+    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g"):
         return True
     else:
         return False
 
-def GetInputWord():
+def GetInputWord(count = 0):
     while True:
-        concept = input("Enter a concept to put into this test (type \"n\" to quit): ")
+        if count == 0:
+            concept = input("Enter a concept to put into this test (type \"n\" to quit): ")
+        else:
+            concept = input("Enter concept %i to put into this test (type \"n\" to quit): " % count)
+
         if concept == "":
             print("No concept was found. Please try again.")
             continue

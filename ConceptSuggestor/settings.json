@@ -9,8 +9,8 @@
 	"spacyWeight": 0.5,
 	"wordnetWeight": 0.5,
 	
-	"_comment": "This value is used as a threshold for similarity value indicating synonymity.",
-	"similarityThreshold": 0.8,
+	"_comment": "This value is used as a threshold for similarity value indicating possible synonymity.",
+	"similarityThreshold": 0.7,
 	
 	"_comment": "Used for comparing compound terms to single-word terms",
 	"_comment": "Alpha + beta = 1",
