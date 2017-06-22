@@ -26,7 +26,11 @@ This is the abstract.
 
 Air Traffic Management (ATM) is a cross-disciplinary field that requires analysts from multiple domains such as security, safety, and business. When discussing problems about the ATM field, analysts often create domain-specific models that employ both shared and domain-specific concepts. To facilitate these discussions it is important that domain-specific models from one domain can be used in communication with other domains. This can be done by ensuring that domains use similar concepts in their models where possible.
 
-It is difficult for analysts from different domains to communicate about their proposed solutions to a given ATM problem. This difficulty is partially caused by a difference in concepts used in their modeling which reduces the usefulness of these models in communication with other domains. % TODO: Expand introduction
+It is difficult for analysts from different domains to communicate about their proposed solutions to a given ATM problem. This difficulty is partially caused by a difference in concepts used in their modeling which reduces the usefulness of these models in communication with other domains.
+
+To reduce this difficulty, suggestions can be made to modelers during the modeling process to ensure that similar concepts are used throughout all models. These suggestions can either be taken from previously created models or from a taxonomy relevant to the domain. 
+
+However, to ensure that suggestions are used, it is important that any new concepts very similar to existing concepts in the models are not suggested. If "Airplane" is already modeled, "Aeroplane" should not be suggested as a new concept. For this, a system that compares new concepts to existing concepts and filters them based on similarity and synonymity can be used.
 
 \section{Related Work}
 
