@@ -147,46 +147,46 @@ To compute the overall semantic similarity of two-word compounds, the semantic s
 When comparing a single word to a two-word compound, there are two possible word-pairs that can be constructed using one word from each compound. In example, when comparing the word "Altitude" to "Flight Level", the two word-pairs which can be constructed are "Altitude-Flight" and "Altitude-Level".
 The formula used for computing the total similarity is 
 \begin{equation} \label{eq:1wordto2word}
-	\alpha * sim(ca, cb[1]) + \beta * sim(ca, cb[0])
+	\alpha * sim(c1, c1w2) + \beta * sim(c1, c1w1)
 \end{equation}
-where $ \alpha $ and $ \beta $ are the weights, $ ca $ indicates the single word, and $ cb $ is an array representing the two-word compound, where $ cb[0] $ is the first word of the two-word compound and $ cb[1] $ is the second word, and $ sim(X,Y) $ computes the semantic similarity of $ X $ and $ Y $. % TODO: present this in a simpler way so people can easily understand it. Maybe write the compounds one after the other and enumerate each word (c1w1`, c1w2, c2w1, c2w1 or c11, c12, c21 and c22) and update the formula. Always provide some examples, compare the similarity results and explain what it means.
-
-We have found that weights of $ \alpha = 0.67 $ and $ \beta = 0.33 $ deliver acceptable accuracy. % TODO: actually test this one. % TODO: back this claim with some evidence.
+where $\alpha$ and $\beta$ are the weights, $c1$ indicates the single word, and $c2w1$ and $c2w2$ are the first and second word of the two-word compound, respectively, and $sim(X,Y)$ computes the semantic similarity of $X$ and $Y$. % TODO: present this in a simpler way so people can easily understand it. Maybe write the compounds one after the other and enumerate each word (c1w1, c1w2, c2w1, c2w1 or c11, c12, c21 and c22) and update the formula. Always provide some examples, compare the similarity results and explain what it means.
 
 \begin{algorithm}
 \caption{The pipeline on one one-word concept and one two-word concept.}\label{al:onetwocompoundpipeline}
 \begin{algorithmic}[1]
-	\Procedure{OneTwoCompoundPipeline}{wordA, word1B, word2B}
-		\State $\textit{simA} \gets \textit{TwoWordPipeline}(wordA, word2B)$
-		\State $\textit{simB} \gets \textit{TwoWordPipeline}(wordA, word1B)$
+	\Procedure{OneTwoCompoundPipeline}{c1, c2w1, c2w2}
+		\State $\textit{simA} \gets \textit{TwoWordPipeline}(c1, c2w2)$
+		\State $\textit{simB} \gets \textit{TwoWordPipeline}(c1, c2w1)$
 		\State \Return $\alpha * \textit{simA} + \beta * \textit{simB}$
 	\EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+We have found that weights of $\alpha = 0.67$ and $\beta = 0.33$ deliver acceptable accuracy. % TODO: actually test this one. % TODO: back this claim with some evidence.
 
 \subsubsection{Comparing a Two-Word Compound to a Two-Word Compound}
 
 When comparing a two-word compound to a two-word compound, there are four possible word-pairs that can be constructed using one word from each compound. In example, when comparing the compound "Flight Level" to "Emergency Altitude", the four word-pairs which can be constructed are "Flight-Emergency", "Flight-Altitude", "Level-Emergency" and "Level-Altitude".
 The formula used for computing the total similarity is 
 \begin{equation} \label{eq:2wordto2word}
-	\alpha * sim(ca[1], cb[1]) + \beta * sim(ca[0], cb[0]) + \gamma * sim(ca[0], cb[1]) + \gamma * sim(ca[1], cb[0])
+	\alpha * sim(c1w2, c2w2) + \beta * sim(c1w1, c2w1) + \gamma * sim(c1w1, c2w2) + \gamma * sim(c1w2, c2w1)
 \end{equation}
-where $ \alpha $, $ \beta $, and $ \gamma $ are the weights, $ ca $ and $ cb $ are arrays representing the two-word compounds, where $ ca[0] $ and $ cb[0] $ are the first words of the two-word compounds and $ c1[1] $ and $ cb[1] $ are the second words, and $ sim(X,Y) $ computes the semantic similarity of $ X $ and $ Y $. 
-
-We have found that weights of $ \alpha = 0.4 $, $ \beta = 0.1 $, and $ \gamma = 0.25 $ deliver acceptable accuracy.
+where $\alpha$, $\beta$, and $\gamma$ are the weights, $c1w1$ and $c1w2$ are the first and second word of the first compound, respectively, and $c2w1$ and $c2w2$ are the same for the second compound, and $sim(X,Y)$ computes the semantic similarity of $X$ and $Y$. 
 
 \begin{algorithm}
 \caption{The pipeline on two two-word concepts.}\label{al:twocompoundpipeline}
 \begin{algorithmic}[1]
-	\Procedure{TwoCompoundPipeline}{word1A, word2A, word1B, word2B}
-		\State $\textit{simA} \gets \textit{TwoWordPipeline}(word2A, word2B)$
-		\State $\textit{simB} \gets \textit{TwoWordPipeline}(word1A, word1B)$
-		\State $\textit{simC1} \gets \textit{TwoWordPipeline}(word1A, word2B)$
-		\State $\textit{simC2} \gets \textit{TwoWordPipeline}(word2A, word1B)$
+	\Procedure{TwoCompoundPipeline}{c1w1, c1w2, c2w1, c2w2}
+		\State $\textit{simA} \gets \textit{TwoWordPipeline}(c1w2, c2w2)$
+		\State $\textit{simB} \gets \textit{TwoWordPipeline}(c1w1, c2w1)$
+		\State $\textit{simC1} \gets \textit{TwoWordPipeline}(c1w1, c2w2)$
+		\State $\textit{simC2} \gets \textit{TwoWordPipeline}(c1w2, c2w1)$
 		\State \Return $\alpha * \textit{simA} + \beta * \textit{simB} + \gamma * \textit{simC1} + \gamma * \textit{simC2}$
 	\EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+We have found that weights of $\alpha = 0.4$, $\beta = 0.1$, and $\gamma = 0.25$ deliver acceptable accuracy.
 
 \section{Evaluation Methodology}
 
