@@ -3,6 +3,8 @@
 \usepackage[backend=biber]{biblatex}
 \usepackage{amsmath}
 
+% TODO: Ensure that paragraphs have at least three sentences.
+
 % -- Title stuff --
 \title{Concept Suggestor}
 \date{17th of May, 2017}
@@ -26,15 +28,14 @@ This is the abstract.
 
 Air Traffic Management (ATM) is a cross-disciplinary field that requires analysts from multiple domains such as security, safety, and business. When discussing problems about the ATM field, analysts often create domain-specific models that employ both shared and domain-specific concepts. To facilitate these discussions it is important that domain-specific models from one domain can be used in communication with other domains. This can be done by ensuring that domains use similar concepts in their models where possible.
 
-It is difficult for analysts from different domains to communicate about their proposed solutions to a given ATM problem. This difficulty is partially caused by a difference in concepts used in their modeling which reduces the usefulness of these models in communication with other domains.
+It is difficult for analysts from different domains to communicate about their proposed solutions to a given ATM problem. This difficulty is partially caused by a difference in concepts used in their modeling which reduces the usefulness of these models in communication with other domains. When models are constructed well but use different concepts it can lead to different proposed solutions which have sound argumentation, but are hard to find a middle ground with.
 
 To reduce this difficulty, suggestions can be made to modelers during the modeling process to ensure that similar concepts are used throughout all models. These suggestions can either be taken from previously created models or from a taxonomy relevant to the domain. 
-
-However, to ensure that suggestions are used, it is important that any new concepts very similar to existing concepts in the models are not suggested. If "Airplane" is already modeled, "Aeroplane" should not be suggested as a new concept. For this, a system that compares new concepts to existing concepts and filters them based on similarity and synonymity can be used.
+It is important that any new concepts very similar to existing concepts in the models are not suggested. If "Airplane" is already modeled, "Aeroplane" should not be suggested as a new concept. For this, a system that compares new concepts to existing concepts and filters them based on similarity and synonymity can be used.
 
 \section{Related Work}
 
-Recommender systems are software tools and techniques providing suggestions for items to be of use to a user\cite{ricci2011introduction}. % TODO: Ensure that paragraphs have at least three sentences.
+Recommender systems are software tools and techniques providing suggestions for items to be of use to a user\cite{ricci2011introduction}. Recommender systems have become increasingly popular in recent years, and are utilized in a variety of areas including movies, music, news, books, research articles, search queries, social tags, and products in general. There are also recommender systems for experts, collaborators, jokes, restaurants, garments, financial services, life insurance, romantic partners, and Twitter pages. % TODO: Ensure this is not plagiarism from https://en.wikipedia.org/wiki/Recommender_system
 
 WordNet is an electronic lexical database\cite{kilgarriff2000wordnet}. % TODO: Add some more information on WordNet.
 SpaCy is one of the fastest and most accurate publicly available Natural Language Processing (NLP) toolkits available\cite{choi2015depends}.
