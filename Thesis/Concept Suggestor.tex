@@ -2,6 +2,8 @@
 
 \usepackage[backend=biber]{biblatex}
 \usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
 
 % TODO: Ensure that paragraphs have at least three sentences.
 
@@ -45,14 +47,51 @@ Most methods of computing semantic relatedness measures such as word vectors rel
 
 \section{Algorithms}
 
-The Concept Suggestor uses several steps to decide which concepts get suggested to the user. % TODO: Add a high level description of the method I propose. There should be pseudo-code or a process diagram that explains the steps in detail.
+The Concept Suggestor uses several steps to decide which concepts get suggested to the user. 
+
+\begin{algorithm}
+\caption{The pipeline.}\label{al:pipeline}
+\begin{algorithmic}[1]
+	\Procedure{Pipeline}{wordA, wordB}
+		\State $\textit{similarity} \gets \textit{DetermineSimilarity}(wordA, wordB)$
+		\If {$\textit{similarity} > \textit{threshold}$}
+			\If {$\textit{DetermineSynonymity}(wordA, wordB)$}
+				\State \Return true
+			\EndIf
+		\EndIf
+		\State \Return false
+	\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{Determining synonymity of two words.}\label{al:synonymity}
+\begin{algorithmic}[1]
+	\Procedure{DetermineSynonymity}{wordA, wordB}
+		\State $\textit{synsA} \gets \textit{wn.synsets}(wordA)$
+		\State $\textit{synsB} \gets \textit{wn.synsets}(wordB)$
+		\State \Return $\textit{HasOverlap}(synsA, synsB)$
+	\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+% TODO: Add a high level description of the method I propose. There should be pseudo-code or a process diagram that explains the steps in detail.
 
 \subsection{Semantic Similarity of two Words}
 
-The first step is to determine semantic similarity of concepts. The Concept Suggestor combines two algorithms for this: SpaCy's similarity function and WordNet's similarity function. The mean of these two algorithms is computed to determine overall word similarity. The following formula represents the similarity calculations: % TODO: Explain differences in the implementation. Also add some examples how the comparison results differ.
-\begin{equation} \label{eq:totalsimilarity}
-	\frac{spacySim(wordA, wordB) + wordnetSim(wordA, wordB)} {2}
-\end{equation}
+The first step is to determine semantic similarity of concepts. The Concept Suggestor combines two algorithms for this: SpaCy's similarity function and WordNet's similarity function. A weighted average of these two values is taken to determine overall word similarity. The following algorithm represents the similarity calculations: % TODO: Explain differences in the implementation. Also add some examples how the comparison results differ.
+\begin{algorithm}
+\caption{Determining semantic similarity of two words.}\label{al:semanticsimilarity}
+\begin{algorithmic}[1]
+	\Procedure{DetermineSimilarity}{wordA, wordB}
+		\State $\textit{sw} \gets \text{Weight of SpaCy's similarity function.}$
+		\State $\textit{ww} \gets \text{Weight of WordNet's similarity function.}$
+		\State $\textit{ss} \gets \textit{spacySimilarity}(wordA, wordB)$
+		\State $\textit{ws} \gets \textit{wordnetSimilarity}(wordA, wordB)$
+		\State \Return $(sw*ss)+(ww*ws)$
+	\EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
 \subsubsection{SpaCy}
 SpaCy's word vectors are calculated by using the GloVe algorithm on the Common Crawl corpus. The similarity function of SpaCy computes the cosine of two word vectors. This results in a number between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. % TODO: If the content is just one paragraph (or two) there is no need to create a subsection. Just keep the paragraph.
