@@ -41,6 +41,9 @@ class Settings(object):
     def WordNetSimilarityMethod(self):
         return self._Setting("wordnetSimilarityMethod")
     @property
+    def UseSynonymity(self):
+        return self._Setting("useSynonymity")
+    @property
     def SpaCyWeight(self):
         return self._Setting("spacyWeight")
     @property

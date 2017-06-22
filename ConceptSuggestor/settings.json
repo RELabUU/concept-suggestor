@@ -5,6 +5,9 @@
 	"_comment": "This is the method that will be uses to compute similarity using WordNet:",
 	"wordnetSimilarityMethod": "wup",
 	
+	"_comment": "This setting determines whether synonymity is checked before passing on similarity.",
+	"useSynonymity": true,
+	
 	"_comment": "These are the weights that are given to SpaCy's similarity() and WordNet's similarity().",
 	"spacyWeight": 0.5,
 	"wordnetWeight": 0.5,

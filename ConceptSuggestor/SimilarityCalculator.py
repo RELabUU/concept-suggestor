@@ -16,6 +16,12 @@ class SimilarityCalculator(object):
 
         self.totalSimilarityWeight = settings.TotalSimilarityWeight
 
+        self.useSynonymity = settings.UseSynonymity
+        if self.useSynonymity is True:
+            from WordNetSynonyms import WordNetSynonyms
+            self.wnsy = WordNetSynonyms()
+            self.SimilarityThreshold = settings.SimilarityThreshold
+
     # Returns the similarity of two words.
     def GetSimilarity(self, wordA, wordB):
         total = 0
@@ -30,6 +36,12 @@ class SimilarityCalculator(object):
             
         total = ((self.spacyWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalSimilarityWeight
         # print("Total: (%f * %f) + (%f * %f) = %f out of %f" % (self.wordVectorWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalWeight)) # DEBUG
+
+        if self.useSynonymity is True:
+            if total >= self.SimilarityThreshold:
+                if self.wnsy.IsSynonym(wordA, wordB) is True:
+                    print("Synonyms found: %s, %s" % (wordA, wordB)) # DEBUG
+                    return 1
 
         return total
 
@@ -53,13 +65,35 @@ class SimilarityCalculator(object):
         return total
 
     def ReloadSettings(self, settings):
+        # Load SpaCy if necessary, and set its weight.
         self.useSpacy = settings.UseSpacy
         if self.useSpacy is True:
+            if hasattr(self, "ss"):
+                pass
+            else:
+                from SpacySimilarity import SpacySimilarity
+                self.ss = SpacySimilarity()
             self.spacyWeight = settings.SpaCyWeight
         
+        # Load WordNetSimilarity if necessary, and set its weight.
         self.useWordNet = settings.UseWordNet
         if self.useWordNet is True:
+            if hasattr(self, "wns"):
+                pass
+            else:
+                from WordNetSimilarity import WordNetSimilarity
+                self.wns = WordNetSimilarity(settings.WordNetSimilarityMethod)
             self.wns.ReloadSettings(settings.WordNetSimilarityMethod)
             self.wordNetWeight = settings.WordNetWeight
 
         self.totalSimilarityWeight = settings.TotalSimilarityWeight
+
+        # Load WordNetSynonymity if necessary, and set its threshold
+        self.useSynonymity = settings.UseSynonymity
+        if self.useSynonymity is True:
+            if hasattr(self, "wnsy"):
+                pass
+            else:
+                from WordNetSynonyms import WordNetSynonyms
+                self.wnsy = WordNetSynonyms()
+            self.SimilarityThreshold = settings.SimilarityThreshold
