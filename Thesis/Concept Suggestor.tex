@@ -50,27 +50,27 @@ Most methods of computing semantic relatedness measures such as word vectors rel
 The Concept Suggestor uses several steps to decide which concepts get suggested to the user. 
 
 \begin{algorithm}
-\caption{The pipeline.}\label{al:pipeline}
-\begin{algorithmic}[1]
-	\Procedure{Pipeline}{wordA, wordB}
-		\State $\textit{similarity} \gets \textit{DetermineSimilarity}(wordA, wordB)$
-		\If {$\textit{similarity} > \textit{threshold}$}
-			\If {$\textit{DetermineSynonymity}(wordA, wordB)$}
-				\State \Return true
-			\EndIf
-		\EndIf
-		\State \Return false
-	\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
 \caption{Determining synonymity of two words.}\label{al:synonymity}
 \begin{algorithmic}[1]
 	\Procedure{DetermineSynonymity}{wordA, wordB}
 		\State $\textit{synsA} \gets \textit{wn.synsets}(wordA)$
 		\State $\textit{synsB} \gets \textit{wn.synsets}(wordB)$
 		\State \Return $\textit{HasOverlap}(synsA, synsB)$
+	\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{The pipeline on two single-word concepts.}\label{al:twowordpipeline}
+\begin{algorithmic}[1]
+	\Procedure{TwoWordPipeline}{wordA, wordB}
+		\State $\textit{similarity} \gets \textit{DetermineSimilarity}(wordA, wordB)$
+		\If {$\textit{similarity} > \textit{threshold}$}
+			\If {$\textit{DetermineSynonymity}(wordA, wordB)$}
+				\State \Return 1
+			\EndIf
+		\EndIf
+		\State \Return $\textit{similarity}$
 	\EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -153,6 +153,17 @@ where $ \alpha $ and $ \beta $ are the weights, $ ca $ indicates the single word
 
 We have found that weights of $ \alpha = 0.67 $ and $ \beta = 0.33 $ deliver acceptable accuracy. % TODO: actually test this one. % TODO: back this claim with some evidence.
 
+\begin{algorithm}
+\caption{The pipeline on one one-word concept and one two-word concept.}\label{al:onetwocompoundpipeline}
+\begin{algorithmic}[1]
+	\Procedure{OneTwoCompoundPipeline}{wordA, word1B, word2B}
+		\State $\textit{simA} \gets \textit{TwoWordPipeline}(wordA, word2B)$
+		\State $\textit{simB} \gets \textit{TwoWordPipeline}(wordA, word1B)$
+		\State \Return $\alpha * \textit{simA} + \beta * \textit{simB}$
+	\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
 \subsubsection{Comparing a Two-Word Compound to a Two-Word Compound}
 
 When comparing a two-word compound to a two-word compound, there are four possible word-pairs that can be constructed using one word from each compound. In example, when comparing the compound "Flight Level" to "Emergency Altitude", the four word-pairs which can be constructed are "Flight-Emergency", "Flight-Altitude", "Level-Emergency" and "Level-Altitude".
@@ -163,6 +174,19 @@ The formula used for computing the total similarity is
 where $ \alpha $, $ \beta $, and $ \gamma $ are the weights, $ ca $ and $ cb $ are arrays representing the two-word compounds, where $ ca[0] $ and $ cb[0] $ are the first words of the two-word compounds and $ c1[1] $ and $ cb[1] $ are the second words, and $ sim(X,Y) $ computes the semantic similarity of $ X $ and $ Y $. 
 
 We have found that weights of $ \alpha = 0.4 $, $ \beta = 0.1 $, and $ \gamma = 0.25 $ deliver acceptable accuracy.
+
+\begin{algorithm}
+\caption{The pipeline on two two-word concepts.}\label{al:twocompoundpipeline}
+\begin{algorithmic}[1]
+	\Procedure{TwoCompoundPipeline}{word1A, word2A, word1B, word2B}
+		\State $\textit{simA} \gets \textit{TwoWordPipeline}(word2A, word2B)$
+		\State $\textit{simB} \gets \textit{TwoWordPipeline}(word1A, word1B)$
+		\State $\textit{simC1} \gets \textit{TwoWordPipeline}(word1A, word2B)$
+		\State $\textit{simC2} \gets \textit{TwoWordPipeline}(word2A, word1B)$
+		\State \Return $\alpha * \textit{simA} + \beta * \textit{simB} + \gamma * \textit{simC1} + \gamma * \textit{simC2}$
+	\EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
 \section{Evaluation Methodology}
 
