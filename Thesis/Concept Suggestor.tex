@@ -25,7 +25,7 @@
 \maketitle
 
 \begin{abstract}
-This is the abstract. Please write some more text here, I feel small and empty inside.
+This is the abstract. Please write some more text here, I feel small and empty.
 \end{abstract}
 
 {\bf Keywords:} Natural Language Processing, semantic relatedness, semantic similarity
@@ -37,21 +37,23 @@ Air Traffic Management (ATM) is a cross-disciplinary field that requires analyst
 It is difficult for analysts from different domains to communicate about their proposed solutions to a given ATM problem. This difficulty is partially caused by a difference in concepts used in their modeling which reduces the usefulness of these models in communication with other domains. When models are constructed well but use different concepts it can lead to different proposed solutions which have sound argumentation, but are hard to find a middle ground with.
 
 To reduce this difficulty, suggestions can be made to modelers during the modeling process to ensure that similar concepts are used throughout all models. These suggestions can either be taken from previously created models or from a taxonomy relevant to the domain. 
-It is important that any new concepts very similar to existing concepts in the models are not suggested. If "Airplane" is already modeled, "Aeroplane" should not be suggested as a new concept. For this, a system that compares new concepts to existing concepts and filters them based on similarity and synonymity can be used.
+It is important that any new concepts very similar to existing concepts in the models are not suggested. If ``Airplane" is already modeled, ``Aeroplane" should not be suggested as a new concept. For this, a system that compares new concepts to existing concepts and filters them based on similarity and synonymity can be used.
 
-In real life, concepts used in modeling are not always single words. Natural Language Processing (NLP) does not yet reliably support comparing multi-word concepts. The relationship between the words in multi-word concepts depends significantly on the context, something computers usually find hard to understand. In the ATM context, however, the relationship between two-word concepts is almost always identical. We propose a way to measure similarity between two-word concepts.
+In practice, concepts used in modeling are not always single words. Multi-word concepts, such as ``Control Tower" will also need to be modeled. Natural Language Processing (NLP) does not yet reliably support comparing multi-word concepts. The relationship between the words in multi-word concepts depends significantly on the context, something computers usually find hard to understand. In the ATM context, however, the relationship between two-word concepts is almost always identical. We propose a way to measure similarity between two-word concepts.
 
 \section{Related Work}
 
-Natural Language Processing (NLP) is a field of computer science, computational linguistics, and artificial intelligence which concerns itself with the interaction between computers and (human) natural language. NLP can be applied in various fields of studies, such as text processing, speech recognition, artificial intelligence, machine translation, expert systems, and so on \citep{chowdhury2003natural}. 
+Natural Language Processing (NLP) is a field of computer science, computational linguistics, and artificial intelligence which concerns itself with the interaction between computers and (human) natural language. NLP can be applied in various fields of studies, such as text processing, speech recognition, artificial intelligence, machine translation, expert systems, and so on \citep{chowdhury2003natural}. In recent years, a new technology to model natural language through vector representation has been developed \citep{mikolov2013efficient, pennington2014glove} and has proved itself as well-performing using the latest evaluation methods \cite{schnabel2015evaluation}.
 
-Recommender systems are software tools and techniques providing suggestions for items to be of use to a user \citep{ricci2011introduction}. Recommender systems have become increasingly popular in recent years, and are utilized in a variety of areas including movies, music, news, books, research articles, search queries, social tags, and products in general. There are also recommender systems for experts, collaborators, jokes, restaurants, garments, financial services, life insurance, romantic partners, and Twitter pages. % TODO: Ensure this is not plagiarism from https://en.wikipedia.org/wiki/Recommender_system
+% Recommender systems are software tools and techniques providing suggestions for items to be of use to a user \citep{ricci2011introduction}. Recommender systems have become increasingly popular in recent years, and are utilized in a variety of areas including movies, music, news, books, research articles, search queries, social tags, and products in general. There are also recommender systems for experts, collaborators, jokes, restaurants, garments, financial services, life insurance, romantic partners, and Twitter pages. % TODO: Ensure this is not plagiarism from https://en.wikipedia.org/wiki/Recommender_system % TODO: Consider whether to put this piece on recommender systems in the paper or to just remove it.
 
 WordNet is an electronic lexical database \citep{kilgarriff2000wordnet}. % TODO: Add some more information on WordNet.
 SpaCy is one of the fastest and most accurate publicly available NLP toolkits available \citep{choi2015depends}.
 SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words. Training is performed on aggregated global word-word co-occurrence statistics from a corpus \citep{pennington2014glove}. Although GloVe measures co-occurrence and not semantic similarity or relatedness, its results can be used as a rough estimate of semantic similarity or relatedness \citep{levy2015improving}. SpaCy's default word vector library is trained on the Common Crawl corpus. The Common Crawl corpus contains over 2.96 billion web pages and over 250 TiB of uncompressed content as of June 2017 \citep{nagel2017commoncrawl}.
 
 Most methods of computing semantic relatedness measures such as word vectors rely on training an algorithm on a dataset. Public datasets, such as Google, Wikipedia, or WordNet are often used, although private datasets can also be used to improve context-sensitivity. Wikipedia and WordNet have proven to perform well in a variety of situations \citep{strube2006wikirelate}. % This section lacks a clear structure. TODO: add clear structure. Add a paragraph that talks about NLP in general, its application areas, etc. I can add more methods/tools, also try to group the data sets. I need to mention word2vec algorithms as a baseline. NLTK is missing. When I cite a work, explain why it is relevant, what the advantages and limitations are of using it.
+
+Combining word vectorization methods and lexical databases results in better-performing algorithms \cite{lee2016combining}.
 
 \section{Algorithms}
 
@@ -193,7 +195,7 @@ We have done our best to reduce these biases as much as possible, but keep in mi
 
 \subsubsection{Comparing a Single Word to a Two-Word Compound}
 
-When comparing a single word to a two-word compound, there are two possible word-pairs that can be constructed using one word from each compound. In example, when comparing the word "Altitude" to "Flight Level", the two word-pairs which can be constructed are "Altitude-Flight" and "Altitude-Level".
+When comparing a single word to a two-word compound, there are two possible word-pairs that can be constructed using one word from each compound. In example, when comparing the word ``Altitude" to ``Flight Level", the two word-pairs which can be constructed are ``Altitude-Flight" and ``Altitude-Level".
 The formula used for computing the total similarity is 
 \begin{equation} \label{eq:1wordto2word}
 	\alpha * sim(c1, c1w2) + \beta * sim(c1, c1w1)
@@ -215,7 +217,7 @@ We have found that weights of $\alpha = 0.67$ and $\beta = 0.33$ deliver accepta
 
 \subsubsection{Comparing a Two-Word Compound to a Two-Word Compound}
 
-When comparing a two-word compound to a two-word compound, there are four possible word-pairs that can be constructed using one word from each compound. In example, when comparing the compound "Flight Level" to "Emergency Altitude", the four word-pairs which can be constructed are "Flight-Emergency", "Flight-Altitude", "Level-Emergency" and "Level-Altitude".
+When comparing a two-word compound to a two-word compound, there are four possible word-pairs that can be constructed using one word from each compound. In example, when comparing the compound ``Flight Level" to ``Emergency Altitude", the four word-pairs which can be constructed are ``Flight-Emergency", ``Flight-Altitude", ``Level-Emergency" and ``Level-Altitude".
 The formula used for computing the total similarity is 
 \begin{equation} \label{eq:2wordto2word}
 	\alpha * sim(c1w2, c2w2) + \beta * sim(c1w1, c2w1) + \gamma * sim(c1w1, c2w2) + \gamma * sim(c1w2, c2w1)
