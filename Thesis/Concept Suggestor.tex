@@ -1,6 +1,10 @@
 \documentclass{article}
 
-\usepackage[backend=biber]{biblatex}
+\usepackage[
+	backend=biber,
+	%citestyle=authoryear,
+	natbib=true
+]{biblatex}
 \usepackage{amsmath}
 \usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
@@ -39,13 +43,15 @@ In real life, concepts used in modeling are not always single words. Natural Lan
 
 \section{Related Work}
 
-Recommender systems are software tools and techniques providing suggestions for items to be of use to a user\cite{ricci2011introduction}. Recommender systems have become increasingly popular in recent years, and are utilized in a variety of areas including movies, music, news, books, research articles, search queries, social tags, and products in general. There are also recommender systems for experts, collaborators, jokes, restaurants, garments, financial services, life insurance, romantic partners, and Twitter pages. % TODO: Ensure this is not plagiarism from https://en.wikipedia.org/wiki/Recommender_system
+Natural Language Processing (NLP) is a field of computer science, computational linguistics, and artificial intelligence which concerns itself with the interaction between computers and (human) natural language. NLP can be applied in various fields of studies, such as text processing, speech recognition, artificial intelligence, machine translation, expert systems, and so on \citep{chowdhury2003natural}. 
 
-WordNet is an electronic lexical database\cite{kilgarriff2000wordnet}. % TODO: Add some more information on WordNet.
-SpaCy is one of the fastest and most accurate publicly available NLP toolkits available\cite{choi2015depends}.
-SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words. Training is performed on aggregated global word-word co-occurrence statistics from a corpus\cite{pennington2014glove}. Although GloVe measures co-occurrence and not semantic similarity or relatedness, its results can be used as a rough estimate of semantic similarity or relatedness\cite{levy2015improving}. SpaCy's default word vector library is trained on the Common Crawl corpus. The Common Crawl corpus contains over 2.96 billion web pages and over 250 TiB of uncompressed content as of June 2017\cite{nagel2017commoncrawl}.
+Recommender systems are software tools and techniques providing suggestions for items to be of use to a user \citep{ricci2011introduction}. Recommender systems have become increasingly popular in recent years, and are utilized in a variety of areas including movies, music, news, books, research articles, search queries, social tags, and products in general. There are also recommender systems for experts, collaborators, jokes, restaurants, garments, financial services, life insurance, romantic partners, and Twitter pages. % TODO: Ensure this is not plagiarism from https://en.wikipedia.org/wiki/Recommender_system
 
-Most methods of computing semantic relatedness measures such as word vectors rely on training an algorithm on a dataset. Public datasets, such as Google, Wikipedia, or WordNet are often used, although private datasets can also be used to improve context-sensitivity. Wikipedia and WordNet have proven to perform well in a variety of situations\cite{strube2006wikirelate}. % This section lacks a clear structure. TODO: add clear structure. Add a paragraph that talks about NLP in general, its application areas, etc. I can add more methods/tools, also try to group the data sets. I need to mention word2vec algorithms as a baseline. NLTK is missing. When I cite a work, explain why it is relevant, what the advantages and limitations are of using it.
+WordNet is an electronic lexical database \citep{kilgarriff2000wordnet}. % TODO: Add some more information on WordNet.
+SpaCy is one of the fastest and most accurate publicly available NLP toolkits available \citep{choi2015depends}.
+SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words. Training is performed on aggregated global word-word co-occurrence statistics from a corpus \citep{pennington2014glove}. Although GloVe measures co-occurrence and not semantic similarity or relatedness, its results can be used as a rough estimate of semantic similarity or relatedness \citep{levy2015improving}. SpaCy's default word vector library is trained on the Common Crawl corpus. The Common Crawl corpus contains over 2.96 billion web pages and over 250 TiB of uncompressed content as of June 2017 \citep{nagel2017commoncrawl}.
+
+Most methods of computing semantic relatedness measures such as word vectors rely on training an algorithm on a dataset. Public datasets, such as Google, Wikipedia, or WordNet are often used, although private datasets can also be used to improve context-sensitivity. Wikipedia and WordNet have proven to perform well in a variety of situations \citep{strube2006wikirelate}. % This section lacks a clear structure. TODO: add clear structure. Add a paragraph that talks about NLP in general, its application areas, etc. I can add more methods/tools, also try to group the data sets. I need to mention word2vec algorithms as a baseline. NLTK is missing. When I cite a work, explain why it is relevant, what the advantages and limitations are of using it.
 
 \section{Algorithms}
 
@@ -101,7 +107,7 @@ SpaCy's word vectors are calculated by using the GloVe algorithm on the Common C
 \subsubsection{WordNet}
 WordNet is a public electronic lexical database that began in the mid-1980s in the Princeton University Department of Psychology and has been regularly updated and improved since then. The similarity function of WordNet returns a score between zero and one denoting how similar two words are, based on the shortest path that connects the senses in the is-a (hypernym/hyponym) taxonomy. % TODO: make the last sentence not plagiarism. Source: http://www.nltk.org/howto/wordnet.html 
 
-WordNet offers six methods to measure similarity\cite{pedersen2004wordnet}. % TODO: Select one or two pairs of words and calculate the results for these different methods and show the results in a table.
+WordNet offers six methods to measure similarity \citep{pedersen2004wordnet}. % TODO: Select one or two pairs of words and calculate the results for these different methods and show the results in a table.
 \begin{itemize}
 	\item Path Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses in the is-a (hypernym/hyponym) taxonomy. The score is in the range 0 to 1. % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
 	\item Leacock-Chodorow Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses (as above) and the maximum depth of the taxonomy in which the senses occur. The relationship is given as \(-log(p/2d)\) where p is the shortest path length and d the taxonomy depth. % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
@@ -138,7 +144,7 @@ WordNet offers six methods to measure similarity\cite{pedersen2004wordnet}. % TO
 \label{table:wordnetsimilarity}
 \end{table}
 
-From these methods, the Wu-Palmer method is a good balance between performance and accuracy\cite{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}.
+From these methods, the Wu-Palmer method is a good balance between performance and accuracy \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}.
 
 \subsection{Semantic Similarity of Two-Word Compounds}
 
@@ -234,16 +240,16 @@ We have found that weights of $\alpha = 0.4$, $\beta = 0.1$, and $\gamma = 0.25$
 \section{Evaluation Methodology}
 
 % Just semantic similarity
-Although there is no standard for computational evaluation of semantic similarity, there are generally three accepted methods\cite{meng2013review}.
+Although there is no standard for computational evaluation of semantic similarity, there are generally three accepted methods \citep{meng2013review}.
 
 Firstly, a theoretical examination of a computational measure can be made for those mathematical properties thought desirable, such as whether it is a metric, whether its parameter-projections are smooth functions, and so on. % TODO: Find out exactly what this means & rephrase it so I understand. It's quite complex language. Taken from meng2013review
 
-Secondly, the coefficients of correlation with human judgement can be calculated, measured, and compared\cite{zhou2008new,seco2004intrinsic}.
+Secondly, the coefficients of correlation with human judgement can be calculated, measured, and compared \citep{zhou2008new,seco2004intrinsic}.
 
-Thirdly, if an application requires a measure of semantic similarity, we can compare the performance of different measures, while all other aspects of the application remain constant, to find the most effective measure\cite{blanchard2006tree,budanitsky2006evaluating}. % TODO: Explain each method in more detail.
+Thirdly, if an application requires a measure of semantic similarity, we can compare the performance of different measures, while all other aspects of the application remain constant, to find the most effective measure \citep{blanchard2006tree,budanitsky2006evaluating}. % TODO: Explain each method in more detail.
 
 % Semantic similarity and relatedness
-The techniques for measuring semantic similarity and relatedness can be roughly categorized into two main categories\cite{agirre2009study}: Those that rely on pre-existing knowledge, such as thesauri, encyclopedias, and semantic networks\cite{alvarez2007graph,yang2005measuring,hughes2007lexical}, and those inducing distributional properties of words from corpora\cite{sahami2006web,chen2006novel,bollegala2007measuring}.
+The techniques for measuring semantic similarity and relatedness can be roughly categorized into two main categories \citep{agirre2009study}: Those that rely on pre-existing knowledge, such as thesauri, encyclopedias, and semantic networks \citep{alvarez2007graph,yang2005measuring,hughes2007lexical}, and those inducing distributional properties of words from corpora \citep{sahami2006web,chen2006novel,bollegala2007measuring}.
 
 
 % Below is subject matter that I want to have handled in this section.
