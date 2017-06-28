@@ -41,7 +41,7 @@ Recommender systems are software tools and techniques providing suggestions for 
 
 WordNet is an electronic lexical database\cite{kilgarriff2000wordnet}. % TODO: Add some more information on WordNet.
 SpaCy is one of the fastest and most accurate publicly available Natural Language Processing (NLP) toolkits available\cite{choi2015depends}.
-SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words. Training is performed on aggregated global word-word co-occurrence statistics from a corpus\cite{pennington2014glove}. Although GloVe measures co-occurrence and not semantic similarity or relatedness, its results can be used as a rough estimate of semantic similarity or relatedness\cite{levy2015improving}. SpaCy's default word vector library is trained on the Common Crawl corpus. The Common Crawl corpus contains over 2.96 billion web pages and over 250 TiB of uncompressed content as of June 2017\cite{nagel2017commoncrawl}. % Wikipedia has proven to be a valuable source for computing semantic relatedness measures\cite{strube2006wikirelate}. % TODO: Determine whether the last sentence is still relevant, and/or replace with "Common Crawl is good corpus".
+SpaCy uses GloVe to create word vectors. GloVe is an unsupervised learning algorithm for obtaining vector representations for words. Training is performed on aggregated global word-word co-occurrence statistics from a corpus\cite{pennington2014glove}. Although GloVe measures co-occurrence and not semantic similarity or relatedness, its results can be used as a rough estimate of semantic similarity or relatedness\cite{levy2015improving}. SpaCy's default word vector library is trained on the Common Crawl corpus. The Common Crawl corpus contains over 2.96 billion web pages and over 250 TiB of uncompressed content as of June 2017\cite{nagel2017commoncrawl}.
 
 Most methods of computing semantic relatedness measures such as word vectors rely on training an algorithm on a dataset. Public datasets, such as Google, Wikipedia, or WordNet are often used, although private datasets can also be used to improve context-sensitivity. Wikipedia and WordNet have proven to perform well in a variety of situations\cite{strube2006wikirelate}. % This section lacks a clear structure. TODO: add clear structure. Add a paragraph that talks about NLP in general, its application areas, etc. I can add more methods/tools, also try to group the data sets. I need to mention word2vec algorithms as a baseline. NLTK is missing. When I cite a work, explain why it is relevant, what the advantages and limitations are of using it.
 
@@ -133,7 +133,7 @@ WordNet offers six methods to measure similarity\cite{pedersen2004wordnet}. % TO
 	\hline
 \end{tabular}
 \caption{Comparison of WordNet similarity measures} % Human estimates taken from budanitsky2006evaluating
-\label{table:1}
+\label{table:wordnetsimilarity}
 \end{table}
 
 From these methods, the Wu-Palmer method is a good balance between performance and accuracy\cite{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}.
@@ -141,6 +141,47 @@ From these methods, the Wu-Palmer method is a good balance between performance a
 \subsection{Semantic Similarity of Two-Word Compounds}
 
 To compute the overall semantic similarity of two-word compounds, the semantic similarity of each possible word-pair constructed with one word from each compound is calculated as above, and the weighted average of all these semantic similarities is computed.
+
+In our estimates of threats to hidden biases in the compound terms, we have discovered four possible sources of bias:
+\begin{itemize}
+	\item Many compound terms have identical or similar first words.
+	\item Many compound terms have identical or similar second words.
+	\item Many compound terms have identical or similar diagonal relationships.
+	\item Many compound terms have similar estimated similarity.
+\end{itemize}
+We have done our best to reduce these biases as much as possible, but keep in mind that no matter how careful a researcher can be, there are always threats to validity.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c||c|}
+	\hline
+	First Compound & Second Compound & Human Rating \\
+	\hline
+	Flight Level & Flight Altitude & ? \\
+	Flight Attendant & Cabin Attendant & ? \\
+	Control Tower & Ground Control & ? \\
+	Passenger Airline & Passenger Aircraft & ? \\
+	Computer Terminal & Flight Terminal & ? \\
+	Police Officer & Security Officer & ? \\
+	Emergency Flight & Emergency Altitude & ? \\
+	Flight Course & Flight Plan & ? \\
+	Emergency Flight & Emergency Plan & ? \\
+	Business Plan & Emergency Plan & ? \\
+	Airplane Wing & Aeroplane Wing & ? \\
+	Business Plane & Business Sheet & ? \\
+	Flight Terminal & International Flight & ? \\
+	Intercontinental Flight & International Flight & ? \\
+	Baggage Check & Sales Figure & ? \\
+	Commercial Time & Revenue Loss & ? \\
+	Paid Leave & Maternal Leave & ? \\
+	Transit Airspace & Destination Aerodrome & ? \\
+	Aeronautical Meteorology & Aviation Meteorology & ? \\
+	Domestic Pilot & Flight Attendant & ? \\
+	\hline
+\end{tabular}
+\caption{Human similarity rating of two-word compounds}
+\label{table:humancompoundsimilarity}
+\end{table}
 
 \subsubsection{Comparing a Single Word to a Two-Word Compound}
 
