@@ -75,26 +75,24 @@ The similarity function of SpaCy, henceforth called $\textit{SpacySimilarity}$, 
 Although NLTK is an often-used library for NLP purposes, Concept Suggestor uses only the WordNet interface, so this subsection will focus primarily on WordNet. WordNet is a public electronic lexical database that began in the mid-1980s in the Princeton University Department of Psychology and has been regularly updated and improved since then. 
 % The similarity function of NLTK, henceforth called $\textit{WordNetSimilarity}$ returns a score between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. This score is based on the shortest path that connects the senses using only hypernym or hyponym relationships.
 
-NLTK offers six methods to calculate the similarity of two words \citep{pedersen2004wordnet}. These six methods are further explained and compared to each other below.
+NLTK offers six methods to calculate the similarity of two words \citep{pedersen2004wordnet}. Of the six, three use Information Content (IC), information about the meaning and usage of words \cite{seco2004intrinsic}. Four use the Least Common Subsumer (LCS), the most specific concept which is an ancestor of both words. The six methods are further explained and compared to each other below.
 \begin{itemize}
 	\item Path Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses traversing only hypernym and hyponym relationships. The score is in the range 0 to 1, where 0 indicates dissimilarity and 1 indicates similarity.
 	\item Leacock-Chodorow Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses (as above) and the maximum depth of the taxonomy in which the senses occur. The relationship is given as \(-log(p/2d)\) where p is the shortest path length and d the taxonomy depth. % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
-	\item Wu-Palmer Similarity: Returns a score denoting how similar two word senses are, based on the depth of the two senses in the taxonomy and that of their Least Common Subsumer (most specific ancestor node). % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
-	\item Resnik Similarity: Returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node). % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
-	\item Jiang-Conrath Similarity: Returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node) and that of the two input synsets. The relationship is given by equation \ref{eq:jcnsimilarity}, where $IC(X)$ stands for the information content of $X$, $s1$ and $s2$ stand for the synsets of the first and second word, and $lcs$ stands for the least common subsumer.
+	\item Wu-Palmer Similarity: Returns a score denoting how similar two word senses are, based on the depth of the two senses in the taxonomy and that of the LCS.
+	\item Resnik Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS.
+	\item Jiang-Conrath Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input synsets. The relationship is given by equation \ref{eq:jcnsimilarity}, where $IC(X)$ stands for the information content of $X$, $s1$ and $s2$ stand for the synsets of the first and second word, and $lcs$ stands for the least common subsumer.
 \begin{equation} \label{eq:jcnsimilarity}
 	\frac{1} {IC(s1) + IC(s2) - 2 * IC(lcs)}
 \end{equation}
-	\item Lin Similarity: Returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node) and that of the two input Synsets. The relationship is given by equation \ref{eq:linsimilarity}. In equation \ref{eq:linsimilarity}, the same meanings for abbreviations are used as in equation \ref{eq:jcnsimilarity}, which can be found above.
+	\item Lin Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input Synsets. The relationship is given by equation \ref{eq:linsimilarity}. In equation \ref{eq:linsimilarity}, the same meanings for abbreviations are used as in equation \ref{eq:jcnsimilarity}, which can be found above.
 \begin{equation} \label{eq:linsimilarity}
 	\frac{2 * IC(lcs)} {IC(s1) + IC(s2)} 
 \end{equation} 
 \end{itemize}
 % TODO: Ensure that all the items above are not too similar to their primary source, http://www.nltk.org/howto/wordnet.html
 
-Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is found from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}.
-
-From these methods, the Wu-Palmer method is a good balance between performance and accuracy \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}.
+Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is found from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}. In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training Concept Suggestor for specific domains using domain-related corpora, but Information Content is an old technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}.
 
 \begin{table}[h!]
 \centering
@@ -102,7 +100,7 @@ From these methods, the Wu-Palmer method is a good balance between performance a
 	\hline
 	& forest - graveyard & asylum - madhouse \\
 	\hline
-	Human Estimate & 0.25 & 0.76 \\
+	\textit{Human Estimate} & \textit{0.25} & \textit{0.76} \\
 	Path & 0.0714 & 0.125 \\
 	Leacock-Chodorow & 1.00 & 1.56 \\
 	Wu-Palmer & 0.133 & 0.632 \\
