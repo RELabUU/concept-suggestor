@@ -51,7 +51,7 @@ SpaCy is one of the fastest and most accurate publically available NLP toolkits 
 
 The Natural Language Toolkit (NLTK) is a widely-used platform for interfacing with over 50 corpora and lexical resources, including WordNet. WordNet stores lists of all the various senses of words. By looking for matching senses between two words, possible synonymity can be detected \cite{kilgarriff2000wordnet}. However, these senses are context-dependent. ``Sheet" and ``plane" have a matching sense, even though these words will not be synonyms in most contexts.
 
-Combining word vectorization methods and lexical databases results in better-performing algorithms \cite{lee2016combining}. % TODO: Expand this paragraph.
+Constructing lexical databases and performing word vectorization are two ways to increase computer understanding of human language. Lee et al. have proven that combining these two methods into a weighted average increases the performance on a large amount of semantic relatedness measuring datasets. The weights they found to perform the best is in the range of $\lambda = 0.45-0.85$, where $\lambda$ is the weight of word vectorization, and $1-\lambda$ is the weight of the lexical database \cite{lee2016combining}.
 
 % WordNet is an electronic lexical database created by the Cognitive Science Laboratory of Princeton University starting in 1985. Since then, it has been updated and enhanced several times by researchers all over the world and is still maintained by Princeton University. % TODO: Determine whether to use this paragraph.
 
