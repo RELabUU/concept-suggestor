@@ -3,6 +3,8 @@
 \usepackage[
 	backend=biber,
 	%citestyle=authoryear,
+	date=edtf,
+	urldate=edtf,
 	natbib=true
 ]{biblatex}
 \usepackage{amsmath}
@@ -30,7 +32,7 @@ This is the abstract. Please write some more text here, I feel small and empty.
 
 {\bf Keywords:} Natural Language Processing, semantic relatedness, semantic similarity
 
-\section{Introduction}
+\section{Introduction} \label{sec:introduction}
 
 Air Traffic Management (ATM) is a cross-disciplinary field that requires analysts from multiple domains such as security, safety, and business. When discussing problems about the ATM field, analysts often create domain-specific models that employ both shared and domain-specific concepts. To facilitate these discussions it is important that domain-specific models from one domain can be used in communication with other domains. This can be done by ensuring that domains use similar concepts in their models where possible.
 
@@ -41,15 +43,15 @@ It is important that any new concepts very similar to existing concepts in the m
 
 In practice, concepts used in modeling are not always single words. Multi-word concepts, such as ``Control Tower" will also need to be modeled. Natural Language Processing (NLP) does not yet reliably support comparing multi-word concepts. The relationship between the words in multi-word concepts depends significantly on the context, something computers usually find hard to understand. In the ATM context, however, the relationship between two-word concepts is almost always identical. We propose a way to measure similarity between two-word concepts.
 
-\section{Related Work}
+\section{Related Work} \label{sec:relwork}
 
 Natural Language Processing (NLP) is a field of computer science, computational linguistics, and artificial intelligence which concerns itself with the interaction between computers and (human) natural language. NLP can be applied in various fields of studies, such as text processing, speech recognition, artificial intelligence, machine translation, expert systems, and so on \citep{chowdhury2003natural}. 
 In recent years, new technologies to model natural language through vector representation, such as word2vec and GloVe, have been developed \citep{mikolov2013efficient, pennington2014glove} and have shown that they perform well using the latest evaluation methods \citep{schnabel2015evaluation}. Of the two, GloVe performs slightly better than word2vec \citep{lee2016combining}.
 One of the `older' ways of natural language processing is WordNet. WordNet is an electronical lexical database that includes various semantic relations between words, such as synonymy and hyponymy \citep{kilgarriff2000wordnet}.
 
-SpaCy is one of the fastest and most accurate publically available NLP toolkits available \citep{choi2015depends} using GloVe. GloVe uses unsupervised learning for constructing word vector representations for words by calculating word-word co-occurrence statistics from a corpus. Although co-occurrence is not identical to semantic similarity or relatedness, it can be used as a rough estimate of semantic similarity or relatedness \citep{levy2015improving}. SpaCy's default word vector library is trained on the Common Crawl corpus, an open repository of web crawl data that contains over 2.96 billion web pages and over 250 TiB of uncompressed content as of June 2017 \citep{nagel2017commoncrawl}.
+SpaCy is one of the fastest and most accurate publically available NLP toolkits available through Python \citep{choi2015depends}. SpaCy uses GloVe, an unsupervised learning algorithm for constructing word vector representations for words by calculating word-word co-occurrence statistics from a corpus. Although co-occurrence is not identical to semantic similarity or relatedness, it can be used as a rough estimate of semantic similarity or relatedness \citep{levy2015improving}. SpaCy's default word vector library is trained on the Common Crawl corpus, an open repository of web crawl data that contains over 2.96 billion web pages and over 250 TiB of uncompressed content as of June 2017 \citep{nagel2017commoncrawl}.
 
-The Natural Language Toolkit (NLTK) is a widely-used platform for interfacing with over 50 corpora and lexical resources, including WordNet. WordNet stores lists of all the various senses of words. By looking for matching senses between two words, possible synonymity can be detected \cite{kilgarriff2000wordnet}. However, these senses are context-dependent. ``Sheet" and ``plane" have a matching sense, even though these words will not be synonyms in most contexts.
+The Natural Language Toolkit (NLTK) is a widely-used platform for interfacing with over 50 corpora and lexical resources, including WordNet, available through Python. WordNet stores lists of all the various senses of words. By looking for matching senses between two words, possible synonymity can be detected \cite{kilgarriff2000wordnet}. However, these senses are context-dependent. ``Sheet" and ``plane" have a matching sense, even though these words will not be synonyms in most contexts.
 
 Constructing lexical databases and performing word vectorization are two ways to increase computer understanding of human language. Lee et al. have proven that combining these two methods into a weighted average increases the performance on a large amount of semantic relatedness measuring datasets. The weights they found to perform the best is in the range of $\lambda = 0.45-0.85$, where $\lambda$ is the weight of word vectorization, and $\mu = 1-\lambda$ is the weight of the lexical database \cite{lee2016combining}.
 
@@ -61,14 +63,64 @@ Constructing lexical databases and performing word vectorization are two ways to
 
 % This section lacks a clear structure. TODO: add clear structure. Add a paragraph that talks about NLP in general, its application areas, etc. I can add more methods/tools, also try to group the data sets. I need to mention word2vec algorithms as a baseline. NLTK is missing. When I cite a work, explain why it is relevant, what the advantages and limitations are of using it.
 
-\section{Algorithms}
+\section{Algorithms} \label{sec:algorithms}
 
-Concept Suggestor aims to eliminate concepts that are too identical to each other. It is capable of doing this with concepts up to two words large. For this, it uses a pipeline constructed from several smaller algorithms that build upon each other.
+Concept Suggestor aims to eliminate concepts that are too identical to each other. It is capable of doing this with concepts up to two words large. For this, it uses a pipeline constructed from several smaller algorithms that build upon each other. All algorithms depend on either SpaCy's implementation of the GloVe algorithm or NLTK's interface with WordNet.
 
-The two smallest algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity}  determine synonymity of two words and determine similarity of two words respectively.
+\subsection{SpaCy and GloVe}
+The similarity function of SpaCy, henceforth called $\textit{SpacySimilarity}$, computes the cosine of two word vectors. In section \ref{sec:relwork} we explained how these word vectors are constructed. $\textit{SpacySimilarity}$ returns a value between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. It is important to note that although the name of the function is $\textit{SpacySimilarity}$, $\textit{SpacySimilarity}$ actually measures semantic relatedness, not semantic similarity, due to the method used to construct the word vectors. 
+% TODO: If the content is just one paragraph (or two) there is no need to create a subsection. Just keep the paragraph.
+
+\subsection{NLTK and WordNet}
+Although NLTK is an often-used library for NLP purposes, Concept Suggestor uses only the WordNet interface, so this subsection will focus primarily on WordNet. WordNet is a public electronic lexical database that began in the mid-1980s in the Princeton University Department of Psychology and has been regularly updated and improved since then. 
+% The similarity function of NLTK, henceforth called $\textit{WordNetSimilarity}$ returns a score between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. This score is based on the shortest path that connects the senses using only hypernym or hyponym relationships.
+
+NLTK offers six methods to calculate the similarity of two words \citep{pedersen2004wordnet}. These six methods are further explained and compared to each other below.
+\begin{itemize}
+	\item Path Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses traversing only hypernym and hyponym relationships. The score is in the range 0 to 1, where 0 indicates dissimilarity and 1 indicates similarity.
+	\item Leacock-Chodorow Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses (as above) and the maximum depth of the taxonomy in which the senses occur. The relationship is given as \(-log(p/2d)\) where p is the shortest path length and d the taxonomy depth. % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
+	\item Wu-Palmer Similarity: Returns a score denoting how similar two word senses are, based on the depth of the two senses in the taxonomy and that of their Least Common Subsumer (most specific ancestor node). % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
+	\item Resnik Similarity: Returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node). % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
+	\item Jiang-Conrath Similarity: Returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node) and that of the two input synsets. The relationship is given by equation \ref{eq:jcnsimilarity}, where $IC(X)$ stands for the information content of $X$, $s1$ and $s2$ stand for the synsets of the first and second word, and $lcs$ stands for the least common subsumer.
+\begin{equation} \label{eq:jcnsimilarity}
+	\frac{1} {IC(s1) + IC(s2) - 2 * IC(lcs)}
+\end{equation}
+	\item Lin Similarity: Returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node) and that of the two input Synsets. The relationship is given by equation \ref{eq:linsimilarity}. In equation \ref{eq:linsimilarity}, the same meanings for abbreviations are used as in equation \ref{eq:jcnsimilarity}, which can be found above.
+\begin{equation} \label{eq:linsimilarity}
+	\frac{2 * IC(lcs)} {IC(s1) + IC(s2)} 
+\end{equation} 
+\end{itemize}
+% TODO: Ensure that all the items above are not too similar to their primary source, http://www.nltk.org/howto/wordnet.html
+
+Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is found from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}.
+
+From these methods, the Wu-Palmer method is a good balance between performance and accuracy \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c||c|c|}
+	\hline
+	& forest - graveyard & asylum - madhouse \\
+	\hline
+	Human Estimate & 0.25 & 0.76 \\
+	Path & 0.0714 & 0.125 \\
+	Leacock-Chodorow & 1.00 & 1.56 \\
+	Wu-Palmer & 0.133 & 0.632 \\
+	Resnik & 0.00 & 3.98 \\
+	Jiang-Conrath & 0.0493 & 0.0661 \\
+	Lin & 0.00 & 0.345 \\
+	\hline
+\end{tabular}
+\caption{Comparison of WordNet similarity measures} % Human estimates taken from budanitsky2006evaluating
+\label{table:wordnetsimilarity}
+\end{table}
+
+\subsection{The Pipeline}
+
+Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} are the two lowest-level algorithms. They determine synonymity and similarity of two words.
 
 \begin{algorithm}
-\caption{Determining synonymity of two words.}\label{al:synonymity}
+\caption{Determine synonymity of two words.}\label{al:synonymity}
 \begin{algorithmic}[1]
 	\Procedure{DetermineSynonymity}{wordA, wordB}
 		\State $\textit{synsA} \gets \textit{WordNetSynsets}(wordA)$
@@ -79,7 +131,7 @@ The two smallest algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} 
 \end{algorithm}
 
 \begin{algorithm}
-\caption{Determining similarity of two words.}\label{al:semanticsimilarity}
+\caption{Determine similarity of two words.}\label{al:semanticsimilarity}
 \begin{algorithmic}[1]
 	\Procedure{DetermineSimilarity}{wordA, wordB}
 		\State $\textit{ss} \gets \textit{SpacySimilarity}(wordA, wordB)$
@@ -89,7 +141,7 @@ The two smallest algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} 
 \end{algorithmic}
 \end{algorithm}
 
-These two algorithms can be used to construct algorithm \ref{al:twowordpipeline}, the pipeline for two single-word concepts.
+Algorithm \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to construct algorithm \ref{al:twowordpipeline}, the pipeline for two single-word concepts.
 
 \begin{algorithm}
 \caption{The pipeline on two single-word concepts.}\label{al:twowordpipeline}
@@ -106,7 +158,7 @@ These two algorithms can be used to construct algorithm \ref{al:twowordpipeline}
 \end{algorithmic}
 \end{algorithm}
 
-Finally, the pipeline for two single-word concepts can be used for building algorithm \ref{al:onetwocompoundpipeline}, an algorithm that compares a single-word concept to a two-word concept and also for algorithm \ref{al:twocompoundpipeline}, an algorithm that compares a two-word concept to another two-word concept.
+Finally, algorithm \ref{al:twowordpipeline} can be used for building algorithm \ref{al:onetwocompoundpipeline}, an algorithm that compares a single-word concept to a two-word concept and for building algorithm \ref{al:twocompoundpipeline}, an algorithm that compares a two-word concept to another two-word concept.
 
 \begin{algorithm}
 \caption{The pipeline on one one-word concept and one two-word concept.}\label{al:onetwocompoundpipeline}
@@ -132,52 +184,9 @@ Finally, the pipeline for two single-word concepts can be used for building algo
 \end{algorithmic}
 \end{algorithm}
 
-% TODO: Add a high level description of the method I propose. There should be pseudo-code or a process diagram that explains the steps in detail.
-
-\subsubsection{SpaCy}
-SpaCy's word vectors are calculated by using the GloVe algorithm on the Common Crawl corpus. The similarity function of SpaCy computes the cosine of two word vectors. This results in a number between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. % TODO: If the content is just one paragraph (or two) there is no need to create a subsection. Just keep the paragraph.
-
-\subsubsection{WordNet}
-WordNet is a public electronic lexical database that began in the mid-1980s in the Princeton University Department of Psychology and has been regularly updated and improved since then. The similarity function of WordNet returns a score between zero and one denoting how similar two words are, based on the shortest path that connects the senses in the is-a (hypernym/hyponym) taxonomy. % TODO: make the last sentence not plagiarism. Source: http://www.nltk.org/howto/wordnet.html 
-
-WordNet offers six methods to measure similarity \citep{pedersen2004wordnet}. % TODO: Select one or two pairs of words and calculate the results for these different methods and show the results in a table.
-\begin{itemize}
-	\item Path Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses in the is-a (hypernym/hyponym) taxonomy. The score is in the range 0 to 1. % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
-	\item Leacock-Chodorow Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses (as above) and the maximum depth of the taxonomy in which the senses occur. The relationship is given as \(-log(p/2d)\) where p is the shortest path length and d the taxonomy depth. % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
-	\item Wu-Palmer Similarity: Returns a score denoting how similar two word senses are, based on the depth of the two senses in the taxonomy and that of their Least Common Subsumer (most specific ancestor node). % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
-	\item Resnik Similarity: Returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node). % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
-	\item Jiang-Conrath Similarity: Returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node) and that of the two input synsets. The relationship is given by the following equation:
-\begin{equation} \label{eq:jcnsimilarity}
-	\frac{1} {IC(s1) + IC(s1) - 2 * IC(lcs)}
-\end{equation}
-% TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
-	\item Lin Similarity: Returns a score denoting how similar two word senses are, based on the Information Content (IC) of the Least Common Subsumer (most specific ancestor node) and that of the two input Synsets. The relationship is given by the follwing equation:
-\begin{equation} \label{eq:linsimilarity}
-	\frac{2 * IC(lcs)} {IC(s1) + IC(s2)} 
-\end{equation} 
-% TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
-\end{itemize}
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{|c||c|c|}
-	\hline
-	& forest - graveyard & asylum - madhouse \\
-	\hline
-	Human Estimate & 0.25 & 0.76 \\
-	Path & 0.0714 & 0.125 \\
-	Leacock-Chodorow & 1.00 & 1.56 \\
-	Wu-Palmer & 0.133 & 0.632 \\
-	Resnik & 0.00 & 3.98 \\
-	Jiang-Conrath & 0.0493 & 0.0661 \\
-	Lin & 0.00 & 0.345 \\
-	\hline
-\end{tabular}
-\caption{Comparison of WordNet similarity measures} % Human estimates taken from budanitsky2006evaluating
-\label{table:wordnetsimilarity}
-\end{table}
-
-From these methods, the Wu-Palmer method is a good balance between performance and accuracy \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}.
+% ==============================================
+% === EVERYTHING BELOW IS SUBJECT TO REMOVAL === Sort of, at least in this section.
+% ==============================================
 
 \subsection{Semantic Similarity of Two-Word Compounds}
 
@@ -207,7 +216,7 @@ where $\alpha$, $\beta$, and $\gamma$ are the weights, $c1w1$ and $c1w2$ are the
 
 We have found that weights of $\alpha = 0.4$, $\beta = 0.1$, and $\gamma = 0.25$ deliver acceptable accuracy.
 
-\section{Evaluation Methodology}
+\section{Evaluation Methodology} \label{sec:evalmeth}
 
 In our estimates of threats to hidden biases in the compound terms, we have discovered four possible sources of bias:
 \begin{itemize}
@@ -270,15 +279,15 @@ The techniques for measuring semantic similarity and relatedness can be roughly 
 	\item How to determine which are relevant concepts from elsewhere that might improve alignment between the models?
 \end{itemize}
 
-\section{Experiments}
+\section{Experiments} \label{sec:experiments}
 
 These are the experiments.
 
-\section{Conclusions}
+\section{Conclusions} \label{sec:conclusions}
 
 These are the conclusions.
 
-\section{Acknowledgements}
+\section{Acknowledgements} \label{sec:ack}
 
 I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise, valuable guidance, and encouragement with me.
 
