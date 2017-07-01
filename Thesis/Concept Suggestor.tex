@@ -51,7 +51,7 @@ SpaCy is one of the fastest and most accurate publically available NLP toolkits 
 
 The Natural Language Toolkit (NLTK) is a widely-used platform for interfacing with over 50 corpora and lexical resources, including WordNet. WordNet stores lists of all the various senses of words. By looking for matching senses between two words, possible synonymity can be detected \cite{kilgarriff2000wordnet}. However, these senses are context-dependent. ``Sheet" and ``plane" have a matching sense, even though these words will not be synonyms in most contexts.
 
-Constructing lexical databases and performing word vectorization are two ways to increase computer understanding of human language. Lee et al. have proven that combining these two methods into a weighted average increases the performance on a large amount of semantic relatedness measuring datasets. The weights they found to perform the best is in the range of $\lambda = 0.45-0.85$, where $\lambda$ is the weight of word vectorization, and $1-\lambda$ is the weight of the lexical database \cite{lee2016combining}.
+Constructing lexical databases and performing word vectorization are two ways to increase computer understanding of human language. Lee et al. have proven that combining these two methods into a weighted average increases the performance on a large amount of semantic relatedness measuring datasets. The weights they found to perform the best is in the range of $\lambda = 0.45-0.85$, where $\lambda$ is the weight of word vectorization, and $\mu = 1-\lambda$ is the weight of the lexical database \cite{lee2016combining}.
 
 % WordNet is an electronic lexical database created by the Cognitive Science Laboratory of Princeton University starting in 1985. Since then, it has been updated and enhanced several times by researchers all over the world and is still maintained by Princeton University. % TODO: Determine whether to use this paragraph.
 
@@ -63,18 +63,33 @@ Constructing lexical databases and performing word vectorization are two ways to
 
 \section{Algorithms}
 
-The Concept Suggestor uses several steps to decide which concepts get suggested to the user. 
+Concept Suggestor aims to eliminate concepts that are too identical to each other. It is capable of doing this with concepts up to two words large. For this, it uses a pipeline constructed from several smaller algorithms that build upon each other.
+
+The two smallest algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity}  determine synonymity of two words and determine similarity of two words respectively.
 
 \begin{algorithm}
 \caption{Determining synonymity of two words.}\label{al:synonymity}
 \begin{algorithmic}[1]
 	\Procedure{DetermineSynonymity}{wordA, wordB}
-		\State $\textit{synsA} \gets \textit{wn.synsets}(wordA)$
-		\State $\textit{synsB} \gets \textit{wn.synsets}(wordB)$
+		\State $\textit{synsA} \gets \textit{WordNetSynsets}(wordA)$
+		\State $\textit{synsB} \gets \textit{WordNetSynsets}(wordB)$
 		\State \Return $\textit{HasOverlap}(synsA, synsB)$
 	\EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+\begin{algorithm}
+\caption{Determining similarity of two words.}\label{al:semanticsimilarity}
+\begin{algorithmic}[1]
+	\Procedure{DetermineSimilarity}{wordA, wordB}
+		\State $\textit{ss} \gets \textit{SpacySimilarity}(wordA, wordB)$
+		\State $\textit{ws} \gets \textit{WordnetSimilarity}(wordA, wordB)$
+		\State \Return $(\lambda*ss)+(\mu*ws)$
+	\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+These two algorithms can be used to construct algorithm \ref{al:twowordpipeline}, the pipeline for two single-word concepts.
 
 \begin{algorithm}
 \caption{The pipeline on two single-word concepts.}\label{al:twowordpipeline}
@@ -91,23 +106,33 @@ The Concept Suggestor uses several steps to decide which concepts get suggested 
 \end{algorithmic}
 \end{algorithm}
 
-% TODO: Add a high level description of the method I propose. There should be pseudo-code or a process diagram that explains the steps in detail.
+Finally, the pipeline for two single-word concepts can be used for building algorithm \ref{al:onetwocompoundpipeline}, an algorithm that compares a single-word concept to a two-word concept and also for algorithm \ref{al:twocompoundpipeline}, an algorithm that compares a two-word concept to another two-word concept.
 
-\subsection{Semantic Similarity of two Words}
-
-The first step is to determine semantic similarity of concepts. The Concept Suggestor combines two algorithms for this: SpaCy's similarity function and WordNet's similarity function. A weighted average of these two values is taken to determine overall word similarity. The following algorithm represents the similarity calculations: % TODO: Explain differences in the implementation. Also add some examples how the comparison results differ.
 \begin{algorithm}
-\caption{Determining semantic similarity of two words.}\label{al:semanticsimilarity}
+\caption{The pipeline on one one-word concept and one two-word concept.}\label{al:onetwocompoundpipeline}
 \begin{algorithmic}[1]
-	\Procedure{DetermineSimilarity}{wordA, wordB}
-		\State $\textit{sw} \gets \text{Weight of SpaCy's similarity function.}$
-		\State $\textit{ww} \gets \text{Weight of WordNet's similarity function.}$
-		\State $\textit{ss} \gets \textit{spacySimilarity}(wordA, wordB)$
-		\State $\textit{ws} \gets \textit{wordnetSimilarity}(wordA, wordB)$
-		\State \Return $(sw*ss)+(ww*ws)$
+	\Procedure{OneTwoCompoundPipeline}{c1, c2w1, c2w2}
+		\State $\textit{simA} \gets \textit{TwoWordPipeline}(c1, c2w2)$
+		\State $\textit{simB} \gets \textit{TwoWordPipeline}(c1, c2w1)$
+		\State \Return $\alpha * \textit{simA} + \beta * \textit{simB}$
 	\EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+\begin{algorithm}
+\caption{The pipeline on two two-word concepts.}\label{al:twocompoundpipeline}
+\begin{algorithmic}[1]
+	\Procedure{TwoCompoundPipeline}{c1w1, c1w2, c2w1, c2w2}
+		\State $\textit{simA} \gets \textit{TwoWordPipeline}(c1w2, c2w2)$
+		\State $\textit{simB} \gets \textit{TwoWordPipeline}(c1w1, c2w1)$
+		\State $\textit{simC1} \gets \textit{TwoWordPipeline}(c1w1, c2w2)$
+		\State $\textit{simC2} \gets \textit{TwoWordPipeline}(c1w2, c2w1)$
+		\State \Return $\gamma * \textit{simA} + \delta * \textit{simB} + \epsilon * \textit{simC1} + \epsilon * \textit{simC2}$
+	\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+% TODO: Add a high level description of the method I propose. There should be pseudo-code or a process diagram that explains the steps in detail.
 
 \subsubsection{SpaCy}
 SpaCy's word vectors are calculated by using the GloVe algorithm on the Common Crawl corpus. The similarity function of SpaCy computes the cosine of two word vectors. This results in a number between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. % TODO: If the content is just one paragraph (or two) there is no need to create a subsection. Just keep the paragraph.
@@ -158,6 +183,32 @@ From these methods, the Wu-Palmer method is a good balance between performance a
 
 To compute the overall semantic similarity of two-word compounds, the semantic similarity of each possible word-pair constructed with one word from each compound is calculated as above, and the weighted average of all these semantic similarities is computed.
 
+
+
+\subsubsection{Comparing a Single Word to a Two-Word Compound}
+
+When comparing a single word to a two-word compound, there are two possible word-pairs that can be constructed using one word from each compound. In example, when comparing the word ``Altitude" to ``Flight Level", the two word-pairs which can be constructed are ``Altitude-Flight" and ``Altitude-Level".
+The formula used for computing the total similarity is 
+\begin{equation} \label{eq:1wordto2word}
+	\alpha * sim(c1, c1w2) + \beta * sim(c1, c1w1)
+\end{equation}
+where $\alpha$ and $\beta$ are the weights, $c1$ indicates the single word, and $c2w1$ and $c2w2$ are the first and second word of the two-word compound, respectively, and $sim(X,Y)$ computes the semantic similarity of $X$ and $Y$. % TODO: present this in a simpler way so people can easily understand it. Maybe write the compounds one after the other and enumerate each word (c1w1, c1w2, c2w1, c2w1 or c11, c12, c21 and c22) and update the formula. Always provide some examples, compare the similarity results and explain what it means.
+
+We have found that weights of $\alpha = 0.67$ and $\beta = 0.33$ deliver acceptable accuracy. % TODO: actually test this one. % TODO: back this claim with some evidence.
+
+\subsubsection{Comparing a Two-Word Compound to a Two-Word Compound}
+
+When comparing a two-word compound to a two-word compound, there are four possible word-pairs that can be constructed using one word from each compound. In example, when comparing the compound ``Flight Level" to ``Emergency Altitude", the four word-pairs which can be constructed are ``Flight-Emergency", ``Flight-Altitude", ``Level-Emergency" and ``Level-Altitude".
+The formula used for computing the total similarity is 
+\begin{equation} \label{eq:2wordto2word}
+	\alpha * sim(c1w2, c2w2) + \beta * sim(c1w1, c2w1) + \gamma * sim(c1w1, c2w2) + \gamma * sim(c1w2, c2w1)
+\end{equation}
+where $\alpha$, $\beta$, and $\gamma$ are the weights, $c1w1$ and $c1w2$ are the first and second word of the first compound, respectively, and $c2w1$ and $c2w2$ are the same for the second compound, and $sim(X,Y)$ computes the semantic similarity of $X$ and $Y$. 
+
+We have found that weights of $\alpha = 0.4$, $\beta = 0.1$, and $\gamma = 0.25$ deliver acceptable accuracy.
+
+\section{Evaluation Methodology}
+
 In our estimates of threats to hidden biases in the compound terms, we have discovered four possible sources of bias:
 \begin{itemize}
 	\item Many compound terms have identical or similar first words.
@@ -198,54 +249,6 @@ We have done our best to reduce these biases as much as possible, but keep in mi
 \caption{Human similarity rating of two-word compounds}
 \label{table:humancompoundsimilarity}
 \end{table}
-
-\subsubsection{Comparing a Single Word to a Two-Word Compound}
-
-When comparing a single word to a two-word compound, there are two possible word-pairs that can be constructed using one word from each compound. In example, when comparing the word ``Altitude" to ``Flight Level", the two word-pairs which can be constructed are ``Altitude-Flight" and ``Altitude-Level".
-The formula used for computing the total similarity is 
-\begin{equation} \label{eq:1wordto2word}
-	\alpha * sim(c1, c1w2) + \beta * sim(c1, c1w1)
-\end{equation}
-where $\alpha$ and $\beta$ are the weights, $c1$ indicates the single word, and $c2w1$ and $c2w2$ are the first and second word of the two-word compound, respectively, and $sim(X,Y)$ computes the semantic similarity of $X$ and $Y$. % TODO: present this in a simpler way so people can easily understand it. Maybe write the compounds one after the other and enumerate each word (c1w1, c1w2, c2w1, c2w1 or c11, c12, c21 and c22) and update the formula. Always provide some examples, compare the similarity results and explain what it means.
-
-\begin{algorithm}
-\caption{The pipeline on one one-word concept and one two-word concept.}\label{al:onetwocompoundpipeline}
-\begin{algorithmic}[1]
-	\Procedure{OneTwoCompoundPipeline}{c1, c2w1, c2w2}
-		\State $\textit{simA} \gets \textit{TwoWordPipeline}(c1, c2w2)$
-		\State $\textit{simB} \gets \textit{TwoWordPipeline}(c1, c2w1)$
-		\State \Return $\alpha * \textit{simA} + \beta * \textit{simB}$
-	\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-
-We have found that weights of $\alpha = 0.67$ and $\beta = 0.33$ deliver acceptable accuracy. % TODO: actually test this one. % TODO: back this claim with some evidence.
-
-\subsubsection{Comparing a Two-Word Compound to a Two-Word Compound}
-
-When comparing a two-word compound to a two-word compound, there are four possible word-pairs that can be constructed using one word from each compound. In example, when comparing the compound ``Flight Level" to ``Emergency Altitude", the four word-pairs which can be constructed are ``Flight-Emergency", ``Flight-Altitude", ``Level-Emergency" and ``Level-Altitude".
-The formula used for computing the total similarity is 
-\begin{equation} \label{eq:2wordto2word}
-	\alpha * sim(c1w2, c2w2) + \beta * sim(c1w1, c2w1) + \gamma * sim(c1w1, c2w2) + \gamma * sim(c1w2, c2w1)
-\end{equation}
-where $\alpha$, $\beta$, and $\gamma$ are the weights, $c1w1$ and $c1w2$ are the first and second word of the first compound, respectively, and $c2w1$ and $c2w2$ are the same for the second compound, and $sim(X,Y)$ computes the semantic similarity of $X$ and $Y$. 
-
-\begin{algorithm}
-\caption{The pipeline on two two-word concepts.}\label{al:twocompoundpipeline}
-\begin{algorithmic}[1]
-	\Procedure{TwoCompoundPipeline}{c1w1, c1w2, c2w1, c2w2}
-		\State $\textit{simA} \gets \textit{TwoWordPipeline}(c1w2, c2w2)$
-		\State $\textit{simB} \gets \textit{TwoWordPipeline}(c1w1, c2w1)$
-		\State $\textit{simC1} \gets \textit{TwoWordPipeline}(c1w1, c2w2)$
-		\State $\textit{simC2} \gets \textit{TwoWordPipeline}(c1w2, c2w1)$
-		\State \Return $\alpha * \textit{simA} + \beta * \textit{simB} + \gamma * \textit{simC1} + \gamma * \textit{simC2}$
-	\EndProcedure
-\end{algorithmic}
-\end{algorithm}
-
-We have found that weights of $\alpha = 0.4$, $\beta = 0.1$, and $\gamma = 0.25$ deliver acceptable accuracy.
-
-\section{Evaluation Methodology}
 
 % Just semantic similarity
 Although there is no standard for computational evaluation of semantic similarity, there are generally three accepted methods \citep{meng2013review}.
