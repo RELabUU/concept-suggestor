@@ -63,6 +63,9 @@ class WordNetSimilarity(object):
         elif measure == "lin": # Lin
             similarity = synsetA.lin_similarity(synsetB, self.ic)
 
+        if similarity is None: # Can occur sometimes, I don't know exactly why. My guesstimate is that different types of words (i.e. verb & adjective) are compared and have no common subsumer or something like that.
+            return 0
+
         return similarity
 
     def ReloadSettings(self, measure):
