@@ -133,7 +133,8 @@ def TestCompoundHandler():
             break
 
 def TestExternalCompounds():
-    import numpy
+    print("Loading libraries...")
+    from scipy.stats.stats import pearsonr
     from CompoundHandler import CompoundHandler
     ch = CompoundHandler(settings)
     from JsonParser import JsonParser
@@ -145,15 +146,19 @@ def TestExternalCompounds():
            settings.LoadSettings()
            ch.ReloadSettings(settings)
 
+        expected = []
         results = []
 
         for value in data:
             print("== Comparing %s to %s. ==" % (value["one"], value["two"]))
             result = ch.GetSimilarity(value["one"], value["two"])
-            results.append(abs(value["sim"] - result))
             print("Similarity expected - found: %s - %s\n" % (value["sim"], result))
 
-        print("Average distance: %s - Standard deviation: %s" % (numpy.mean(results), numpy.std(results)))
+            expected.append(value["sim"])
+            results.append(result)
+
+        print("Pearson correlation, 2-tailed p-value:")
+        print(pearsonr(expected, results))
         print("==============================")
         print()
 
