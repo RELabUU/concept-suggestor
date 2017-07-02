@@ -92,7 +92,7 @@ NLTK offers six methods to calculate the similarity of two words \citep{pedersen
 \end{itemize}
 % TODO: Ensure that all the items above are not too similar to their primary source, http://www.nltk.org/howto/wordnet.html
 
-Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is found from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}. In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training Concept Suggestor for specific domains using domain-related corpora, but Information Content is an old technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}.
+Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is found from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}. In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training Concept Suggestor for specific domains using domain-related corpora, but Information Content is an old technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}. % TODO: Remove citations that do not support this statement.
 
 \begin{table}[h!]
 \centering
@@ -208,11 +208,11 @@ We have found that weights of $\alpha = 0.67$ and $\beta = 0.33$ deliver accepta
 When comparing a two-word compound to a two-word compound, there are four possible word-pairs that can be constructed using one word from each compound. In example, when comparing the compound ``Flight Level" to ``Emergency Altitude", the four word-pairs which can be constructed are ``Flight-Emergency", ``Flight-Altitude", ``Level-Emergency" and ``Level-Altitude".
 The formula used for computing the total similarity is 
 \begin{equation} \label{eq:2wordto2word}
-	\alpha * sim(c1w2, c2w2) + \beta * sim(c1w1, c2w1) + \gamma * sim(c1w1, c2w2) + \gamma * sim(c1w2, c2w1)
+	\gamma * sim(c1w2, c2w2) + \delta * sim(c1w1, c2w1) + \epsilon * sim(c1w1, c2w2) + \epsilon * sim(c1w2, c2w1)
 \end{equation}
-where $\alpha$, $\beta$, and $\gamma$ are the weights, $c1w1$ and $c1w2$ are the first and second word of the first compound, respectively, and $c2w1$ and $c2w2$ are the same for the second compound, and $sim(X,Y)$ computes the semantic similarity of $X$ and $Y$. 
+where $\gamma$, $\delta$, and $\epsilon$ are the weights, $c1w1$ and $c1w2$ are the first and second word of the first compound, respectively, and $c2w1$ and $c2w2$ are the same for the second compound, and $sim(X,Y)$ computes the semantic similarity of $X$ and $Y$. 
 
-We have found that weights of $\alpha = 0.4$, $\beta = 0.1$, and $\gamma = 0.25$ deliver acceptable accuracy.
+We have found that weights of $\gamma = 0.4$, $\delta = 0.1$, and $\epsilon = 0.25$ deliver acceptable accuracy.
 
 \section{Evaluation Methodology} \label{sec:evalmeth}
 
@@ -229,31 +229,31 @@ We have done our best to reduce these biases as much as possible, but keep in mi
 \centering
 \begin{tabular}{|c|c||c|}
 	\hline
-	First Compound & Second Compound & Human Rating \\
+	First Compound & Second Compound & Expert Similarity Rating \\
 	\hline
-	Flight Level & Flight Altitude & ? \\
-	Flight Attendant & Cabin Attendant & ? \\
-	Control Tower & Ground Control & ? \\
-	Passenger Airline & Passenger Aircraft & ? \\
-	Computer Terminal & Flight Terminal & ? \\
-	Police Officer & Security Officer & ? \\
-	Emergency Flight & Emergency Altitude & ? \\
-	Flight Course & Flight Plan & ? \\
-	Emergency Flight & Emergency Plan & ? \\
-	Business Plan & Emergency Plan & ? \\
-	Airplane Wing & Aeroplane Wing & ? \\
-	Business Plane & Business Sheet & ? \\
-	Flight Terminal & International Flight & ? \\
-	Intercontinental Flight & International Flight & ? \\
-	Baggage Check & Sales Figure & ? \\
-	Commercial Time & Revenue Loss & ? \\
-	Paid Leave & Maternal Leave & ? \\
-	Transit Airspace & Destination Aerodrome & ? \\
-	Aeronautical Meteorology & Aviation Meteorology & ? \\
-	Domestic Pilot & Flight Attendant & ? \\
+	Computer Terminal & Flight Terminal & 0.25 \\
+	Business Plan & Emergency Plan & 0.25 \\
+	Commercial Time & Revenue Loss & 0.00 \\
+	Paid Leave & Maternal Leave & 0.75 \\
+	Transit Airspace & Destination Aerodrome & 0.50 \\
+	Flight Attendant & Cabin Attendant & 1.00 \\
+	Intercontinental Flight & International Flight & 1.00 \\
+	Aeronautical Meteorology & Aviation Meteorology & 1.00 \\
+	Business Plane & Business Sheet & 1.00 \\
+	Emergency Flight & Emergency Altitude & 0.75 \\
+	Emergency Flight & Emergency Plan & 0.75 \\
+	Passenger Airline & Passenger Aircraft & 0.50 \\
+	Control Tower & Ground Control & 0.75 \\
+	Baggage Check & Sales Figure & 0.00 \\
+	Domestic Pilot & Flight Attendant & 0.75 \\
+	Airplane Wing & Aeroplane Wing & 1.00 \\
+	Flight Course & Flight Plan & 0.50 \\
+	Police Officer & Security Officer & 0.75 \\
+	Flight Level & Flight Altitude & 1.00 \\
+	Flight Terminal & International Flight & 0.00 \\
 	\hline
 \end{tabular}
-\caption{Human similarity rating of two-word compounds}
+\caption{Human expert similarity rating of two-word compounds}
 \label{table:humancompoundsimilarity}
 \end{table}
 
@@ -287,7 +287,7 @@ These are the conclusions.
 
 \section{Acknowledgements} \label{sec:ack}
 
-I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise, valuable guidance, and encouragement with me.
+I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise, valuable guidance, and encouragement with me. Special thanks to Fabiano Dalpiaz for sharing his expertise on the similarity of compound terms in the ATM domain.
 
 \printbibliography
 
