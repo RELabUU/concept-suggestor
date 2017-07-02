@@ -63,7 +63,8 @@ class WordNetSimilarity(object):
         elif measure == "lin": # Lin
             similarity = synsetA.lin_similarity(synsetB, self.ic)
 
-        if similarity is None: # Can occur sometimes, I don't know exactly why. My guesstimate is that different types of words (i.e. verb & adjective) are compared and have no common subsumer or something like that.
+        # Can occur when comparing adjectives or verbs. Adjectives have no hierarchy, so some similarity measures do not work. Verbs have several very short hierarchies, so sometimes paths can also not be found. More information: https://stackoverflow.com/questions/13555399/nltk-wordnet-similarity-returns-none-for-adjectives
+        if similarity is None: 
             return 0
 
         return similarity
