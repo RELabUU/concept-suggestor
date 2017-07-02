@@ -1,52 +1,102 @@
 [
 	{
-		"one": "Flight Altitude",
-		"two": "Flight Level",
-		"sim": 0.8
-	},
-	{
-		"one": "Emergency Flight",
-		"two": "Emergency Plan",
-		"sim": 0.4
-	},
-	{
-		"one": "Flight Level",
-		"two": "Emergency Altitude",
-		"sim": 0.4
-	},
-	{
-		"one": "Flight Course",
-		"two": "Flight Level",
-		"sim": 0.2
-	},
-	{
-		"one": "Pilot Training",
-		"two": "Cockpit Pressure",
-		"sim": 0.2
-	},
-	{
-		"one": "Police Officer",
-		"two": "Security Officer",
-		"sim": 0.6
-	},
-	{
 		"one": "Computer Terminal",
 		"two": "Flight Terminal",
-		"sim": 0.2
+		"sim": 0.25
+	},
+	{
+		"one": "Business Plan",
+		"two": "Emergency Plan",
+		"sim": 0.25
+	},
+	{
+		"one": "Commercial Time",
+		"two": "Revenue Loss",
+		"sim": 0.0
+	},
+	{
+		"one": "Paid Leave",
+		"two": "Maternal Leave",
+		"sim": 0.75
+	},
+	{
+		"one": "Transit Airspace",
+		"two": "Destination Aerodrome",
+		"sim": 0.5
 	},
 	{
 		"one": "Flight Attendant",
 		"two": "Cabin Attendant",
-		"sim": 0.8
+		"sim": 1.0
+	},
+	{
+		"one": "Intercontinental Flight",
+		"two": "International Flight",
+		"sim": 1.0
+	},
+	{
+		"one": "Aeronautical Meteorology",
+		"two": "Aviation Meteorology",
+		"sim": 1.0
+	},
+	{
+		"one": "Business Plane",
+		"two": "Business Sheet",
+		"sim": 1.0
+	},
+	{
+		"one": "Emergency Flight",
+		"two": "Emergency Altitude",
+		"sim": 0.75
+	},
+	{
+		"one": "Emergency Flight",
+		"two": "Emergency Plan",
+		"sim": 0.75
 	},
 	{
 		"one": "Passenger Airline",
 		"two": "Passenger Aircraft",
-		"sim": 0.6
+		"sim": 0.5
 	},
 	{
 		"one": "Control Tower",
 		"two": "Ground Control",
-		"sim": 0.6
+		"sim": 0.75
+	},
+	{
+		"one": "Baggage Check",
+		"two": "Sales Figure",
+		"sim": 0.0
+	},
+	{
+		"one": "Domestic Pilot",
+		"two": "Flight Attendant",
+		"sim": 0.75
+	},
+	{
+		"one": "Airplane Wing",
+		"two": "Aeroplane Wing",
+		"sim": 1.0
+	},
+	{
+		"one": "Flight Course",
+		"two": "Flight Plan",
+		"sim": 0.5
+	},
+	{
+		"one": "Police Officer",
+		"two": "Security Officer",
+		"sim": 0.75
+	},
+	{
+		"one": "Flight Level",
+		"two": "Flight Altitude",
+		"sim": 1.0
+	},
+	{
+		"one": "Flight Terminal",
+		"two": "International Flight",
+		"sim": 0.0
 	}
 ]
