@@ -33,11 +33,11 @@ class CompoundHandler(object):
         elif compoundAisCompound is True and compoundBisCompound is not True:
             # print("Comparing %s to %s:" % (wordsA[0], wordsB[0])) # DEBUG
             similarityA = self.sc.GetSimilarity(wordsA[0], wordsB[0]) # Flight - Altitude
-            print("similarityA: %s <> %s = %f" % (wordsA[0], wordsB[0], similarityB)) # DEBUG
+            print("similarityA: %s <> %s = %f" % (wordsA[0], wordsB[0], similarityA)) # DEBUG
 
             # print("Comparing %s to %s:" % (wordsA[1], wordsB[0])) # DEBUG
             similarityB = self.sc.GetSimilarity(wordsA[1], wordsB[0]) # Level - Altitude
-            print("similarityB: %s <> %s = %f" % (wordsA[1], wordsB[0], similarityA)) # DEBUG
+            print("similarityB: %s <> %s = %f" % (wordsA[1], wordsB[0], similarityB)) # DEBUG
 
             similarity = (self.s.Alpha * similarityA + 
                           self.s.Beta * similarityB)
@@ -49,11 +49,11 @@ class CompoundHandler(object):
         elif compoundAisCompound is not True and compoundBisCompound is True:
             # print("Comparing %s to %s:" % (wordsA[0], wordsB[0])) # DEBUG
             similarityA = self.sc.GetSimilarity(wordsA[0], wordsB[0]) # Level - Flight
-            print("similarityA: %s <> %s = %f" % (wordsA[0], wordsB[0], similarityB)) # DEBUG
+            print("similarityA: %s <> %s = %f" % (wordsA[0], wordsB[0], similarityA)) # DEBUG
 
             # print("Comparing %s to %s:" % (wordsA[0], wordsB[1])) # DEBUG
             similarityB = self.sc.GetSimilarity(wordsA[0], wordsB[1]) # Level - Altitude
-            print("similarityB: %s <> %s = %f" % (wordsA[0], wordsB[1], similarityA)) # DEBUG
+            print("similarityB: %s <> %s = %f" % (wordsA[0], wordsB[1], similarityB)) # DEBUG
 
             similarity = (self.s.Alpha * similarityA + 
                           self.s.Beta * similarityB)
@@ -65,11 +65,11 @@ class CompoundHandler(object):
         else:
             # print("Comparing %s to %s:" % (wordsA[0], wordsB[0])) # DEBUG
             similarityC = self.sc.GetSimilarity(wordsA[0], wordsB[0]) # Flight - Flight
-            print("similarityC: %s <> %s = %f" % (wordsA[0], wordsB[0], similarityD)) # DEBUG
+            print("similarityC: %s <> %s = %f" % (wordsA[0], wordsB[0], similarityC)) # DEBUG
 
             # print("Comparing %s to %s:" % (wordsA[1], wordsB[1])) # DEBUG
             similarityD = self.sc.GetSimilarity(wordsA[1], wordsB[1]) # Level - Altitude
-            print("similarityD: %s <> %s = %f" % (wordsA[1], wordsB[1], similarityC)) # DEBUG
+            print("similarityD: %s <> %s = %f" % (wordsA[1], wordsB[1], similarityD)) # DEBUG
 
             # print("Comparing %s to %s:" % (wordsA[0], wordsB[1])) # DEBUG
             similarityEa = self.sc.GetSimilarity(wordsA[0], wordsB[1]) # Flight - Altitude
