@@ -115,18 +115,7 @@ Table \ref{table:wordnetsimilarity} shows the results of each similarity measure
 
 \subsection{The Pipeline}
 
-Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} are the two lowest-level algorithms. They determine synonymity and similarity of two words.
-
-\begin{algorithm}
-\caption{Determine synonymity of two words.}\label{al:synonymity}
-\begin{algorithmic}[1]
-	\Procedure{DetermineSynonymity}{wordA, wordB}
-		\State $\textit{synsA} \gets \textit{WordNetSynsets}(wordA)$
-		\State $\textit{synsB} \gets \textit{WordNetSynsets}(wordB)$
-		\State \Return $\textit{HasOverlap}(synsA, synsB)$
-	\EndProcedure
-\end{algorithmic}
-\end{algorithm}
+The first building block of the pipeline, algorithm \ref{al:semanticsimilarity}, compares the similarity of two words to each other. It computes a similarity rating using both SpaCy and NLTK and returns a weighted average of both results, where $\lambda$ is the weight of SpaCy and $\mu$ is the weight of NLTK. The result is between 0 and 1, where indicates the two words are dissimilar, and 1 indicates the two words are similar.
 
 \begin{algorithm}
 \caption{Determine similarity of two words.}\label{al:semanticsimilarity}
@@ -139,7 +128,20 @@ Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} are the two lowes
 \end{algorithmic}
 \end{algorithm}
 
-Algorithm \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to construct algorithm \ref{al:twowordpipeline}, the pipeline for two single-word concepts.
+The second building block of the pipeline, algorithm \ref{al:synonymity}, determines whether two words are synonyms. It requests the synsets of both words from WordNet, and looks for any matching synset between the two. If a match is found, the two words are possibly synonyms and the algorithm returns \textit{true}. If no match is found, the algorithm returns \textit{false}.
+
+\begin{algorithm}
+\caption{Determine synonymity of two words.}\label{al:synonymity}
+\begin{algorithmic}[1]
+	\Procedure{DetermineSynonymity}{wordA, wordB}
+		\State $\textit{synsA} \gets \textit{WordNetSynsets}(wordA)$
+		\State $\textit{synsB} \gets \textit{WordNetSynsets}(wordB)$
+		\State \Return $\textit{HasOverlap}(synsA, synsB)$
+	\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to construct algorithm \ref{al:twowordpipeline}, the pipeline for two single-word concepts.  When using only SpaCy and NLTK, words that are similar and also synonyms can have the same similarity score as words that are similar and not synonyms. Algorithm \ref{al:twowordpipeline} aims to ensure that similar words that are synonyms have the highest similarity score possible. If the similarity score from algorithm \ref{al:semanticsimilarity} is above a certain threshold, algorithm \ref{al:synonymity} is used to determine whether the two words are synonyms. The threshold ensures that words that are semantically dissimilar, but synonyms in certain contexts, such as ``plane" and ``sheet" do not get the highest similarity score possible. If the two words are synonyms, this algorithm changes their similarity score to 1. If the two words are not synonyms, the result from algorithm \ref{al:semanticsimilarity} is passed on.
 
 \begin{algorithm}
 \caption{The pipeline on two single-word concepts.}\label{al:twowordpipeline}
@@ -156,14 +158,15 @@ Algorithm \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to con
 \end{algorithmic}
 \end{algorithm}
 
-Finally, algorithm \ref{al:twowordpipeline} can be used for building algorithm \ref{al:onetwocompoundpipeline}, an algorithm that compares a single-word concept to a two-word concept and for building algorithm \ref{al:twocompoundpipeline}, an algorithm that compares a two-word concept to another two-word concept.
+% YOU ARE HERE. TODO: Expand on the piece below a little. Talk about the weights, what they mean, what other abbreviations (c1w2 etc) mean, etc. Same as above.
+Finally, algorithm \ref{al:twowordpipeline} can be used for building algorithm \ref{al:onetwocompoundpipeline} and \ref{al:twocompoundpipeline}, algorithms that determine the similarity score of compound concepts.
 
 \begin{algorithm}
 \caption{The pipeline on one one-word concept and one two-word concept.}\label{al:onetwocompoundpipeline}
 \begin{algorithmic}[1]
 	\Procedure{OneTwoCompoundPipeline}{c1, c2w1, c2w2}
-		\State $\textit{simA} \gets \textit{TwoWordPipeline}(c1, c2w2)$
-		\State $\textit{simB} \gets \textit{TwoWordPipeline}(c1, c2w1)$
+		\State $\textit{simA} \gets \textit{TwoWordPipeline}(c1, c2w1)$
+		\State $\textit{simB} \gets \textit{TwoWordPipeline}(c1, c2w2)$
 		\State \Return $\alpha * \textit{simA} + \beta * \textit{simB}$
 	\EndProcedure
 \end{algorithmic}
@@ -173,11 +176,11 @@ Finally, algorithm \ref{al:twowordpipeline} can be used for building algorithm \
 \caption{The pipeline on two two-word concepts.}\label{al:twocompoundpipeline}
 \begin{algorithmic}[1]
 	\Procedure{TwoCompoundPipeline}{c1w1, c1w2, c2w1, c2w2}
-		\State $\textit{simA} \gets \textit{TwoWordPipeline}(c1w2, c2w2)$
-		\State $\textit{simB} \gets \textit{TwoWordPipeline}(c1w1, c2w1)$
-		\State $\textit{simC1} \gets \textit{TwoWordPipeline}(c1w1, c2w2)$
-		\State $\textit{simC2} \gets \textit{TwoWordPipeline}(c1w2, c2w1)$
-		\State \Return $\gamma * \textit{simA} + \delta * \textit{simB} + \epsilon * \textit{simC1} + \epsilon * \textit{simC2}$
+		\State $\textit{simC} \gets \textit{TwoWordPipeline}(c1w1, c2w1)$
+		\State $\textit{simD} \gets \textit{TwoWordPipeline}(c1w2, c2w2)$
+		\State $\textit{simE1} \gets \textit{TwoWordPipeline}(c1w1, c2w2)$
+		\State $\textit{simE2} \gets \textit{TwoWordPipeline}(c1w2, c2w1)$
+		\State \Return $\gamma * \textit{simC} + \delta * \textit{simD} + \epsilon * \textit{simE1} + \epsilon * \textit{simE2}$
 	\EndProcedure
 \end{algorithmic}
 \end{algorithm}
