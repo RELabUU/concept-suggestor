@@ -75,7 +75,7 @@ The similarity function of SpaCy, henceforth called $\textit{SpacySimilarity}$, 
 Although NLTK is an often-used library for NLP purposes, Concept Suggestor uses only the WordNet interface, so this subsection will focus primarily on WordNet. WordNet is a public electronic lexical database that began in the mid-1980s in the Princeton University Department of Psychology and has been regularly updated and improved since then. 
 % The similarity function of NLTK, henceforth called $\textit{WordNetSimilarity}$ returns a score between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. This score is based on the shortest path that connects the senses using only hypernym or hyponym relationships.
 
-NLTK offers six methods to calculate the similarity of two words \citep{pedersen2004wordnet}. Of the six, three use Information Content (IC), information about the meaning and usage of words \cite{seco2004intrinsic}. Four use the Least Common Subsumer (LCS), the most specific concept which is an ancestor of both words. The six methods are further explained and compared to each other below.
+NLTK offers six methods to calculate the similarity of two words \citep{pedersen2004wordnet}, henceforth called $\textit{WordnetSimilarity}$. Of the six, three use Information Content (IC), information about the meaning and usage of words \cite{seco2004intrinsic}. Four use the Least Common Subsumer (LCS), the most specific concept which is an ancestor of both words. The six methods are further explained and compared to each other below.
 \begin{itemize}
 	\item Path Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses traversing only hypernym and hyponym relationships. The score is in the range 0 to 1, where 0 indicates dissimilarity and 1 indicates similarity.
 	\item Leacock-Chodorow Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses (as above) and the maximum depth of the taxonomy in which the senses occur. The relationship is given as \(-log(p/2d)\) where p is the shortest path length and d the taxonomy depth. % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
@@ -115,7 +115,7 @@ Table \ref{table:wordnetsimilarity} shows the results of each similarity measure
 
 \subsection{The Pipeline}
 
-The first building block of the pipeline, algorithm \ref{al:semanticsimilarity}, compares the similarity of two words to each other. It computes a similarity rating using both SpaCy and NLTK and returns a weighted average of both results, where $\lambda$ is the weight of SpaCy and $\mu$ is the weight of NLTK. The result is between 0 and 1, where indicates the two words are dissimilar, and 1 indicates the two words are similar.
+The first building block of the pipeline, algorithm \ref{al:semanticsimilarity}, compares the similarity of two words to each other. It computes a similarity rating using both $\textit{SpacySimilarity}$ and $\textit{WordnetSimilarity}$ and returns a weighted average of both results, where $\lambda$ is the weight of $\textit{SpacySimilarity}$ and $\mu$ is the weight of $\textit{WordnetSimilarity}$. The result is between 0 and 1, where indicates the two words are dissimilar, and 1 indicates the two words are similar.
 
 \begin{algorithm}
 \caption{Determine similarity of two words.}\label{al:semanticsimilarity}
@@ -315,7 +315,9 @@ The experiments to find the best values for $\lambda$ and $\mu$ can be found in 
 
 \section{Conclusions} \label{sec:conclusions}
 
-These are the conclusions.
+The performance of Concept Suggestor is mediocre. Using the best parameters, a Pearson correlation score of 0.613 is reached with human expert estimates. Concept Suggestor works better using just the similarity algorithm of SpaCy, and leaving the similarity algorithm of NLTK out.
+
+Future research could investigate whether training SpaCy on a domain-specific corpus will improve the performance of Concept Suggestor.
 
 \section{Acknowledgements} \label{sec:ack}
 
