@@ -188,14 +188,16 @@ Algorithm \ref{al:twocompoundpipeline} determines the similarity between two two
 
 \section{Evaluation Methodology} \label{sec:evalmeth}
 
-In our estimates of threats to hidden biases in the compound terms, we have discovered four possible sources of bias:
+We aim to find the best values for $\lambda$, $\mu$, $\alpha$, $\beta$, $\gamma$, $\delta$, and $\epsilon$. Because $\alpha$, $\beta$, $\gamma$, $\delta$, and $\epsilon$ are dependent on $\lambda$ and $\mu$, we have taken values of $\lambda = 0.65$ and $\mu = 0.35$ from Lee et al. as a starting point \cite{lee2016combining}. To find the best values for $\gamma$, $\delta$, and $\epsilon$, we decided to test algorithm \ref{al:twocompoundpipeline} on a variety of two-word concept combinations, and compare the results to the similarity score estimated by human experts.
+
+As there is very little research on the similarity of compound terms, there are no existing proven and tested datasets. For this research, we have had to create our own. In creating this dataset, we have determined four possible sources of bias:
 \begin{itemize}
 	\item Many compound terms have identical or similar first words.
 	\item Many compound terms have identical or similar second words.
 	\item Many compound terms have identical or similar diagonal relationships.
 	\item Many compound terms have similar estimated similarity.
 \end{itemize}
-We have done our best to reduce these biases as much as possible, but keep in mind that no matter how careful a researcher can be, there are always threats to validity.
+We have attempted to reduce these biases as much as possible in our dataset.
 
 \begin{table}[h!]
 \centering
@@ -229,29 +231,58 @@ We have done our best to reduce these biases as much as possible, but keep in mi
 \label{table:humancompoundsimilarity}
 \end{table}
 
+We will compare the Pearson correlation of algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\gamma$, $\delta$, and $\epsilon$. During the experiments, we will ensure that $\gamma + \delta + 2 * \epsilon = 1$ so that the total weighted similarity is in the range $0..1$. All the tested values of $\gamma$, $\delta$, and $\epsilon$ can be found in table \ref{table:results}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% EVERYTHING BELOW SUBJECT TO REMOVAL %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Just semantic similarity
-Although there is no standard for computational evaluation of semantic similarity, there are generally three accepted methods \citep{meng2013review}.
+%Although there is no standard for computational evaluation of semantic similarity, there are generally three accepted methods \citep{meng2013review}.
 
-Firstly, a theoretical examination of a computational measure can be made for those mathematical properties thought desirable, such as whether it is a metric, whether its parameter-projections are smooth functions, and so on. % TODO: Find out exactly what this means & rephrase it so I understand. It's quite complex language. Taken from meng2013review
+%Firstly, a theoretical examination of a computational measure can be made for those mathematical properties thought desirable, such as whether it is a metric, whether its parameter-projections are smooth functions, and so on. % TODO: Find out exactly what this means & rephrase it so I understand. It's quite complex language. Taken from meng2013review
 
-Secondly, the coefficients of correlation with human judgement can be calculated, measured, and compared \citep{zhou2008new,seco2004intrinsic}.
+%Secondly, the coefficients of correlation with human judgement can be calculated, measured, and compared \citep{zhou2008new,seco2004intrinsic}.
 
-Thirdly, if an application requires a measure of semantic similarity, we can compare the performance of different measures, while all other aspects of the application remain constant, to find the most effective measure \citep{blanchard2006tree,budanitsky2006evaluating}. % TODO: Explain each method in more detail.
+%Thirdly, if an application requires a measure of semantic similarity, we can compare the performance of different measures, while all other aspects of the application remain constant, to find the most effective measure \citep{blanchard2006tree,budanitsky2006evaluating}. % TODO: Explain each method in more detail.
 
 % Semantic similarity and relatedness
-The techniques for measuring semantic similarity and relatedness can be roughly categorized into two main categories \citep{agirre2009study}: Those that rely on pre-existing knowledge, such as thesauri, encyclopedias, and semantic networks \citep{alvarez2007graph,yang2005measuring,hughes2007lexical}, and those inducing distributional properties of words from corpora \citep{sahami2006web,chen2006novel,bollegala2007measuring}.
+%The techniques for measuring semantic similarity and relatedness can be roughly categorized into two main categories \citep{agirre2009study}: Those that rely on pre-existing knowledge, such as thesauri, encyclopedias, and semantic networks \citep{alvarez2007graph,yang2005measuring,hughes2007lexical}, and those inducing distributional properties of words from corpora \citep{sahami2006web,chen2006novel,bollegala2007measuring}.
 
 
 % Below is subject matter that I want to have handled in this section.
-\begin{itemize}
-	\item How to measure similarity in concepts used in the various domain-specific models?
-	\item How to determine which are relevant concepts from other models that should be suggested to a modeler in order to improve the alignment between the models?
-	\item How to determine which are relevant concepts from elsewhere that might improve alignment between the models?
-\end{itemize}
+%\begin{itemize}
+%	\item How to measure similarity in concepts used in the various domain-specific models?
+%	\item How to determine which are relevant concepts from other models that should be suggested to a modeler in order to improve the alignment between the models?
+%	\item How to determine which are relevant concepts from elsewhere that might improve alignment between the models?
+%\end{itemize}
 
 \section{Experiments} \label{sec:experiments}
 
-These are the experiments.
+To determine the best values for $\lambda$ and $\mu$, we looked at this table and decided to test various values of $\lambda$ and $\mu$ on the best performing values of $\gamma$, $\delta$, and $\epsilon$. We ensured that $\lambda + \mu = 1$ so that the total weighted similarity is in the range 0..1.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c||c|}
+	\hline
+	$\lambda$ & $\mu$ & Pearson Correlation \\
+	\hline
+	1.0 & 0.0 & 0.613 \\
+	0.9 & 0.1 & 0.605 \\
+	0.8 & 0.2 & 0.595 \\
+	0.7 & 0.3 & 0.583 \\
+	0.6 & 0.4 & 0.570 \\
+	0.5 & 0.5 & 0.554 \\
+	0.4 & 0.6 & 0.536 \\
+	0.3 & 0.7 & 0.516 \\
+	0.2 & 0.8 & 0.495 \\
+	0.1 & 0.9 & 0.473 \\
+	0.0 & 1.0 & 0.450 \\
+	\hline
+\end{tabular}
+\caption{Experiment results for $\lambda$ and $\mu$ with $\gamma = 0.5$, $\delta = 0.4$ and $\epsilon = 0.05$}
+\label{table:lambdamuresults}
+\end{table}
 
 \section{Conclusions} \label{sec:conclusions}
 
@@ -262,5 +293,107 @@ These are the conclusions.
 I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise, valuable guidance, and encouragement with me. Special thanks to Fabiano Dalpiaz for sharing his expertise on the similarity of compound terms in the ATM domain.
 
 \printbibliography
+
+\section{Appendix}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c||c|}
+	\hline
+	$\gamma$ & $\delta$ & $\epsilon$ & Pearson Correlation \\
+	\hline
+	\hline
+	0.0 & 0.0 & 0.5 & -0.0761 \\
+	0.0 & 0.1 & 0.45 & 0.00349 \\
+	0.0 & 0.2 & 0.4 & 0.0927 \\
+	0.0 & 0.3 & 0.35 & 0.167 \\
+	0.0 & 0.4 & 0.3 & 0.215 \\ 
+	0.0 & 0.5 & 0.25 & 0.243 \\
+	0.0 & 0.6 & 0.2 & 0.259 \\
+	0.0 & 0.7 & 0.15 & 0.267 \\
+	0.0 & 0.8 & 0.1 & 0.272 \\
+	0.0 & 0.9 & 0.05 & 0.275 \\
+	0.0 & 1.0 & 0.0 & 0.277 \\
+	\hline
+	0.1 & 0.0 & 0.45 & 0.400 \\
+	0.1 & 0.1 & 0.4 & 0.146 \\
+	0.1 & 0.2 & 0.35 & 0.254 \\
+	0.1 & 0.3 & 0.3 & 0.322 \\
+	0.1 & 0.4 & 0.25 & 0.349 \\
+	0.1 & 0.5 & 0.2 & 0.354 \\
+	0.1 & 0.6 & 0.15 & 0.350 \\
+	0.1 & 0.7 & 0.1 & 0.344 \\
+	0.1 & 0.8 & 0.05 & 0.339 \\
+	0.1 & 0.9 & 0.0 & 0.333 \\
+	\hline
+	0.2 & 0.0 & 0.4 & 0.163 \\
+	0.2 & 0.1 & 0.35 & 0.290 \\
+	0.2 & 0.2 & 0.3 & 0.407 \\
+	0.2 & 0.3 & 0.25 & 0.463 \\
+	0.2 & 0.4 & 0.2 & 0.470 \\
+	0.2 & 0.5 & 0.15 & 0.454 \\
+	0.2 & 0.6 & 0.1 & 0.434 \\
+	0.2 & 0.7 & 0.05 & 0.416 \\
+	0.2 & 0.8 & 0.0 & 0.400 \\
+	\hline
+	0.3 & 0.0 & 0.35 & 0.259 \\
+	0.3 & 0.1 & 0.3 & 0.383 \\
+	0.3 & 0.2 & 0.25 & 0.490 \\
+	0.3 & 0.3 & 0.2 & 0.544 \\
+	0.3 & 0.4 & 0.15 & 0.546 \\
+	0.3 & 0.5 & 0.1 & 0.525 \\
+	0.3 & 0.6 & 0.05 & 0.499 \\
+	0.3 & 0.7 & 0.0 & 0.474 \\
+	\hline
+\end{tabular}
+\caption{Experiment results for $\gamma$, $\delta$, and $\epsilon$ with $\lambda = 0.65$ and $\mu = 0.35$, part one}
+\label{table:gammaresults1}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|c||c|}
+	\hline
+	$\gamma$ & $\delta$ & $\epsilon$ & Pearson Correlation \\
+	\hline
+	0.4 & 0.0 & 0.3 & 0.317 \\
+	0.4 & 0.1 & 0.25 & 0.423 \\
+	0.4 & 0.2 & 0.2 & 0.513 \\
+	0.4 & 0.3 & 0.15 & 0.564 \\
+	\textbf{0.4} & \textbf{0.4} & \textbf{0.1} & \textbf{0.576} \\
+	0.4 & 0.5 & 0.05 & 0.563 \\
+	0.4 & 0.6 & 0.0 & 0.540 \\
+	\hline
+	0.5 & 0.0 & 0.25 & 0.349 \\
+	0.5 & 0.1 & 0.2 & 0.436 \\
+	0.5 & 0.2 & 0.15 & 0.509 \\
+	0.5 & 0.3 & 0.1 & 0.557 \\
+	\textbf{0.5} & \textbf{0.4} & \textbf{0.05} & \textbf{0.577} \\
+	0.5 & 0.5 & 0.0 & 0.574 \\
+	\hline
+	0.6 & 0.0 & 0.2 & 0.366 \\
+	0.6 & 0.1 & 0.15 & 0.437 \\
+	0.6 & 0.2 & 0.1 & 0.498 \\
+	0.6 & 0.3 & 0.05 & 0.542 \\
+	0.6 & 0.4 & 0.0 & 0.566 \\
+	\hline
+	0.7 & 0.0 & 0.15 & 0.376 \\
+	0.7 & 0.1 & 0.1 & 0.435 \\
+	0.7 & 0.2 & 0.05 & 0.486 \\
+	0.7 & 0.3 & 0.0 & 0.526 \\
+	\hline
+	0.8 & 0.0 & 0.1 & 0.381 \\
+	0.8 & 0.1 & 0.05 & 0.431 \\
+	0.8 & 0.2 & 0.0 & 0.476 \\
+	\hline
+	0.9 & 0.0 & 0.05 & 0.384 \\
+	0.9 & 0.1 & 0.0 & 0.427 \\
+	\hline
+	1.0 & 0.0 & 0.0 & 0.385 \\
+	\hline
+\end{tabular}
+\caption{Experiment results for $\gamma$, $\delta$, and $\epsilon$ with $\lambda = 0.65$ and $\mu = 0.35$, part two}
+\label{table:gammaresults2}
+\end{table}
 
 \end{document}

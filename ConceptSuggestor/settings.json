@@ -9,11 +9,11 @@
 	"useSynonymity": true,
 	
 	"_comment": "These are the weights that are given to SpaCy's similarity() and WordNet's similarity().",
-	"spacyWeight": 0.5,
-	"wordnetWeight": 0.5,
+	"spacyWeight": 1.0,
+	"wordnetWeight": 0.0,
 	
 	"_comment": "This value is used as a threshold for similarity value indicating possible synonymity.",
-	"similarityThreshold": 0.7,
+	"similarityThreshold": 0.6,
 	
 	"_comment": "Used for comparing compound terms to single-word terms",
 	"_comment": "Alpha + beta = 1",
@@ -22,9 +22,9 @@
 	
 	"_comment": "Used for comparing compound terms to compound terms",
 	"_comment": "Gamma + delta + 2(epsilon) = 1",
-	"gamma": 0.4,
-	"delta": 0.1,
-	"epsilon": 0.25,
+	"gamma": 0.5,
+	"delta": 0.4,
+	"epsilon": 0.05,
 	
 	"_comment": "In the thesis, gamma = Alpha, delta = Beta and epsilon = Gamma."
 }
