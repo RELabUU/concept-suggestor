@@ -188,7 +188,7 @@ Algorithm \ref{al:twocompoundpipeline} determines the similarity between two two
 
 \section{Evaluation Methodology} \label{sec:evalmeth}
 
-We aim to find the best values for $\lambda$, $\mu$, $\alpha$, $\beta$, $\gamma$, $\delta$, and $\epsilon$. Because $\alpha$, $\beta$, $\gamma$, $\delta$, and $\epsilon$ are dependent on $\lambda$ and $\mu$, we have taken values of $\lambda = 0.65$ and $\mu = 0.35$ from Lee et al. as a starting point \cite{lee2016combining}. To find the best values for $\gamma$, $\delta$, and $\epsilon$, we decided to test algorithm \ref{al:twocompoundpipeline} on a variety of two-word concept combinations, and compare the results to the similarity score estimated by human experts.
+We aim to find the best values for $\lambda$, $\mu$, $\alpha$, $\beta$, $\gamma$, $\delta$, and $\epsilon$. To find the best values for $\gamma$, $\delta$, and $\epsilon$, we decided to test algorithm \ref{al:twocompoundpipeline} on a variety of two-word concept combinations, and compare the results to the similarity score estimated by human experts.
 
 As there is very little research on the similarity of compound terms, there are no existing proven and tested datasets. For this research, we have had to create our own. In creating this dataset, we have determined four possible sources of bias:
 \begin{itemize}
@@ -197,7 +197,7 @@ As there is very little research on the similarity of compound terms, there are 
 	\item Many compound terms have identical or similar diagonal relationships.
 	\item Many compound terms have similar estimated similarity.
 \end{itemize}
-We have attempted to reduce these biases as much as possible in our dataset.
+We have attempted to reduce these biases as much as possible in our dataset, which can be found below in table \ref{table:humancompoundsimilarity}.
 
 \begin{table}[h!]
 \centering
@@ -231,7 +231,11 @@ We have attempted to reduce these biases as much as possible in our dataset.
 \label{table:humancompoundsimilarity}
 \end{table}
 
-We will compare the Pearson correlation of algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\gamma$, $\delta$, and $\epsilon$. During the experiments, we will ensure that $\gamma + \delta + 2 * \epsilon = 1$ so that the total weighted similarity is in the range $0..1$. All the tested values of $\gamma$, $\delta$, and $\epsilon$ can be found in table \ref{table:results}.
+Values for $\gamma$, $\delta$, and $\epsilon$ are needed to test values for $\lambda$ and $\mu$ and vice-versa. We have decided to first find the optimal values for $\gamma$, $\delta$, and $\epsilon$ using values of $\lambda = 0.65$ and $\mu = 0.35$ from Lee et al. as a starting point \cite{lee2016combining}, and afterwards find optimal values for $\lambda$ and $\mu$ using the results of the first experiment.
+
+We will compare the Pearson correlation of algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\gamma$, $\delta$, and $\epsilon$. We will test all possible values of $\gamma$ and $\delta$ with intervals of 0.1 in the range 0..1. We will ensure that $\gamma + \delta + 2 * \epsilon = 1$ so that the total weighted similarity is in the range 0..1. All the tested values of $\gamma$, $\delta$, and $\epsilon$ can be found in table \ref{table:gammaresults1} and \ref{table:gammaresults2} in the appendix. 
+
+After finding the optimal values of $\gamma$, $\delta$, and $\epsilon$, we will search for the optimal values of $\lambda$ and $\mu$. We will compare the Pearson correlation of algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\lambda$ and $\mu$. We will test all possible values of $\lambda$ and $\mu$ with intervals of 0.1 in the range 0..1. We will ensure that $\lambda + \mu = 1$ so that the total weighted similarity is in the range 0..1. All the tested values of $\lambda$ and $\mu$ can be found in table \ref{table:lambdamuresults}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% EVERYTHING BELOW SUBJECT TO REMOVAL %%%
