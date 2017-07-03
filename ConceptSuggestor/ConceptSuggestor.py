@@ -19,6 +19,7 @@ def GetProgramMode():
     print("e - Compares two possibly compound terms and returns the similarity between them.")
     print("f - Tests compound terms found in compound_concepts.json for similarity.")
     print("g - Full pipeline. Determines whether two words are similar enough but not synonyms.")
+    print("h - Tests compound terms found in compound_concepts.json for similarity, but uses only random results.")
 
     # Get the program mode from the user and ensure it's valid.
     choice = input("Please tell me what to do (type a letter): ").lower()
@@ -48,6 +49,8 @@ def Main():
         TestExternalCompounds()
     elif choice == "g":
         TestPipeline()
+    elif choice == "h":
+        TestExternalCompoundsRandom()
     else:
         print("Invalid mode. Aborting.")
 
@@ -165,6 +168,34 @@ def TestExternalCompounds():
         if not TryAgain():
             break
 
+def TestExternalCompoundsRandom():
+    print("Loading libraries...")
+    from numpy import random
+    from scipy.stats.stats import pearsonr
+    from JsonParser import JsonParser
+    jp = JsonParser()
+    data = jp.LoadFile(COMPOUNDSFILE)
+
+    while True:
+        expected = []
+        results = []
+
+        for value in data:
+            print("== Comparing %s to %s. ==" % (value["one"], value["two"]))
+            result = random.uniform(0.0, 1.0)
+            print("Similarity expected - found: %s - %s\n" % (value["sim"], result))
+
+            expected.append(value["sim"])
+            results.append(result)
+
+        print("Pearson correlation, 2-tailed p-value:")
+        print(pearsonr(expected, results))
+        print("==============================")
+        print()
+
+        if not TryAgain():
+            break
+
 def TestPipeline():
     from SimilarityCalculator import SimilarityCalculator
     sc = SimilarityCalculator(settings)
@@ -195,7 +226,7 @@ def TestPipeline():
             break
 
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g"):
+    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g" or choice=="h"):
         return True
     else:
         return False
