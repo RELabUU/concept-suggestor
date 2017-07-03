@@ -158,8 +158,7 @@ Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to co
 \end{algorithmic}
 \end{algorithm}
 
-% YOU ARE HERE. TODO: Expand on the piece below a little. Talk about the weights, what they mean, what other abbreviations (c1w2 etc) mean, etc. Same as above.
-Finally, algorithm \ref{al:twowordpipeline} can be used for building algorithm \ref{al:onetwocompoundpipeline} and \ref{al:twocompoundpipeline}, algorithms that determine the similarity score of compound concepts.
+Finally, algorithm \ref{al:twowordpipeline} can be used for building algorithm \ref{al:onetwocompoundpipeline} and \ref{al:twocompoundpipeline}, algorithms that determine the similarity score of compound concepts. Algorithm \ref{al:onetwocompoundpipeline} deterines the similarity between a one-word concept and a two-word concept. In the algorithm $c1$ stands for compound one, the one-word concept. $c2w1$ and $c2w2$ stand for the first and second word of the second compound. Algorithm \ref{al:onetwocompoundpipeline} uses two weights, $\alpha$ and $\beta$, which determine how significant the similarity between two words is for determining the final similarity score.
 
 \begin{algorithm}
 \caption{The pipeline on one one-word concept and one two-word concept.}\label{al:onetwocompoundpipeline}
@@ -171,6 +170,8 @@ Finally, algorithm \ref{al:twowordpipeline} can be used for building algorithm \
 	\EndProcedure
 \end{algorithmic}
 \end{algorithm}
+
+Algorithm \ref{al:twocompoundpipeline} determines the similarity between two two-word concepts. In the algorithm $c1w1$ and $c1w2$ stand for the first and second word of the first compound, and $c2w1$ and $c2w2$ for the first and second word of the second compound. Algorithm \ref{al:twocompoundpipeline} uses three weights, $\gamma$, $\delta$, and $\epsilon$, which determine how significant the similarity is between two words for determining the final similarity. $\gamma$ determines the weight of the similarity between $c1w1$ and $c2w1$, $\delta$ determines the weight of the similarity between $c1w2$ and $c2w2$, and $\epsilon$ determines the weight of the similarity between the diagonal relationships $c1w1$-$c2w2$ and $c1w2$-$c2w1$.
 
 \begin{algorithm}
 \caption{The pipeline on two two-word concepts.}\label{al:twocompoundpipeline}
@@ -184,38 +185,6 @@ Finally, algorithm \ref{al:twowordpipeline} can be used for building algorithm \
 	\EndProcedure
 \end{algorithmic}
 \end{algorithm}
-
-% ==============================================
-% === EVERYTHING BELOW IS SUBJECT TO REMOVAL === Sort of, at least in this section.
-% ==============================================
-
-\subsection{Semantic Similarity of Two-Word Compounds}
-
-To compute the overall semantic similarity of two-word compounds, the semantic similarity of each possible word-pair constructed with one word from each compound is calculated as above, and the weighted average of all these semantic similarities is computed.
-
-
-
-\subsubsection{Comparing a Single Word to a Two-Word Compound}
-
-When comparing a single word to a two-word compound, there are two possible word-pairs that can be constructed using one word from each compound. In example, when comparing the word ``Altitude" to ``Flight Level", the two word-pairs which can be constructed are ``Altitude-Flight" and ``Altitude-Level".
-The formula used for computing the total similarity is 
-\begin{equation} \label{eq:1wordto2word}
-	\alpha * sim(c1, c1w2) + \beta * sim(c1, c1w1)
-\end{equation}
-where $\alpha$ and $\beta$ are the weights, $c1$ indicates the single word, and $c2w1$ and $c2w2$ are the first and second word of the two-word compound, respectively, and $sim(X,Y)$ computes the semantic similarity of $X$ and $Y$. % TODO: present this in a simpler way so people can easily understand it. Maybe write the compounds one after the other and enumerate each word (c1w1, c1w2, c2w1, c2w1 or c11, c12, c21 and c22) and update the formula. Always provide some examples, compare the similarity results and explain what it means.
-
-We have found that weights of $\alpha = 0.67$ and $\beta = 0.33$ deliver acceptable accuracy. % TODO: actually test this one. % TODO: back this claim with some evidence.
-
-\subsubsection{Comparing a Two-Word Compound to a Two-Word Compound}
-
-When comparing a two-word compound to a two-word compound, there are four possible word-pairs that can be constructed using one word from each compound. In example, when comparing the compound ``Flight Level" to ``Emergency Altitude", the four word-pairs which can be constructed are ``Flight-Emergency", ``Flight-Altitude", ``Level-Emergency" and ``Level-Altitude".
-The formula used for computing the total similarity is 
-\begin{equation} \label{eq:2wordto2word}
-	\gamma * sim(c1w2, c2w2) + \delta * sim(c1w1, c2w1) + \epsilon * sim(c1w1, c2w2) + \epsilon * sim(c1w2, c2w1)
-\end{equation}
-where $\gamma$, $\delta$, and $\epsilon$ are the weights, $c1w1$ and $c1w2$ are the first and second word of the first compound, respectively, and $c2w1$ and $c2w2$ are the same for the second compound, and $sim(X,Y)$ computes the semantic similarity of $X$ and $Y$. 
-
-We have found that weights of $\gamma = 0.4$, $\delta = 0.1$, and $\epsilon = 0.25$ deliver acceptable accuracy.
 
 \section{Evaluation Methodology} \label{sec:evalmeth}
 
