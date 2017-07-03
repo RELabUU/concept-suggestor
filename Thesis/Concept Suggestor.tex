@@ -141,7 +141,7 @@ The second building block of the pipeline, algorithm \ref{al:synonymity}, determ
 \end{algorithmic}
 \end{algorithm}
 
-Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to construct algorithm \ref{al:twowordpipeline}, the pipeline for two single-word concepts.  When using only SpaCy and NLTK, words that are similar and also synonyms can have the same similarity score as words that are similar and not synonyms. Algorithm \ref{al:twowordpipeline} aims to ensure that similar words that are synonyms have the highest similarity score possible. If the similarity score from algorithm \ref{al:semanticsimilarity} is above a certain threshold, algorithm \ref{al:synonymity} is used to determine whether the two words are synonyms. The threshold ensures that words that are semantically dissimilar, but synonyms in certain contexts, such as ``plane" and ``sheet" do not get the highest similarity score possible. If the two words are synonyms, this algorithm changes their similarity score to 1. If the two words are not synonyms, the result from algorithm \ref{al:semanticsimilarity} is passed on.
+Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to construct algorithm \ref{al:twowordpipeline}, the pipeline for two single-word concepts.  When using only SpaCy and NLTK, words that are similar and also synonyms can have the same similarity score as words that are similar and not synonyms. Algorithm \ref{al:twowordpipeline} aims to ensure that similar words that are synonyms have the highest similarity score possible. If the similarity score from algorithm \ref{al:semanticsimilarity} is above a certain threshold, algorithm \ref{al:synonymity} is used to determine whether the two words are synonyms. The threshold ensures that words that are semantically dissimilar, but synonyms in certain contexts, such as ``plane" and ``sheet" do not get the highest similarity score possible. If the two words are synonyms, this algorithm changes their similarity score to 1. If the two words are not synonyms, the result from algorithm \ref{al:semanticsimilarity} is passed on. The aim of the threshold is only to filter out semantically dissimilar words. Because of this, a threshold of 0.6 suffices.
 
 \begin{algorithm}
 \caption{The pipeline on two single-word concepts.}\label{al:twowordpipeline}
@@ -237,6 +237,8 @@ We will compare the Pearson correlation of algorithm \ref{al:twocompoundpipeline
 
 After finding the optimal values of $\gamma$, $\delta$, and $\epsilon$, we will search for the optimal values of $\lambda$ and $\mu$ using the most and second most optimal values of $\gamma$, $\delta$ and $\epsilon$. We will compare the Pearson correlation of algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\lambda$ and $\mu$. We will test all possible values of $\lambda$ and $\mu$ with intervals of 0.1 in the range 0..1. We will ensure that $\lambda + \mu = 1$ so that the total weighted similarity is in the range 0..1. All the tested values of $\lambda$ and $\mu$ can be found in table \ref{table:lambdamuresults1}.
 
+To properly estimate the efficacy of Concept Suggestor, after finding the optimal values for $\lambda$, $\mu$, $\gamma$, $\delta$, and $\epsilon$, we will compare the Pearson correlation of the similarity score found by the most optimal parameters with the average of the Pearson correlation of random similarity scores. We will determine the Pearson correlation of results where algorithm \ref{al:twocompoundpipeline} returns a random value in the 0..1 range twenty times and take the absolute value of each Pearson correlation so that negative correlations are properly counted. Finally, we will compare the Pearson correlation of Concept Suggestor to the Pearson correlation of random values.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% EVERYTHING BELOW SUBJECT TO REMOVAL %%% at least in Evaluation Methodology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -265,7 +267,7 @@ After finding the optimal values of $\gamma$, $\delta$, and $\epsilon$, we will 
 
 The experiments to find the best values for $\gamma$, $\delta$, and $\epsilon$ can be found in table \ref{table:gammaresults1} and \ref{table:gammaresults2} in the appendix. Values of $\gamma = 0.5$, $\delta = 0.4$, and $\epsilon = 0.05$ result in the highest Pearson correlation of 0.577. Values of $\gamma = 0.4$, $\delta = 0.4$, and $\epsilon = 0.1$ are in a very close second with a Pearson correlation of 0.576. 
 
-The experiments to find the best values for $\lambda$ and $\mu$ can be found in table \ref{table:lambdamuresults1} and \ref{table:lambdamuresults2} below. Using the best and second best values for $\gamma$, $\delta$, and $\epsilon$, values of $\lambda = 1.0$ and $\mu = 0.0$ score the highest with a Pearson correlation of 0.613 and 0.597, respectively.
+The experiments to find the best values for $\lambda$ and $\mu$ can be found in table \ref{table:lambdamuresults1} and \ref{table:lambdamuresults2} below. Using the best and second best values for $\gamma$, $\delta$, and $\epsilon$, values of $\lambda = 1.0$ and $\mu = 0.0$ score the highest with a Pearson correlation of 0.613 and 0.597, respectively. 
 
 \begin{table}[h!]
 \centering
@@ -313,11 +315,15 @@ The experiments to find the best values for $\lambda$ and $\mu$ can be found in 
 \label{table:lambdamuresults2}
 \end{table}
 
+Using random similarity scores, we found an average Pearson correlation score of 0.145. More details can be found in table \ref{table:randomresults} in the appendix.
+
 \section{Conclusions} \label{sec:conclusions}
 
-The performance of Concept Suggestor is mediocre. Using the best parameters, a Pearson correlation score of 0.613 is reached with human expert estimates. Concept Suggestor works better using just the similarity algorithm of SpaCy, and leaving the similarity algorithm of NLTK out.
+The performance of Concept Suggestor is promising. Using the best parameters, a Pearson correlation score of 0.613 is reached with human expert estimates. Although it does not perform as well as many single-word concept similarity algorithms, it still performs significantly better than using random similarity scores. 
 
-Future research could investigate whether training SpaCy on a domain-specific corpus will improve the performance of Concept Suggestor.
+Concept Suggestor works better using just the similarity algorithm of SpaCy, and leaving the similarity algorithm of NLTK out.
+
+Future research could investigate whether training SpaCy on a domain-specific corpus will improve the performance of Concept Suggestor. Future research could also establish a more peer tested dataset for testing multi-word compound similarity, which could significantly improve the validity of research on multi-word compound similarity.
 
 \section{Acknowledgements} \label{sec:ack}
 
@@ -334,9 +340,9 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 	$\gamma$ & $\delta$ & $\epsilon$ & Pearson Correlation \\
 	\hline
 	\hline
-	0.0 & 0.0 & 0.5 & -0.0761 \\
-	0.0 & 0.1 & 0.45 & 0.00349 \\
-	0.0 & 0.2 & 0.4 & 0.0927 \\
+	0.0 & 0.0 & 0.5 & -0.076 \\
+	0.0 & 0.1 & 0.45 & 0.003 \\
+	0.0 & 0.2 & 0.4 & 0.093 \\
 	0.0 & 0.3 & 0.35 & 0.167 \\
 	0.0 & 0.4 & 0.3 & 0.215 \\ 
 	0.0 & 0.5 & 0.25 & 0.243 \\
@@ -426,6 +432,41 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 \end{tabular}
 \caption{Experiment results for $\gamma$, $\delta$, and $\epsilon$ with $\lambda = 0.65$ and $\mu = 0.35$, part two}
 \label{table:gammaresults2}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|}
+	\hline
+	Pearson Correlation & Absolute Value \\
+	\hline
+	0.106 & 0.106 \\
+	0.045 & 0.045 \\
+	-0.145 & 0.145 \\
+	0.044 & 0.044 \\
+	0.202 & 0.202 \\
+	-0.051 & 0.051 \\
+	-0.125 & 0.125 \\
+	-0.053 & 0.053 \\
+	-0.066 & 0.066 \\
+	0.186 & 0.186 \\
+	-0.201 & 0.201 \\
+	-0.152 & 0.152 \\
+	-0.195 & 0.195 \\
+	0.166 & 0.166 \\
+	0.333 & 0.333 \\
+	-0.035 & 0.035 \\
+	-0.029 & 0.029 \\
+	-0.229 & 0.229 \\
+	0.123 & 0.123 \\
+	-0.421 & 0.421 \\
+	\hline
+	\hline
+	Average & 0.145\\
+	\hline
+\end{tabular}
+\caption{Pearson Correlation of random similarity scores to human expert estimates}
+\label{table:randomresults}
 \end{table}
 
 \end{document}
