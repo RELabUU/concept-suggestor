@@ -235,10 +235,10 @@ Values for $\gamma$, $\delta$, and $\epsilon$ are needed to test values for $\la
 
 We will compare the Pearson correlation of algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\gamma$, $\delta$, and $\epsilon$. We will test all possible values of $\gamma$ and $\delta$ with intervals of 0.1 in the range 0..1. We will ensure that $\gamma + \delta + 2 * \epsilon = 1$ so that the total weighted similarity is in the range 0..1. All the tested values of $\gamma$, $\delta$, and $\epsilon$ can be found in table \ref{table:gammaresults1} and \ref{table:gammaresults2} in the appendix. 
 
-After finding the optimal values of $\gamma$, $\delta$, and $\epsilon$, we will search for the optimal values of $\lambda$ and $\mu$. We will compare the Pearson correlation of algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\lambda$ and $\mu$. We will test all possible values of $\lambda$ and $\mu$ with intervals of 0.1 in the range 0..1. We will ensure that $\lambda + \mu = 1$ so that the total weighted similarity is in the range 0..1. All the tested values of $\lambda$ and $\mu$ can be found in table \ref{table:lambdamuresults}.
+After finding the optimal values of $\gamma$, $\delta$, and $\epsilon$, we will search for the optimal values of $\lambda$ and $\mu$ using the most and second most optimal values of $\gamma$, $\delta$ and $\epsilon$. We will compare the Pearson correlation of algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\lambda$ and $\mu$. We will test all possible values of $\lambda$ and $\mu$ with intervals of 0.1 in the range 0..1. We will ensure that $\lambda + \mu = 1$ so that the total weighted similarity is in the range 0..1. All the tested values of $\lambda$ and $\mu$ can be found in table \ref{table:lambdamuresults1}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% EVERYTHING BELOW SUBJECT TO REMOVAL %%%
+%%% EVERYTHING BELOW SUBJECT TO REMOVAL %%% at least in Evaluation Methodology
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Just semantic similarity
@@ -263,7 +263,9 @@ After finding the optimal values of $\gamma$, $\delta$, and $\epsilon$, we will 
 
 \section{Experiments} \label{sec:experiments}
 
-To determine the best values for $\lambda$ and $\mu$, we looked at this table and decided to test various values of $\lambda$ and $\mu$ on the best performing values of $\gamma$, $\delta$, and $\epsilon$. We ensured that $\lambda + \mu = 1$ so that the total weighted similarity is in the range 0..1.
+The experiments to find the best values for $\gamma$, $\delta$, and $\epsilon$ can be found in table \ref{table:gammaresults1} and \ref{table:gammaresults2} in the appendix. Values of $\gamma = 0.5$, $\delta = 0.4$, and $\epsilon = 0.05$ result in the highest Pearson correlation of 0.577. Values of $\gamma = 0.4$, $\delta = 0.4$, and $\epsilon = 0.1$ are in a very close second with a Pearson correlation of 0.576. 
+
+The experiments to find the best values for $\lambda$ and $\mu$ can be found in table \ref{table:lambdamuresults1} and \ref{table:lambdamuresults2} below. Using the best and second best values for $\gamma$, $\delta$, and $\epsilon$, values of $\lambda = 1.0$ and $\mu = 0.0$ score the highest with a Pearson correlation of 0.613 and 0.597, respectively.
 
 \begin{table}[h!]
 \centering
@@ -284,8 +286,31 @@ To determine the best values for $\lambda$ and $\mu$, we looked at this table an
 	0.0 & 1.0 & 0.450 \\
 	\hline
 \end{tabular}
-\caption{Experiment results for $\lambda$ and $\mu$ with $\gamma = 0.5$, $\delta = 0.4$ and $\epsilon = 0.05$}
-\label{table:lambdamuresults}
+\caption{Experiment results for $\lambda$ and $\mu$ with $\gamma = 0.5$, $\delta = 0.4$, and $\epsilon = 0.05$}
+\label{table:lambdamuresults1}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c||c|}
+	\hline
+	$\lambda$ & $\mu$ & Pearson Correlation \\
+	\hline
+	1.0 & 0.0 & 0.597 \\
+	0.9 & 0.1 & 0.593 \\
+	0.8 & 0.2 & 0.588 \\
+	0.7 & 0.3 & 0.580 \\
+	0.6 & 0.4 & 0.571 \\
+	0.5 & 0.5 & 0.559 \\
+	0.4 & 0.6 & 0.544 \\
+	0.3 & 0.7 & 0.528 \\
+	0.2 & 0.8 & 0.509 \\
+	0.1 & 0.9 & 0.489 \\
+	0.0 & 1.0 & 0.466 \\
+	\hline
+\end{tabular}
+\caption{Experiment results for $\lambda$ and $\mu$ with $\gamma = 0.4$, $\delta = 0.4$, and $\epsilon = 0.1$}
+\label{table:lambdamuresults2}
 \end{table}
 
 \section{Conclusions} \label{sec:conclusions}
@@ -359,6 +384,7 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 \begin{tabular}{|c|c|c||c|}
 	\hline
 	$\gamma$ & $\delta$ & $\epsilon$ & Pearson Correlation \\
+	\hline
 	\hline
 	0.4 & 0.0 & 0.3 & 0.317 \\
 	0.4 & 0.1 & 0.25 & 0.423 \\
