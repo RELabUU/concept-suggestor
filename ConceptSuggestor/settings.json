@@ -26,5 +26,21 @@
 	"delta": 0.4,
 	"epsilon": 0.05,
 	
-	"_comment": "In the thesis, gamma = Alpha, delta = Beta and epsilon = Gamma."
+	"_comment": "In the thesis, gamma = Alpha, delta = Beta and epsilon = Gamma.",
+	
+	"_comment": "=====================================================",
+	"_comment": "The values below are parameters for the testing suite",
+	"_comment": "=====================================================",
+	"_comment": "Lambda + Mu = lambdaPlusMu",
+	"minLambda": 0.0,
+	"maxLambda": 1.0,
+	"lambdaInterval": 0.1,
+	"lambdaPlusMu": 1.0,
+	
+	"_comment": "Gamma + Delta + 2*Epsilon = gammaPlusDeltaPlusTwoEpsilon",
+	"_comment": "The interval of Epsilon is gammaInterval / 2",
+	"minGamma": 0.0,
+	"maxGamma": 1.0,
+	"gammaInterval": 0.1,
+	"gammaPlusDeltaPlusTwoEpsilon": 1.0
 }

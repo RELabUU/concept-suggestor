@@ -67,6 +67,30 @@ class Settings(object):
     @property
     def Epsilon(self):
         return self._Setting("epsilon")
+    @property
+    def MinLambda(self):
+        return self._Setting("minLambda")
+    @property
+    def MaxLambda(self):
+        return self._Setting("maxLambda")
+    @property
+    def LambdaInterval(self):
+        return self._Setting("lambdaInterval")
+    @property
+    def LambdaPlusMu(self):
+        return self._Setting("lambdaPlusMu")
+    @property
+    def MinGamma(self):
+        return self._Setting("minGamma")
+    @property
+    def MaxGamma(self):
+        return self._Setting("maxGamma")
+    @property
+    def GammaInterval(self):
+        return self._Setting("gammaInterval")
+    @property
+    def GammaPlusDeltaPlusTwoEpsilon(self):
+        return self._Setting("gammaPlusDeltaPlusTwoEpsilon")
 
     # Derived settings
     @property
