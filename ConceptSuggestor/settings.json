@@ -32,15 +32,16 @@
 	"_comment": "The values below are parameters for the testing suite",
 	"_comment": "=====================================================",
 	"_comment": "Lambda + Mu = lambdaPlusMu",
+	"_comment": "lambdaSteps determines how many values between minLambda and maxLambda (inclusive bounds) are tested.",
 	"minLambda": 0.0,
 	"maxLambda": 1.0,
-	"lambdaInterval": 0.1,
+	"lambdaSteps": 11,
 	"lambdaPlusMu": 1.0,
 	
 	"_comment": "Gamma + Delta + 2*Epsilon = gammaPlusDeltaPlusTwoEpsilon",
-	"_comment": "The interval of Epsilon is gammaInterval / 2",
+	"_comment": "gammaSteps determines how many values between minGamma and maxGamma (inclusive bounds) are tested.",
 	"minGamma": 0.0,
 	"maxGamma": 1.0,
-	"gammaInterval": 0.1,
+	"gammaSteps": 11,
 	"gammaPlusDeltaPlusTwoEpsilon": 1.0
 }

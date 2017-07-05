@@ -74,8 +74,8 @@ class Settings(object):
     def MaxLambda(self):
         return self._Setting("maxLambda")
     @property
-    def LambdaInterval(self):
-        return self._Setting("lambdaInterval")
+    def LambdaSteps(self):
+        return self._Setting("lambdaSteps")
     @property
     def LambdaPlusMu(self):
         return self._Setting("lambdaPlusMu")
@@ -86,8 +86,8 @@ class Settings(object):
     def MaxGamma(self):
         return self._Setting("maxGamma")
     @property
-    def GammaInterval(self):
-        return self._Setting("gammaInterval")
+    def GammaSteps(self):
+        return self._Setting("gammaSteps")
     @property
     def GammaPlusDeltaPlusTwoEpsilon(self):
         return self._Setting("gammaPlusDeltaPlusTwoEpsilon")
