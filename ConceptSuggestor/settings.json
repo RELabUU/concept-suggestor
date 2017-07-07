@@ -22,9 +22,9 @@
 	
 	"_comment": "Used for comparing compound terms to compound terms",
 	"_comment": "Gamma + delta + 2(epsilon) = 1",
-	"gamma": 0.5,
+	"gamma": 0.3,
 	"delta": 0.4,
-	"epsilon": 0.05,
+	"epsilon": 0.15,
 	
 	"_comment": "In the thesis, gamma = Alpha, delta = Beta and epsilon = Gamma.",
 	
