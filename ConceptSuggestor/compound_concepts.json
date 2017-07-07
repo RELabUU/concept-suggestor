@@ -2,101 +2,101 @@
 	{
 		"one": "Computer Terminal",
 		"two": "Flight Terminal",
-		"sim": 0.25
+		"sim": 0.2125
 	},
 	{
 		"one": "Business Plan",
 		"two": "Emergency Plan",
-		"sim": 0.25
+		"sim": 0.1125
 	},
 	{
 		"one": "Commercial Time",
 		"two": "Revenue Loss",
-		"sim": 0.0
+		"sim": 0.225
 	},
 	{
 		"one": "Paid Leave",
 		"two": "Maternal Leave",
-		"sim": 0.75
+		"sim": 0.45
 	},
 	{
 		"one": "Transit Airspace",
 		"two": "Destination Aerodrome",
-		"sim": 0.5
+		"sim": 0.175
 	},
 	{
 		"one": "Flight Attendant",
 		"two": "Cabin Attendant",
-		"sim": 1.0
+		"sim": 0.8
 	},
 	{
 		"one": "Intercontinental Flight",
 		"two": "International Flight",
-		"sim": 1.0
+		"sim": 0.575
 	},
 	{
 		"one": "Aeronautical Meteorology",
 		"two": "Aviation Meteorology",
-		"sim": 1.0
+		"sim": 0.8625
 	},
 	{
 		"one": "Business Plane",
 		"two": "Business Sheet",
-		"sim": 1.0
+		"sim": 0.2125
 	},
 	{
 		"one": "Emergency Flight",
 		"two": "Emergency Altitude",
-		"sim": 0.75
+		"sim": 0.2
 	},
 	{
 		"one": "Emergency Flight",
 		"two": "Emergency Plan",
-		"sim": 0.75
+		"sim": 0.1875
 	},
 	{
 		"one": "Passenger Airline",
 		"two": "Passenger Aircraft",
-		"sim": 0.5
+		"sim": 0.325
 	},
 	{
 		"one": "Control Tower",
 		"two": "Ground Control",
-		"sim": 0.75
+		"sim": 0.475
 	},
 	{
 		"one": "Baggage Check",
 		"two": "Sales Figure",
-		"sim": 0.0
+		"sim": 0.075
 	},
 	{
 		"one": "Domestic Pilot",
 		"two": "Flight Attendant",
-		"sim": 0.75
+		"sim": 0.2375
 	},
 	{
 		"one": "Airplane Wing",
 		"two": "Aeroplane Wing",
-		"sim": 1.0
+		"sim": 0.9375
 	},
 	{
 		"one": "Flight Course",
 		"two": "Flight Plan",
-		"sim": 0.5
+		"sim": 0.5125
 	},
 	{
 		"one": "Police Officer",
 		"two": "Security Officer",
-		"sim": 0.75
+		"sim": 0.5875
 	},
 	{
 		"one": "Flight Level",
 		"two": "Flight Altitude",
-		"sim": 1.0
+		"sim": 0.775
 	},
 	{
 		"one": "Flight Terminal",
 		"two": "International Flight",
-		"sim": 0.0
+		"sim": 0.175
 	}
 ]
