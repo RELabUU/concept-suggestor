@@ -262,6 +262,32 @@ def TestSuiteCompoundWeights():
         print("g: %s d: %s e: %s result: %s" % (gammas[i], deltas[i], epsilons[i], value))
         i += 1
 
+def TestSuiteSimilarityWeights():
+    print("Loading libraries...")
+    import numpy as np
+    from CompoundHandler import CompoundHandler
+    ch = CompoundHandler(settings, loadAll = True)
+    from JsonParser import JsonParser
+    jp = JsonParser()
+    data = jp.LoadFile(COMPOUNDSFILE)
+
+    lambdas = []
+    mus = []
+    results = []
+
+    for _lambda in np.linspace(settings.MinLambda, settings.MaxLambda, settings.LambdaSteps):
+        mu = (settings.MaxLambda - _lambda)
+
+        lambdas.append(_lambda)
+        mus.append(mu)
+
+        results.append(PerformTests(_lambda, mu, settings.Gamma, settings.Delta, settings.Epsilon, ch, data))
+
+    i = 0
+    for value in results:
+        print("l: %s m: %s result: %s" % (lambdas[i], mus[i], value))
+        i += 1
+
 def PerformTests(_lambda, mu, gamma, delta, epsilon, compoundHandler, data):
     from scipy.stats.stats import pearsonr
 
@@ -282,11 +308,8 @@ def PerformTests(_lambda, mu, gamma, delta, epsilon, compoundHandler, data):
 
     return(pearsonr(expected, results))
 
-def TestSuiteSimilarityWeights():
-    pass
-
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g" or choice=="h" or choice == "i"):
+    if "a" <= choice <= "j":
         return True
     else:
         return False

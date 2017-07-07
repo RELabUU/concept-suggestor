@@ -3,11 +3,11 @@ class CompoundHandler(object):
 
     import Settings
 
-    def __init__(self, settings):
+    def __init__(self, settings, loadAll = False):
         self.s = settings
 
         from SimilarityCalculator import SimilarityCalculator
-        self.sc = SimilarityCalculator(self.s)
+        self.sc = SimilarityCalculator(self.s, loadAll = loadAll)
 
     def GetSimilarity(self, compoundA, compoundB):
         wordsA = compoundA.split()

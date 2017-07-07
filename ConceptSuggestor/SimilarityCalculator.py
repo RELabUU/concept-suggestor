@@ -1,18 +1,18 @@
 class SimilarityCalculator(object):
     """Calculates the similarity of two words using a variety of methods."""
 
-    def __init__(self, settings):
+    def __init__(self, settings, loadAll = False):
         self.s = settings
 
-        if self.s.UseSpacy is True:
+        if self.s.UseSpacy is True or loadAll is True:
             from SpacySimilarity import SpacySimilarity
             self.ss = SpacySimilarity()
 
-        if self.s.UseWordNet is True:
+        if self.s.UseWordNet is True or loadAll is True:
             from WordNetSimilarity import WordNetSimilarity
             self.wns = WordNetSimilarity(settings.WordNetSimilarityMethod)
 
-        if self.s.UseSynonymity is True:
+        if self.s.UseSynonymity is True or loadAll is True:
             from WordNetSynonyms import WordNetSynonyms
             self.wnsy = WordNetSynonyms()
 
