@@ -20,6 +20,8 @@ def GetProgramMode():
     print("f - Tests compound terms found in compound_concepts.json for similarity.")
     print("g - Full pipeline. Determines whether two words are similar enough but not synonyms.")
     print("h - Tests compound terms found in compound_concepts.json for similarity, but uses only random results.")
+    print("i - Testing suite for the weights for compound terms (gamma, delta, and epsilon).")
+    print("j - Testing suite for the weights for SpaCy and NLTK (lambda and mu).")
 
     # Get the program mode from the user and ensure it's valid.
     choice = input("Please tell me what to do (type a letter): ").lower()
@@ -51,6 +53,10 @@ def Main():
         TestPipeline()
     elif choice == "h":
         TestExternalCompoundsRandom()
+    elif choice == "i":
+        TestSuiteCompoundWeights()
+    elif choice == "j":
+        TestSuiteSimilarityWeights()
     else:
         print("Invalid mode. Aborting.")
 
@@ -225,8 +231,62 @@ def TestPipeline():
         else:
             break
 
+def TestSuiteCompoundWeights():
+    print("Loading libraries...")
+    import numpy as np
+    from CompoundHandler import CompoundHandler
+    ch = CompoundHandler(settings)
+    from JsonParser import JsonParser
+    jp = JsonParser()
+    data = jp.LoadFile(COMPOUNDSFILE)
+    
+    gammas = []
+    deltas = []
+    epsilons = []
+    results = []
+
+    gammanum = 0 # Counts at which gamma value we're at. Increases by one every time we finish a gamma pass, is used to ensure step size is identical for gamma and delta.
+    for gamma in np.linspace(settings.MinGamma, settings.MaxGamma, settings.GammaSteps):
+        for delta in np.linspace(settings.MinGamma, settings.MaxGamma - gamma, settings.GammaSteps - gammanum):
+            epsilon = (settings.MaxGamma - gamma - delta) / 2
+
+            gammas.append(gamma)
+            deltas.append(delta)
+            epsilons.append(epsilon)
+
+            results.append(PerformTests(settings.SpaCyWeight, settings.WordNetWeight, gamma, delta, epsilon, ch, data))
+        gammanum += 1
+
+    i = 0
+    for value in results:
+        print("g: %s d: %s e: %s result: %s" % (gammas[i], deltas[i], epsilons[i], value))
+        i += 1
+
+def PerformTests(_lambda, mu, gamma, delta, epsilon, compoundHandler, data):
+    from scipy.stats.stats import pearsonr
+
+    # Set the settings to the correct values for this test
+    settings.SpaCyWeight = _lambda
+    settings.WordNetWeight = mu
+    settings.Gamma = gamma
+    settings.Delta = delta
+    settings.Epsilon = epsilon
+    
+    expected = []
+    results = []
+
+    for value in data:
+        expected.append(value["sim"])
+        result = compoundHandler.GetSimilarity(value["one"], value["two"])
+        results.append(result)
+
+    return(pearsonr(expected, results))
+
+def TestSuiteSimilarityWeights():
+    pass
+
 def IsValidChoice(choice):
-    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g" or choice=="h"):
+    if(choice=="a" or choice=="b" or choice=="c" or choice=="d" or choice=="e" or choice=="f" or choice=="g" or choice=="h" or choice == "i"):
         return True
     else:
         return False
