@@ -2,45 +2,37 @@ class SimilarityCalculator(object):
     """Calculates the similarity of two words using a variety of methods."""
 
     def __init__(self, settings):
-        self.spacyWeight = 0
-        self.useSpacy = settings.UseSpacy
-        if self.useSpacy is True:
+        self.s = settings
+
+        if self.s.UseSpacy is True:
             from SpacySimilarity import SpacySimilarity
             self.ss = SpacySimilarity()
-            self.spacyWeight = settings.SpaCyWeight
 
-        self.wordNetWeight = 0
-        self.useWordNet = settings.UseWordNet
-        if self.useWordNet is True:
+        if self.s.UseWordNet is True:
             from WordNetSimilarity import WordNetSimilarity
             self.wns = WordNetSimilarity(settings.WordNetSimilarityMethod)
-            self.wordNetWeight = settings.WordNetWeight
 
-        self.totalSimilarityWeight = settings.TotalSimilarityWeight
-
-        self.useSynonymity = settings.UseSynonymity
-        if self.useSynonymity is True:
+        if self.s.UseSynonymity is True:
             from WordNetSynonyms import WordNetSynonyms
             self.wnsy = WordNetSynonyms()
-            self.SimilarityThreshold = settings.SimilarityThreshold
 
     # Returns the similarity of two words.
     def GetSimilarity(self, wordA, wordB):
         total = 0
 
         spacySimilarity = 0
-        if self.useSpacy is True:
+        if self.s.UseSpacy == True:
             spacySimilarity = self.ss.GetSimilarity(wordA, wordB)
            
         wordNetSimilarity = 0
-        if self.useWordNet is True:
+        if self.s.UseWordNet == True:
             wordNetSimilarity = self.wns.GetSimilarity(wordA, wordB)
             
-        total = ((self.spacyWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalSimilarityWeight
-        # print("Total: (%f * %f) + (%f * %f) = %f out of %f" % (self.wordVectorWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalWeight)) # DEBUG
+        total = ((self.s.SpaCyWeight * spacySimilarity) + (self.s.WordNetWeight * wordNetSimilarity)) / self.s.TotalSimilarityWeight
+        # print("sc: Total: (%f * %f) + (%f * %f) = %f out of %f" % (self.s.SpaCyWeight, spacySimilarity, self.s.WordNetWeight, wordNetSimilarity, total, self.s.TotalSimilarityWeight)) # DEBUG
 
-        if self.useSynonymity is True:
-            if total >= self.SimilarityThreshold:
+        if self.s.UseSynonymity is True:
+            if total >= self.s.SimilarityThreshold:
                 if self.wnsy.IsSynonym(wordA, wordB) is True:
                     print("Synonyms found: %s, %s" % (wordA, wordB)) # DEBUG
                     return 1
@@ -54,48 +46,40 @@ class SimilarityCalculator(object):
         total = 0
 
         spacySimilarity = 0
-        if self.useSpacy is True:
+        if self.s.UseSpacy is True:
             spacySimilarity = self.ss.GetMaxSimilarity(word, collection)
 
         wordNetSimilarity = 0
-        if self.useWordNet is True:
+        if self.s.UseWordNet is True:
             wordNetSimilarity = self.wns.GetMaxSimilarity(word, collection)
             
-        total = ((self.spacyWeight * spacySimilarity) + (self.wordNetWeight * wordNetSimilarity)) / self.totalSimilarityWeight
-        print("Total: (%s * %s) + (%s * %s) = %s out of %s" % (self.spacyWeight, spacySimilarity, self.wordNetWeight, wordNetSimilarity, total, self.totalSimilarityWeight)) # DEBUG
+        total = ((self.s.SpaCyWeight * spacySimilarity) + (self.s.WordNetWeight * wordNetSimilarity)) / self.s.TotalSimilarityWeight
+        print("Total: (%s * %s) + (%s * %s) = %s out of %s" % (self.s.SpaCyWeight, spacySimilarity, self.s.WordNetWeight, wordNetSimilarity, total, self.s.TotalSimilarityWeight)) # DEBUG
 
         return total
 
     def ReloadSettings(self, settings):
         # Load SpaCy if necessary, and set its weight.
-        self.useSpacy = settings.UseSpacy
-        if self.useSpacy is True:
+        if self.s.UseSpacy is True:
             if hasattr(self, "ss"):
                 pass
             else:
                 from SpacySimilarity import SpacySimilarity
                 self.ss = SpacySimilarity()
-            self.spacyWeight = settings.SpaCyWeight
         
         # Load WordNetSimilarity if necessary, and set its weight.
-        self.useWordNet = settings.UseWordNet
-        if self.useWordNet is True:
+        if self.s.UseWordNet is True:
             if hasattr(self, "wns"):
                 pass
             else:
                 from WordNetSimilarity import WordNetSimilarity
                 self.wns = WordNetSimilarity(settings.WordNetSimilarityMethod)
             self.wns.ReloadSettings(settings.WordNetSimilarityMethod)
-            self.wordNetWeight = settings.WordNetWeight
-
-        self.totalSimilarityWeight = settings.TotalSimilarityWeight
 
         # Load WordNetSynonymity if necessary, and set its threshold
-        self.useSynonymity = settings.UseSynonymity
-        if self.useSynonymity is True:
+        if self.s.UseSynonymity is True:
             if hasattr(self, "wnsy"):
                 pass
             else:
                 from WordNetSynonyms import WordNetSynonyms
                 self.wnsy = WordNetSynonyms()
-            self.SimilarityThreshold = settings.SimilarityThreshold
