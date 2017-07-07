@@ -258,9 +258,13 @@ def TestSuiteCompoundWeights():
         gammanum += 1
 
     i = 0
+    pastgamma = gammas[i]
     for value in results:
         print("g: %s d: %s e: %s result: %s" % (gammas[i], deltas[i], epsilons[i], value))
         i += 1
+        if i < len(gammas) and pastgamma != gammas[i]: # Minor readability improvement.
+            pastgamma = gammas[i]
+            print()
 
 def TestSuiteSimilarityWeights():
     print("Loading libraries...")
