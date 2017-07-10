@@ -14,7 +14,7 @@
 % TODO: Ensure that paragraphs have at least three sentences.
 
 % -- Title stuff --
-\title{Concept Suggestor}
+\title{SimCom: Measuring Similarity of Compound Terms}
 \date{17th of May, 2017}
 \author{Rapha\"el Claasen}
 
@@ -27,23 +27,24 @@
 \maketitle
 
 \begin{abstract}
-<CONTEXT>. Natural language processing algorithms are currently able to assign meaning to and compare single-word concepts, but have difficulty performing the same with multi-word concepts. We propose an algorithm that can determine the similarity of two two-word compounds by combining various state-of-the-art techniques and compare and tune it to the similarity estimates of domain experts. <CONTRIBUTION>
+When designing large-scale complex systems, domain experts use difficult to align models in their communication. Natural language processing (NLP) is a promising field for alleviating some of this difficulty. NLP algorithms are currently able to assign meaning to and compare single-word concepts, but have difficulty performing the same with multi-word concepts. We propose SimCom, a framework that can determine the similarity of two two-word compounds by combining various state-of-the-art techniques, compare and tune it to the similarity estimates of domain experts, and discuss the results.
 \end{abstract}
 
 {\bf Keywords:} Natural Language Processing, semantic relatedness, semantic similarity
 
 \section{Introduction} \label{sec:introduction}
 
-Air Traffic Management (ATM) is a cross-disciplinary field that requires analysts from multiple domains such as security, safety, and business. When discussing problems about the ATM field, analysts often create models in domain-specific modeling languages that employ both shared and domain-specific concepts. To facilitate these discussions it is important that domain-specific models from one domain can be used in communication with other domains. This can be done by ensuring that domains use similar concepts in their models where possible.
+Large-scale complex system design often require analysts from multiple domains such as security, safety, and business. When discussing problems during the design process, analysts have the need to create models in domain-specific modeling languages that employ both shared and domain-specific concepts, which are then used in cross-domain communication. To increase cross-domain understanding, domain-specific models from one domain need to be aligned with domain-specific models from another domain. This is currently usually done through expensive face-to-face meetings. The Participatory Architectural Change MAnagement in ATM Systems (PACAS) studies how to move away from face-to-face meetings towards a web platform that relies on collaborative modeling and automated reasoning in the Air Traffic Management (ATM) domain \cite{aydemir2017towards}.
 
-It is difficult for analysts from different domains to communicate about their proposed solutions to a given problem. This difficulty is partially caused by a difference in concepts used in their modeling which reduces the usefulness of these models in communication with other domains. When models are constructed well but use different concepts it can lead to different proposed solutions which all have sound argumentation, but are hard to find a middle ground with. Model alignment is currently performed through expensive face-to-face meetings. The PACAS project studies how to move away from face-to-face meetings towards a web platform that relies on collaborative modeling and automated reasoning \cite{aydemir2017towards}.
+One part of collaborative modeling is ensuring that similar concepts are used during the modeling process. If two models are created in different domains that use wildly different concepts, it is difficult to compare proposed solutions using both of the models. That is why suggestions can be made to modelers during the modeling process to ensure that similar concepts are used throughout all models. These suggestions can either be taken from previously created models or from a taxonomy relevant to the domain. It is important that any new concepts very similar to existing concepts in the models are not suggested. If ``Airplane" is already modeled, ``Aeroplane" should not be suggested as a new concept. For this, a system that compares new concepts to existing concepts and filters them based on similarity and synonymity can be used.
 
-In collaborative modeling, suggestions can be made to modelers during the modeling process to ensure that similar concepts are used throughout all models. These suggestions can either be taken from previously created models or from a taxonomy relevant to the domain. 
-It is important that any new concepts very similar to existing concepts in the models are not suggested. If ``Airplane" is already modeled, ``Aeroplane" should not be suggested as a new concept. For this, a system that compares new concepts to existing concepts and filters them based on similarity and synonymity can be used.
-
-In practice, concepts used in modeling are not always single words. Multi-word concepts, such as ``Control Tower" will also need to be modeled. Natural Language Processing (NLP) does not yet reliably support comparing multi-word concepts. The relationship between the words in multi-word concepts depends significantly on the context, something computers usually find hard to understand. In the ATM context, however, the relationship between two-word concepts is almost always identical. We propose a way to measure similarity between two-word concepts.
+In practice, concepts used in modeling are not always single words. Multi-word concepts, such as ``Control Tower" will also need to be modeled. Natural Language Processing (NLP) does not yet reliably support comparing multi-word concepts. The relationship between the words in multi-word concepts depends significantly on the context, something computers still find hard to understand. In the ATM context, however, the relationship between two-word concepts is almost always identical. We propose a way to measure similarity between two-word concepts.
 
 In Section \ref{sec:relwork} we discuss the latest Natural Language Processing techniques for measuring semantic similarity and relatedness. In Section \ref{sec:framework} we discuss our proposed solution for determining semantic similarity and relatedness for two-word compounds. In Section \ref{sec:evalmeth} we discuss the evaluation methodology we will use for evaluating the proposed framework. In Section \ref{sec:experiments} we discuss the results found from performing the proposed evaluations. Finally, in Section \ref{sec:conclusions} extract conclusions from the results and suggest future research directions.
+
+% To facilitate this communication it is important that domain-specific models use similar concepts so cross-domain understanding is increased.
+
+% It is difficult for analysts from different domains to communicate about their proposed solutions to a given problem. This difficulty is partially caused by a difference in concepts used in their modeling which reduces the usefulness of these models in communication with other domains. When models are constructed well but use different concepts it can lead to different proposed solutions which all have sound argumentation, but are hard to find a middle ground with. Model alignment is currently performed through expensive face-to-face meetings. The PACAS project studies how to move away from face-to-face meetings towards a web platform that relies on collaborative modeling and automated reasoning \cite{aydemir2017towards}.
 
 \section{Related Work} \label{sec:relwork}
 
@@ -67,14 +68,14 @@ Constructing lexical databases and performing word vectorization are two ways to
 
 \section{Framework} \label{sec:framework}
 
-Concept Suggestor aims to eliminate concepts that are too similar to each other. It is capable of doing this with concepts up to two words large. For this, it uses a pipeline constructed from several smaller algorithms that build upon each other. All algorithms depend on either SpaCy's implementation of the GloVe algorithm or NLTK's interface with WordNet.
+SimCom aims to eliminate concepts that are too similar to each other. It is capable of doing this with concepts up to two words large. For this, it uses a pipeline constructed from several smaller algorithms that build upon each other. All algorithms depend on either SpaCy's implementation of the GloVe algorithm or NLTK's interface with WordNet.
 
 \subsection{SpaCy and GloVe}
 The similarity function of SpaCy, henceforth called $\textit{SpacySimilarity}$, computes the cosine of two word vectors. In Section \ref{sec:relwork} we explained how these word vectors are constructed. $\textit{SpacySimilarity}$ returns a value between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. It is important to note that although the name of the function is $\textit{SpacySimilarity}$, $\textit{SpacySimilarity}$ actually measures semantic relatedness, not semantic similarity, as SpaCy's word vectors are built using co-occurrence, which does not assign any form of semantics to words. 
 % TODO: If the content is just one paragraph (or two) there is no need to create a subsection. Just keep the paragraph.
 
 \subsection{NLTK and WordNet}
-Although NLTK is an often-used library for NLP purposes, Concept Suggestor uses only the WordNet interface, so this subsection will focus primarily on WordNet. WordNet is a public electronic lexical database that began in the mid-1980s in the Princeton University Department of Psychology and has been regularly updated and improved since then. 
+Although NLTK is an often-used library for NLP purposes, SimCom uses only the WordNet interface, so this subsection will focus primarily on WordNet. WordNet is a public electronic lexical database that began in the mid-1980s in the Princeton University Department of Psychology and has been regularly updated and improved since then. 
 % The similarity function of NLTK, henceforth called $\textit{WordNetSimilarity}$ returns a score between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. This score is based on the shortest path that connects the senses using only hypernym or hyponym relationships.
 
 NLTK offers six methods to calculate the similarity of two words \citep{pedersen2004wordnet}, henceforth called $\textit{WordnetSimilarity}$. Of the six, three use Information Content (IC), information about the meaning and usage of words \cite{seco2004intrinsic}. Four use the Least Common Subsumer (LCS), the most specific concept which is an ancestor of both words. The six methods are further explained and compared to each other below.
@@ -94,7 +95,7 @@ NLTK offers six methods to calculate the similarity of two words \citep{pedersen
 \end{itemize}
 % TODO: Ensure that all the items above are not too similar to their primary source, http://www.nltk.org/howto/wordnet.html
 
-Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In Table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is found from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}. In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training Concept Suggestor for specific domains using domain-related corpora, but Information Content is an old technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}. % TODO: Remove citations that do not support this statement.
+Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In Table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is found from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}. In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training SimCom for specific domains using domain-related corpora, but Information Content is an old technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}. % TODO: Remove citations that do not support this statement.
 
 \begin{table}[h!]
 \caption{Comparison of WordNet similarity measures} % Human estimates taken from budanitsky2006evaluating
@@ -239,7 +240,7 @@ We will compare the Pearson correlation of Algorithm \ref{al:twocompoundpipeline
 
 After finding the optimal values of $\gamma$, $\delta$, and $\epsilon$, we will search for the optimal values of $\lambda$ and $\mu$ using the most and second most optimal values of $\gamma$, $\delta$ and $\epsilon$. We will compare the Pearson correlation of Algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\lambda$ and $\mu$. We will test all possible values of $\lambda$ and $\mu$ with intervals of 0.1 in the range 0..1. We will ensure that $\lambda + \mu = 1$ so that the total weighted similarity is in the range 0..1. All the tested values of $\lambda$ and $\mu$ can be found in Table \ref{table:lambdamuresults1}.
 
-To properly estimate the efficacy of Concept Suggestor, after finding the optimal values for $\lambda$, $\mu$, $\gamma$, $\delta$, and $\epsilon$, we will compare the Pearson correlation of the similarity score found by the most optimal parameters with the average of the Pearson correlation of random similarity scores. We will determine the Pearson correlation of results where Algorithm \ref{al:twocompoundpipeline} returns a random value in the 0..1 range twenty times and take the absolute value of each Pearson correlation so that negative correlations are properly counted. Finally, we will compare the Pearson correlation of Concept Suggestor to the Pearson correlation of random values.
+To properly estimate the efficacy of SimCom, after finding the optimal values for $\lambda$, $\mu$, $\gamma$, $\delta$, and $\epsilon$, we will compare the Pearson correlation of the similarity score found by the most optimal parameters with the average of the Pearson correlation of random similarity scores. We will determine the Pearson correlation of results where Algorithm \ref{al:twocompoundpipeline} returns a random value in the 0..1 range twenty times and take the absolute value of each Pearson correlation so that negative correlations are properly counted. Finally, we will compare the Pearson correlation of SimCom to the Pearson correlation of random values.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% EVERYTHING BELOW SUBJECT TO REMOVAL %%% at least in Evaluation Methodology
@@ -321,11 +322,11 @@ Using random similarity scores, we found an average Pearson correlation score of
 
 \section{Conclusions} \label{sec:conclusions}
 
-The performance of Concept Suggestor is promising. Using the best parameters, a Pearson correlation score of 0.692 is reached with human expert estimates. Although it does not perform as well as the latest single-word concept similarity algorithms, it still performs significantly better than using random similarity scores. 
+The performance of SimCom is very promising. Using the best parameters, a Pearson correlation score of 0.692 is reached with human expert estimates, which is a high correlation score in this domain. Although it does not perform as well as the latest single-word concept similarity algorithms, it still performs significantly better than using random similarity scores. 
 
-Concept Suggestor works better using just the similarity algorithm of SpaCy, and leaving the similarity algorithm of NLTK out.
+SimCom works better using just the similarity algorithm of SpaCy, and leaving the similarity algorithm of NLTK out.
 
-Future research could investigate whether training SpaCy on a domain-specific corpus will improve the performance of Concept Suggestor. Future research could also establish a more peer reviewed dataset for testing multi-word compound similarity, which could improve the validity of research on multi-word compound similarity. These algorithms can only determine the similarity of up to two-word compounds. More research into determining the relationship between the words in multi-word concepts could allow similar algorithms to accept larger concepts.
+Future research could investigate whether training SpaCy on a domain-specific corpus will improve the performance of SimCom. Future research could also establish a more peer reviewed dataset for testing multi-word compound similarity, which could improve the validity of research on multi-word compound similarity. SimCom can only determine the similarity of up to two-word compounds. More research into determining the relationship between the words in multi-word concepts could allow similar frameworks to accept larger concepts.
 
 \section{Acknowledgements} \label{sec:ack}
 
