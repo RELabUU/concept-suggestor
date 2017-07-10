@@ -43,7 +43,7 @@ It is important that any new concepts very similar to existing concepts in the m
 
 In practice, concepts used in modeling are not always single words. Multi-word concepts, such as ``Control Tower" will also need to be modeled. Natural Language Processing (NLP) does not yet reliably support comparing multi-word concepts. The relationship between the words in multi-word concepts depends significantly on the context, something computers usually find hard to understand. In the ATM context, however, the relationship between two-word concepts is almost always identical. We propose a way to measure similarity between two-word concepts.
 
-In Section \ref{sec:relwork} we discuss the latest Natural Language Processing techniques for measuring semantic similarity and relatedness. In Section \ref{sec:algorithms} we discuss our proposed solution for determining semantic similarity and relatedness for two-word compounds. In Section \ref{sec:evalmeth} we discuss the evaluation methodology we will use for evaluating the proposed algorithms. In Section \ref{sec:experiments} we discuss the results found from performing the proposed evaluations. Finally, in Section \ref{sec:conclusions} extract conclusions from the results and suggest future research directions.
+In Section \ref{sec:relwork} we discuss the latest Natural Language Processing techniques for measuring semantic similarity and relatedness. In Section \ref{sec:framework} we discuss our proposed solution for determining semantic similarity and relatedness for two-word compounds. In Section \ref{sec:evalmeth} we discuss the evaluation methodology we will use for evaluating the proposed framework. In Section \ref{sec:experiments} we discuss the results found from performing the proposed evaluations. Finally, in Section \ref{sec:conclusions} extract conclusions from the results and suggest future research directions.
 
 \section{Related Work} \label{sec:relwork}
 
@@ -65,12 +65,12 @@ Constructing lexical databases and performing word vectorization are two ways to
 
 % This section lacks a clear structure. TODO: add clear structure. Add a paragraph that talks about NLP in general, its application areas, etc. I can add more methods/tools, also try to group the data sets. I need to mention word2vec algorithms as a baseline. NLTK is missing. When I cite a work, explain why it is relevant, what the advantages and limitations are of using it.
 
-\section{Algorithms} \label{sec:algorithms}
+\section{Framework} \label{sec:framework}
 
 Concept Suggestor aims to eliminate concepts that are too similar to each other. It is capable of doing this with concepts up to two words large. For this, it uses a pipeline constructed from several smaller algorithms that build upon each other. All algorithms depend on either SpaCy's implementation of the GloVe algorithm or NLTK's interface with WordNet.
 
 \subsection{SpaCy and GloVe}
-The similarity function of SpaCy, henceforth called $\textit{SpacySimilarity}$, computes the cosine of two word vectors. In section \ref{sec:relwork} we explained how these word vectors are constructed. $\textit{SpacySimilarity}$ returns a value between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. It is important to note that although the name of the function is $\textit{SpacySimilarity}$, $\textit{SpacySimilarity}$ actually measures semantic relatedness, not semantic similarity, due to the method used to construct the word vectors. 
+The similarity function of SpaCy, henceforth called $\textit{SpacySimilarity}$, computes the cosine of two word vectors. In Section \ref{sec:relwork} we explained how these word vectors are constructed. $\textit{SpacySimilarity}$ returns a value between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. It is important to note that although the name of the function is $\textit{SpacySimilarity}$, $\textit{SpacySimilarity}$ actually measures semantic relatedness, not semantic similarity, as SpaCy's word vectors are built using co-occurrence, which does not assign any form of semantics to words. 
 % TODO: If the content is just one paragraph (or two) there is no need to create a subsection. Just keep the paragraph.
 
 \subsection{NLTK and WordNet}
@@ -83,18 +83,18 @@ NLTK offers six methods to calculate the similarity of two words \citep{pedersen
 	\item Leacock-Chodorow Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses (as above) and the maximum depth of the taxonomy in which the senses occur. The relationship is given as \(-log(p/2d)\) where p is the shortest path length and d the taxonomy depth. % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
 	\item Wu-Palmer Similarity: Returns a score denoting how similar two word senses are, based on the depth of the two senses in the taxonomy and that of the LCS.
 	\item Resnik Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS.
-	\item Jiang-Conrath Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input synsets. The relationship is given by equation \ref{eq:jcnsimilarity}, where $IC(X)$ stands for the information content of $X$, $s1$ and $s2$ stand for the synsets of the first and second word, and $lcs$ stands for the least common subsumer.
+	\item Jiang-Conrath Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input synsets. The relationship is given by Equation \ref{eq:jcnsimilarity}, where $IC(X)$ stands for the information content of $X$, $s1$ and $s2$ stand for the synsets of the first and second word, and $lcs$ stands for the least common subsumer.
 \begin{equation} \label{eq:jcnsimilarity}
 	\frac{1} {IC(s1) + IC(s2) - 2 * IC(lcs)}
 \end{equation}
-	\item Lin Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input Synsets. The relationship is given by equation \ref{eq:linsimilarity}. In equation \ref{eq:linsimilarity}, the same meanings for abbreviations are used as in equation \ref{eq:jcnsimilarity}, which can be found above.
+	\item Lin Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input Synsets. The relationship is given by Equation \ref{eq:linsimilarity}. In Equation \ref{eq:linsimilarity}, the same meanings for abbreviations are used as in Equation \ref{eq:jcnsimilarity}, which can be found above.
 \begin{equation} \label{eq:linsimilarity}
 	\frac{2 * IC(lcs)} {IC(s1) + IC(s2)} 
 \end{equation} 
 \end{itemize}
 % TODO: Ensure that all the items above are not too similar to their primary source, http://www.nltk.org/howto/wordnet.html
 
-Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is found from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}. In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training Concept Suggestor for specific domains using domain-related corpora, but Information Content is an old technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}. % TODO: Remove citations that do not support this statement.
+Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In Table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is found from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}. In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training Concept Suggestor for specific domains using domain-related corpora, but Information Content is an old technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}. % TODO: Remove citations that do not support this statement.
 
 \begin{table}[h!]
 \caption{Comparison of WordNet similarity measures} % Human estimates taken from budanitsky2006evaluating
@@ -117,7 +117,7 @@ Table \ref{table:wordnetsimilarity} shows the results of each similarity measure
 
 \subsection{The Pipeline}
 
-The first building block of the pipeline, algorithm \ref{al:semanticsimilarity}, compares the similarity of two words to each other. It computes a similarity rating using both $\textit{SpacySimilarity}$ and $\textit{WordnetSimilarity}$ and returns a weighted average of both results, where $\lambda$ is the weight of $\textit{SpacySimilarity}$ and $\mu$ is the weight of $\textit{WordnetSimilarity}$. The result is between 0 and 1, where indicates the two words are dissimilar, and 1 indicates the two words are similar.
+The first building block of the pipeline, Algorithm \ref{al:semanticsimilarity}, compares the similarity of two words to each other. It computes a similarity rating using both $\textit{SpacySimilarity}$ and $\textit{WordnetSimilarity}$ and returns a weighted average of both results, where $\lambda$ is the weight of $\textit{SpacySimilarity}$ and $\mu$ is the weight of $\textit{WordnetSimilarity}$. The result is between 0 and 1, where indicates the two words are dissimilar, and 1 indicates the two words are similar.
 
 \begin{algorithm}
 \caption{Determine similarity of two words.}\label{al:semanticsimilarity}
@@ -130,7 +130,7 @@ The first building block of the pipeline, algorithm \ref{al:semanticsimilarity},
 \end{algorithmic}
 \end{algorithm}
 
-The second building block of the pipeline, algorithm \ref{al:synonymity}, determines whether two words are synonyms. It requests the synsets of both words from WordNet, and looks for any matching synset between the two. If a match is found, the two words are possibly synonyms and the algorithm returns \textit{true}. If no match is found, the algorithm returns \textit{false}.
+The second building block of the pipeline, Algorithm \ref{al:synonymity}, determines whether two words are synonyms. It requests the synsets of both words from WordNet, and looks for any matching synset between the two. If a match is found, the two words are possibly synonyms and the algorithm returns \textit{true}. If no match is found, the algorithm returns \textit{false}.
 
 \begin{algorithm}
 \caption{Determine synonymity of two words.}\label{al:synonymity}
@@ -143,7 +143,7 @@ The second building block of the pipeline, algorithm \ref{al:synonymity}, determ
 \end{algorithmic}
 \end{algorithm}
 
-Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to construct algorithm \ref{al:twowordpipeline}, the pipeline for two single-word concepts.  When using only SpaCy and NLTK, words that are similar and also synonyms can have the same similarity score as words that are similar and not synonyms. Algorithm \ref{al:twowordpipeline} aims to ensure that similar words that are synonyms have the highest similarity score possible. If the similarity score from algorithm \ref{al:semanticsimilarity} is above a certain threshold, algorithm \ref{al:synonymity} is used to determine whether the two words are synonyms. The threshold ensures that words that are semantically dissimilar, but synonyms in certain contexts, such as ``plane" and ``sheet" do not get the highest similarity score possible. If the two words are synonyms, this algorithm changes their similarity score to 1. If the two words are not synonyms, the result from algorithm \ref{al:semanticsimilarity} is passed on. The aim of the threshold is only to filter out semantically dissimilar words. Because of this, a threshold of 0.6 suffices.
+Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to construct Algorithm \ref{al:twowordpipeline}, the pipeline for two single-word concepts.  When using only SpaCy and NLTK, words that are similar and also synonyms can have the same similarity score as words that are similar and not synonyms. Algorithm \ref{al:twowordpipeline} aims to ensure that similar words that are synonyms have the highest similarity score possible. If the similarity score from Algorithm \ref{al:semanticsimilarity} is above a certain threshold, Algorithm \ref{al:synonymity} is used to determine whether the two words are synonyms. The threshold ensures that words that are semantically dissimilar, but synonyms in certain contexts, such as ``plane" and ``sheet" do not get the highest similarity score possible. If the two words are synonyms, this algorithm changes their similarity score to 1. If the two words are not synonyms, the result from Algorithm \ref{al:semanticsimilarity} is passed on. The aim of the threshold is only to filter out semantically dissimilar words. Because of this, a threshold of 0.6 suffices.
 
 \begin{algorithm}
 \caption{The pipeline on two single-word concepts.}\label{al:twowordpipeline}
@@ -160,7 +160,7 @@ Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to co
 \end{algorithmic}
 \end{algorithm}
 
-Finally, algorithm \ref{al:twowordpipeline} can be used for building algorithm \ref{al:onetwocompoundpipeline} and \ref{al:twocompoundpipeline}, algorithms that determine the similarity score of compound concepts. Algorithm \ref{al:onetwocompoundpipeline} deterines the similarity between a one-word concept and a two-word concept. In the algorithm $c1$ stands for compound one, the one-word concept. $c2w1$ and $c2w2$ stand for the first and second word of the second compound. Algorithm \ref{al:onetwocompoundpipeline} uses two weights, $\alpha$ and $\beta$, which determine how significant the similarity between two words is for determining the final similarity score.
+Finally, Algorithm \ref{al:twowordpipeline} can be used for building Algorithm \ref{al:onetwocompoundpipeline} and \ref{al:twocompoundpipeline}, algorithms that determine the similarity score of compound concepts. Algorithm \ref{al:onetwocompoundpipeline} deterines the similarity between a one-word concept and a two-word concept. In the algorithm $c1$ stands for compound one, the one-word concept. $c2w1$ and $c2w2$ stand for the first and second word of the second compound. Algorithm \ref{al:onetwocompoundpipeline} uses two weights, $\alpha$ and $\beta$, which determine how significant the similarity between two words is for determining the final similarity score.
 
 \begin{algorithm}
 \caption{The pipeline on one one-word concept and one two-word concept.}\label{al:onetwocompoundpipeline}
@@ -190,7 +190,7 @@ Algorithm \ref{al:twocompoundpipeline} determines the similarity between two two
 
 \section{Evaluation Methodology} \label{sec:evalmeth}
 
-We aim to find the best values for $\lambda$, $\mu$, $\alpha$, $\beta$, $\gamma$, $\delta$, and $\epsilon$. To find the best values for $\gamma$, $\delta$, and $\epsilon$, we decided to test algorithm \ref{al:twocompoundpipeline} on a variety of two-word concept combinations, and compare the results to the similarity score estimated by human experts.
+We aim to find the best values for $\lambda$, $\mu$, $\alpha$, $\beta$, $\gamma$, $\delta$, and $\epsilon$. To find the best values for $\gamma$, $\delta$, and $\epsilon$, we decided to test Algorithm \ref{al:twocompoundpipeline} on a variety of two-word concept combinations, and compare the results to the similarity score estimated by human experts.
 
 As there is very little research on the similarity of compound terms, there are no existing proven and tested datasets. For this research, we have had to create our own. In creating this dataset, we have determined four possible sources of bias:
 \begin{itemize}
@@ -199,7 +199,7 @@ As there is very little research on the similarity of compound terms, there are 
 	\item Many compound terms have identical or similar diagonal relationships.
 	\item Many compound terms have similar estimated similarity.
 \end{itemize}
-We have attempted to reduce these biases as much as possible in our dataset, which can be found below in table \ref{table:humancompoundsimilarity}. These values were found by asking domain experts to rate the similarity of the compound terms on a Likert scale with five options: ``Strongly dissimilar", ``Dissimilar", ``Neutral", ``Similar", and ``Strongly similar". After gathering the expert ratings, the options were translated to numerical values by assigning them the following values: 0.0, 0.25, 0.5, 0.75, and 1.0. Finally, the average of all the expert ratings is taken and used in the dataset.
+We have attempted to reduce these biases as much as possible in our dataset, which can be found below in Table \ref{table:humancompoundsimilarity}. These values were found by asking domain experts to rate the similarity of the compound terms on a Likert scale with five options: ``Strongly dissimilar", ``Dissimilar", ``Neutral", ``Similar", and ``Strongly similar". After gathering the expert ratings, the options were translated to numerical values by assigning them the following values: 0.0, 0.25, 0.5, 0.75, and 1.0. Finally, the average of all the expert ratings is taken and used in the dataset.
 
 \begin{table}[h!]
 \caption{Human expert similarity rating of two-word compounds (n=20)}
@@ -235,11 +235,11 @@ We have attempted to reduce these biases as much as possible in our dataset, whi
 
 Values for $\gamma$, $\delta$, and $\epsilon$ are needed to test values for $\lambda$ and $\mu$ and vice-versa. We have decided to first find the optimal values for $\gamma$, $\delta$, and $\epsilon$ using values of $\lambda = 0.65$ and $\mu = 0.35$ from Lee et al. as a starting point \cite{lee2016combining}, and afterwards find optimal values for $\lambda$ and $\mu$ using the results of the first experiment.
 
-We will compare the Pearson correlation of algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\gamma$, $\delta$, and $\epsilon$. We will test all possible values of $\gamma$ and $\delta$ with intervals of 0.1 in the range 0..1. We will ensure that $\gamma + \delta + 2 * \epsilon = 1$ so that the total weighted similarity is in the range 0..1. All the tested values of $\gamma$, $\delta$, and $\epsilon$ can be found in table \ref{table:gammaresults1} and \ref{table:gammaresults2} in the appendix. 
+We will compare the Pearson correlation of Algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\gamma$, $\delta$, and $\epsilon$. We will test all possible values of $\gamma$ and $\delta$ with intervals of 0.1 in the range 0..1. We will ensure that $\gamma + \delta + 2 * \epsilon = 1$ so that the total weighted similarity is in the range 0..1. All the tested values of $\gamma$, $\delta$, and $\epsilon$ can be found in Table \ref{table:gammaresults1} and \ref{table:gammaresults2} in the appendix. 
 
-After finding the optimal values of $\gamma$, $\delta$, and $\epsilon$, we will search for the optimal values of $\lambda$ and $\mu$ using the most and second most optimal values of $\gamma$, $\delta$ and $\epsilon$. We will compare the Pearson correlation of algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\lambda$ and $\mu$. We will test all possible values of $\lambda$ and $\mu$ with intervals of 0.1 in the range 0..1. We will ensure that $\lambda + \mu = 1$ so that the total weighted similarity is in the range 0..1. All the tested values of $\lambda$ and $\mu$ can be found in table \ref{table:lambdamuresults1}.
+After finding the optimal values of $\gamma$, $\delta$, and $\epsilon$, we will search for the optimal values of $\lambda$ and $\mu$ using the most and second most optimal values of $\gamma$, $\delta$ and $\epsilon$. We will compare the Pearson correlation of Algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\lambda$ and $\mu$. We will test all possible values of $\lambda$ and $\mu$ with intervals of 0.1 in the range 0..1. We will ensure that $\lambda + \mu = 1$ so that the total weighted similarity is in the range 0..1. All the tested values of $\lambda$ and $\mu$ can be found in Table \ref{table:lambdamuresults1}.
 
-To properly estimate the efficacy of Concept Suggestor, after finding the optimal values for $\lambda$, $\mu$, $\gamma$, $\delta$, and $\epsilon$, we will compare the Pearson correlation of the similarity score found by the most optimal parameters with the average of the Pearson correlation of random similarity scores. We will determine the Pearson correlation of results where algorithm \ref{al:twocompoundpipeline} returns a random value in the 0..1 range twenty times and take the absolute value of each Pearson correlation so that negative correlations are properly counted. Finally, we will compare the Pearson correlation of Concept Suggestor to the Pearson correlation of random values.
+To properly estimate the efficacy of Concept Suggestor, after finding the optimal values for $\lambda$, $\mu$, $\gamma$, $\delta$, and $\epsilon$, we will compare the Pearson correlation of the similarity score found by the most optimal parameters with the average of the Pearson correlation of random similarity scores. We will determine the Pearson correlation of results where Algorithm \ref{al:twocompoundpipeline} returns a random value in the 0..1 range twenty times and take the absolute value of each Pearson correlation so that negative correlations are properly counted. Finally, we will compare the Pearson correlation of Concept Suggestor to the Pearson correlation of random values.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% EVERYTHING BELOW SUBJECT TO REMOVAL %%% at least in Evaluation Methodology
@@ -267,9 +267,9 @@ To properly estimate the efficacy of Concept Suggestor, after finding the optima
 
 \section{Experiments} \label{sec:experiments} % TODO: Talk more about p-values?
 
-The experiments to find the best values for $\gamma$, $\delta$, and $\epsilon$ can be found in table \ref{table:gammaresults1} and \ref{table:gammaresults2} in the appendix. Values of $\gamma = 0.3$, $\delta = 0.4$, and $\epsilon = 0.15$ result in the highest Pearson correlation of 0.646 and a two-tailed p-value of 0.002. Values of $\gamma = 0.2$, $\delta = 0.4$, and $\epsilon = 0.2$ are in a very close second with a Pearson correlation of 0.643 and a two-tailed p-value of 0.002. 
+The experiments to find the best values for $\gamma$, $\delta$, and $\epsilon$ can be found in Table \ref{table:gammaresults1} and \ref{table:gammaresults2} in the appendix. Values of $\gamma = 0.3$, $\delta = 0.4$, and $\epsilon = 0.15$ result in the highest Pearson correlation of 0.646 and a two-tailed p-value of 0.002. Values of $\gamma = 0.2$, $\delta = 0.4$, and $\epsilon = 0.2$ are in a very close second with a Pearson correlation of 0.643 and a two-tailed p-value of 0.002. 
 
-The experiments to find the best values for $\lambda$ and $\mu$ can be found in table \ref{table:lambdamuresults1} and \ref{table:lambdamuresults2} below. Using the best and second best values for $\gamma$, $\delta$, and $\epsilon$, values of $\lambda = 1.0$ and $\mu = 0.0$ score the highest with a Pearson correlation of 0.692 and 0.673, respectively. 
+The experiments to find the best values for $\lambda$ and $\mu$ can be found in Table \ref{table:lambdamuresults1} and \ref{table:lambdamuresults2} below. Using the best and second best values for $\gamma$, $\delta$, and $\epsilon$, values of $\lambda = 1.0$ and $\mu = 0.0$ score the highest with a Pearson correlation of 0.692 and 0.673, respectively. 
 
 \begin{table}[h!]
 \caption{Experiment results for $\lambda$ and $\mu$ with $\gamma = 0.3$, $\delta = 0.4$, and $\epsilon = 0.15$}
@@ -317,7 +317,7 @@ The experiments to find the best values for $\lambda$ and $\mu$ can be found in 
 \label{table:lambdamuresults2}
 \end{table}
 
-Using random similarity scores, we found an average Pearson correlation score of 0.145. More details can be found in table \ref{table:randomresults} in the appendix.
+Using random similarity scores, we found an average Pearson correlation score of 0.145. More details can be found in Table \ref{table:randomresults} in the appendix.
 
 \section{Conclusions} \label{sec:conclusions}
 
