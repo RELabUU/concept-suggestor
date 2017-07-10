@@ -27,21 +27,23 @@
 \maketitle
 
 \begin{abstract}
-This is the abstract. Please write some more text here, I feel small and empty.
+<CONTEXT>. Natural language processing algorithms are currently able to assign meaning to and compare single-word concepts, but have difficulty performing the same with multi-word concepts. We propose an algorithm that can determine the similarity of two two-word compounds by combining various state-of-the-art techniques and compare and tune it to the similarity estimates of domain experts. <CONTRIBUTION>
 \end{abstract}
 
 {\bf Keywords:} Natural Language Processing, semantic relatedness, semantic similarity
 
 \section{Introduction} \label{sec:introduction}
 
-Air Traffic Management (ATM) is a cross-disciplinary field that requires analysts from multiple domains such as security, safety, and business. When discussing problems about the ATM field, analysts often create domain-specific models that employ both shared and domain-specific concepts. To facilitate these discussions it is important that domain-specific models from one domain can be used in communication with other domains. This can be done by ensuring that domains use similar concepts in their models where possible.
+Air Traffic Management (ATM) is a cross-disciplinary field that requires analysts from multiple domains such as security, safety, and business. When discussing problems about the ATM field, analysts often create models in domain-specific modeling languages that employ both shared and domain-specific concepts. To facilitate these discussions it is important that domain-specific models from one domain can be used in communication with other domains. This can be done by ensuring that domains use similar concepts in their models where possible.
 
-It is difficult for analysts from different domains to communicate about their proposed solutions to a given ATM problem. This difficulty is partially caused by a difference in concepts used in their modeling which reduces the usefulness of these models in communication with other domains. When models are constructed well but use different concepts it can lead to different proposed solutions which have sound argumentation, but are hard to find a middle ground with.
+It is difficult for analysts from different domains to communicate about their proposed solutions to a given problem. This difficulty is partially caused by a difference in concepts used in their modeling which reduces the usefulness of these models in communication with other domains. When models are constructed well but use different concepts it can lead to different proposed solutions which all have sound argumentation, but are hard to find a middle ground with. Model alignment is currently performed through expensive face-to-face meetings. The PACAS project studies how to move away from face-to-face meetings towards a web platform that relies on collaborative modeling and automated reasoning \cite{aydemir2017towards}.
 
-To reduce this difficulty, suggestions can be made to modelers during the modeling process to ensure that similar concepts are used throughout all models. These suggestions can either be taken from previously created models or from a taxonomy relevant to the domain. 
+In collaborative modeling, suggestions can be made to modelers during the modeling process to ensure that similar concepts are used throughout all models. These suggestions can either be taken from previously created models or from a taxonomy relevant to the domain. 
 It is important that any new concepts very similar to existing concepts in the models are not suggested. If ``Airplane" is already modeled, ``Aeroplane" should not be suggested as a new concept. For this, a system that compares new concepts to existing concepts and filters them based on similarity and synonymity can be used.
 
 In practice, concepts used in modeling are not always single words. Multi-word concepts, such as ``Control Tower" will also need to be modeled. Natural Language Processing (NLP) does not yet reliably support comparing multi-word concepts. The relationship between the words in multi-word concepts depends significantly on the context, something computers usually find hard to understand. In the ATM context, however, the relationship between two-word concepts is almost always identical. We propose a way to measure similarity between two-word concepts.
+
+In Section \ref{sec:relwork} we discuss the latest Natural Language Processing techniques for measuring semantic similarity and relatedness. In Section \ref{sec:algorithms} we discuss our proposed solution for determining semantic similarity and relatedness for two-word compounds. In Section \ref{sec:evalmeth} we discuss the evaluation methodology we will use for evaluating the proposed algorithms. In Section \ref{sec:experiments} we discuss the results found from performing the proposed evaluations. Finally, in Section \ref{sec:conclusions} extract conclusions from the results and suggest future research directions.
 
 \section{Related Work} \label{sec:relwork}
 
@@ -53,7 +55,7 @@ SpaCy is one of the fastest and most accurate publically available NLP toolkits 
 
 The Natural Language Toolkit (NLTK) is a widely-used platform for interfacing with over 50 corpora and lexical resources, including WordNet, available through Python. WordNet stores lists of all the various senses of words. By looking for matching senses between two words, possible synonymity can be detected \cite{kilgarriff2000wordnet}. However, these senses are context-dependent. ``Sheet" and ``plane" have a matching sense, even though these words will not be synonyms in most contexts.
 
-Constructing lexical databases and performing word vectorization are two ways to increase computer understanding of human language. Lee et al. have proven that combining these two methods into a weighted average increases the performance on a large amount of semantic relatedness measuring datasets. The weights they found to perform the best is in the range of $\lambda = 0.45-0.85$, where $\lambda$ is the weight of word vectorization, and $\mu = 1-\lambda$ is the weight of the lexical database \cite{lee2016combining}.
+Constructing lexical databases and performing word vectorization are two ways to increase computer understanding of human language. Lee et al. have shown that combining these two methods into a weighted average increases the performance on a large amount of semantic relatedness measuring datasets. The weights they found to perform the best is in the range of $\lambda = 0.45-0.85$, where $\lambda$ is the weight of word vectorization, and $\mu = 1-\lambda$ is the weight of the lexical database \cite{lee2016combining}.
 
 % WordNet is an electronic lexical database created by the Cognitive Science Laboratory of Princeton University starting in 1985. Since then, it has been updated and enhanced several times by researchers all over the world and is still maintained by Princeton University. % TODO: Determine whether to use this paragraph.
 
@@ -65,7 +67,7 @@ Constructing lexical databases and performing word vectorization are two ways to
 
 \section{Algorithms} \label{sec:algorithms}
 
-Concept Suggestor aims to eliminate concepts that are too identical to each other. It is capable of doing this with concepts up to two words large. For this, it uses a pipeline constructed from several smaller algorithms that build upon each other. All algorithms depend on either SpaCy's implementation of the GloVe algorithm or NLTK's interface with WordNet.
+Concept Suggestor aims to eliminate concepts that are too similar to each other. It is capable of doing this with concepts up to two words large. For this, it uses a pipeline constructed from several smaller algorithms that build upon each other. All algorithms depend on either SpaCy's implementation of the GloVe algorithm or NLTK's interface with WordNet.
 
 \subsection{SpaCy and GloVe}
 The similarity function of SpaCy, henceforth called $\textit{SpacySimilarity}$, computes the cosine of two word vectors. In section \ref{sec:relwork} we explained how these word vectors are constructed. $\textit{SpacySimilarity}$ returns a value between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. It is important to note that although the name of the function is $\textit{SpacySimilarity}$, $\textit{SpacySimilarity}$ actually measures semantic relatedness, not semantic similarity, due to the method used to construct the word vectors. 
@@ -95,6 +97,7 @@ NLTK offers six methods to calculate the similarity of two words \citep{pedersen
 Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is found from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}. In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training Concept Suggestor for specific domains using domain-related corpora, but Information Content is an old technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}. % TODO: Remove citations that do not support this statement.
 
 \begin{table}[h!]
+\caption{Comparison of WordNet similarity measures} % Human estimates taken from budanitsky2006evaluating
 \centering
 \begin{tabular}{|c||c|c|}
 	\hline
@@ -109,7 +112,6 @@ Table \ref{table:wordnetsimilarity} shows the results of each similarity measure
 	Lin & 0.00 & 0.345 \\
 	\hline
 \end{tabular}
-\caption{Comparison of WordNet similarity measures} % Human estimates taken from budanitsky2006evaluating
 \label{table:wordnetsimilarity}
 \end{table}
 
@@ -200,6 +202,7 @@ As there is very little research on the similarity of compound terms, there are 
 We have attempted to reduce these biases as much as possible in our dataset, which can be found below in table \ref{table:humancompoundsimilarity}. These values were found by asking domain experts to rate the similarity of the compound terms on a Likert scale with five options: ``Strongly dissimilar", ``Dissimilar", ``Neutral", ``Similar", and ``Strongly similar". After gathering the expert ratings, the options were translated to numerical values by assigning them the following values: 0.0, 0.25, 0.5, 0.75, and 1.0. Finally, the average of all the expert ratings is taken and used in the dataset.
 
 \begin{table}[h!]
+\caption{Human expert similarity rating of two-word compounds (n=20)}
 \centering
 \begin{tabular}{|c|c||c|}
 	\hline
@@ -227,7 +230,6 @@ We have attempted to reduce these biases as much as possible in our dataset, whi
 	Flight Terminal & International Flight & 0.1750 \\
 	\hline
 \end{tabular}
-\caption{Human expert similarity rating of two-word compounds (n=20)}
 \label{table:humancompoundsimilarity}
 \end{table}
 
@@ -270,6 +272,7 @@ The experiments to find the best values for $\gamma$, $\delta$, and $\epsilon$ c
 The experiments to find the best values for $\lambda$ and $\mu$ can be found in table \ref{table:lambdamuresults1} and \ref{table:lambdamuresults2} below. Using the best and second best values for $\gamma$, $\delta$, and $\epsilon$, values of $\lambda = 1.0$ and $\mu = 0.0$ score the highest with a Pearson correlation of 0.692 and 0.673, respectively. 
 
 \begin{table}[h!]
+\caption{Experiment results for $\lambda$ and $\mu$ with $\gamma = 0.3$, $\delta = 0.4$, and $\epsilon = 0.15$}
 \centering
 \begin{tabular}{|c|c||c|c|}
 	\hline
@@ -288,11 +291,11 @@ The experiments to find the best values for $\lambda$ and $\mu$ can be found in 
 	\textbf{1.0} & \textbf{0.0} & \textbf{0.692} & \textbf{0.001} \\
 	\hline
 \end{tabular}
-\caption{Experiment results for $\lambda$ and $\mu$ with $\gamma = 0.3$, $\delta = 0.4$, and $\epsilon = 0.15$}
 \label{table:lambdamuresults1}
 \end{table}
 
 \begin{table}[h!]
+\caption{Experiment results for $\lambda$ and $\mu$ with $\gamma = 0.2$, $\delta = 0.4$, and $\epsilon = 0.2$}
 \centering
 \begin{tabular}{|c|c||c|c|}
 	\hline
@@ -311,7 +314,6 @@ The experiments to find the best values for $\lambda$ and $\mu$ can be found in 
 	\textbf{1.0} & \textbf{0.0} & \textbf{0.673} & \textbf{0.001} \\	
 	\hline
 \end{tabular}
-\caption{Experiment results for $\lambda$ and $\mu$ with $\gamma = 0.2$, $\delta = 0.4$, and $\epsilon = 0.2$}
 \label{table:lambdamuresults2}
 \end{table}
 
@@ -319,11 +321,11 @@ Using random similarity scores, we found an average Pearson correlation score of
 
 \section{Conclusions} \label{sec:conclusions}
 
-The performance of Concept Suggestor is promising. Using the best parameters, a Pearson correlation score of 0.692 is reached with human expert estimates. Although it does not perform as well as many single-word concept similarity algorithms, it still performs significantly better than using random similarity scores. 
+The performance of Concept Suggestor is promising. Using the best parameters, a Pearson correlation score of 0.692 is reached with human expert estimates. Although it does not perform as well as the latest single-word concept similarity algorithms, it still performs significantly better than using random similarity scores. 
 
 Concept Suggestor works better using just the similarity algorithm of SpaCy, and leaving the similarity algorithm of NLTK out.
 
-Future research could investigate whether training SpaCy on a domain-specific corpus will improve the performance of Concept Suggestor. Future research could also establish a more peer reviewed dataset for testing multi-word compound similarity, which could improve the validity of research on multi-word compound similarity.
+Future research could investigate whether training SpaCy on a domain-specific corpus will improve the performance of Concept Suggestor. Future research could also establish a more peer reviewed dataset for testing multi-word compound similarity, which could improve the validity of research on multi-word compound similarity. These algorithms can only determine the similarity of up to two-word compounds. More research into determining the relationship between the words in multi-word concepts could allow similar algorithms to accept larger concepts.
 
 \section{Acknowledgements} \label{sec:ack}
 
@@ -334,6 +336,7 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 \section{Appendix}
 
 \begin{table}[h!]
+\caption{Experiment results for $\gamma$, $\delta$, and $\epsilon$ with $\lambda = 0.65$ and $\mu = 0.35$, part one}
 \centering
 \begin{tabular}{|c|c|c||c|c|}
 	\hline
@@ -383,11 +386,11 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 	0.3 & 0.7 & 0.00 & 0.606 & 0.005 \\
 	\hline
 \end{tabular}
-\caption{Experiment results for $\gamma$, $\delta$, and $\epsilon$ with $\lambda = 0.65$ and $\mu = 0.35$, part one}
 \label{table:gammaresults1}
 \end{table}
 
 \begin{table}[h!]
+\caption{Experiment results for $\gamma$, $\delta$, and $\epsilon$ with $\lambda = 0.65$ and $\mu = 0.35$, part two}
 \centering
 \begin{tabular}{|c|c|c||c|c|}
 	\hline
@@ -430,11 +433,11 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 	1.0 & 0.0 & 0.00 & 0.195 & 0.411 \\
 	\hline
 \end{tabular}
-\caption{Experiment results for $\gamma$, $\delta$, and $\epsilon$ with $\lambda = 0.65$ and $\mu = 0.35$, part two}
 \label{table:gammaresults2}
 \end{table}
 
 \begin{table}[h!]
+\caption{Pearson Correlation of random similarity scores to human expert estimates}
 \centering
 \begin{tabular}{|c|c|}
 	\hline
@@ -461,11 +464,9 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 	0.123 & 0.123 \\
 	-0.421 & 0.421 \\
 	\hline
-	\hline
 	Average & 0.145\\
 	\hline
 \end{tabular}
-\caption{Pearson Correlation of random similarity scores to human expert estimates}
 \label{table:randomresults}
 \end{table}
 
