@@ -68,27 +68,25 @@ Constructing lexical databases and performing word vectorization are two ways to
 
 \section{Framework} \label{sec:framework}
 
-SimCom aims to eliminate concepts that are too similar to each other. It is capable of doing this with concepts up to two words large. For this, it uses a pipeline constructed from several smaller algorithms that build upon each other. All algorithms depend on either SpaCy's implementation of the GloVe algorithm or NLTK's interface with WordNet.
+SimCom aims to determine the similarity of compound terms. It is capable of doing this with concepts up to two words large. For this, it uses a pipeline constructed from several smaller algorithms that build upon each other. All algorithms depend on either SpaCy's implementation of the GloVe algorithm or NLTK's interface with WordNet.
 
 \subsection{SpaCy and GloVe}
 The similarity function of SpaCy, henceforth called $\textit{SpacySimilarity}$, computes the cosine of two word vectors. In Section \ref{sec:relwork} we explained how these word vectors are constructed. $\textit{SpacySimilarity}$ returns a value between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. It is important to note that although the name of the function is $\textit{SpacySimilarity}$, $\textit{SpacySimilarity}$ actually measures semantic relatedness, not semantic similarity, as SpaCy's word vectors are built using co-occurrence, which does not assign any form of semantics to words. 
 % TODO: If the content is just one paragraph (or two) there is no need to create a subsection. Just keep the paragraph.
 
 \subsection{NLTK and WordNet}
-Although NLTK is an often-used library for NLP purposes, SimCom uses only the WordNet interface, so this subsection will focus primarily on WordNet. WordNet is a public electronic lexical database that began in the mid-1980s in the Princeton University Department of Psychology and has been regularly updated and improved since then. 
-% The similarity function of NLTK, henceforth called $\textit{WordNetSimilarity}$ returns a score between zero and one, where a value of zero indicates that two words are dissimilar, and a value of one indicates that two words are similar to each other. This score is based on the shortest path that connects the senses using only hypernym or hyponym relationships.
-
-NLTK offers six methods to calculate the similarity of two words \citep{pedersen2004wordnet}, henceforth called $\textit{WordnetSimilarity}$. Of the six, three use Information Content (IC), information about the meaning and usage of words \cite{seco2004intrinsic}. Four use the Least Common Subsumer (LCS), the most specific concept which is an ancestor of both words. The six methods are further explained and compared to each other below.
+Although NLTK is an often-used library for NLP purposes, SimCom uses only the WordNet interface, so this subsection will focus primarily on WordNet. 
+NLTK offers six methods to calculate the similarity of two words \citep{pedersen2004wordnet}, henceforth called $\textit{WordnetSimilarity}$. Of the six, three use Information Content (IC), information about the meaning and usage of words \cite{seco2004intrinsic}. Four use the Least Common Subsumer (LCS), the most specific concept which is an ancestor of both words. To determine the LCS, the word that requires the least steps from both words traversing only the hypernym (more generic category) relation is taken. In example, the LCS of ``automobile" and ``rowboat" is ``vehicle", and the LCS of ``rowboat" and ``ferry" is ``boat". The six methods are further explained and compared to each other below.
 \begin{itemize}
-	\item Path Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses traversing only hypernym and hyponym relationships. The score is in the range 0 to 1, where 0 indicates dissimilarity and 1 indicates similarity.
-	\item Leacock-Chodorow Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses (as above) and the maximum depth of the taxonomy in which the senses occur. The relationship is given as \(-log(p/2d)\) where p is the shortest path length and d the taxonomy depth. % TODO: make this not copied from http://www.nltk.org/howto/wordnet.html
-	\item Wu-Palmer Similarity: Returns a score denoting how similar two word senses are, based on the depth of the two senses in the taxonomy and that of the LCS.
-	\item Resnik Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS.
-	\item Jiang-Conrath Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input synsets. The relationship is given by Equation \ref{eq:jcnsimilarity}, where $IC(X)$ stands for the information content of $X$, $s1$ and $s2$ stand for the synsets of the first and second word, and $lcs$ stands for the least common subsumer.
+	\item Path Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses traversing only hypernym and hyponym (more specific word) relationships. The score is in the range 0 to 1, where 0 indicates dissimilarity and 1 indicates similarity.
+	\item Leacock-Chodorow Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses traversing only hypernym and hyponym relationships and the maximum depth of the taxonomy in which the senses occur. The relationship is given as \(-log(p/2d)\) where p is the shortest path length and d the taxonomy depth \cite{leacock1998combining}.
+	\item Wu-Palmer Similarity: Returns a score denoting how similar two word senses are, based on the depth of the two senses in the taxonomy and that of the LCS \cite{wu1994verbs}.
+	\item Resnik Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS \cite{resnik1995using}.
+	\item Jiang-Conrath Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input synsets. The relationship is given by Equation \ref{eq:jcnsimilarity}, where $IC(X)$ stands for the information content of $X$, $s1$ and $s2$ stand for the synsets of the first and second word, and $lcs$ stands for the least common subsumer \cite{jiang1997semantic}.
 \begin{equation} \label{eq:jcnsimilarity}
 	\frac{1} {IC(s1) + IC(s2) - 2 * IC(lcs)}
 \end{equation}
-	\item Lin Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input Synsets. The relationship is given by Equation \ref{eq:linsimilarity}. In Equation \ref{eq:linsimilarity}, the same meanings for abbreviations are used as in Equation \ref{eq:jcnsimilarity}, which can be found above.
+	\item Lin Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input Synsets. The relationship is given by Equation \ref{eq:linsimilarity}. In Equation \ref{eq:linsimilarity}, the same meanings for abbreviations are used as in Equation \ref{eq:jcnsimilarity}, which can be found above \cite{lin1998information}.
 \begin{equation} \label{eq:linsimilarity}
 	\frac{2 * IC(lcs)} {IC(s1) + IC(s2)} 
 \end{equation} 
@@ -96,6 +94,7 @@ NLTK offers six methods to calculate the similarity of two words \citep{pedersen
 % TODO: Ensure that all the items above are not too similar to their primary source, http://www.nltk.org/howto/wordnet.html
 
 Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In Table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is found from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}. In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training SimCom for specific domains using domain-related corpora, but Information Content is an old technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}. % TODO: Remove citations that do not support this statement.
+Note that only the Human Estimate and Wu-Palmer similarity measure use a linear scale between 0 and 1. The Path and Jiang-Conrath similarity measures are rational functions with a numerator of 1, the Resnik and Leacock-Chodorow similarity measures are logarithmic functions, and the Lin similarity measure is a rational function in the range 0 to 1. All similarity measures do have in common that in their implementation in NLTK, a higher result indicates higher similarity.
 
 \begin{table}[h!]
 \caption{Comparison of WordNet similarity measures} % Human estimates taken from budanitsky2006evaluating
@@ -131,10 +130,10 @@ The first building block of the pipeline, Algorithm \ref{al:semanticsimilarity},
 \end{algorithmic}
 \end{algorithm}
 
-The second building block of the pipeline, Algorithm \ref{al:synonymity}, determines whether two words are synonyms. It requests the synsets of both words from WordNet, and looks for any matching synset between the two. If a match is found, the two words are possibly synonyms and the algorithm returns \textit{true}. If no match is found, the algorithm returns \textit{false}.
+The second building block of the pipeline, Algorithm \ref{al:synonymity}, determines whether two words are synonyms. It requests the synsets of both words from WordNet, and looks for any matching synset between the two. If a match is found, the two words are possibly synonyms and the algorithm returns \textit{true}. If no match is found, the algorithm returns \textit{false}. Due to the fact that words can have multiple context-dependent meanings and SimCom has no sense of context, DetermineSynonymity can return an erroneous result. In example, ``sheet" and ``plane" share a common synset, even though in most cases these two words would not be seen as synonyms by human judgement. Algorithm \ref{al:twowordpipeline}, which can be found further on, reduces this risk of an erroneous result.
 
 \begin{algorithm}
-\caption{Determine synonymity of two words.}\label{al:synonymity}
+\caption{Determine possible synonymity of two words.}\label{al:synonymity}
 \begin{algorithmic}[1]
 	\Procedure{DetermineSynonymity}{wordA, wordB}
 		\State $\textit{synsA} \gets \textit{WordNetSynsets}(wordA)$
@@ -144,14 +143,14 @@ The second building block of the pipeline, Algorithm \ref{al:synonymity}, determ
 \end{algorithmic}
 \end{algorithm}
 
-Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to construct Algorithm \ref{al:twowordpipeline}, the pipeline for two single-word concepts.  When using only SpaCy and NLTK, words that are similar and also synonyms can have the same similarity score as words that are similar and not synonyms. Algorithm \ref{al:twowordpipeline} aims to ensure that similar words that are synonyms have the highest similarity score possible. If the similarity score from Algorithm \ref{al:semanticsimilarity} is above a certain threshold, Algorithm \ref{al:synonymity} is used to determine whether the two words are synonyms. The threshold ensures that words that are semantically dissimilar, but synonyms in certain contexts, such as ``plane" and ``sheet" do not get the highest similarity score possible. If the two words are synonyms, this algorithm changes their similarity score to 1. If the two words are not synonyms, the result from Algorithm \ref{al:semanticsimilarity} is passed on. The aim of the threshold is only to filter out semantically dissimilar words. Because of this, a threshold of 0.6 suffices.
+Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to construct Algorithm \ref{al:twowordpipeline}, the pipeline for two single-word concepts.  When using only SpaCy and NLTK, words that are similar and also synonyms can have the same similarity score as words that are similar and not synonyms. Algorithm \ref{al:twowordpipeline} aims to ensure that similar words that are synonyms have the highest similarity score possible. If the similarity score from Algorithm \ref{al:semanticsimilarity} is above the threshold $\sigma$, Algorithm \ref{al:synonymity} is used to determine whether the two words are synonyms. The threshold $\sigma$ ensures that words that are semantically dissimilar, but synonyms in certain contexts, such as ``plane" and ``sheet" do not get the highest similarity score possible. If the two words are synonyms, this algorithm changes their similarity score to 1. If the two words are not synonyms, the result from Algorithm \ref{al:semanticsimilarity} is passed on. The aim of the threshold $\sigma$ is only to filter out semantically dissimilar words. Because of this, a $\sigma$ of 0.6 suffices.
 
 \begin{algorithm}
 \caption{The pipeline on two single-word concepts.}\label{al:twowordpipeline}
 \begin{algorithmic}[1]
 	\Procedure{TwoWordPipeline}{wordA, wordB}
 		\State $\textit{similarity} \gets \textit{DetermineSimilarity}(wordA, wordB)$
-		\If {$\textit{similarity} > \textit{threshold}$}
+		\If {$\textit{similarity} > \sigma$}
 			\If {$\textit{DetermineSynonymity}(wordA, wordB)$}
 				\State \Return 1
 			\EndIf
