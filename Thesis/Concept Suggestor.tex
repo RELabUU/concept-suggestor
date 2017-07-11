@@ -36,7 +36,7 @@ When designing large-scale complex systems, domain experts use domain-specific m
 
 \section{Introduction} \label{sec:introduction}
 
-Large-scale complex system design often requires analysts from multiple concerns such as security, safety, and business. When discussing problems during the design process, analysts need to create models in concern-specific modeling languages that employ both shared and domain-specific concepts, which are then used in cross-concern communication. To increase cross-concern understanding, concern-specific models from one concern need to be aligned with concern-specific models from another concern. Currently, this is usually done through expensive face-to-face meetings. The Participatory Architectural Change MAnagement in ATM Systems (PACAS) project studies how to move away from face-to-face meetings towards a web platform that relies on collaborative modeling and automated reasoning in the Air Traffic Management (ATM) domain \cite{aydemir2017towards} \fba{the publication venue is missing for this reference. It is MoDRE 2017}.
+Large-scale complex system design often requires analysts from multiple concerns such as security, safety, and business. When discussing problems during the design process, analysts need to create models in concern-specific modeling languages that employ both shared and domain-specific concepts, which are then used in cross-concern communication. To increase cross-concern understanding, concern-specific models from one concern need to be aligned with concern-specific models from another concern. Currently, this is usually done through expensive face-to-face meetings. The Participatory Architectural Change MAnagement in ATM Systems (PACAS) project studies how to move away from face-to-face meetings towards a web platform that relies on collaborative modeling and automated reasoning in the Air Traffic Management (ATM) domain \cite{aydemir2017towards}.
 
 One part of collaborative modeling is ensuring that similar concepts are used during the modeling process. If two models are created in different domains that use wildly different concepts, it is difficult to compare proposed solutions using both of the models. Suggestions can be made to modelers during the modeling process to ensure that similar concepts are used throughout all models. These suggestions can either be taken from previously created models or from a taxonomy relevant to the domain. It is important that any new concepts very similar to existing concepts in the models are not suggested. If ``Airplane" is already modeled, ``Aeroplane" should not be suggested as a new concept. For this, a system that compares new concepts to existing concepts and filters them based on similarity and synonymity can be used.
 
@@ -52,7 +52,7 @@ Usually, the first word indicates something about the second word, such as ``blu
 
 \section{Related Work} \label{sec:relwork}
 
-Natural Language Processing (NLP) is a field of computer science, computational linguistics, and artificial intelligence which concerns itself with the interaction between computers and (human) natural languages \fba{This sentence is a bit too similar to the wikipedia definition. Please paraphrase}. NLP can be applied in various fields of studies, such as text processing, speech recognition, artificial intelligence, machine translation, expert systems, and so on \citep{chowdhury2003natural}. In this thesis we look at a particular aspect of NLP, namely modeling natural language and extracting meaning from these models.
+Natural Language Processing (NLP) is a field of applied science combining computer science, computational linguistics, and artificial intelligence to analyze and synthesize natural language and speech through computational techniques. NLP can be applied in various fields of studies, such as text processing, speech recognition, artificial intelligence, machine translation, expert systems, and so on \citep{chowdhury2003natural}. In this thesis we look at a particular aspect of NLP, namely modeling natural language and extracting meaning from these models.
 
 One of the `older' ways of modeling natural language is WordNet. WordNet is a human-constructed electronical lexical database started in 1985. WordNet resembles a thesaurus, but only superficially. Where a thesaurus only groups words together based on rough meaning similarity, WordNet groups different sets of synonyms together into ``Synsets" and labels semantic relationships such as hypernymy, a more generic category, or hyponymy, a more specific word, between these synsets. In example, a ``car" has the synset ``car, automobile", but also the synset ``car, railway car". The synset ``car, automobile" has several full hyponyms such as ``ambulance", ``taxi", and ``limousine", and also the direct hypernym ``motor vehicle" \cite{princeton2010wordnet}. With all this data about semantic relationships between words and their possible meanings, a variety of information can be extracted, such as detecting possible synonymy \cite{kilgarriff2000wordnet}.
 WordNet has been made more accessible through the Natural Language Toolkit (NLTK), a widely-used platform for interfacing with over 50 corpora and lexical resources, available through the Python language \cite{bird2006nltk}.
@@ -97,7 +97,7 @@ NLTK offers six methods to calculate the similarity of two words \citep{pedersen
 \end{itemize}
 % TODO: Ensure that all the items above are not too similar to their primary source, http://www.nltk.org/howto/wordnet.html
 
-Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In Table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is obtained from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}. \fba{Please explain briefly how they got it} In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training SimCom for specific domains using domain-related corpora, but Information Content is an old corpus-specific technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}. % TODO: Remove citations that do not support this statement.
+Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In Table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating has been created by H. Rubenstein and J.B. Goodenough by asking volunteers to rate the similarity of meaning for a variety of word pairs \cite{rubenstein1965contextual}. In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training SimCom for specific domains using domain-related corpora, but Information Content is an old corpus-specific technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}.
 
 Note that only the Human Estimate and Wu-Palmer similarity measure use a linear scale between 0 and 1. The Path and Jiang-Conrath similarity measures are rational functions with a numerator of 1, the Resnik and Leacock-Chodorow similarity measures are logarithmic functions, and the Lin similarity measure is a rational function in the range 0 to 1. All similarity measures do have in common that in their implementation in NLTK, a higher result indicates higher similarity.
 
@@ -205,35 +205,35 @@ As there is no research specifically aimed on determining the similarity of comp
 	\item Many compound terms have identical or similar diagonal relationships.
 	\item Many compound terms have similar estimated similarity.
 \end{itemize}
-We have attempted to reduce these biases as much as possible in our dataset, which can be found below in Table \ref{table:humancompoundsimilarity}. The expert similarity ratings were found by asking twenty domain experts to rate the similarity of the compound terms on a Likert scale with five options: ``Strongly dissimilar", ``Dissimilar", ``Neutral", ``Similar", and ``Strongly similar". After gathering the expert ratings, the options were translated to numerical values by assigning them the following five values respectively: 0.0, 0.25, 0.5, 0.75, and 1.0. Finally, the average of all the expert ratings was taken and inserted into the dataset. \fba{report standard deviation as well.}
+We have attempted to reduce these biases as much as possible in our dataset, which can be found below in Table \ref{table:humancompoundsimilarity}. The expert similarity ratings were found by asking twenty domain experts to rate the similarity of the compound terms on a Likert scale with five options: ``Strongly dissimilar", ``Dissimilar", ``Neutral", ``Similar", and ``Strongly similar". After gathering the expert ratings, the options were translated to numerical values by assigning them the following five values respectively: 0.0, 0.25, 0.5, 0.75, and 1.0. Finally, the average of all the expert ratings was taken and inserted into the dataset, as well as the standard deviation (SD) of the results of each compound term pair.
 
 \begin{table}[h!]
 \caption{Human expert similarity rating of two-word compounds (n=20)}
 \centering
-\begin{tabular}{lll}
+\begin{tabular}{llll}
 	\toprule
-	First Compound & Second Compound & Average Expert Similarity Rating \\
+	First Compound & Second Compound & Expert Rating & SD \\
 	\midrule
-	Computer Terminal & Flight Terminal & 0.21 \\
-	Business Plan & Emergency Plan & 0.11 \\
-	Commercial Time & Revenue Loss & 0.22 \\
-	Paid Leave & Maternal Leave & 0.45 \\
-	Transit Airspace & Destination Aerodrome & 0.18 \\
-	Flight Attendant & Cabin Attendant & 0.80 \\
-	Intercontinental Flight & International Flight & 0.58 \\
-	Aeronautical Meteorology & Aviation Meteorology & 0.86 \\
-	Business Plane & Business Sheet & 0.21 \\
-	Emergency Flight & Emergency Altitude \fba{why this one has a different precision?} & 0.200 \\
-	Emergency Flight & Emergency Plan & 0.19 \\
-	Passenger Airline & Passenger Aircraft & 0.33 \\
-	Control Tower & Ground Control & 0.48 \\
-	Baggage Check & Sales Figure & 0.08 \\
-	Domestic Pilot & Flight Attendant & 0.24 \\
-	Airplane Wing & Aeroplane Wing & 0.94 \\
-	Flight Course & Flight Plan & 0.51 \\
-	Police Officer & Security Officer & 0.59 \\
-	Flight Level & Flight Altitude & 0.78 \\
-	Flight Terminal & International Flight & 0.18 \\
+	Computer Terminal & Flight Terminal & 0.21 & 0.25 \\
+	Business Plan & Emergency Plan & 0.11 & 0.19\\
+	Commercial Time & Revenue Loss & 0.23 & 0.23 \\
+	Paid Leave & Maternal Leave & 0.45 & 0.26  \\
+	Transit Airspace & Destination Aerodrome & 0.18 & 0.22 \\
+	Flight Attendant & Cabin Attendant & 0.80 & 0.28 \\
+	Intercontinental Flight & International Flight & 0.58 & 0.35 \\
+	Aeronautical Meteorology & Aviation Meteorology & 0.86 & 0.17 \\
+	Business Plane & Business Sheet & 0.21 & 0.31 \\
+	Emergency Flight & Emergency Altitude & 0.20 & 0.30 \\
+	Emergency Flight & Emergency Plan & 0.19 & 0.24 \\
+	Passenger Airline & Passenger Aircraft & 0.33 & 0.30 \\
+	Control Tower & Ground Control & 0.48 & 0.32 \\
+	Baggage Check & Sales Figure & 0.08 & 0.16 \\
+	Domestic Pilot & Flight Attendant & 0.24 & 0.30 \\
+	Airplane Wing & Aeroplane Wing & 0.94 & 0.11 \\
+	Flight Course & Flight Plan & 0.51 & 0.33 \\
+	Police Officer & Security Officer & 0.59 & 0.27 \\
+	Flight Level & Flight Altitude & 0.78 & 0.23 \\
+	Flight Terminal & International Flight & 0.18 & 0.26 \\
 	\bottomrule
 \end{tabular}
 \label{table:humancompoundsimilarity}
@@ -241,7 +241,7 @@ We have attempted to reduce these biases as much as possible in our dataset, whi
 
 Values for $\gamma$, $\delta$, and $\epsilon$ are needed to test values for $\lambda$ and $\mu$ and vice-versa. We have decided to first find the optimal values for $\gamma$, $\delta$, and $\epsilon$ using values of $\lambda = 0.65$ and $\mu = 0.35$ from Lee \emph{et al}. as a starting point \cite{lee2016combining}, and afterwards find optimal values for $\lambda$ and $\mu$ using the results of the first experiment.
 
-We compare the Pearson correlation \fba{cite and briefly explain what it is} of Algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\gamma$, $\delta$, and $\epsilon$. We test all possible values of $\gamma$ and $\delta$ with intervals of 0.1 in the range 0 to 1. We ensure that $\gamma + \delta + 2 * \epsilon = 1$ so that the total weighted similarity is in the range 0 to 1. All the tested values of $\gamma$, $\delta$, and $\epsilon$ can be found in Table \ref{table:gammaresults1} and \ref{table:gammaresults2} in the appendix. 
+We compare the Pearson correlation coefficient, a measure of the strength of linear association between two variables, where a value of -1 indicates total negative correlation, a value of 0 indicates no correlation, and a value of 1 indicates total positive correlation \cite{sedgwick2012pearson}, of Algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\gamma$, $\delta$, and $\epsilon$. We test all possible values of $\gamma$ and $\delta$ with intervals of 0.1 in the range 0 to 1. We ensure that $\gamma + \delta + 2 * \epsilon = 1$ so that the total weighted similarity is in the range 0 to 1. All the tested values of $\gamma$, $\delta$, and $\epsilon$ can be found in Table \ref{table:gammaresults1} and \ref{table:gammaresults2} in the appendix. 
 
 After finding the optimal values of $\gamma$, $\delta$, and $\epsilon$, we search for the optimal values of $\lambda$ and $\mu$ using the most and second most optimal values of $\gamma$, $\delta$ and $\epsilon$. We   compare the Pearson correlation of Algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\lambda$ and $\mu$. We   test all possible values of $\lambda$ and $\mu$ with intervals of 0.1 in the range 0 to 1. We   ensure that $\lambda + \mu = 1$ so that the total weighted similarity is in the range 0 to 1. All the tested values of $\lambda$ and $\mu$ can be found in Table \ref{table:lambdamuresults1}.
 
