@@ -9,13 +9,15 @@
 ]{biblatex}
 \usepackage{amsmath}
 \usepackage{algorithm}
+\usepackage{booktabs,color}
 \usepackage[noend]{algpseudocode}
+\usepackage[x11names,svgnames]{xcolor}
+\newcommand\fba[1]{\textcolor{SeaGreen3}{FBA: #1}}
 
 % TODO: Ensure that paragraphs have at least three sentences.
 
 % -- Title stuff --
 \title{SimCom: Measuring Similarity of Compound Terms}
-\date{17th of May, 2017}
 \author{Rapha\"el Claasen}
 
 % -- Bibliography --
@@ -34,15 +36,15 @@ When designing large-scale complex systems, domain experts use domain-specific m
 
 \section{Introduction} \label{sec:introduction}
 
-Large-scale complex system design often require analysts from multiple domains such as security, safety, and business. When discussing problems during the design process, analysts have the need to create models in domain-specific modeling languages that employ both shared and domain-specific concepts, which are then used in cross-domain communication. To increase cross-domain understanding, domain-specific models from one domain need to be aligned with domain-specific models from another domain. Currently, this is usually done through expensive face-to-face meetings. The Participatory Architectural Change MAnagement in ATM Systems (PACAS) studies how to move away from face-to-face meetings towards a web platform that relies on collaborative modeling and automated reasoning in the Air Traffic Management (ATM) domain \cite{aydemir2017towards}.
+Large-scale complex system design often requires analysts from multiple concerns such as security, safety, and business. When discussing problems during the design process, analysts need to create models in concern-specific modeling languages that employ both shared and domain-specific concepts, which are then used in cross-concern communication. To increase cross-concern understanding, concern-specific models from one concern need to be aligned with concern-specific models from another concern. Currently, this is usually done through expensive face-to-face meetings. The Participatory Architectural Change MAnagement in ATM Systems (PACAS) project studies how to move away from face-to-face meetings towards a web platform that relies on collaborative modeling and automated reasoning in the Air Traffic Management (ATM) domain \cite{aydemir2017towards} \fba{the publication venue is missing for this reference. It is MoDRE 2017}.
 
 One part of collaborative modeling is ensuring that similar concepts are used during the modeling process. If two models are created in different domains that use wildly different concepts, it is difficult to compare proposed solutions using both of the models. Suggestions can be made to modelers during the modeling process to ensure that similar concepts are used throughout all models. These suggestions can either be taken from previously created models or from a taxonomy relevant to the domain. It is important that any new concepts very similar to existing concepts in the models are not suggested. If ``Airplane" is already modeled, ``Aeroplane" should not be suggested as a new concept. For this, a system that compares new concepts to existing concepts and filters them based on similarity and synonymity can be used.
 
-In practice, concepts used in modeling are not always single words. Compound terms, such as ``Control Tower" will also need to be modeled. Current Natural Language Processing (NLP) techniques do not yet reliably support comparing compound terms. The relationship between the words in compound terms depends significantly on the context, something computers still find hard to understand. 
+In practice, concepts used in modeling are not always single words. Compound terms, such as ``Control Tower" will also need to be modeled. Current Natural Language Processing (NLP) techniques do not reliably support comparing compound terms. The relationship between the words in compound terms depends significantly on the context, something computers still struggle to understand. 
 
 Usually, the first word indicates something about the second word, such as ``blue ball", or ``small bike". However, there are situations where this is not the case, such as ``size medium". In compound terms larger than two words, the context dependency increases significantly. In example, a ``red speckled ball" can indicate that either the speckles are red, or the ball is red. Because the complexity of the relationships between words rises exponentially with the size of compound terms, we will be focusing on two-word compounds and propose a way to measure similarity between two two-word compounds.
 
-In Section \ref{sec:relwork} we discuss the latest Natural Language Processing techniques for measuring semantic similarity and relatedness. In Section \ref{sec:framework} we discuss our proposed solution for determining semantic similarity and relatedness for two-word compounds. In Section \ref{sec:evalmeth} we discuss the evaluation methodology we will use for evaluating the proposed framework. In Section \ref{sec:experiments} we discuss the results found from performing the proposed evaluations. Finally, in Section \ref{sec:conclusions} we extract conclusions from the results and suggest future research directions.
+\emph{Organization}. In Section \ref{sec:relwork} we discuss the latest Natural Language Processing techniques for measuring semantic similarity and relatedness. In Section \ref{sec:framework} we discuss our proposed solution for determining semantic similarity and relatedness for two-word compounds. In Section \ref{sec:evalmeth} we discuss the evaluation methodology we will use for evaluating the proposed framework. In Section \ref{sec:experiments} we discuss the results found from performing the proposed evaluations. Finally, in Section \ref{sec:conclusions} we extract conclusions from the results and suggest future research directions.
 
 % To facilitate this communication it is important that domain-specific models use similar concepts so cross-domain understanding is increased.
 
@@ -50,15 +52,15 @@ In Section \ref{sec:relwork} we discuss the latest Natural Language Processing t
 
 \section{Related Work} \label{sec:relwork}
 
-Natural Language Processing (NLP) is a field of computer science, computational linguistics, and artificial intelligence which concerns itself with the interaction between computers and (human) natural language. NLP can be applied in various fields of studies, such as text processing, speech recognition, artificial intelligence, machine translation, expert systems, and so on \citep{chowdhury2003natural}. In this thesis we will look at a particular aspect of NLP, namely modeling natural language and extracting meaning from these models.
+Natural Language Processing (NLP) is a field of computer science, computational linguistics, and artificial intelligence which concerns itself with the interaction between computers and (human) natural languages \fba{This sentence is a bit too similar to the wikipedia definition. Please paraphrase}. NLP can be applied in various fields of studies, such as text processing, speech recognition, artificial intelligence, machine translation, expert systems, and so on \citep{chowdhury2003natural}. In this thesis we look at a particular aspect of NLP, namely modeling natural language and extracting meaning from these models.
 
 One of the `older' ways of modeling natural language is WordNet. WordNet is a human-constructed electronical lexical database started in 1985. WordNet resembles a thesaurus, but only superficially. Where a thesaurus only groups words together based on rough meaning similarity, WordNet groups different sets of synonyms together into ``Synsets" and labels semantic relationships such as hypernymy, a more generic category, or hyponymy, a more specific word, between these synsets. In example, a ``car" has the synset ``car, automobile", but also the synset ``car, railway car". The synset ``car, automobile" has several full hyponyms such as ``ambulance", ``taxi", and ``limousine", and also the direct hypernym ``motor vehicle" \cite{princeton2010wordnet}. With all this data about semantic relationships between words and their possible meanings, a variety of information can be extracted, such as detecting possible synonymy \cite{kilgarriff2000wordnet}.
-WordNet is made more accessible through the Natural Language Toolkit (NLTK), a widely-used platform for interfacing with over 50 corpora and lexical resources, available through the Python language \cite{bird2006nltk}.
+WordNet has been made more accessible through the Natural Language Toolkit (NLTK), a widely-used platform for interfacing with over 50 corpora and lexical resources, available through the Python language \cite{bird2006nltk}.
 
-In recent years, new technologies to model natural language through vector representation, such as word2vec and GloVe, have been developed \citep{mikolov2013efficient, pennington2014glove} and have shown that they perform well using the latest evaluation methods \citep{schnabel2015evaluation}. Of the two, GloVe performs slightly better than word2vec \citep{lee2016combining}.
+In recent years, new technologies to model natural language through vector representation, such as word2vec and GloVe, have been developed \citep{mikolov2013efficient, pennington2014glove} and they have been proven to perform well using the latest evaluation methods \citep{schnabel2015evaluation}. Of the two, GloVe performs slightly better than word2vec \citep{lee2016combining}.
 GloVe is an unsupervised learning algorithm for constructing word vector representations by calculating word-word co-occurrence statistics from a corpus. Although co-occurrence is not identical to semantic similarity or relatedness, it can be used as a rough estimate of semantic similarity or relatedness \citep{levy2015improving}. The GloVe algorithm is used to create the word vectors used in SpaCy, one of the fastest and most accurate publically available NLP toolkits \citep{choi2015depends}. SpaCy's default word vector library is trained on the Common Crawl corpus, an open repository of web crawl data that contains over 2.96 billion web pages and over 250 TiB of uncompressed content as of June 2017 \citep{nagel2017commoncrawl}.
 
-Constructing lexical databases and performing word vectorization are two ways to increase computer understanding of human language. Lee et al. have shown that combining these two methods into a weighted average increases the performance on a large amount of semantic relatedness measuring datasets. The weights they found to perform the best is in the range of $\lambda = 0.45-0.85$, where $\lambda$ is the weight of word vectorization, and $\mu = 1-\lambda$ is the weight of the lexical database \cite{lee2016combining}.
+Constructing lexical databases and performing word vectorization are two ways to increase computer understanding of human language. Lee \emph{et al}. have shown that combining these two methods into a weighted average increases the performance on a large amount of semantic relatedness measuring datasets. The weights they found to perform the best is in the range of $\lambda = 0.45-0.85$, where $\lambda$ is the weight of word vectorization, and $\mu = 1-\lambda$ is the weight of the lexical database \cite{lee2016combining}.
 
 % WordNet is an electronic lexical database created by the Cognitive Science Laboratory of Princeton University starting in 1985. Since then, it has been updated and enhanced several times by researchers all over the world and is still maintained by Princeton University. % TODO: Determine whether to use this paragraph.
 
@@ -70,7 +72,7 @@ Constructing lexical databases and performing word vectorization are two ways to
 
 \section{Framework} \label{sec:framework}
 
-SimCom aims to determine the similarity of compound terms. It is capable of doing this with concepts up to two words large. For this, it uses a pipeline constructed from several smaller algorithms that build upon each other. All algorithms depend on either SpaCy's implementation of the GloVe algorithm or NLTK's interface with WordNet.
+SimCom aims to determine the similarity of compound terms. It is capable of doing this with concepts up to two words large. In order to achieve this, it uses a pipeline constructed from several smaller algorithms that build upon each other. All algorithms depend on either SpaCy's implementation of the GloVe algorithm or NLTK's interface with WordNet.
 
 \subsection{SpaCy and GloVe}
 The similarity function of SpaCy, henceforth called $\textit{SpacySimilarity}$, computes the cosine of two word vectors. In Section \ref{sec:relwork} we explained how these word vectors are constructed. $\textit{SpacySimilarity}$ returns a value between 0 and 1, where a value of 0 indicates that two words are dissimilar, and a value of 1 indicates that two words are similar to each other. It is important to note that although the name of the function is $\textit{SpacySimilarity}$, $\textit{SpacySimilarity}$ actually measures semantic relatedness, not semantic similarity, as SpaCy's word vectors are built using co-occurrence, which does not assign any form of semantics to words. 
@@ -78,70 +80,70 @@ The similarity function of SpaCy, henceforth called $\textit{SpacySimilarity}$, 
 
 \subsection{NLTK and WordNet}
 Although NLTK is an often-used library for NLP purposes, SimCom uses only the WordNet interface, so this subsection will focus only on WordNet. 
-NLTK offers six methods to calculate the similarity of two words \citep{pedersen2004wordnet}, henceforth called $\textit{WordnetSimilarity}$. Of the six, three use Information Content (IC), information about the meaning and usage of words \cite{seco2004intrinsic}. Four use the Least Common Subsumer (LCS), the most specific concept which is an ancestor of both words. To determine the LCS, the word that requires the least steps from both words traversing only the hypernym (more generic category) relation is taken. In example, the LCS of ``automobile" and ``rowboat" is ``vehicle", and the LCS of ``rowboat" and ``ferry" is ``boat". The six methods are further explained and compared to each other below.
+NLTK offers six methods to calculate the similarity of two words \citep{pedersen2004wordnet}, henceforth called $\textit{WordnetSimilarity}$. Of the six, three method use Information Csontent (IC), information about the meaning and usage of words \cite{seco2004intrinsic}. Four methods use the Least Common Subsumer (LCS), the most specific concept which is an ancestor of both words. To determine the LCS, the word that requires the least steps from both words traversing only the hypernym (more generic category) relation is taken. In example, the LCS of ``automobile" and ``rowboat" is ``vehicle", and the LCS of ``rowboat" and ``ferry" is ``boat". The six methods are further explained and compared to each other below.
 \begin{itemize}
-	\item Path Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses traversing only hypernym and hyponym (more specific word) relationships. The score is in the range 0 to 1, where 0 indicates dissimilarity and 1 indicates similarity.
-	\item Leacock-Chodorow Similarity: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses traversing only hypernym and hyponym relationships and the maximum depth of the taxonomy in which the senses occur. The relationship is given as \(-log(p/2d)\) where p is the shortest path length and d the taxonomy depth \cite{leacock1998combining}.
-	\item Wu-Palmer Similarity: Returns a score denoting how similar two word senses are, based on the depth of the two senses in the taxonomy and that of the LCS \cite{wu1994verbs}.
-	\item Resnik Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS \cite{resnik1995using}.
-	\item Jiang-Conrath Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input synsets. The relationship is given by Equation \ref{eq:jcnsimilarity}, where $IC(X)$ stands for the information content of $X$, $s1$ and $s2$ stand for the synsets of the first and second word, and $lcs$ stands for the least common subsumer \cite{jiang1997semantic}.
+	\item \emph{Path Similarity}: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses traversing only hypernym and hyponym (more specific word) relationships. The score is in the range 0 to 1, where 0 indicates dissimilarity and 1 indicates similarity.
+	\item \emph{Leacock-Chodorow Similarity}: Returns a score denoting how similar two word senses are, based on the shortest path that connects the senses traversing only hypernym and hyponym relationships and the maximum depth of the taxonomy in which the senses occur. The relationship is given as \(-log(p/2d)\) where p is the shortest path length and d the taxonomy depth \cite{leacock1998combining}.
+	\item \emph{Wu-Palmer Similarity}: Returns a score denoting how similar two word senses are, based on the depth of the two senses in the taxonomy and that of the LCS \cite{wu1994verbs}.
+	\item \emph{Resnik Similarity}: Returns a score denoting how similar two word senses are, based on the IC of the LCS \cite{resnik1995using}.
+	\item \emph{Jiang-Conrath Similarity}: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input synsets. The relationship is given by Equation \ref{eq:jcnsimilarity}, where $IC(X)$ stands for the information content of $X$, $s1$ and $s2$ stand for the synsets of the first and second word, and $lcs$ stands for the least common subsumer \cite{jiang1997semantic}.
 \begin{equation} \label{eq:jcnsimilarity}
 	\frac{1} {IC(s1) + IC(s2) - 2 * IC(lcs)}
 \end{equation}
-	\item Lin Similarity: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input Synsets. The relationship is given by Equation \ref{eq:linsimilarity}. In Equation \ref{eq:linsimilarity}, the same meanings for abbreviations are used as in Equation \ref{eq:jcnsimilarity}, which can be found above \cite{lin1998information}.
+	\item \emph{Lin Similarity}: Returns a score denoting how similar two word senses are, based on the IC of the LCS and that of the two input Synsets. The relationship is given by Equation \ref{eq:linsimilarity}. In Equation \ref{eq:linsimilarity}, the same meanings for abbreviations are used as in Equation \ref{eq:jcnsimilarity}, which can be found above \cite{lin1998information}.
 \begin{equation} \label{eq:linsimilarity}
 	\frac{2 * IC(lcs)} {IC(s1) + IC(s2)} 
 \end{equation} 
 \end{itemize}
 % TODO: Ensure that all the items above are not too similar to their primary source, http://www.nltk.org/howto/wordnet.html
 
-Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In Table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is found from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}. In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training SimCom for specific domains using domain-related corpora, but Information Content is an old corpus-specific technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}. % TODO: Remove citations that do not support this statement.
+Table \ref{table:wordnetsimilarity} shows the results of each similarity measure on the two word pairs ``forest - graveyard" and ``asylum - madhouse". In Table \ref{table:wordnetsimilarity}, the ``Human Estimate" rating is obtained from the Rubenstein-Goodenough set of word pairs \cite{rubenstein1965contextual}. \fba{Please explain briefly how they got it} In our case it is undesirable to use a similarity measure that uses Information Content. We would like to keep the possibility of training SimCom for specific domains using domain-related corpora, but Information Content is an old corpus-specific technology rarely supported by current NLP libraries, so using the Information Content from another corpus would require extensive work. Of the similarity measures that do not use Information Content, Wu-Palmer has the highest correlation with human estimates \citep{budanitsky2006evaluating,seco2004intrinsic,mihalcea2006corpus}. % TODO: Remove citations that do not support this statement.
 
 Note that only the Human Estimate and Wu-Palmer similarity measure use a linear scale between 0 and 1. The Path and Jiang-Conrath similarity measures are rational functions with a numerator of 1, the Resnik and Leacock-Chodorow similarity measures are logarithmic functions, and the Lin similarity measure is a rational function in the range 0 to 1. All similarity measures do have in common that in their implementation in NLTK, a higher result indicates higher similarity.
 
 \begin{table}[h!]
 \caption{Comparison of WordNet similarity measures} % Human estimates taken from budanitsky2006evaluating
 \centering
-\begin{tabular}{|c||c|c|}
-	\hline
+\begin{tabular}{lll}
+	\toprule
 	& forest - graveyard & asylum - madhouse \\
-	\hline
-	\textit{Human Estimate} & \textit{0.25} & \textit{0.76} \\
+	\midrule
+	Human Estimate & 0.25 & 0.76 \\
 	Path & 0.0714 & 0.125 \\
 	Leacock-Chodorow & 1.00 & 1.56 \\
 	Wu-Palmer & 0.133 & 0.632 \\
 	Resnik & 0.00 & 3.98 \\
 	Jiang-Conrath & 0.0493 & 0.0661 \\
 	Lin & 0.00 & 0.345 \\
-	\hline
+	\bottomrule
 \end{tabular}
 \label{table:wordnetsimilarity}
 \end{table}
 
 \subsection{The Pipeline}
 
-The first building block of the pipeline, Algorithm \ref{al:semanticsimilarity}, compares the similarity of two words to each other. It computes a similarity rating by combining both $\textit{SpacySimilarity}$ and $\textit{WordnetSimilarity}$ into a weighted average, where $\lambda$ is the weight of $\textit{SpacySimilarity}$ and $\mu$ is the weight of $\textit{WordnetSimilarity}$. The result is between 0 and 1, where indicates the two words are dissimilar, and 1 indicates the two words are similar.
+The first building block of the pipeline, Algorithm \ref{al:semanticsimilarity}, compares the similarity of two words to each other. It computes a similarity rating by combining both $\emph{SpacySimilarity}$ and $\emph{WordnetSimilarity}$ into a weighted average, where $\lambda$ is the weight of $\emph{SpacySimilarity}$ and $\mu$ is the weight of $\emph{WordnetSimilarity}$. The result is between 0 and 1, where 0 indicates the two words are dissimilar, and 1 indicates that the two words are similar.
 
 \begin{algorithm}
 \caption{Determine similarity of two words.}\label{al:semanticsimilarity}
 \begin{algorithmic}[1]
 	\Procedure{DetermineSimilarity}{wordA, wordB}
-		\State $\textit{ss} \gets \textit{SpacySimilarity}(wordA, wordB)$
-		\State $\textit{ws} \gets \textit{WordnetSimilarity}(wordA, wordB)$
+		\State $\emph{ss} \gets \emph{SpacySimilarity}(wordA, wordB)$
+		\State $\emph{ws} \gets \emph{WordnetSimilarity}(wordA, wordB)$
 		\State \Return $(\lambda*ss)+(\mu*ws)$
 	\EndProcedure
 \end{algorithmic}
 \end{algorithm}
 
-The second building block of the pipeline, Algorithm \ref{al:synonymity}, determines whether two words are synonyms. It requests the synsets of both words from WordNet, and looks for any matching synset between the two. If a match is found, the two words are possibly synonyms and the algorithm returns \textit{true}. If no match is found, the algorithm returns \textit{false}. Due to the fact that words can have multiple context-dependent meanings and SimCom has no sense of context, DetermineSynonymity can return an erroneous result. In example, ``plane" and ``sheet" share a common synset, even though in most cases these two words would not be seen as synonyms by human judgement. Algorithm \ref{al:twowordpipeline}, which can be found further on, reduces this risk of an erroneous result.
+The second building block of the pipeline, Algorithm \ref{al:synonymity}, determines whether two words are synonyms. It requests the synsets of both words from WordNet, and looks for any matching synset between the two. If a match is found, the two words are possibly synonyms and the algorithm returns \emph{true}. If no match is found, the algorithm returns \emph{false}. Due to the fact that words can have multiple context-dependent meanings and SimCom has no sense of context, DetermineSynonymity can return an erroneous result. In example, ``plane" and ``sheet" share a common synset, even though in most cases these two words would not be seen as synonyms by human judgement. Algorithm \ref{al:twowordpipeline}, which can be found further on, reduces this risk of an erroneous result.
 
 \begin{algorithm}
 \caption{Determine possible synonymity of two words.}\label{al:synonymity}
 \begin{algorithmic}[1]
 	\Procedure{DetermineSynonymity}{wordA, wordB}
-		\State $\textit{synsA} \gets \textit{WordNetSynsets}(wordA)$
-		\State $\textit{synsB} \gets \textit{WordNetSynsets}(wordB)$
-		\State \Return $\textit{HasOverlap}(synsA, synsB)$
+		\State $\emph{synsA} \gets \emph{WordNetSynsets}(wordA)$
+		\State $\emph{synsB} \gets \emph{WordNetSynsets}(wordB)$
+		\State \Return $\emph{HasOverlap}(synsA, synsB)$
 	\EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -152,13 +154,13 @@ Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to co
 \caption{The pipeline on two single-word concepts.}\label{al:twowordpipeline}
 \begin{algorithmic}[1]
 	\Procedure{TwoWordPipeline}{wordA, wordB}
-		\State $\textit{similarity} \gets \textit{DetermineSimilarity}(wordA, wordB)$
-		\If {$\textit{similarity} > \sigma$}
-			\If {$\textit{DetermineSynonymity}(wordA, wordB)$}
+		\State $\emph{similarity} \gets \emph{DetermineSimilarity}(wordA, wordB)$
+		\If {$\emph{similarity} > \sigma$}
+			\If {$\emph{DetermineSynonymity}(wordA, wordB)$}
 				\State \Return 1
 			\EndIf
 		\EndIf
-		\State \Return $\textit{similarity}$
+		\State \Return $\emph{similarity}$
 	\EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -170,9 +172,9 @@ Algorithms \ref{al:synonymity} and \ref{al:semanticsimilarity} can be used to co
 %\label{al:onetwocompoundpipeline}
 %\begin{algorithmic}[1]
 %	\Procedure{OneTwoCompoundPipeline}{c1, c2w1, c2w2}
-%		\State $\textit{simA} \gets \textit{TwoWordPipeline}(c1, c2w1)$
-%		\State $\textit{simB} \gets \textit{TwoWordPipeline}(c1, c2w2)$
-%		\State \Return $\alpha * \textit{simA} + \beta * \textit{simB}$
+%		\State $\emph{simA} \gets \emph{TwoWordPipeline}(c1, c2w1)$
+%		\State $\emph{simB} \gets \emph{TwoWordPipeline}(c1, c2w2)$
+%		\State \Return $\alpha * \emph{simA} + \beta * \emph{simB}$
 %	\EndProcedure
 %\end{algorithmic}
 %\end{algorithm}
@@ -183,11 +185,11 @@ Finally, Algorithm \ref{al:twowordpipeline} can be used to build Algorithm \ref{
 \caption{The pipeline on two two-word concepts.}\label{al:twocompoundpipeline}
 \begin{algorithmic}[1]
 	\Procedure{TwoCompoundPipeline}{c1w1, c1w2, c2w1, c2w2}
-		\State $\textit{simC} \gets \textit{TwoWordPipeline}(c1w1, c2w1)$
-		\State $\textit{simD} \gets \textit{TwoWordPipeline}(c1w2, c2w2)$
-		\State $\textit{simE1} \gets \textit{TwoWordPipeline}(c1w1, c2w2)$
-		\State $\textit{simE2} \gets \textit{TwoWordPipeline}(c1w2, c2w1)$
-		\State \Return $\gamma * \textit{simC} + \delta * \textit{simD} + \epsilon * \textit{simE1} + \epsilon * \textit{simE2}$
+		\State $\emph{simC} \gets \emph{TwoWordPipeline}(c1w1, c2w1)$
+		\State $\emph{simD} \gets \emph{TwoWordPipeline}(c1w2, c2w2)$
+		\State $\emph{simE1} \gets \emph{TwoWordPipeline}(c1w1, c2w2)$
+		\State $\emph{simE2} \gets \emph{TwoWordPipeline}(c1w2, c2w1)$
+		\State \Return $\gamma * \emph{simC} + \delta * \emph{simD} + \epsilon * \emph{simE1} + \epsilon * \emph{simE2}$
 	\EndProcedure
 \end{algorithmic}
 \end{algorithm}
@@ -203,15 +205,15 @@ As there is no research specifically aimed on determining the similarity of comp
 	\item Many compound terms have identical or similar diagonal relationships.
 	\item Many compound terms have similar estimated similarity.
 \end{itemize}
-We have attempted to reduce these biases as much as possible in our dataset, which can be found below in Table \ref{table:humancompoundsimilarity}. The expert similarity ratings were found by asking twenty domain experts to rate the similarity of the compound terms on a Likert scale with five options: ``Strongly dissimilar", ``Dissimilar", ``Neutral", ``Similar", and ``Strongly similar". After gathering the expert ratings, the options were translated to numerical values by assigning them the following five values respectively: 0.0, 0.25, 0.5, 0.75, and 1.0. Finally, the average of all the expert ratings was taken and inserted into the dataset.
+We have attempted to reduce these biases as much as possible in our dataset, which can be found below in Table \ref{table:humancompoundsimilarity}. The expert similarity ratings were found by asking twenty domain experts to rate the similarity of the compound terms on a Likert scale with five options: ``Strongly dissimilar", ``Dissimilar", ``Neutral", ``Similar", and ``Strongly similar". After gathering the expert ratings, the options were translated to numerical values by assigning them the following five values respectively: 0.0, 0.25, 0.5, 0.75, and 1.0. Finally, the average of all the expert ratings was taken and inserted into the dataset. \fba{report standard deviation as well.}
 
 \begin{table}[h!]
 \caption{Human expert similarity rating of two-word compounds (n=20)}
 \centering
-\begin{tabular}{|c|c||c|}
-	\hline
-	First Compound & Second Compound & Expert Similarity Rating \\
-	\hline
+\begin{tabular}{lll}
+	\toprule
+	First Compound & Second Compound & Average Expert Similarity Rating \\
+	\midrule
 	Computer Terminal & Flight Terminal & 0.21 \\
 	Business Plan & Emergency Plan & 0.11 \\
 	Commercial Time & Revenue Loss & 0.22 \\
@@ -221,7 +223,7 @@ We have attempted to reduce these biases as much as possible in our dataset, whi
 	Intercontinental Flight & International Flight & 0.58 \\
 	Aeronautical Meteorology & Aviation Meteorology & 0.86 \\
 	Business Plane & Business Sheet & 0.21 \\
-	Emergency Flight & Emergency Altitude & 0.200 \\
+	Emergency Flight & Emergency Altitude \fba{why this one has a different precision?} & 0.200 \\
 	Emergency Flight & Emergency Plan & 0.19 \\
 	Passenger Airline & Passenger Aircraft & 0.33 \\
 	Control Tower & Ground Control & 0.48 \\
@@ -232,18 +234,18 @@ We have attempted to reduce these biases as much as possible in our dataset, whi
 	Police Officer & Security Officer & 0.59 \\
 	Flight Level & Flight Altitude & 0.78 \\
 	Flight Terminal & International Flight & 0.18 \\
-	\hline
+	\bottomrule
 \end{tabular}
 \label{table:humancompoundsimilarity}
 \end{table}
 
-Values for $\gamma$, $\delta$, and $\epsilon$ are needed to test values for $\lambda$ and $\mu$ and vice-versa. We have decided to first find the optimal values for $\gamma$, $\delta$, and $\epsilon$ using values of $\lambda = 0.65$ and $\mu = 0.35$ from Lee et al. as a starting point \cite{lee2016combining}, and afterwards find optimal values for $\lambda$ and $\mu$ using the results of the first experiment.
+Values for $\gamma$, $\delta$, and $\epsilon$ are needed to test values for $\lambda$ and $\mu$ and vice-versa. We have decided to first find the optimal values for $\gamma$, $\delta$, and $\epsilon$ using values of $\lambda = 0.65$ and $\mu = 0.35$ from Lee \emph{et al}. as a starting point \cite{lee2016combining}, and afterwards find optimal values for $\lambda$ and $\mu$ using the results of the first experiment.
 
-We will compare the Pearson correlation of Algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\gamma$, $\delta$, and $\epsilon$. We will test all possible values of $\gamma$ and $\delta$ with intervals of 0.1 in the range 0 to 1. We will ensure that $\gamma + \delta + 2 * \epsilon = 1$ so that the total weighted similarity is in the range 0 to 1. All the tested values of $\gamma$, $\delta$, and $\epsilon$ can be found in Table \ref{table:gammaresults1} and \ref{table:gammaresults2} in the appendix. 
+We compare the Pearson correlation \fba{cite and briefly explain what it is} of Algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\gamma$, $\delta$, and $\epsilon$. We test all possible values of $\gamma$ and $\delta$ with intervals of 0.1 in the range 0 to 1. We ensure that $\gamma + \delta + 2 * \epsilon = 1$ so that the total weighted similarity is in the range 0 to 1. All the tested values of $\gamma$, $\delta$, and $\epsilon$ can be found in Table \ref{table:gammaresults1} and \ref{table:gammaresults2} in the appendix. 
 
-After finding the optimal values of $\gamma$, $\delta$, and $\epsilon$, we will search for the optimal values of $\lambda$ and $\mu$ using the most and second most optimal values of $\gamma$, $\delta$ and $\epsilon$. We will compare the Pearson correlation of Algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\lambda$ and $\mu$. We will test all possible values of $\lambda$ and $\mu$ with intervals of 0.1 in the range 0 to 1. We will ensure that $\lambda + \mu = 1$ so that the total weighted similarity is in the range 0 to 1. All the tested values of $\lambda$ and $\mu$ can be found in Table \ref{table:lambdamuresults1}.
+After finding the optimal values of $\gamma$, $\delta$, and $\epsilon$, we search for the optimal values of $\lambda$ and $\mu$ using the most and second most optimal values of $\gamma$, $\delta$ and $\epsilon$. We   compare the Pearson correlation of Algorithm \ref{al:twocompoundpipeline} with the dataset for various values of $\lambda$ and $\mu$. We   test all possible values of $\lambda$ and $\mu$ with intervals of 0.1 in the range 0 to 1. We   ensure that $\lambda + \mu = 1$ so that the total weighted similarity is in the range 0 to 1. All the tested values of $\lambda$ and $\mu$ can be found in Table \ref{table:lambdamuresults1}.
 
-To properly estimate the efficacy of SimCom, after finding the optimal values for $\lambda$, $\mu$, $\gamma$, $\delta$, and $\epsilon$, we will compare the Pearson correlation of the similarity score found by the most optimal parameters with the average of the Pearson correlation of random similarity scores. We will determine the Pearson correlation of results where Algorithm \ref{al:twocompoundpipeline} returns a random value in the 0 to 1 range twenty times and take the absolute value of each Pearson correlation so that negative correlations are properly counted. Finally, we will compare the Pearson correlation of SimCom to the Pearson correlation of random values.
+To properly estimate the efficacy of SimCom, after finding the optimal values for $\lambda$, $\mu$, $\gamma$, $\delta$, and $\epsilon$, we   compare the Pearson correlation of the similarity score found by the most optimal parameters with the average of the Pearson correlation of random similarity scores. We   determine the Pearson correlation of results where Algorithm \ref{al:twocompoundpipeline} returns a random value in the 0 to 1 range twenty times and take the absolute value of each Pearson correlation so that negative correlations are properly counted. Finally, we   compare the Pearson correlation of SimCom to the Pearson correlation of random values.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% EVERYTHING BELOW SUBJECT TO REMOVAL %%% at least in Evaluation Methodology
@@ -278,10 +280,10 @@ The experiments to find the best values for $\lambda$ and $\mu$ can be found in 
 \begin{table}[h!]
 \caption{Experiment results for $\lambda$ and $\mu$ with $\gamma = 0.3$, $\delta = 0.4$, and $\epsilon = 0.15$}
 \centering
-\begin{tabular}{|c|c||c|c|}
-	\hline
+\begin{tabular}{llll}
+	\toprule
 	$\lambda$ & $\mu$ & Pearson Correlation & Two-tailed p-value \\
-	\hline
+	\midrule
 	0.0 & 1.0 & 0.459 & 0.042 \\
 	0.1 & 0.9 & 0.497 & 0.026 \\
 	0.2 & 0.8 & 0.532 & 0.016 \\
@@ -293,7 +295,7 @@ The experiments to find the best values for $\lambda$ and $\mu$ can be found in 
 	0.8 & 0.2 & 0.669 & 0.001 \\
 	0.9 & 0.1 & 0.682 & 0.001 \\
 	\textbf{1.0} & \textbf{0.0} & \textbf{0.692} & \textbf{0.001} \\
-	\hline
+	\bottomrule
 \end{tabular}
 \label{table:lambdamuresults1}
 \end{table}
@@ -301,10 +303,10 @@ The experiments to find the best values for $\lambda$ and $\mu$ can be found in 
 \begin{table}[h!]
 \caption{Experiment results for $\lambda$ and $\mu$ with $\gamma = 0.2$, $\delta = 0.4$, and $\epsilon = 0.2$}
 \centering
-\begin{tabular}{|c|c||c|c|}
-	\hline
+\begin{tabular}{llll}
+	\toprule
 	$\lambda$ & $\mu$ & Pearson Correlation & Two-tailed p-value \\
-	\hline
+	\midrule
 	0.0 & 1.0 & 0.483 & 0.031 \\
 	0.1 & 0.9 & 0.519 & 0.019 \\
 	0.2 & 0.8 & 0.551 & 0.012 \\
@@ -316,7 +318,7 @@ The experiments to find the best values for $\lambda$ and $\mu$ can be found in 
 	0.8 & 0.2 & 0.659 & 0.002 \\
 	0.9 & 0.1 & 0.667 & 0.001 \\
 	\textbf{1.0} & \textbf{0.0} & \textbf{0.673} & \textbf{0.001} \\	
-	\hline
+	\bottomrule
 \end{tabular}
 \label{table:lambdamuresults2}
 \end{table}
@@ -329,11 +331,11 @@ The performance of SimCom is very promising. Using the best parameters, a Pearso
 
 Surprisingly, SimCom works better when the similarity algorithm of NLTK is disabled. There are no values for $\mu$ where $\mu > 0$ that perform better than $\mu = 0$.
 
-Future research could investigate whether training SpaCy on a domain-specific corpus will improve the performance of SimCom. Datasets for testing compound terms similarity could also be investigated further, which could improve the validity of all future research on compound term similarity. SimCom can only determine the similarity of up to two-word compounds. More research into determining the relationship between the words in larger compound terms could allow similar frameworks to accept larger and more syntactically complex concepts.
+Future research could investigate whether training SpaCy on a domain-specific corpus   improves the performance of SimCom. Datasets for testing compound terms similarity could also be investigated further, which could improve the validity of all future research on compound term similarity. SimCom can only determine the similarity of up to two-word compounds. More research into determining the relationship between the words in larger compound terms could allow similar frameworks to accept larger and more syntactically complex concepts.
 
 \section{Acknowledgements} \label{sec:ack}
 
-I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise, valuable guidance, and encouragement with me. Special thanks to the people contributing to the Participatory Architectural Change MAnagement in ATM Systems (PACAS) for sharing their expertise on the similarity of compound terms in the ATM domain.
+I would like to thank Fabiano Dalpiaz and Fatma Ba\c{s}ak Aydemir for sharing expertise, valuable guidance, and encouragement with me. Special thanks to the people contributing to the PACAS project for sharing their expertise on the similarity of compound terms in the ATM domain.
 
 \printbibliography
 
@@ -342,11 +344,10 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 \begin{table}[h!]
 \caption{Experiment results for $\gamma$, $\delta$, and $\epsilon$ with $\lambda = 0.65$ and $\mu = 0.35$, part one}
 \centering
-\begin{tabular}{|c|c|c||c|c|}
-	\hline
+\begin{tabular}{lllll}
+	\toprule
 	$\gamma$ & $\delta$ & $\epsilon$ & Pearson Correlation & Two-tailed p-value \\
-	\hline
-	\hline
+\midrule
 	0.0 & 0.0 & 0.50 & 0.065 & 0.785 \\
 	0.0 & 0.1 & 0.45 & 0.205 & 0.385 \\
 	0.0 & 0.2 & 0.40 & 0.343 & 0.139 \\
@@ -358,7 +359,7 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 	0.0 & 0.8 & 0.10 & 0.499 & 0.020 \\
 	0.0 & 0.9 & 0.05 & 0.494 & 0.027 \\
 	0.0 & 1.0 & 0.00 & 0.488 & 0.029 \\
-	\hline
+	&&&& \\
 	0.1 & 0.0 & 0.45 & 0.123 & 0.606 \\
 	0.1 & 0.1 & 0.40 & 0.293 & 0.210 \\
 	0.1 & 0.2 & 0.35 & 0.457 & 0.043 \\
@@ -369,7 +370,7 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 	0.1 & 0.7 & 0.10 & 0.553 & 0.011 \\
 	0.1 & 0.8 & 0.05 & 0.540 & 0.014 \\
 	0.1 & 0.9 & 0.00 & 0.528 & 0.017 \\
-	\hline
+		&&&& \\
 	0.2 & 0.0 & 0.40 & 0.173 & 0.465 \\
 	0.2 & 0.1 & 0.35 & 0.354 & 0.126 \\
 	0.2 & 0.2 & 0.30 & 0.526 & 0.017 \\
@@ -379,7 +380,7 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 	0.2 & 0.6 & 0.10 & 0.609 & 0.004 \\
 	0.2 & 0.7 & 0.05 & 0.589 & 0.006 \\
 	0.2 & 0.8 & 0.00 & 0.570 & 0.009 \\
-	\hline
+		&&&& \\
 	0.3 & 0.0 & 0.35 & 0.203 & 0.391 \\
 	0.3 & 0.1 & 0.30 & 0.365 & 0.114 \\
 	0.3 & 0.2 & 0.25 & 0.519 & 0.019 \\
@@ -388,7 +389,7 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 	0.3 & 0.5 & 0.10 & 0.642 & 0.002 \\
 	0.3 & 0.6 & 0.05 & 0.625 & 0.003 \\
 	0.3 & 0.7 & 0.00 & 0.606 & 0.005 \\
-	\hline
+	\bottomrule
 \end{tabular}
 \label{table:gammaresults1}
 \end{table}
@@ -396,11 +397,10 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 \begin{table}[h!]
 \caption{Experiment results for $\gamma$, $\delta$, and $\epsilon$ with $\lambda = 0.65$ and $\mu = 0.35$, part two}
 \centering
-\begin{tabular}{|c|c|c||c|c|}
-	\hline
+\begin{tabular}{lllll}
+	\toprule
 	$\gamma$ & $\delta$ & $\epsilon$ & Pearson Correlation & Two-tailed p-value \\
-	\hline
-	\hline
+	\midrule
 	0.4 & 0.0 & 0.30 & 0.213 & 0.367 \\
 	0.4 & 0.1 & 0.25 & 0.346 & 0.135 \\
 	0.4 & 0.2 & 0.20 & 0.473 & 0.035 \\
@@ -408,34 +408,34 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 	0.4 & 0.4 & 0.10 & 0.608 & 0.004 \\
 	0.4 & 0.5 & 0.05 & 0.621 & 0.004 \\
 	0.4 & 0.6 & 0.00 & 0.616 & 0.004 \\
-	\hline
+		&&&& \\
 	0.5 & 0.0 & 0.25 & 0.214 & 0.365 \\
 	0.5 & 0.1 & 0.20 & 0.321 & 0.167 \\
 	0.5 & 0.2 & 0.15 & 0.424 & 0.062 \\
 	0.5 & 0.3 & 0.10 & 0.506 & 0.023 \\
 	0.5 & 0.4 & 0.05 & 0.557 & 0.011 \\
 	0.5 & 0.5 & 0.00 & 0.583 & 0.007 \\
-	\hline
+		&&&& \\
 	0.6 & 0.0 & 0.20 & 0.211 & 0.373 \\
 	0.6 & 0.1 & 0.15 & 0.299 & 0.200 \\
 	0.6 & 0.2 & 0.10 & 0.384 & 0.095 \\
 	0.6 & 0.3 & 0.05 & 0.456 & 0.043 \\
 	0.6 & 0.4 & 0.00 & 0.508 & 0.022 \\
-	\hline
+		&&&& \\
 	0.7 & 0.0 & 0.15 & 0.206 & 0.383 \\
 	0.7 & 0.1 & 0.10 & 0.281 & 0.231 \\
 	0.7 & 0.2 & 0.05 & 0.352 & 0.128 \\
 	0.7 & 0.3 & 0.00 & 0.415 & 0.069 \\
-	\hline
+		&&&& \\
 	0.8 & 0.0 & 0.10 & 0.202 & 0.393 \\
 	0.8 & 0.1 & 0.05 & 0.266 & 0.257 \\
 	0.8 & 0.2 & 0.00 & 0.328 & 0.159 \\
-	\hline
+		&&&& \\
 	0.9 & 0.0 & 0.05 & 0.198 & 0.402 \\
 	0.9 & 0.1 & 0.00 & 0.254 & 0.280 \\
-	\hline
+		&&&& \\
 	1.0 & 0.0 & 0.00 & 0.195 & 0.411 \\
-	\hline
+	\bottomrule
 \end{tabular}
 \label{table:gammaresults2}
 \end{table}
@@ -443,10 +443,10 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 \begin{table}[h!]
 \caption{Pearson Correlation of random similarity scores to human expert estimates}
 \centering
-\begin{tabular}{|c|c|}
-	\hline
+\begin{tabular}{ll}
+	\toprule
 	Pearson Correlation & Absolute Value \\
-	\hline
+	\midrule
 	0.106 & 0.106 \\
 	0.045 & 0.045 \\
 	-0.145 & 0.145 \\
@@ -467,9 +467,9 @@ I would like to thank Fabiano Dalpiaz and Ba\c sak Aydemir for sharing expertise
 	-0.229 & 0.229 \\
 	0.123 & 0.123 \\
 	-0.421 & 0.421 \\
-	\hline
+		\midrule
 	Average & 0.145\\
-	\hline
+	\bottomrule
 \end{tabular}
 \label{table:randomresults}
 \end{table}
